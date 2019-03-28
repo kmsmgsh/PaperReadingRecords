@@ -1,0 +1,237 @@
+# Random effects selection in generalized linear mixed models via shrinkage penalty function
+papers by Huang Chao & Jianxin Pan 2014
+
+
+## Abstract: 
+
+Framework: Generalized linear mixed models (GLMMs).
+
+Method: MCD for covariance matrix of random effects.
+
+Add shrinkage penalty term to the penalized quasi-likelihood (PQL) to select effective random effects.
+
+Idea: Variance ->0, random effects no longer random.
+
+PQL: convenient computation.
+
+Penalty: LASSO and SCAD.
+
+backfitting algorithms to estimate the fixed effects and variance components in GLMMs, and simultaneously selecting effective random effects.
+
+
+
+## Introduction
+
+Selecting significant covariate .
+
+- Early literature methods: Mallow's $C_p$, AIC, BIC, backward, forward, stepwise selection methods : computational intensive and statistically unreliable.
+
+- Via penalty methods:  Penalty add in sum squares or substract in log-likelihood methods.
+
+  - Ridge regression: $L_2$ penalty
+
+  - Bridge regression: $L_q,q\geq0$ penalty
+  - LASSO(Least absolute shrinkage and selection operator): $L_1$ penalty
+  - Adaptive LASSO: improve consistency of LASSO
+  - SCAD(smoothly clipped absolute deviation): Continuity, sparsity, and unbiasedness.
+
+- Generalized linear mixed model
+
+  - Continuous/Discrete longitudinal/clustered data
+  - Compare to GLM, GLMM handle the heterogeneity across subject (clustered)
+  - Estimation method: PQL
+    - Key idea: utilize Laplace approximation to approximate the integral likelihood (The integral random effect part)
+    - Easily fulfill iterative fitting linear mixed model
+
+  - Variable Selection in GLMMs
+    - Fixed effects selection via $L_1$ penalty 
+    - Fixed effects selection via boosting techniques
+    - Framework of general class of mixed-effects models penalized likelihood as SCAD and adaptive LASSO, $IC_Q$ criteria is used to select tunning parameter
+    -  Need care selection efficiency: redundant random effect may cause covariance matrix of random effects to be singular (Random effect not random, than variance comes to 0? ), also computational intraceble for estimation also should be considered.
+    - Bayes hierachical model by MCMC (Chen&Dunson 2003 actually using the full model posterior selection method )
+    - Fahrmeir et al. (2010) gave a detailed review of Bayesian approaches for the selection of ran-
+      dom effects.
+  - Variable Selection in LMMs
+    - Both fixed and random effect using EM algorithms
+    - Random effects selection using moment-based methods and two-stage method.
+    - Group variable selection to simultaneously select and estimate ran-dom effects, by using a proxy matrix to replace the unknown covariance matrix of random effects.
+  - Conclusion of Introduction:
+    - Focus on selection of random effects within the framework of GLMMs.
+    - Shrinkage penalty term on PQL, covariance matrix model by MCD.
+    - Key idea: variance -> 0 (shrinkage), corresponding variable is no longer random
+
+## Methodology and Algorithm
+
+Basic notation: $y_{ij}$ be j-th of $n_i$ repeat measurements for i-th individual. $\mu_{ij} =E(y_{ij}|b_i)$ .
+
+GLMMs:
+$$
+\begin{array}{l}{g\left(\mu_{i j}\right)=\eta_{i j}=x_{i j}^{T} \beta+z_{i j}^{T} b_{i}} \\ {\operatorname{var}\left(y_{i j} | b_{i}\right)=a(\phi) v\left(\mu_{i j}\right)}\end{array}
+$$
+$\beta$ is $p\times 1$ vector as fixed effects, $x_{ij}$ and $z_{ij}$  are covariates corresponding to fixed effects and random effects. $\phi$ nuisance dispersion parameter.
+
+$b_i\sim N(0,D)$ , so $Y_{ij}=X_i\beta+Z_ib_i$, $Y_{ij}\sim N(X_i\beta,\Sigma+Z_iDZ_i^T)$ . By (Chen & Dunson 2003) D uas the acd form: $D=\Lambda \Gamma \Gamma^{T} \Lambda$ , $\Lambda=\operatorname{diag}\left(\lambda_{1}, \ldots, \lambda_{q}\right)$ , with the $\lambda_l$ proportion to the standard deviantion of the random effects $b_i$
+
+> Need prove of this "proportion to the standard deviantion of the random effects $b_i$ , the best should write down the form of the "constant proportion", then …. wait a minute, seems we can write it down
+
+$\Gamma$ with the form: the lower-triangular matrix with diagonal part as 1's, denote its entry by $\gamma_{ij}$
+
+$\theta_{1}=\left(\lambda_{1}, \ldots, \lambda_{q}\right)^{T}, \theta_{2}=\left(\gamma_{21} ; \gamma_{31}, \gamma_{32} ; \ldots ; \gamma_{q 1}, \ldots,\gamma_{q(q-1)} \right).$ Then the full covariance matrix is determined by $\theta=(\theta_1^T,\theta_2^T,\phi^T)^T$
+
+Then the covariance $D$ can be determined by $\theta$ . With such notation, we can obtain the conditonal distribution of data $y_{ij}$ as $N(X_i\beta+Z_ib_i,Z_i\Lambda\Gamma\Gamma^T\Lambda+a(\phi)v(\mu_{ij})$, than the likelihood can be expressed as
+$$
+\begin{aligned} L(\beta, \theta) &=\prod_{i=1}^{n} f\left(y_{i} ; \beta, \theta\right) \\ &=\prod_{i=1}^{n} \int_{b_{i}}\left\{\prod_{j=1}^{n_{i}} f\left(y_{i j} | b_{i} ; \beta, \phi\right)\right\} f\left(b_{i} ; \theta_{1}, \theta_{2}\right) d b_{i} \end{aligned}
+$$
+Similar, the log likelihood is
+$$
+\begin{aligned} \ell(\beta, \theta) &=\sum_{i=1}^{n} \log f\left(y_{i} ; \beta, \theta\right) \\ &=\sum_{i=1}^{n} \log \int_{j=1}^{n_{i}} f\left(y_{i j} | b_{i} ; \beta, \phi\right) \} f\left(b_{i} ; \theta_{1}, \theta_{2}\right) d b_{i} \end{aligned}
+$$
+
+> Need write more about how this form is derived, it's may not a big deal
+
+The PQL approach for the loglikelihood can be obtained as follows 
+
+> But I have no idea why this form is work
+
+$$
+\ell(\beta, \theta) \approx \sum_{i=1}^{n} \sum_{j=1}^{n_{i}} \log f\left(y_{i j} | b_{i} ; \beta, \phi\right)-\frac{1}{2} \sum_{i=1}^{n} b_{i}^{T} D^{-1} b_{i}
+$$
+
+> The original Laplace approximation make the loglikelihood as $\tilde b_i^T D^{-1} \tilde b_i$, with $\tilde b_i$ is a solution to some function $\kappa(b_i)$ (or its derivatives) =0.
+
+Then the random effects $b_i$ can be treated as some kind of parameter and solve the loglikelihood in iterating two steps.
+
+1. Given $\theta$ , maximize $\ell(\beta,\theta)$ with $\beta$ and $b_i$, that is $(\hat\beta,\hat b_i)=(\hat\beta(\theta),\hat b_i(\theta))$ 
+2. $\sum_{i=1}^n X^T_iW_i(Y_i-\eta_i)=0$  and  $Z_i^TW_i(Y_i-\eta_i)=D^{-1}b_i$
+
+$X_i=(x_{i1},…,x_{in_i})^T$ ,$Z_i=(z_{i1},…,z_{in_i})^T$ , $Y_i=\eta_i+(y_i-\mu_i)g'(\mu_i)$  is the working response, $W_i=diag(w_{i1},…,w_{in_i})$  with $w_{ij}=\{a(\phi)v(\mu_{ij})g'(\mu_{ij})^2 \}^{-1}$ is the weight matrix. That is ,
+
+we have 
+$$
+\hat\beta=(\sum_{i=1}^n X^T_iV_i^{-1}X_i)^{-1} (\sum_{i=1}^n X_i^TV_i^{-1}Y_i)\\
+\hat b_i=DZ_i^TV_i^{-1} (Y_i-X_i\hat\beta)
+$$
+where $V_i=W^{-1}_i+Z_iDZ_i^T$
+
+The log-likelihood function can be further approximated by
+$$
+\begin{aligned} \ell_{2}(\hat{\beta}, \theta)=&-\frac{1}{2} \sum_{i=1}^{n} \log \left|V_{i}\right| -\frac{1}{2} \sum_{i=1}^{n}\left(Y_{i}-X_{i} \hat{\beta}\right)^{T} V_{i}^{-1}\left(Y_{i}-X_{i} \hat{\beta}\right) \end{aligned}
+$$
+An alternative approximation which corresponds to the restricted maximum likelihood (REML) is given by
+$$
+\begin{aligned} \ell_{2 R}(\hat{\beta}, \theta)=-& \frac{1}{2} \sum_{i=1}^{n} \log \left|V_{i}\right|-\frac{1}{2} \sum_{i=1}^{n} \log \left|X_{i}^{T} V_{i}^{-1} X_{i}\right| \\ &-\frac{1}{2} \sum_{i=1}^{n}\left(Y_{i}-X_{i} \hat{\beta}\right)^{T} V_{i}^{-1}\left(Y_{i}-X_{i} \hat{\beta}\right) \end{aligned}
+$$
+Maximization of $\ell_2(\hat\beta,\theta)$ or $\ell(\hat\beta,\theta)$  respect to $\theta$ . 
+
+Consider the diagonal entry of $\Lambda$ in $D=\Lambda\Gamma\Gamma^{T}\Lambda$ as $\lambda_\ell$ . It is obvious that if $\lambda_\ell=0$ then $d_{ll}=0$, so that all the entries of the lth row and the lth column in $D$ .
+
+Maximize the penalized log-likelihood function
+$$
+p \ell_{2 R}(\hat{\beta}, \theta)=\ell_{2 R}(\hat{\beta}, \theta)-n p_{\psi}\left(\left|\theta_{1}\right|\right)
+$$
+Or its REML version
+$$
+p \ell_{2 R}(\hat{\beta}, \theta)=\ell_{2 R}(\hat{\beta}, \theta)-n p_{\psi}\left(\left|\theta_{1}\right|\right)
+$$
+with $p_\psi (|\theta_1|)=\sum_{l=1}^q p_{\psi} (|\lambda_l|)$ are the penalty function for $\lambda_1,…,\lambda_q$ with $\psi$ as the tuning parameter, which can be chosen as LASSO or SCAD.
+
+> Penalized log-likelihood function he REML 的形式都很奇怪，需要仔细看看怎么来的。
+>
+> 推了一遍，在notes的longitudinal那一节
+
+SACD penalty is
+$$
+p_{\psi}\left(\left|\lambda_{l}\right|\right)=\psi\left\{I\left(\left|\lambda_{l}\right| \leq \psi\right)+\frac{\left(a \psi-\left|\lambda_{l}\right|\right)_{+}}{(a-1) \psi} I\left(\left|\lambda_{l}\right|>\psi\right)\right\}
+$$
+Next is estimate the variance component $\theta=\left(\theta_{1}^{T}, \theta_{2}^{T}, \phi\right)^{T}$ based on the penalized log-likelihood function. 
+
+Assume $\phi$ is known, in order to obtain $\theta_1$, fix $\theta_2$ first and in this case $p\ell_2(\hat\beta,\theta)$ or $p\ell_{2R}(\hat\beta,\theta)$ is univariate function corresponds to $\theta_1$ . Then Newton-Raphson algorithm can be used to calculate the estimate $\hat\theta_1$ .
+
+Because the penalty function $p_\psi(\cdot)$ not always have second-order derivatives. Thus, replace it by its quadratic approximation functions.
+
+首先是三个参数$\theta=(\theta_1^T,\theta_2^T,\phi)$ ,前两个之前解释过了，$\phi$是Y的条件方差，(近似的可以看成measurement error的方差?)。
+
+基于$p\ell_2(\hat\beta,\theta)$ 或者restrict版本$p\ell_{2R} (\hat\beta,\theta)$. 假设$\phi$ 已知，计算$\theta_1$和$\theta_2$ 的PQL。
+
+首先计算$\theta_1$ ，则固定$\theta_2$ ，PQL退化成关于$\theta_1$ 的一元函数。此时可以用Newton-Raphson算法计算$\hat\theta_1$ .因为罚函数$p_\psi(\cdot)$ 不一定二阶可导，所以使用quadratic approximation function替代罚函数。
+
+> 提示：$\theta_1=(\lambda_1,…,\lambda_q)^T,\theta_2=(\gamma_{21};\gamma_{31},\gamma_{32};…;\gamma_{q1},…,\gamma_{q(q-1)})$ ,也就是说$\theta_1$是 innovation variance的参数，$\theta_2$ 是下三角阵的参数 
+>
+> 提示2：对$\theta$的penalty以及估计是这篇文章的核心部分
+
+Given $\beta$ and $\theta_2$ , the estimate of $\theta_1$ can be iteratively updated using
+$$
+\begin{aligned} \theta_{1}^{(k)}=& \theta_{1}^{(k-1)}-\left(\nabla^{2} \ell_{2}\left(\theta_{1}^{(k-1)}\right)+n \Sigma_{\psi}\left(\theta_{1}^{(k-1)}\right)\right)^{-1} \\ & \cdot\left(\nabla \ell_{2}\left(\theta_{1}^{(k-1)}\right)+n U_{\psi}\left(\theta_{1}^{(k-1)}\right)\right) \end{aligned}
+$$
+where $\nabla \ell_{2}\left(\theta_{1}\right)=\frac{\partial \ell_{2}}{\partial \theta_{1}}$ and $\nabla^{2} \ell_{2}\left(\theta_{1}\right)=\frac{\partial^{2} \ell_{2}}{\partial \theta_{1} \theta_{1}^{T}}$ are the first and second order derivative of $\ell_2(\beta,\theta)$ with respect to $\theta_1$ , $U_\psi (\theta_1^{(k-1)})=\Sigma_\psi(\theta_1^{(k-1)})\theta_1^{(k-1)}$  and $\Sigma_{\psi}\left(\theta_{1}^{(k-1)}\right)=\operatorname{diag}\left(\frac{p_{\psi}^{\prime}\left(\left|\lambda_{1}^{(k-1)}\right|\right)}{\left|\lambda_{1}^{(k-1)}\right|}, \ldots, \frac{p_{\psi}^{\prime}\left(\left|\lambda_{q}^{(k-1)}\right|\right)}{\left|\lambda_{q}^{(k-1)}\right|}\right)$  .
+
+每步迭代的步长和方向由上式第二项决定，这个式子是啥意思怎么来的文章没写，于是感觉得去翻Fan那篇文章。
+
+
+
+
+
+
+
+
+
+After this, we turn to calculate the estimate of $\theta_2$ . Assume we have already got $\hat\theta_1$ via the previous procedure. Need to mention that, if some components of $\theta_1$ , like $\lambda_l=0$, then the lth component of the random effects $b_i$ is not effective, so that it should be removed from $b_i$ . As a result, corresponding $\gamma_{l1},…,\gamma_{l(l-1)}$ are also removed from $\theta_2$ . The remaining part can be obtained by
+$$
+\theta_{2}^{(k)}=\theta_{2}^{(k-1)}-\left(\nabla^{2} \ell_{2}\left(\theta_{2}^{(k-1)}\right)\right)^{-1}\left(\nabla \ell_{2}\left(\theta_{2}^{(k-1)}\right)\right)
+$$
+With $\nabla \ell_{2}\left(\theta_{2}\right)=\frac{\partial \ell_{2}}{\partial \theta_{2}} \text { and } \nabla^{2} \ell_{2}\left(\theta_{2}\right)=\frac{\partial^{2} \ell_{2}}{\partial \theta_{2} \theta_{2}^{T}}$ . 
+
+The covariance matrices of $\hat\theta_1$ and $\hat\theta_2$ can be calculated using the sandwich formulae
+$$
+\begin{aligned} \operatorname{Cov}\left(\hat{\theta}_{1}\right)=&\left(\nabla^{2} \ell_{2}\left(\hat{\theta}_{1}\right)+n \Sigma_{\psi}\left(\hat{\theta}_{1}\right)\right)^{-1} \widehat{\operatorname{Cov}}\left(\nabla \ell_{2}\left(\hat{\theta}_{1}\right)\right) \\ & \cdot\left(\nabla^{2} \ell_{2}\left(\hat{\theta}_{1}\right)+n \Sigma_{\psi}\left(\hat{\theta}_{1}\right)\right)^{-1} \end{aligned}
+$$
+and
+$$
+\operatorname{Cov}\left(\hat{\theta}_{2}\right)=\left(\nabla^{2} \ell_{2}\left(\hat{\theta}_{2}\right)\right)^{-1} \widehat{\operatorname{Cov}}\left(\nabla \ell_{2}\left(\hat{\theta}_{2}\right)\right)\left(\nabla^{2} \ell_{2}\left(\hat{\theta}_{2}\right)\right)^{-1}
+$$
+If $\phi$ is unknown, it can be estimated iteratively using the residuals.
+
+$\phi^{(k)}=(1 / N) \sum_{i=1}^{n}\left(e_{i}^{(k)}\right)^{T} e_{i}^{(k)}$ where $N=\sum_{i=1}^n n_i$ and $e_{i}^{(k)}=y_{i}-X_{i} \hat{\beta}^{(k)}-Z_{i} \hat{b}_{i}^{(k)}$  are the conditional residuals in the kth iteration. 
+
+while $y_{ij}$ is Normal distribution.
+
+When $y_{ij}$ under binomial or Poisson distribution, we may simply take $\phi=1$ .
+
+
+
+
+
+
+
+
+
+### Algorithms
+
+1. Give initial value for fixed effects $\beta^{(0)}$ and variance components $\theta^{(0)}=\left(\theta_{1}^{(0)}, \theta_{2}^{(0)}, \phi^{(0)}\right)$ , then compute estimate of fixed beta, $\beta^{(1)}$ and prediction of random effects $b_i^{(1)}$.
+2. Given $\beta^{(1)},\theta^{(0)}_2,\phi^{(0)}$, using the $\theta_1^{(k)}$ updating formula upon, to update $\theta_1$ , then use $\beta_{(1)},\theta_1^{(1)},\phi^{(0)}$ to compute $\theta_2^{(1)}$ . Update $\phi^{(1)}$ if neccessary.
+3. Repeat Steps 1 and 2 above until convergence.
+
+Tunning parameter $\psi$ in the penalty function is genearlly unknown and need to estimate. This paper used the leave-one-subject-out cross validation, which minimizes
+$$
+\begin{aligned} \operatorname{SCV}(\psi)=& \sum_{i=1}^{n}\left(Y_{i}^{(-i)}-X_{i} \hat{\beta}^{(-i)}\right)^{T}\left[V_{i}^{(-i)}\right]^{-1} \\ & \times\left(Y_{i}^{(-i)}-X_{i} \hat{\beta}^{(-i)}\right) \end{aligned}
+$$
+with $Y_{i}^{(-i)}=\eta_{i}^{(-i)}+\left(y_{i}-\mu_{i}^{(-i)}\right) g^{\prime}\left(\mu_{i}^{(-i)}\right)$ and $V_{i}^{(-i)}=\left(W_{i}^{(-i)}\right)^{-1}+Z_{i} D^{(-i)} Z_{i}^{T}, D^{(-i)}$ .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

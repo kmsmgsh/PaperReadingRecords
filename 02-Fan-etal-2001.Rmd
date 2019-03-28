@@ -66,15 +66,130 @@ $$
 $$
 在这种情况下，正巧和best subset selection and stepwise deletion and addition for orthonormal designs的一致。Hard thresholding penalty function is a smoother penalty function than the entropy penalty $p_{\lambda}(|\theta|)=\left(\lambda^{2} / 2\right) I(|\theta| \neq 0)$. 
 
+一个好的penalty function应该有如下性质
+
+- Unbiasedness,无偏或者近似无偏
+- Sparsity,自动把参数很小的变量设为0进而降低模型复杂度
+- Continuity 估计对于数据z连续，避免模型预测时的不稳定(?)
+
+对于hard thresholding penalty，如下图可见，当$|\theta|<\lambda$时，罚函数是从0到$\lambda^2$，也就是在这个范围内，“鼓励”$\theta$取0，但是当$|\theta|\geq \lambda$时，penalty是一样的，所以不会对likelihood的估计造成影响。
+
+```{r}
+lambda=2
+theta=seq(-4,4,0.001)
+p_hard=lambda^2-(abs(theta)-lambda)^2*as.numeric(abs(theta)<lambda)
+plot(theta,p_hard,type='l',ylab="hard threshold penalty")
+```
+
+PLS关于$\theta$的一阶导是$\operatorname{sgn}(\theta)\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}-z$ ,其中, $p'(\theta)=I(|\theta|<\lambda) sign(\theta)\cdot2(|\theta|-\lambda)$当$\theta$很大的时候,$p'(\theta)$=0.当$|z|$ 足够大的时候，估计值就是$\hat\theta=z$ 所以说approximately unbiased estimator. 此时，"$p'(|\theta|)=0$ for large $|\theta|$" 就是无偏性的一个充分条件。就类似于Bayes selection中的一个improper prior.(？？？为啥，improper prior的定义不是不是分布的prior吗，和导数为0有什么关系？)
+
+结果得到的估计量是一个阈值条件(thresholding rule)的充分条件是 *the minimum of the function $|\theta|+p'_{\lambda}(|\theta|)$ is positive*. When $|z|<\min _{\theta \neq 0}\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}$, then the derivative of PLS is positive for all positive $\theta$'s and negative for negative $\theta$'s.  
+因为PLS的一阶是$\operatorname{sgn}(\theta)\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}-z$.
+但是在这种情况下，PLS的估计是$\hat\theta=0$.因为在定义域上$(-\infty,0)$上PLS函数单减，在$(0,\infty)$上单增，最小化PLS函数的点就是0.
+另外一种情况，当$|z|>\min _{\theta \neq 0}|\theta|+p_{\lambda}^{\prime}(|\theta|)$，则Z函数和$|\theta|+p'_{\lambda}(|\theta|)$有交叉，也就是存在令导数为0的点。
+```{r,echo=FALSE}
+knitr::include_graphics(rep("chp2/Figure1.png", 1))
+```
+所以这几根粗的线是不同penalty function的长相，第一张图的意思就是当$\theta=0$时，罚函数不罚，当theta超过一定值也不罚。lasso则一直罚，SCAD则更smooth，但是超过一定值也不罚了。
+
+This implies that a sufficient and necessary condition for continuity is that *the minimum of the function $|\theta|+p_\lambda'(|\theta|)$ is attained at 0.*
+
+```{r}
+lambda=2
+theta=seq(-4,4,0.001)
+p_der=-as.numeric(abs(theta)<lambda)*2*(abs(theta)-lambda)
+plot(theta,p_der,type='l',ylab = "hard threshold 1-order derivative")
+#lines(theta,rep(1,8001),type='l')
+```
+
+观察PLS关于$\theta$的一阶导，当$|z|<\min _{\theta \neq 0}\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}$ 时，一阶导的符号与$\theta$一致，+ if $\theta>0$,- if $\theta<0$.这样$\hat\theta=0$。 而当$|z|>\min _{\theta \neq 0}|\theta|+p_{\lambda}^{\prime}(|\theta|)$ 时，（可能？）存在两个跨越点。
+
+```{r,echo=FALSE}
+knitr::include_graphics(rep("chp2/Figure3.png", 1))
+```
+
+其中，大的那个点是PLS的estimator。这样，为了保证$\hat\theta$关于$z=\min _{\theta \neq 0}\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}$ 左右连续，所以$|\theta|+p_{\lambda}^{\prime}(|\theta|)$ 应该在0点取得
+
+可以断言，满足稀疏性和连续性条件的penalty 函数必须在origin点singular。
+
+- $L_2$ penalty $p_{\lambda}(|\theta|)=\lambda|\theta|^2$-> ridge regression
+- $L_1$ penalty $p_{\lambda}(|\theta|)=\lambda|\theta|$ yields a soft thresholding rule and lasso
+$$
+\hat{\theta}_{j}=\operatorname{sgn}\left(z_{j}\right)\left(\left|z_{j}\right|-\lambda\right)_{+}
+$$
+- $L_q$ penalty $p_{\lambda}(|\theta|)=\lambda|\theta|^{q}$ -> bridge regression.
+
+然而 The solution is continuous only when $q\geq 1$. 但是，when $q>1$, the minimum of $|\theta|+p'_{\lambda}(|\theta|)$ is zero and hence it does not produce sparse solution. So the only solution is the $L_1$ penalty family. 但是使用常数$\lambda$时，改变$\lambda$会有代价。
+
+
+### Smoothly Clipped Absolute Deviation Penalty
+
+因为一般的$L_q$ 和硬阈值方法不能同时满足无偏，稀疏和连续性。定义一个连续可微的penalty:
+$$
+p_{\lambda}^{\prime}(\theta)=\lambda\left\{I(\theta \leq \lambda)+\frac{(a \lambda-\theta)_{+}}{(a-1) \lambda} I(\theta>\lambda)\right\}
+$$
+for some $a>2$ and $\theta>0$. This is called SCAD penalty.
+这是二次样条，其端点是$\lambda$和$a\lambda$.结果如下
+$$
+\hat{\theta}=\left\{\begin{array}{ll}{\operatorname{sgn}(z)(|z|-\lambda)_{+},} & {\text { when }|z| \leq 2 \lambda} \\ {\{(a-1) z-\operatorname{sgn}(z) a \lambda\} /(a-2),} & {\text { when } 2 \lambda<|z| \leq a \lambda} \\ {z,} & {\text { when }|z|>a \lambda}\end{array}\right.
+$$
+
+估计的阈值由$\lambda$和$a$决定。
+在Bayes risk analysis中，prior for $\theta$ is $N(0,a\lambda)$. Compute Bayes risk via numerical integration.
+
+### Performance of Thresholding Rules
+
+怎么突然转去讲risk anaysis了。。。
+Compare between $L_2$ risk function, hard and soft thresholding rules with SCAD.
 
 
 
+## Variable selection via penalized likelihood
 
 
+Assume design matrix $X=(x_{ij})$ is standardized.(mean 0 and variance 1).
+
+### Penalized Least Squares and Likelihood
+
+Penalized least squares:
+$$
+\frac{1}{2}(\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^{T}(\mathbf{y}-\mathbf{X} \boldsymbol{\beta})+n \sum_{j=1}^{d} p_{\lambda}\left(\left|\beta_{j}\right|\right)
+$$
+
+We can consider alternative loss function Huber's $\psi$ function, which is more numerical stablize than least squares,that is, we minimizing
+
+$$
+\sum_{i=1}^{n} \psi\left(\left|y_{i}-\mathbf{x}_{i} \boldsymbol{\beta}\right|\right)+n \sum_{j=1}^{d} p_{\lambda}\left(\left|\beta_{j}\right|\right)
+$$
+For generalized linear model, penalized likelihood is
+$$
+\sum_{i=1}^{n} \ell_{i}\left(g\left(\mathbf{x}_{i}^{T} \boldsymbol{\beta}\right), y_{i}\right)-n \sum_{j=1}^{d} p_{\lambda}\left(\left|\beta_{j}\right|\right)
+$$
+equivelent to minimize its multiple with -1.
+
+### Sampling properties and oracle properties.
+
+先跳过，以后再看。
 
 
+### A new Unified Algorithm
 
+A new unified algorithm for monimizing the problem:1. penalized linear square.
+2.penalized Huber $\psi$ function 3.Generalised linear model.
 
+Denote first term of these problem as a loss function of $\boldsymbol \beta$, as $\ell(\beta)$. Then the problem can be rewrite as the form:
+
+$$
+\ell(\boldsymbol{\beta})+n \sum_{j=1}^{d} p_{\lambda}\left(\left|\beta_{j}\right|\right)
+$$
+为了解这个优化问题，可能会涉及二阶导以及Hessian阵一类的问题。但是$L_1$,硬阈值，SCAD都没有连续的二阶导，但是这些罚函数可以被locally approximated by a quadratic function.假设从初值$\boldsymbol \beta_0$ 开始迭代，如果对于某个$\beta_{j0}$ 非常靠近0，则设置$\hat\beta_j=0$。否则用二次函数局部逼近：
+$$
+\left[p_{\lambda}\left(\left|\beta_{j}\right|\right)\right]^{\prime}=p_{\lambda}^{\prime}\left(\left|\beta_{j}\right|\right) \operatorname{sgn}\left(\beta_{j}\right) \approx\left\{p_{\lambda}^{\prime}\left(\left|\beta_{j 0}\right|\right) /\left|\beta_{j 0}\right|\right\} \beta_{j}
+$$
+when $\beta\neq0$,则有
+$$
+\begin{array}{r}{p_{\lambda}\left(\left|\beta_{j}\right|\right) \approx p_{\lambda}\left(\left|\beta_{j 0}\right|\right)+\frac{1}{2}\left\{p_{\lambda}^{\prime}\left(\left|\beta_{j 0}\right|\right) /\left|\beta_{j 0}\right|\right\}\left(\beta_{j}^{2}-\beta_{j 0}^{2}\right)} \\ {\text { for } \beta_{j} \approx \beta_{j 0}}\end{array}
+$$
 
 
 
