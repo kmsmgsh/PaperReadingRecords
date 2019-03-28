@@ -1,3 +1,6 @@
 [
-["index.html", "A paper reading record Prerequisites", " A paper reading record Jiaming Shen 2019-03-28 Prerequisites "]
+["index.html", "A paper reading record Prerequisites", " A paper reading record Jiaming Shen 2019-03-28 Prerequisites "],
+["introduction.html", "Introduction", " Introduction 没什么价值，就是抄书和重新组合一下 "],
+["variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html", "Chapter 1 Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties 1.1 Abstract: 1.2 Introduction", " Chapter 1 Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties essay by Jianqing Fan &amp; Runze Li，2001 1.1 Abstract: Variable selection，stepwise selection方法的计算昂贵，并且在选择过程中没有考虑到随机误差。这篇文章则考虑使用罚似然函数penalized likelihood 方法去解决这几个问题。选择变量和估计参数同时进行。同时构造估计参数的置信区间。该方法独特的地方在于罚函数是symetric, nonconcave on \\((0,\\infty)\\). 本文还提出了一种关于penalized likelihood function的优化算法。这种算法可以广泛的用于各类模型。比如非参模型小波和样条。同时也提出了收敛速率相关的理论。还介绍了这个方法的oracle property。 1.2 Introduction 第一段：变量选择很重要blablabla。传统方法（step-wise）方法有很多问题。罚最小二乘可以同时保持子集选择方法和岭回归的有点。罚函数需要有在原点奇异性使得有稀疏的解(The penalty functions have to be singular at the origin to produce sparse solutions.)，还得满足一定的条件使得模型连续，为了保持模型选择的稳定性。(to satisfy certain conditions to produce continuous models, for staility of model selection)、而且得有界up to a constant使得对于一些大参数的估计是几乎无偏的。 罚函数的前辈ridge regression和 lasso不完全满足这几项条件。 第二段：罚最小二乘可以自然的推广到似然函数基础的模型上。 "],
+["references.html", "References", " References "]
 ]
