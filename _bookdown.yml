@@ -1,5 +1,6 @@
-book_filename: "Essay_reanding_record"
+book_filename: "paper_reanding_record"
 delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "
+output_dir: "docs"
