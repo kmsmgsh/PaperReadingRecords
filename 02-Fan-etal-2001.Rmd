@@ -6,8 +6,76 @@ essay by Jianqing Fan & Runze Li，2001
 Variable selection，stepwise selection方法的计算昂贵，并且在选择过程中没有考虑到随机误差。这篇文章则考虑使用罚似然函数penalized likelihood 方法去解决这几个问题。选择变量和估计参数同时进行。同时构造估计参数的置信区间。该方法独特的地方在于罚函数是symetric, nonconcave on $(0,\infty)$. 本文还提出了一种关于penalized likelihood function的优化算法。这种算法可以广泛的用于各类模型。比如非参模型小波和样条。同时也提出了收敛速率相关的理论。还介绍了这个方法的oracle property。
 
 ## Introduction
-第一段：变量选择很重要blablabla。传统方法（step-wise）方法有很多问题。罚最小二乘可以同时保持子集选择方法和岭回归的有点。罚函数需要有在原点奇异性使得有稀疏的解(The penalty functions have to be singular at the origin to produce sparse solutions.)，还得满足一定的条件使得模型连续，为了保持模型选择的稳定性。(to satisfy certain conditions to produce continuous models, for staility of model selection)、而且得有界up to a constant使得对于一些大参数的估计是几乎无偏的。
+变量选择很重要blablabla。传统方法（step-wise）方法有很多问题。罚最小二乘可以同时保持子集选择方法和岭回归的有点。罚函数需要有在原点奇异性使得有稀疏的解(The penalty functions have to be singular at the origin to produce sparse solutions.)，还得满足一定的条件使得模型连续，为了保持模型选择的稳定性。(to satisfy certain conditions to produce continuous models, for staility of model selection)、而且得有界up to a constant使得对于一些大参数的估计是几乎无偏的。
 罚函数的前辈ridge regression和 lasso不完全满足这几项条件。
+罚最小二乘可以自然的推广到似然函数基础的模型上。
+对带有罚的高维目标函数做优化是一个非常难的问题。本文提出了一个新的并且广泛的算法能产生unified variable selection procedure.
+估计的标准差用一个sandwitch formula得到。
 
-第二段：罚最小二乘可以自然的推广到似然函数基础的模型上。
+罚函数相对于传统的step-wise方法来说，可以建立样本性质，比如收敛速度，oracle procedure。也就是说，如果真实的参数为0，则估计值为0的概率趋向于1. 
+
+penalized likelihood 方法可以推广到高维的非参模型，通过使用wavelet和splines逼近回归函数。传统的sub-set selection方法在非参中是选择合适的样条的subbases。这些data-driven的变量选择方法的大样本性质很难理解。但是用penalized likelihood方法就很好建立大样本性质理论。
+
+- Section 2 Relation between penalized least squares & subset selection when matrices are orthonormal
+- Section 3 Extend penalized likelihood approach to various parametric regression, lm, rlm. glm. Asymoptotic property. 3.3: Based on local quadratic approximations, find the estimator for penalized likelihood.
+
+> The main reason I read this, the local quadratic approximation
+
+- Section 4 Numerical comparision and simulation studies
+- Section 5 More discussion 
+- Appendix: Technical proofs.
+
+
+## Penalized Least Squares And Variable Selection
+
+Linear Regression Model:
+$$
+\mathbf{y}=\mathbf{X} \boldsymbol{\beta}+\boldsymbol{\varepsilon}
+$$
+LSE
+$$
+\|\mathbf{y}-\mathbf{X} \boldsymbol{\beta}\|^{2}
+$$
+equivelent to
+$$
+\|\hat{\boldsymbol{\beta}}-\boldsymbol{\beta}\|^{2}
+$$
+penalized least square:
+$$
+\begin{array}{r}{\frac{1}{2}\|\mathbf{y}-\mathbf{X} \boldsymbol{\beta}\|^{2}+\lambda \sum_{j=1}^{d} p_{j}\left(\left|\boldsymbol{\beta}_{j}\right|\right)=\frac{1}{2}\|\mathbf{y}-\hat{\mathbf{y}}\|^{2}+\frac{1}{2} \sum_{j=1}^{d}\left(z_{j}-\beta_{j}\right)^{2}} \\ {+\lambda \sum_{j=1}^{d} p_{j}\left(\left|\beta_{j}\right|\right)}\end{array}
+$$
+with $\mathbf{z}=\mathbf{X}^{T} \mathbf{y}$ and $\hat{\mathbf{y}}=\mathbf{X} \mathbf{X}^{T} \mathbf{y}$. 
+
+$p_j$ 不一定对所有j都一致。（可以加个权甚至把对重要j的减为0）
+
+但是以下我们假设一致。
+
+minimizing the previous PLS problem is equivelant to
+$$
+\frac{1}{2}(z-\theta)^{2}+p_{\lambda}(|\theta|)
+$$
+
+By taking hard thresholding penalty(!!! 这个在lasso里面提过)
+$$
+p_{\lambda}(|\theta|)=\lambda^{2}-(|\theta|-\lambda)^{2} I(|\theta|<\lambda)
+$$
+
+hard thresholding rule:
+$$
+\hat{\theta}=z I(|z|>\lambda)
+$$
+在这种情况下，正巧和best subset selection and stepwise deletion and addition for orthonormal designs的一致。Hard thresholding penalty function is a smoother penalty function than the entropy penalty $p_{\lambda}(|\theta|)=\left(\lambda^{2} / 2\right) I(|\theta| \neq 0)$. 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
