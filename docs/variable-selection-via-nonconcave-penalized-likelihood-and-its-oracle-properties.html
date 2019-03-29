@@ -25,7 +25,7 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-03-28">
+<meta name="date" content="2019-03-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -333,6 +333,25 @@ equivelent to minimize its multiple with -1.</p>
 when <span class="math inline">\(\beta\neq0\)</span>,则有
 <span class="math display">\[
 \begin{array}{r}{p_{\lambda}\left(\left|\beta_{j}\right|\right) \approx p_{\lambda}\left(\left|\beta_{j 0}\right|\right)+\frac{1}{2}\left\{p_{\lambda}^{\prime}\left(\left|\beta_{j 0}\right|\right) /\left|\beta_{j 0}\right|\right\}\left(\beta_{j}^{2}-\beta_{j 0}^{2}\right)} \\ {\text { for } \beta_{j} \approx \beta_{j 0}}\end{array}
+\]</span>
+二次逼近的缺点是一旦coefficient被压缩到0，将一直停留在0点。
+所以penalized maximum likelihood 的问题可以等价的编程二次型最小值的问题，并且能用Newton-Raphson算法进行求解。
+<span class="math display">\[
+\begin{array}{r}{\ell\left(\boldsymbol{\beta}_{0}\right)+\nabla \ell\left(\boldsymbol{\beta}_{0}\right)^{T}\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)+\frac{1}{2}\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)^{T} \nabla^{2} \ell\left(\boldsymbol{\beta}_{0}\right)\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)} \\ {+\frac{1}{2} n \boldsymbol{\beta}^{T} \Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right) \boldsymbol{\beta}}\end{array}
+\]</span></p>
+<p>于是就得到更新过程如下：
+<span class="math display">\[
+\boldsymbol{\beta}_{1}=\boldsymbol{\beta}_{0}-\left\{\nabla^{2} \ell\left(\boldsymbol{\beta}_{0}\right)+n \Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right)\right\}^{-1}\left\{\nabla \ell\left(\boldsymbol{\beta}_{0}\right)+n \mathbf{U}_{\lambda}\left(\boldsymbol{\beta}_{0}\right)\right\}
+\]</span>
+with
+<span class="math display">\[
+\begin{array}{l}{\nabla \ell\left(\boldsymbol{\beta}_{0}\right)=\frac{\partial \ell\left(\boldsymbol{\beta}_{0}\right)}{\partial \boldsymbol{\beta}}, \quad \nabla^{2} \ell\left(\boldsymbol{\beta}_{0}\right)=\frac{\partial^{2} \ell\left(\boldsymbol{\beta}_{0}\right)}{\partial \boldsymbol{\beta} \partial \boldsymbol{\beta}^{T}}} \\ {\Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right)=\operatorname{diag}\left\{p_{\lambda}^{\prime}\left(\left|\boldsymbol{\beta}_{10}\right|\right) /\left|\beta_{10}\right|, \ldots, p_{\lambda}^{\prime}\left(\left|\beta_{d 0}\right|\right) /\left|\beta_{d 0}\right|\right\}}\\
+\mathbf{U}_{\lambda}\left(\boldsymbol{\beta}_{0}\right)=\Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right) \boldsymbol{\beta}_{0}
+\end{array}
+\]</span></p>
+<p>当算法收敛的时候，estimator <span class="math inline">\(\hat\beta\)</span>满足如下条件
+<span class="math display">\[
+\frac{\partial \ell\left(\hat{\boldsymbol{\beta}}_{0}\right)}{\partial \beta_{j}}+n p_{\lambda}^{\prime}\left(\left|\hat{\beta}_{j 0}\right|\right) \operatorname{sgn}\left(\hat{\beta}_{j 0}\right)=0
 \]</span></p>
 
 </div>
