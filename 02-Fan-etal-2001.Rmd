@@ -1,6 +1,5 @@
 # Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties
-
-essay by Jianqing Fan & Runze Li，2001
+@Fan:2001ug
 
 ## Abstract: 
 Variable selection，stepwise selection方法的计算昂贵，并且在选择过程中没有考虑到随机误差。这篇文章则考虑使用罚似然函数penalized likelihood 方法去解决这几个问题。选择变量和估计参数同时进行。同时构造估计参数的置信区间。该方法独特的地方在于罚函数是symetric, nonconcave on $(0,\infty)$. 本文还提出了一种关于penalized likelihood function的优化算法。这种算法可以广泛的用于各类模型。比如非参模型小波和样条。同时也提出了收敛速率相关的理论。还介绍了这个方法的oracle property。
@@ -191,7 +190,7 @@ $$
 \begin{array}{r}{p_{\lambda}\left(\left|\beta_{j}\right|\right) \approx p_{\lambda}\left(\left|\beta_{j 0}\right|\right)+\frac{1}{2}\left\{p_{\lambda}^{\prime}\left(\left|\beta_{j 0}\right|\right) /\left|\beta_{j 0}\right|\right\}\left(\beta_{j}^{2}-\beta_{j 0}^{2}\right)} \\ {\text { for } \beta_{j} \approx \beta_{j 0}}\end{array}
 $$
 二次逼近的缺点是一旦coefficient被压缩到0，将一直停留在0点。
-所以penalized maximum likelihood 的问题可以等价的编程二次型最小值的问题，并且能用Newton-Raphson算法进行求解。
+penalized maximum likelihood的问题可以等价的编程二次型最小值的问题，并且能用Newton-Raphson算法进行求解。
 $$
 \begin{array}{r}{\ell\left(\boldsymbol{\beta}_{0}\right)+\nabla \ell\left(\boldsymbol{\beta}_{0}\right)^{T}\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)+\frac{1}{2}\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)^{T} \nabla^{2} \ell\left(\boldsymbol{\beta}_{0}\right)\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)} \\ {+\frac{1}{2} n \boldsymbol{\beta}^{T} \Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right) \boldsymbol{\beta}}\end{array}
 $$
@@ -213,9 +212,10 @@ $$
 \frac{\partial \ell\left(\hat{\boldsymbol{\beta}}_{0}\right)}{\partial \beta_{j}}+n p_{\lambda}^{\prime}\left(\left|\hat{\beta}_{j 0}\right|\right) \operatorname{sgn}\left(\hat{\beta}_{j 0}\right)=0
 $$
 
-
-
-
+如下的sandwich formula 可以作为对$\hat\beta_1$的估计:
+$$
+\begin{aligned} \widehat{\operatorname{cov}}\left(\hat{\boldsymbol{\beta}}_{1}\right)=\left\{\nabla^{2} \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)+n \Sigma_{\lambda}\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\}^{-1} \widehat {\operatorname{cov}}\left\{\nabla \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\} \\ \times\left\{\nabla^{2} \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)+n \Sigma_{\lambda}\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\}^{-1} \end{aligned}
+$$
 
 
 

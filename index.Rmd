@@ -11,3 +11,4 @@ description: "This is a reading record and notes for paper reading, in order to 
 ---
 
 # Prerequisites {-}
+[@deStatistique:vb]

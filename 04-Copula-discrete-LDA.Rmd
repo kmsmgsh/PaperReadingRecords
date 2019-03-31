@@ -1,0 +1,207 @@
+# Copula for discrete LDA
+
+
+
+Lack of suitable mutivariate joint distributions for discrete variables that incorporate with the correlation.
+
+
+
+Maximizing the full likelihooe function constructed from copula representation can be computational infeasible--> Composite pairwise likelihood approach.
+
+
+
+Copula usage: Gaussian copula:Formally:
+
+A set of random variables $\boldsymbol{U}=\left(U  _  {1}, \dots, U  _  {d}\right)^{\mathrm{T}}$ follows a Gaussian copula model if their joint distribution is specified by
+$$
+F\left(u  _  {1}, \ldots, u  _  {d}\right)=P\left(U  _  {1} \leq u  _  {1}, \ldots, U  _  {d} \leq u  _  {d}\right)=\Phi  _  {d}\left(v  _  {1}, \ldots, v  _  {d} ; \mathbf{R}\right)
+$$
+$\Phi _ d$ is the porbability distribution function of the d-dimensional standardised normal distribution with zero mean, $\mathbf R$ is the correlation matrix. 
+
+$v _ i=\Phi^{-1} (w _ i)$ Where $w _ i=P(U _ i\leq u _ i)$ is the marginal distribution of $U _ i\leq i\leq d$.  
+
+Other copulas, like t-copula can also be applied.
+
+Notation: standard Longitudinal data format: $\mathbf{y} _ {i}=\left(y _ {i 1}, \ldots, y _ {i m _ {i}}\right)^{\mathrm{T}}$ , $m _ i$ longitudinal measurements fr i-th subject, discrete response $y _ {ij}$ is observed at time $t _ {ij}$ .Consider $y _ {i j} \in\{0,1,2, \ldots\}$ . and $\mathbf{t} _ {i}=\left(t _ {i 1}, \ldots, t _ {i m _ {i}}\right)^{\mathrm{T}}$ 
+
+$\{ y _ {ij},x _ {ij},t _ {ij} \}(i=1,...,n;j=1,...,m _ i).$ For categorical responses, we assume that $y _ {ij}$ follows exponential family distribution (so that GLMs can be used modelling marginally discrete responses.) 
+$$
+f(y)=c(y ; \varphi) \exp [\{y \theta-\psi(\theta)\} / \varphi]
+$$
+Since $\psi'(\theta)=E(Y):=\mu$.
+
+canonical link function:
+$$
+(\psi')^{-1} (\mu)=g(\mu)
+$$
+Then the GLM marginally for each $y _ {ij}$ as
+$$
+g(E(y _ {ij}))=g(\mu _ {ij})=x^T _ {ij}\beta
+$$
+$\operatorname{var}(y)=\varphi \psi^{\prime \prime}(\theta)$
+
+Joint distribution of $y _ i$ following the Gaussian copula representation
+$$
+F _ {m _ i}(y _ i)=P(Y _ {i1}\leq y _ {i1},...,Y _ {im _ i}\leq y _ {im _ i})=\Phi _ {m _ i}(z _ {i1},...,z _ {im _ i};\mathbf R _ i)
+$$
+where $z _ {ij}=\Phi^{-1} _ 1 \{F(y _ {ij})\}$
+
+This is, $F(y _ {ij})$ is the probability of $Y _ {i _ 1} \leq y _ {i1}$ , it's in the probability space [0,1], $\Phi _ 1^{-1} \{F(y _ {ij})\}$ make the value from probability space back to sample space. Then this is in continuous sample space, then use multivariate Normal distribution as the joint distribution.
+
+In a special case when the responses are binary, the correlation between two observations is a monotone function of the corresponding element in $R _ i$ .
+
+
+
+The HPC insed in decomposite correlation coefficients $R _ i$ .
+
+
+
+... 
+
+
+
+The description of HPC 
+
+
+
+...
+
+modelling angles by
+$$
+\omega _ {i j k}=\pi / 2-\operatorname{atan}\left(\mathbf{w} _ {i j k}^{\mathrm{T}} \boldsymbol{\gamma}\right)
+$$
+$\mathbf{w} _ {ijk}\in \mathbb R^{q}$ is a covariate and $\mathbb \gamma$ is a $q\times 1$ unknown parameters.
+
+Let $\boldsymbol{\theta}=\left(\boldsymbol{\beta}^{\mathrm{T}}, \boldsymbol{\gamma}^{\mathrm{T}}, \varphi^{\mathrm{T}}\right)$.  Then follow the framework upon, we can construct likelihood and estimate $\mathbb \theta$ by MLE.
+
+Gaussian copula has continuous support on $\mathbb R^d$ while discrete response variable are defined only on discrete grid points.
+
+Full likelihood:
+
+
+$$
+\begin{aligned} L(\boldsymbol{\theta}) &=\prod _ {i=1}^{n} P\left(Y _ {i 1}=y _ {i 1}, \ldots, Y _ {i m _ {i}}=y _ {i m _ {i}}\right) \\ &=\prod _ {i=1}^{n} P\left(y _ {i 1}-1<Y _ {i 1} \leq y _ {i 1} \leq y _ {i 1}, \ldots, y _ {i m _ {i}}-1<Y _ {i m _ {i}} \leq y _ {i m _ {i}}\right) \\ &=\prod _ {i=1}^{n} \int \cdots \int _ {\mathbf{Z} _ {i}^{-}<\mathbf{u} \leq \mathbf{Z} _ {i}} \phi _ {m _ {i}}\left(\mathbf{u} ; \mathbf{R} _ {i}\right) d \mathbf{u} \end{aligned}
+$$
+积分形式应该来源于Gaussian copula的定义。
+
+> Laplace 展开对u，精度可能不够，特别是binary
+>
+> 包括pairwise likelihood，需要满足一定条件才能逼近的好
+
+
+
+This is hard to deal with, then the author use the composite likelihood by using pairwise likelihood.
+
+Construct all pairwise likelihoods via bivariate copula as
+$$
+p L(\boldsymbol{\theta})=\prod _ {i=1}^{n} \prod _ {1 \leq j<k \leq m _ {i}} \int _ {z _ {i j}^{-}}^{z _ {i j}} \int _ {z _ {i k}^{-}}^{z _ {i k}} \phi _ {2}\left(\mathbf{u} ; \rho _ {i j k}\right) d \mathbf{u}
+$$
+That is, using two-integral instead of $m _ i$ integrals.
+
+$\rho _ {ijk}$ is specified by the HPC.
+
+log pairwise likelihood function is
+$$
+p l(\boldsymbol{\theta})=\sum _ {i=1}^{n} \sum _ {1 \leq j<k \leq m _ {i}} \log \int _ {z _ {i j}^{-}}^{z _ {i j}} \int _ {z _ {i k}^{-}}^{z _ {i k}} \phi _ {2}\left(\mathbf{u} ; \rho _ {i j k}\right) d \mathbf{u} :=\sum _ {i=1}^{n} \sum _ {1 \leq j<k \leq m _ {i}} l _ {i j k}(\theta)
+$$
+and the score function is 
+$$
+\mathbf{S} _ {n}(\boldsymbol{\theta})=\frac{\partial p l}{\partial \boldsymbol{\theta}}=\sum _ {i=1}^{n} \sum _ {1 \leq j<k \leq m _ {i}} \frac{\partial l _ {i j k}}{\partial \boldsymbol{\theta}} :=\sum _ {i=1}^{n} \mathbf{S} _ {n i}(\boldsymbol{\theta})
+$$
+Employ modified Fisher scoring algorithm to maximize the pairwise likelihood function.
+
+
+
+
+
+Song, et. al. 2009
+
+## Joint Regression Analysis of Correlated Data Using Gaussian Copulas
+
+Estimating equations (EE)-based approach. Join marginal models for correlated outcomes. Shortcomings associated with the EE method due to lack of fuly parametric model: 1. loss of estimation efficiency 2. the lack of procedures for model assessment and selection, 3. Difficulty of incorporating vector outcomes of mixed types. 
+
+Burn injury data: $y _ 1=log(\textit{burn area}+1)$   $y _ 2$ 1 for death from burn injury and 0 for survival.
+
+Normally people do two seperate regression model but the problem is $y _ 1$ and $y _ 2$ are not independent, it's joint. How to consider the correlation in these two marginal models?
+
+Develop a unified and flexible likelihood framework to join various marginal models.
+
+Use GLMs as marginal models. To join marginal GLMs, invoke Gaussian copulas as the link model, and the resulting joint regression model is refrred to as the vector GLM(VGLM).
+
+VGLM for correlated discrete outcomes and correlated mixed outcomes. Comparisons to the moment-based EE approach. 
+
+Jointly analyze vector data by the GLM approach multidimensional GLMs, or VGLMs, specify the conditional distribution of a vector response y given x as follows :
+$$
+f(\mathbf{y} | \mathbf{x} ; \boldsymbol{\beta}, \boldsymbol{\varphi}, \Gamma)=\delta\left(\mathbf{y}, \eta _ {1}, \ldots, \eta _ {m} ; \boldsymbol{\varphi}, \Gamma\right)
+$$
+Parametric link model $\delta(\cdot ;\varphi,\Gamma)$ is parameterized by the vector of dispersion parameters $\boldsymbol  \varphi=(\varphi _ 1,...,\varphi _ m)^T$
+
+The $\Gamma$ characterizes the association among the components of $\mathbf y$. 
+
+This article consider a new class of parametric link models $\delta(\cdot)$ via multivariate distributions generated by Gaussian copulas.
+
+
+
+Multivariate ED Family distribution
+
+Cumulative distribution function of $ED(\mu _ j,\varphi _ j)$ denoted by $G _ j(y _ j;\mu _ j,\varphi _ j)$
+$$
+F(\mathbf{y} ; \boldsymbol{\mu}, \varphi, \Gamma)=C\left\{G _ {1}\left(y _ {1} ; \mu _ {1}, \varphi _ {1}\right), \ldots, G _ {m}\left(y _ {m} ; \mu _ {m}, \varphi _ {m}\right) | \Gamma\right\}
+$$
+$\boldsymbol \mu=(\mu _ 1,\cdots,\mu _ m)^T$ is the vector of m means,$\boldsymbol\varphi=(\varphi _ 1,...,\varphi _ m)^T$  is dispersion parameters, $C(\cdot)$ is m-variate Gaussian copula with 
+$$
+\begin{aligned} C(\mathbf{u} | \Gamma) &=\Phi _ {m}\left\{\Phi^{-1}\left(u _ {1}\right), \ldots, \Phi^{-1}\left(u _ {m}\right) | \Gamma\right\} \\ \mathbf{u} &=\left(u _ {1}, \ldots, u _ {m}\right)^{T} \in(0,1)^{m} \end{aligned}
+$$
+$\Gamma$ is Pearson correlation matrix. For non-Gaussian margins, $\Gamma$ becomes a pairwise non-linear association, van der Waerden coefficient, which is defined by
+$$
+\gamma _ {i j}=\operatorname{corr}\left[\Phi^{-1}\left\{G _ {i}\left(y _ {i}\right)\right\}, \Phi^{-1}\left\{G _ {j}\left(y _ {j}\right)\right\}\right]
+$$
+For continuous marginal CDF, $\gamma _ {ij}$ represents the linear correlation of two normal scores $\Phi^{-1}\left\{G _ {t}\left(y _ {t}\right)\right\}, t=i, j$ . For discrete cases, the equation still holds but interpretation would be different. For binary case with same joint probability mass function, then the $\gamma _ {ij}$ can be interpreted as the tetrachoric correlation. 
+
+The density functions of MEDs with different marginal distribution, in continuous case, the MED can be expressed by 
+$$
+f(\mathbf{y} ; \boldsymbol{\mu}, \varphi, \Gamma)=c\left\{G _ {1}\left(y _ {1}\right), \ldots, G _ {m}\left(y _ {m}\right) | \Gamma\right\} \prod _ {i=1}^{m} g _ {i}\left(y _ {i} ; \mu _ {i}, \varphi _ {i}\right)
+$$
+where $c(\cdot)$ is density of the copula $C( \cdot)$
+$$
+c(\mathbf{u} | \Gamma)=|\Gamma|^{-1 / 2} \exp \left\{\frac{1}{2} \mathbf{q}^{T}\left(I _ {m}-\Gamma^{-1}\right) \mathbf{q}\right\}
+$$
+When all margins are discrete, the joint probability function of a discrete MED distribution with the form:
+$$
+\begin{aligned} f(\mathbf{y}) &=\mathrm{P}\left(Y _ {1}=y _ {1}, \ldots, Y _ {m}=y _ {m}\right) \\ &=\sum _ {j _ {1}=1}^{2} \cdots \sum _ {j _ {m}=1}^{2}(-1)^{j _ {1}+\cdots+j _ {m}} C\left(u _ {1, j _ {1}}, \ldots, u _ {m, j _ {m}} | \Gamma\right) \end{aligned}
+$$
+Another case is the mixed outcome.
+
+3. Simultaneous Maximum Likelihood Inference
+
+Responses $\left(\mathbf{y} _ {1}, \ldots, \mathbf{y} _ {n}\right)$ with covariates $\left(X _ {1}, \ldots, X _ {n}\right)$ follows m-variate MED distribution
+$$
+\mathbf{y} _ {i}\left|X _ {i}=\left(\mathbf{x} _ {i 1}, \ldots, \mathbf{x} _ {i m}\right) \sim \operatorname{MED} _ {m}\left(\boldsymbol{\mu} _ {i}, \boldsymbol{\varphi} _ {i}, \Gamma\right), \quad i=1, \ldots, n\right.
+$$
+Responses $\boldsymbol {y_i}$ has mean $\boldsymbol{\mu_i}=\left(\mu _ {i 1}\left(\mathbf{x} _ {i 1}\right), \ldots, \mu _ {i m}\left(\mathbf{x} _ {i m}\right)\right)^{T}$ and dispersion $\varphi _ {i}=\left(\varphi _ {i 1}, \ldots, \varphi _ {i m}\right)^{T}$ .
+
+Mean $\mu _ i$ follows marginal GLM $h _ j(\mu _ {ij})=\eta _ j(x _ {ij}) $  with $\eta _ {i j}=\mathbf{x} _ {i j}^{T} \boldsymbol{\beta} _ {j}$
+
+Let $\theta=(\beta,\varphi,\Gamma)$ . For normal longitudinal or clustered data analysis, VGLM with $\Gamma$ has some specific form like AR(1), that is $\Gamma(\alpha)$    
+
+Loglikelihood： $\ell(\boldsymbol{\theta} ; Y, X)=\sum _ {i=1}^{n} \ell _ {i}\left(\boldsymbol{\theta} ; \mathbf{y} _ {i}, X _ {i}\right)$，then MLE $\hat{\boldsymbol{\theta}}=\underset{\boldsymbol{\theta}}{\operatorname{argmax}} \ell(\boldsymbol{\theta} ; Y, X)$ .
+
+Search for result we use Gauss-Newton type algorithm.
+
+The observed fisher Information using the sandwich form: $\hat{\mathcal{I}}=\mathbf{A} _ {n}^{-1}(\hat{\boldsymbol{\theta}}) \mathbf{B} _ {n}(\hat{\boldsymbol{\theta}}) \mathbf{A} _ {n}^{-1}(\hat{\boldsymbol{\theta}})$ where $\mathbf{A} _ {n}(\theta)$ is the numerical Hessian matrix and $B _ n(\theta)=\frac{1}{n} \sum _ {i=1}^{n} \dot{\ell} _ {i}\left(\boldsymbol{\theta} ; \mathbf{y} _ {i}, X _ {i}\right) \dot{\ell} _ {i}\left(\boldsymbol{\theta} ; \mathbf{y} _ {i}, X _ {i}\right)^{T}$ . The iteration updates of parameter $\theta$ is by
+$$
+\theta^{k+1}=\theta^{k}+\epsilon\left\{\mathbf{B} _ {n}\left(\theta^{k}\right)\right\}^{-1} \dot{\ell}\left(\theta^{k}\right)
+$$
+$\epsilon$  is step-halving term. Among Newton-Raphson, downhill simplex, quasi-Newton with numerical derivatives, the Gauss-Newton appears to privde the best trade-off.
+
+4. VGLMs for Trivariate Discrete Data
+
+Moment-based EE method .etc
+
+Trivariate VGLMs
+
+probability mass function:
+$$
+\begin{aligned} f\left(\mathbf{y} _ {i} ; \boldsymbol{\theta}\right) &=P\left(Y _ {i 1}=y _ {i 1}, Y _ {i 2}=y _ {i 2}, Y _ {i 3}=y _ {i 3}\right) \\ &=\sum _ {j _ {1}=1}^{2} \sum _ {j _ {2}=1}^{2} \sum _ {j _ {3}=1}^{2}(-1)^{j _ {1}+j _ {2}+j _ {3}} C\left(u _ {i, 1, j _ {1}}, u _ {i, 2, j _ {2}}, u _ {i, 3, j _ {3}} | \alpha\right) \end{aligned}
+$$
+where $C\left(u _ {i, 1, j _ {1}}, u _ {i, 2, j _ {2}}, u _ {i, 3, j _ {3}} | \alpha\right)=\Phi _ {3}\left\{\Phi^{-1}\left(u _ {i, 1, j _ {1}}\right), \Phi^{-1}\left(u _ {i, 2, j _ {2}}\right)\right. ,\Phi^{-1}\left(u _ {i, 3, j _ {3}}\right) | \alpha \}$with $\alpha$ is exchangeable correlation coefficient $\alpha$ 

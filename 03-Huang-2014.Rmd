@@ -217,7 +217,7 @@ $$
 $$
 with $Y_{i}^{(-i)}=\eta_{i}^{(-i)}+\left(y_{i}-\mu_{i}^{(-i)}\right) g^{\prime}\left(\mu_{i}^{(-i)}\right)$ and $V_{i}^{(-i)}=\left(W_{i}^{(-i)}\right)^{-1}+Z_{i} D^{(-i)} Z_{i}^{T}, D^{(-i)}$ .
 
-
+所以是取使得leave-i-out,sum from i=1:n CV 最小的那个$\phi$.
 
 
 

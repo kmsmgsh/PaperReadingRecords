@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Paper 4 Estimation of random-effects model for longitudinal data with nonignorable missingness using Gibbs sampling | A paper reading record</title>
+  <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Paper 4 Estimation of random-effects model for longitudinal data with nonignorable missingness using Gibbs sampling | A paper reading record" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Paper 4 Estimation of random-effects model for longitudinal data with nonignorable missingness using Gibbs sampling | A paper reading record" />
+  
+  <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
+  
+
+<meta name="author" content="Jiaming Shen">
+
+
+<meta name="date" content="2019-03-31">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="copula-for-discrete-lda.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Mini paper reading record</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><i class="fa fa-check"></i><b>1</b> Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties</a><ul>
+<li class="chapter" data-level="1.1" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#abstract"><i class="fa fa-check"></i><b>1.1</b> Abstract:</a></li>
+<li class="chapter" data-level="1.2" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#introduction-1"><i class="fa fa-check"></i><b>1.2</b> Introduction</a></li>
+<li class="chapter" data-level="1.3" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#penalized-least-squares-and-variable-selection"><i class="fa fa-check"></i><b>1.3</b> Penalized Least Squares And Variable Selection</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#smoothly-clipped-absolute-deviation-penalty"><i class="fa fa-check"></i><b>1.3.1</b> Smoothly Clipped Absolute Deviation Penalty</a></li>
+<li class="chapter" data-level="1.3.2" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#performance-of-thresholding-rules"><i class="fa fa-check"></i><b>1.3.2</b> Performance of Thresholding Rules</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#variable-selection-via-penalized-likelihood"><i class="fa fa-check"></i><b>1.4</b> Variable selection via penalized likelihood</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#penalized-least-squares-and-likelihood"><i class="fa fa-check"></i><b>1.4.1</b> Penalized Least Squares and Likelihood</a></li>
+<li class="chapter" data-level="1.4.2" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#sampling-properties-and-oracle-properties."><i class="fa fa-check"></i><b>1.4.2</b> Sampling properties and oracle properties.</a></li>
+<li class="chapter" data-level="1.4.3" data-path="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html"><a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html#a-new-unified-algorithm"><i class="fa fa-check"></i><b>1.4.3</b> A new Unified Algorithm</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html"><a href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html"><i class="fa fa-check"></i><b>2</b> Random effects selection in generalized linear mixed models via shrinkage penalty function</a><ul>
+<li class="chapter" data-level="2.1" data-path="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html"><a href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html#abstract-1"><i class="fa fa-check"></i><b>2.1</b> Abstract:</a></li>
+<li class="chapter" data-level="2.2" data-path="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html"><a href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html#introduction-2"><i class="fa fa-check"></i><b>2.2</b> Introduction</a></li>
+<li class="chapter" data-level="2.3" data-path="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html"><a href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html#methodology-and-algorithm"><i class="fa fa-check"></i><b>2.3</b> Methodology and Algorithm</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html"><a href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html#algorithms"><i class="fa fa-check"></i><b>2.3.1</b> Algorithms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="copula-for-discrete-lda.html"><a href="copula-for-discrete-lda.html"><i class="fa fa-check"></i><b>3</b> Copula for discrete LDA</a><ul>
+<li class="chapter" data-level="3.1" data-path="copula-for-discrete-lda.html"><a href="copula-for-discrete-lda.html#joint-regression-analysis-of-correlated-data-using-gaussian-copulas"><i class="fa fa-check"></i><b>3.1</b> Joint Regression Analysis of Correlated Data Using Gaussian Copulas</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><i class="fa fa-check"></i><b>4</b> Estimation of random-effects model for longitudinal data with nonignorable missingness using Gibbs sampling</a><ul>
+<li class="chapter" data-level="4.1" data-path="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html#abstract-2"><i class="fa fa-check"></i><b>4.1</b> Abstract:</a></li>
+<li class="chapter" data-level="4.2" data-path="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html#introduction-3"><i class="fa fa-check"></i><b>4.2</b> Introduction:</a></li>
+<li class="chapter" data-level="4.3" data-path="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html#proposed-model"><i class="fa fa-check"></i><b>4.3</b> Proposed model</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html#modelling-time-varying-coefficients"><i class="fa fa-check"></i><b>4.3.1</b> Modelling time-varying coefficients</a></li>
+<li class="chapter" data-level="4.3.2" data-path="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html#bayesian-estimation-using-gibbs-sampler"><i class="fa fa-check"></i><b>4.3.2</b> Bayesian estimation using Gibbs sampler</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A paper reading record</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling" class="section level1">
+<h1><span class="header-section-number">Paper 4</span> Estimation of random-effects model for longitudinal data with nonignorable missingness using Gibbs sampling</h1>
+<p>by Prajamitra Bhuyan1(2019)</p>
+<div id="abstract-2" class="section level2">
+<h2><span class="header-section-number">4.1</span> Abstract:</h2>
+<p>Provide an alternative modelling of ‘correlated random-effect model’ using latent variable and algorithm based on Gibbs sampling.
+In order to solve the longitudinal study involve nonignorable missingness.</p>
+<p>因为处理nonignorable missingness要用上‘correlated random-effect model’或者 ‘shared random-effect model’.</p>
+</div>
+<div id="introduction-3" class="section level2">
+<h2><span class="header-section-number">4.2</span> Introduction:</h2>
+<p>Proportion of missing data can be substantial. Consider the missingness mechanism is nonignorable. Jointly model the observed response and indicators of missingness. Classified into either pattern mixture models or selectin models. Little(1995) provided a detail overview.</p>
+<ul>
+<li>Siddiqui and Ali(1998) random-effects pattern-mixture models. Averaging estimates from different subsets depending on missing data-pattern.</li>
+<li>Daniels and Hogan(2000), reparameterization of pattern mixture model to consider wide range of missing mechanism.</li>
+<li>Diggle and Kenward(1994), proposed reparameterization of the pattern mixture model with logistic regression.</li>
+<li>Baker (1995) repeated binary data with nonignorable and non-monotone missingness.</li>
+<li>Troxel et al.(1998) Extend Diggle for non-monotone and nonignoranble but with computationally challenging.</li>
+<li>Rotnizky et al.(1998) inverse probability weighted estimating equations.</li>
+<li>Minini and Chavance(2004) log-linear model and provided a sensitiviy analysis for the longitudinal binary data with nonignorable missings.</li>
+</ul>
+<p>Survival analysis</p>
+<ul>
+<li>Wu and Carrol(1998): Shared random-effects model, as alternative to the selection models.</li>
+<li>De and tu(1994), Schluchter(1994) extensions of SRE models.</li>
+<li>Have et.al (1998) and Pulkstenis et al.(1998) adopted the SRE model for binary longitudinal data with the informative dropouts.</li>
+<li>Tsonaka et al.(2009) considered semi-parametric shared parameter model for the modelling of the response variable with non-monotone and nonignorable missingness.</li>
+</ul>
+<p>SRE models, the selection model and the response model have exactly the same random component.Latent factors affecting the missingness could be different from those affecting the response, however it is correlated due to common risk factor.</p>
+<ul>
+<li><p>Lin et.al (2010) interesting generalization of SRE model by correlated random effects model. Main difficulties of random effects approach is computational challenge. Expressed the likelihood as a ratio of two integrals and approximated the numerator and denominator using Laplace formula.</p></li>
+<li><p>Pinheiro and Bates(1995) Gauss-Hermite quadrature for numerical integration in loglikelihood function.</p></li>
+<li><p>Breslow and Clayton (1993) Laplace approximation.</p></li>
+</ul>
+<p>This paper propose alternative modelling of observed response and indicators of missingness based on correlated latent variable. Then develop regression models. Gibbs sampler is used to implement the method.</p>
+<ul>
+<li>Section2, proposed method</li>
+<li>Section3, simulation studies</li>
+<li>section4, outlines of possible future work and some conclusion.</li>
+</ul>
+</div>
+<div id="proposed-model" class="section level2">
+<h2><span class="header-section-number">4.3</span> Proposed model</h2>
+<p>i denote the response
+<span class="math display">\[
+Y_{i}(t)=\sum_{j=1}^{J} \beta_{j}(t) X_{j i}(t)+\sum_{j^{\prime}=1}^{J^{\prime}} \gamma_{j^{\prime}} Z_{j^{\prime} i}(t)+\sum_{l=1}^{L} u_{l i} \tilde{Z}_{l i}(t)+e_{i}(t)
+\]</span>
+subject specific random effects <span class="math inline">\(\mathbf{u}_{i}=\left(u_{1 i}, \dots, u_{L i}\right)\sim N_{L}\left(\mathbf{0}, \Sigma_{u}\right)\)</span>,residual <span class="math inline">\(e_i(t)\sim N\left(0, \sigma_{e}^{2}\right)\)</span>. Special case for generalized varying coefficient model for longitudinal data. (Sentrk et al.2013)
+Ignorable missing data mechanism:Missing at random (MAR) (Little 1995)</p>
+If using MAR to nonignorable missing values, then the model will be biased.
+
+<div class="definition">
+<span id="def:unnamed-chunk-1" class="definition"><strong>Definition 4.1  </strong></span>Define <span class="math inline">\(U_i(t)\)</span> as
+<span class="math display">\[
+U_{i}(t)=\left\{\begin{array}{ll}{1,} &amp; {\text { if } Y_{i}(t) \text { is observed }} \\ {0,} &amp; {\text { if } Y_{i}(t) \text { is missing }}\end{array}\right.
+\]</span>
+And rewrite <span class="math inline">\(Y_i(t)\)</span> as
+<span class="math display">\[
+Y_{i}(t)=\left\{\begin{array}{ll}{Y_{i}^{*}(t),} &amp; {\text { if } U_{i}(t)=1} \\ {\text { missing, }} &amp; {\text { if } U_{i}(t)=0}\end{array}\right.    
+\]</span>
+</div>
+
+<p>in this case <span class="math inline">\(Y_i^*(t)\)</span> is a latent variable.
+Under such situation, we can rewrite the model as
+<span class="math display">\[
+Y_{i}^{*}(t)=\sum_{j=1}^{J} \beta_{j}(t) X_{j i}(t)+\sum_{j^{\prime}=1}^{J^{\prime}} \gamma_{j^{\prime}} Z_{j^{\prime} i}(t)+\sum_{l=1}^{L} u_{l i} \tilde{Z}_{l i}(t)+e_{i}(t)
+\]</span>
+In addition, consider the latent variable <span class="math inline">\(U_i^*(t)\)</span> with
+<span class="math display">\[
+U_{i}(t)=\left\{\begin{array}{ll}{1,} &amp; {\text { if } U_{i}^{*}(t)&gt;0} \\ {0,} &amp; {\text { if } U_{i}^{*}(t) \leq 0}\end{array}\right.
+\]</span></p>
+<p>Then we consider modelling missing data mechanism with covariate as
+<span class="math display">\[
+U_{i}^{*}(t)=\sum_{k=1}^{K} \theta_{k}(t) W_{k i}(t)+\sum_{k^{\prime}=1}^{K^{\prime}} \delta_{k^{\prime}} S_{k^{\prime} i}(t)+\sum_{l=1}^{L} v_{l i} \tilde{Z}_{l i}(t)+\epsilon_{i}(t)
+\]</span>
+<span class="math inline">\(v_{li}\)</span> is the random effect, write as <span class="math inline">\(\mathbf{v}_{i}=\left(v_{1 i}, \ldots, v_{L i}\right)\sim N_{L}\left(\mathbf{0}, \Sigma_{v}\right)\)</span>.</p>
+<p>In order to incorporate the possible correlation between the response variable <span class="math inline">\(Y_i(t)\)</span> and the missing indicator <span class="math inline">\(U_i(t)\)</span>. We consider <span class="math inline">\(\boldsymbol u_i\)</span> and <span class="math inline">\(\boldsymbol v_i\)</span> are correlated random vectors with distribution <span class="math inline">\(N(\boldsymbol 0,\Sigma)\)</span> with <span class="math inline">\(\Sigma=\left( \begin{array}{cc}{\Sigma_{u}} &amp; {\Sigma_{u v}} \\ {\Sigma_{u v}} &amp; {\Sigma_{v}}\end{array}\right)\)</span>.</p>
+<p>Use the usual model for multivariate longitudinal data once we know the latent variable at each step. In this step, use Bayesian estimation method for simltaneous estimation of the parameters by Gibbs sampling.</p>
+<div id="modelling-time-varying-coefficients" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Modelling time-varying coefficients</h3>
+<p>Since <span class="math inline">\(\beta_j(t)\)</span> and <span class="math inline">\(\theta_k(t)\)</span> is not known, consider semi-parametric approach using Legendre polynomials (LP) basis functions.</p>
+<p>(Marie and Sen 1985; Meyer 2000; Cui and Zhu 2006;Bhuyan et al.2019)</p>
+<p><span class="math display">\[
+P_{r}(x)=\sum_{l=0}^{L}(-1)^{l} \frac{(2 r-2 l) !}{2^{r} l !(r-l) !(r-2 l) !} x^{r-2 l}
+\]</span></p>
+<blockquote>
+<p>Why use this? not B-spline or nature spline</p>
+</blockquote>
+<p>Defined over <span class="math inline">\([-1,1]\)</span> , orthogonal to each over, which is <span class="math inline">\(\int_{-1}^{1} P_{r}(x) P_{s}(x) d x=0\)</span>.
+Example:
+<span class="math display">\[
+P_{0}(x)=1, \quad P_{1}(x)=x, \quad P_{2}(x)=\frac{1}{2}\left(3 x^{2}-1\right), \quad P_{3}(x)=\frac{1}{2}\left(5 x^{3}-3 x\right)
+\]</span>
+.</p>
+<p>Using the adjusted time points.
+<span class="math inline">\(t^{\prime}=-1+2\left(\frac{t-t_{\min }}{t_{\max }-t_{\min }}\right)\)</span>
+&gt; seems a triditional re-scale method.</p>
+<p><span class="math inline">\(P^{(r)}\left(t^{\prime}\right)=\left[P_{0}\left(t^{\prime}\right), P_{1}\left(t^{\prime}\right), \ldots, P_{r}\left(t^{\prime}\right)\right]^{T}\)</span></p>
+<p>then for the time-varying parameter <span class="math inline">\(\beta_{j}\left(t^{\prime}\right)\)</span> and <span class="math inline">\(\theta_k(t&#39;)\)</span> are linear combination of the basis functions:
+<span class="math display">\[
+\beta_{j}(t)=\mathbf{a}_{j}^{T} P^{\left(r_{1}\right)}(t) ; \quad \theta_{k}(t)=\mathbf{b}_{k}^{T} P^{\left(r_{2}\right)}(t)
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(r_1\)</span> and <span class="math inline">\(r_2\)</span> 和jmcm里面的triple(p,q,d)类似</p>
+</blockquote>
+<p>低次方的多项式一般而言就足够了，可以用AIC/BIC选。
+Example:
+<span class="math display">\[
+J=2, J^{\prime}=0, L=1,r_{1}=r_{2}=1, X_{1 i}(t)=1, \tilde{Z}_{1 i}(t)=1,X_{2 i}(t) \equiv X_{2 i}
+\]</span>
+Model:
+<span class="math display">\[
+\begin{array}{l}{Y_{i}^{*}(t)=\alpha_{10}+\alpha_{11} t+\alpha_{20} X_{2 i}+\alpha_{21} t X_{2 i}+u_{1 i}+e_{i}(t)} \\ {U_{i}^{*}(t)=\lambda_{10}+\lambda_{11} t+\lambda_{20} X_{2 i}+\lambda_{21} t X_{2 i}+v_{1 i}+\epsilon_{i}(t)}\end{array}
+\]</span></p>
+</div>
+<div id="bayesian-estimation-using-gibbs-sampler" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Bayesian estimation using Gibbs sampler</h3>
+<p>Notation:
+<span class="math display">\[
+Y^{*}=\left(Y_{11}^{*}(t), \ldots, Y_{n m}^{*}(t)\right), U^{*}=\left(U_{11}^{*}(t), \ldots, U_{n m}^{*}(t)\right),\\
+Y=\left(Y_{11}(t), \ldots, Y_{n m}(t)\right)
+U=\left(U_{11}(t), \ldots, U_{n m}(t)\right)
+\]</span>
+The joint posterior density for the latent variables</p>
+<p><span class="math display">\[
+\begin{array}{l}{\pi\left(\Theta, Y^{*}, U^{*} | Y, U\right) \propto \pi\left(\mathbf{a}, \mathbf{b}, \gamma, \delta, \sigma_{e}^{2}, \Sigma\right) \times \prod_{i=1}^{n} \int \prod_{t=1}^{m} f\left(Y_{i}^{*}(t), U_{i}^{*}(t) | u_{i}, v_{i}\right)} \\ {\quad \times\left\{1\left(U_{i}^{*}(t)&gt;0\right) 1\left(U_{i}(t)=1\right)+1\left(U_{i}^{*}(t) \leq 0\right) 1\left(U_{i}(t)=0\right)\right\} g\left(u_{i}, v_{i}\right) d u_{i} d v_{i}}\end{array}
+\]</span></p>
+<p>Prior:</p>
+<ul>
+<li>Non-informative priors for <span class="math inline">\(\left(\mathbf{a}, \boldsymbol{\gamma}, \sigma_{e}^{2}\right)\)</span> and <span class="math inline">\((\mathbf{b}, \boldsymbol{\delta})\)</span>.</li>
+<li>Maximal data information prior for <span class="math inline">\(\Sigma\)</span></li>
+</ul>
+<p>Then we have</p>
+<p><span class="math display">\[
+\pi\left(\mathbf{a}, \boldsymbol{\gamma}, \sigma_{e}^{2}\right) \propto \frac{1}{\sigma_{e}^{2}}\\
+\pi(\mathbf{b}, \delta) \propto 1\\
+\pi(\Sigma) \propto \frac{1}{|\Sigma|}
+\]</span>
+&gt; Maximal data information prior?</p>
+<p>Then the full conditionals for <span class="math inline">\((\mathbf{a}, \mathbf{b}, \gamma, \boldsymbol{\delta}), \sigma_{e}^{2}\)</span> and <span class="math inline">\(\Sigma\)</span> are Normal, inverse gamma and inverse-Wishart, respectively.</p>
+<p>Then the latent variable <span class="math inline">\(Y^*_i(t)\)</span> and <span class="math inline">\(U^*_i(t)\)</span> are sampled from the conditional densities:</p>
+<p><span class="math display">\[
+\left\{\begin{array}{ll}{Y_{i}(t) \text { with probability } 1,} &amp; {\text { if } U_{i}(t)=1} \\ {N\left(\sum_{j=1}^{J} \beta_{j}(t) X_{j i}(t)+\sum_{j^{\prime}=1}^{J^{\prime}} \gamma_{j^{\prime}} Z_{j i}(t)+\sum_{l=1}^{L} u_{l i} \tilde{z}_{l i}(t), \sigma_{e}^{2}\right),} &amp; {\text { if } U_{i}(t)=0}\end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+\left\{\begin{array}{l}{N\left(\sum_{k=1}^{K} \theta_{k}(t) W_{k i}(t)+\sum_{k^{\prime}=1}^{K^{\prime}} \delta_{k^{\prime}} S_{k^{\prime} i}(t)+\sum_{l=1}^{L} v_{l i} \tilde{Z}_{l i}(t), 1\right)} \text{left truncated at 0,} &amp; \text{if} U_i(t)=1,\\ {N\left(\sum_{k=1}^{K} \theta_{k}(t) W_{k i}(t)+\sum_{k^{\prime}=1}^{K^{\prime}} \delta_{k^{\prime}} S_{k^{\prime} i}(t)+\sum_{l=1}^{L} v_{l i} \tilde{Z}_{l i}(t), 1\right)}\text{right truncated at 0,}&amp; \text{if }U_i(t)=0\end{array}\right.
+\]</span></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="copula-for-discrete-lda.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["paper_reanding_record.pdf", "paper_reanding_record.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

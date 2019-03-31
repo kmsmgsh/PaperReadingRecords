@@ -25,7 +25,7 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-03-29">
+<meta name="date" content="2019-03-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -152,6 +152,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.1" data-path="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html"><a href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html#algorithms"><i class="fa fa-check"></i><b>2.3.1</b> Algorithms</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="copula-for-discrete-lda.html"><a href="copula-for-discrete-lda.html"><i class="fa fa-check"></i><b>3</b> Copula for discrete LDA</a><ul>
+<li class="chapter" data-level="3.1" data-path="copula-for-discrete-lda.html"><a href="copula-for-discrete-lda.html#joint-regression-analysis-of-correlated-data-using-gaussian-copulas"><i class="fa fa-check"></i><b>3.1</b> Joint Regression Analysis of Correlated Data Using Gaussian Copulas</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html"><i class="fa fa-check"></i><b>4</b> Estimation of random-effects model for longitudinal data with nonignorable missingness using Gibbs sampling</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -175,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties" class="section level1">
 <h1><span class="header-section-number">Paper 1</span> Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties</h1>
-<p>essay by Jianqing Fan &amp; Runze Li，2001</p>
+<p><span class="citation">Fan and Li (<a href="#ref-Fan:2001ug">2001</a>)</span></p>
 <div id="abstract" class="section level2">
 <h2><span class="header-section-number">1.1</span> Abstract:</h2>
 <p>Variable selection，stepwise selection方法的计算昂贵，并且在选择过程中没有考虑到随机误差。这篇文章则考虑使用罚似然函数penalized likelihood 方法去解决这几个问题。选择变量和估计参数同时进行。同时构造估计参数的置信区间。该方法独特的地方在于罚函数是symetric, nonconcave on <span class="math inline">\((0,\infty)\)</span>. 本文还提出了一种关于penalized likelihood function的优化算法。这种算法可以广泛的用于各类模型。比如非参模型小波和样条。同时也提出了收敛速率相关的理论。还介绍了这个方法的oracle property。</p>
@@ -335,7 +339,7 @@ when <span class="math inline">\(\beta\neq0\)</span>,则有
 \begin{array}{r}{p_{\lambda}\left(\left|\beta_{j}\right|\right) \approx p_{\lambda}\left(\left|\beta_{j 0}\right|\right)+\frac{1}{2}\left\{p_{\lambda}^{\prime}\left(\left|\beta_{j 0}\right|\right) /\left|\beta_{j 0}\right|\right\}\left(\beta_{j}^{2}-\beta_{j 0}^{2}\right)} \\ {\text { for } \beta_{j} \approx \beta_{j 0}}\end{array}
 \]</span>
 二次逼近的缺点是一旦coefficient被压缩到0，将一直停留在0点。
-所以penalized maximum likelihood 的问题可以等价的编程二次型最小值的问题，并且能用Newton-Raphson算法进行求解。
+penalized maximum likelihood的问题可以等价的编程二次型最小值的问题，并且能用Newton-Raphson算法进行求解。
 <span class="math display">\[
 \begin{array}{r}{\ell\left(\boldsymbol{\beta}_{0}\right)+\nabla \ell\left(\boldsymbol{\beta}_{0}\right)^{T}\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)+\frac{1}{2}\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)^{T} \nabla^{2} \ell\left(\boldsymbol{\beta}_{0}\right)\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)} \\ {+\frac{1}{2} n \boldsymbol{\beta}^{T} \Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right) \boldsymbol{\beta}}\end{array}
 \]</span></p>
@@ -353,8 +357,18 @@ with
 <span class="math display">\[
 \frac{\partial \ell\left(\hat{\boldsymbol{\beta}}_{0}\right)}{\partial \beta_{j}}+n p_{\lambda}^{\prime}\left(\left|\hat{\beta}_{j 0}\right|\right) \operatorname{sgn}\left(\hat{\beta}_{j 0}\right)=0
 \]</span></p>
+<p>如下的sandwich formula 可以作为对<span class="math inline">\(\hat\beta_1\)</span>的估计:
+<span class="math display">\[
+\begin{aligned} \widehat{\operatorname{cov}}\left(\hat{\boldsymbol{\beta}}_{1}\right)=\left\{\nabla^{2} \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)+n \Sigma_{\lambda}\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\}^{-1} \widehat {\operatorname{cov}}\left\{\nabla \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\} \\ \times\left\{\nabla^{2} \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)+n \Sigma_{\lambda}\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\}^{-1} \end{aligned}
+\]</span></p>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Fan:2001ug">
+<p>Fan, Jianqin, and Runze Li. 2001. “Variable selection via nonconcave penalized likelihood and its oracle properties.” <em>Journal of the American Statistical Association</em>, December.</p>
 </div>
 </div>
             </section>
