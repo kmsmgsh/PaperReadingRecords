@@ -150,6 +150,7 @@ $$
 \pi(\mathbf{b}, \delta) \propto 1\\
 \pi(\Sigma) \propto \frac{1}{|\Sigma|}
 $$
+
 > Maximal data information prior?
 
 Then the full conditionals for $(\mathbf{a}, \mathbf{b}, \gamma, \boldsymbol{\delta}), \sigma_{e}^{2}$ and $\Sigma$ are Normal, inverse gamma and inverse-Wishart, respectively.
