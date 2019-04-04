@@ -1,0 +1,104 @@
+# reading review
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Time period and Work
+
+
+Elements of statistical learning
+
+Index: 
+
+- Chap2 Supervised learning
+- Chap3 Linear methods for Regression
+- Chap4 Linear Methods for Classification
+- Chap5 Basic Expansions and Regularization
+  - Nonparametric Regression and Generalized Linear Methods
+    - Chap1. Introduction
+    - Chap2. Interpolating and smoothing splines
+
+- 
+- Chap7 Model assessment and Selection
+- Chap8 Model Inference and Averaging
+- Chap9 Additive Models, Trees, and Related Methods
+  - Generalized Additive Model: Chap2 Smoothing
+
+---
+
+Mixed models,theory and applications with R
+
+Eugene Demidenko
+
+to page 98, 
+Chap1. Introduction: Why Mixed Models
+Chap2. MLE for the LME model
+
+
+
+---
+
+Classification and Regression Trees
+
+LeiBreiman
+
+To Chap2.
+
+---
+
+An Introduction to Graphical Models, (lecture notes)
+
+To Chap4
+
+Michael I. Jordan
+
+
+
+
+---
+
+
+- Least-Angle regression,[@Efron:2018tz]
+- Elastic Net [@Anonymous:LDmrq-ls]
+
+
+
+
+- Random effect selection[@Pan:2013bp]
+- Jmcm [@Pan:2017il] 
+- mcd: [@Pourahmadi:2000fs] , [@Anonymous:F6r664rM] , [@Anonymous:2sUafWTP] and [@Pan:2016hg]
+- acd& Bayesian random effect selection : [@Chen:vh]
+
+- Covariance matrix estimation [@Bickel:2008ez],[@Pinheiro:1996ib],
+
+[Covariance modelling talks by Pourhamadi](http://www.math.niu.edu/~pourahm/GenLinModMSU.pdf)
+
+
+Regulized covariance estimating, banding [@Rothman:2010cy],[@Lee:2018vj],[@Cheng:2017jh],[@An:2014jc]
+
+Bayes random effect selection [@Cai:tp]
+
+lasso uniqueness [@Tibshirani:2014uc]
+
+Discrete correlated data analysis via copula [@Tang:2019gw] and [@Song:wr]
+
+Gaussian Process[@Dunlop:2017uz]
+
+---
+
+Recent reading
+roptim, by Yi Pan
+
+acd:[@Maadooliat:tw]
+
+Joint modelling dealing with non-ignorance missing data [@Bhuyan:uc]
+
+Penalised method: [@Fan:2001ug]
+
+mcd for $\Sigma$ [@Zhang:2012dg], and it's gee [@Liu:tv]
+
+mcd gee [@Anonymous:eWhsJY64]
+
+HPC: [@Zhang:2015is],[@Rapisarda:2007eh]
+
