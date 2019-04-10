@@ -1,0 +1,84 @@
+# The Bayesian Lasso
+
+## Abstract
+
+Lasso estimate can be intepreted as Bayesian prosterior mode estimate under independent Laplace prior. Gibbs sampling is possible using expanded hierarchy with conjugate normal priors for $\beta$. The Bayesian Lasso provides interval estimates can guide variable selection.Structure of hierarchical help selecting tuning parameter.
+
+Model:
+
+$$
+\mathbf{y}=\mu \mathbf{1}_{n}+\mathbf{X} \boldsymbol{\beta}+\boldsymbol{\epsilon}
+$$
+
+Lasso LS
+
+$$
+\min _{\beta}(\tilde{\mathbf{y}}-\mathbf{X} \boldsymbol{\beta})^{\top}(\tilde{\mathbf{y}}-\mathbf{X} \boldsymbol{\beta})+\lambda \sum_{j=1}^{p}\left|\beta_{j}\right|
+$$
+Consider fully Bayesian analysis using a conditional Laplace prior specification with th eform
+
+$$
+\pi\left(\boldsymbol{\beta} | \sigma^{2}\right)=\prod_{j=1}^{p} \frac{\lambda}{2 \sqrt{\sigma^{2}}} e^{-\lambda\left|\beta_{j}\right| / \sqrt{\sigma^{2}}}
+$$
+scale-invariant marginal prior:
+$$
+\pi\left(\sigma^{2}\right)=1 / \sigma^{2}
+$$
+$\sigma^2$ gurantees a unimodal full posterior.
+
+
+```{r,echo=FALSE}
+knitr::include_graphics(rep("chp8/Figure1.png", 1))
+```
+
+Bayesian Lasso is not that strictly to 0 as Lasso, but the shape is similar.
+
+
+## Hierarchical Model and Gibbs Sampler
+
+Laplace distribution as a scale mxiture of normals(with an exponential mixing density):
+
+$$
+\frac{a}{2} e^{-a|z|}=\int_{0}^{\infty} \frac{1}{\sqrt{2 \pi s}} e^{-z^{2} /(2 s)} \frac{a^{2}}{2} e^{-a^{2} s / 2} d s, \quad a>0
+$$
+
+> 这个很关键啊，Laplace prior相当于一个权重是exponential的mixture Gaussian prior。
+
+This suggests the following hierarchical representation of the full model:
+
+$$
+\begin{array}{c}{\mathbf{y}\left|\mu, \mathbf{X}, \boldsymbol{\beta}, \sigma^{2} \sim \mathrm{N}_{n}\left(\mu \mathbf{1}_{n}+\mathbf{X} \boldsymbol{\beta}, \sigma^{2} \mathbf{I}_{n}\right)\right.} \\ {\boldsymbol{\beta} | \sigma^{2}, \tau_{1}^{2}, \ldots, \tau_{p}^{2} \sim \mathbf{N}_{p}\left(\mathbf{0}_{p}, \sigma^{2} \mathbf{D}_{\tau}\right)} \\ {\mathbf{D}_{\tau}=\operatorname{diag}\left(\tau_{1}^{2}, \ldots, \tau_{p}^{2}\right)} \\ {\sigma^{2}, \tau_{1}^{2}, \ldots, \tau_{p}^{2} \sim \pi\left(\sigma^{2}\right) d \sigma^{2} \prod_{j=1}^{p} \frac{\lambda^{2}}{2} e^{-\lambda^{2} \tau_{j}^{2} / 2} d \tau_{j}^{2}} \\ {\sigma^{2}, \tau_{1}^{2}, \ldots, \tau_{p}^{2}>0}\end{array}
+$$
+The parameter $\mu$ may be given an independent, flat prior.
+After integrating out $\tau_1^2,...,\tau^2_p>0$
+Improper prior density $\pi(\sigma^2)=1/\sigma^2$,inverse-gamma prior for $\sigma^2$ also would maintain conjugacy.
+
+The full conditional distributions of $\boldsymbol{\beta}, \sigma^{2}, \text { and } \tau_{1}^{2}, \ldots, \tau_{p}^{2}$ are still easy to sample,and they depend on the centered response vector $\tilde y$.
+The full conditional for $\boldsymbol \beta$ is $MVN(\mathbf{A}^{-1} \mathbf{X}^{\top} \tilde{\mathbf{y}},\sigma^{2} \mathbf{A}^{-1})$ with $\mathbf{A}=\mathbf{X}^{\top} \mathbf{X}+\mathbf{D}_{\tau}^{-1}$.
+
+The full conditional for $\sigma^2$ is inverse-gamma with shape parameter $(n-1) / 2+p / 2$ and scale parameter $(\tilde{\mathbf{y}}-\mathbf{X} \boldsymbol{\beta})^{\top}(\tilde{\mathbf{y}}-\mathbf{X} \boldsymbol{\beta} ) / 2+\boldsymbol{\beta}^{\top} \mathbf{D}_{\tau}^{-1} \boldsymbol{\beta} / 2$, and $\tau_{1}^{2}, \ldots, \tau_{p}^{2}$ are conditionally independent, with $1 / \tau_{j}^{2}$ conditionally inverse-Gaussian with parameters
+$$
+\mu^{\prime}=\sqrt{\frac{\lambda^{2} \sigma^{2}}{\beta_{j}^{2}}} \quad \text { and } \quad \lambda^{\prime}=\lambda^{2}
+$$
+in the parameterization of the inverse-Gaussian density given by
+$$
+f(x)=\sqrt{\frac{\lambda^{\prime}}{2 \pi}} x^{-3 / 2} \exp \left\{-\frac{\lambda^{\prime}\left(x-\mu^{\prime}\right)^{2}}{2\left(\mu^{\prime}\right)^{2} x}\right\}, \quad x>0
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

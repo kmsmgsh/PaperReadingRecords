@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 4 Copula for discrete LDA | A paper reading record</title>
+  <title>Paper 6 Sparse inverse covariance estimation with the graphical lasso | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 4 Copula for discrete LDA | A paper reading record" />
+  <meta property="og:title" content="Paper 6 Sparse inverse covariance estimation with the graphical lasso | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 4 Copula for discrete LDA | A paper reading record" />
+  <meta name="twitter:title" content="Paper 6 Sparse inverse covariance estimation with the graphical lasso | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html">
-<link rel="next" href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html">
+<link rel="prev" href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html">
+<link rel="next" href="a-bayesian-lasso-via-reversible-jump-mcmc.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -213,147 +213,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="copula-for-discrete-lda" class="section level1">
-<h1><span class="header-section-number">Paper 4</span> Copula for discrete LDA</h1>
-<p>Lack of suitable mutivariate joint distributions for discrete variables that incorporate with the correlation.</p>
-<p>Maximizing the full likelihooe function constructed from copula representation can be computational infeasible–&gt; Composite pairwise likelihood approach.</p>
-<p>Copula usage: Gaussian copula:Formally:</p>
-<p>A set of random variables <span class="math inline">\(\boldsymbol{U}=\left(U _ {1}, \dots, U _ {d}\right)^{\mathrm{T}}\)</span> follows a Gaussian copula model if their joint distribution is specified by
+<div id="sparse-inverse-covariance-estimation-with-the-graphical-lasso" class="section level1">
+<h1><span class="header-section-number">Paper 6</span> Sparse inverse covariance estimation with the graphical lasso</h1>
+<p>by <span class="citation">(Friedman, Hastie, and Biostatistics <a href="#ref-Friedman:2008tb">2008</a>)</span></p>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">6.1</span> Summary</h2>
+<p>Estimating sparse graph by lasso penalty to precision matrix.
+Using coordinate descent procedure for the lasso-&gt; <em>graphical lasso</em>, which is remarkably fast.</p>
+</div>
+<div id="introduction-4" class="section level2">
+<h2><span class="header-section-number">6.2</span> Introduction</h2>
+<p>Estimation of sparse undirected graphical models through <span class="math inline">\(L_1\)</span> regularization. Basic model: observations follows <span class="math inline">\(MVN(\mu,\Sigma)\)</span>. An important result in graphical model is that if the <span class="math inline">\(ij\)</span> th component of <span class="math inline">\(\Sigma^{-1}\)</span> is 0, <span class="math inline">\(\sigma_{ij}=0\)</span>, then the variable <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are conditionally independent condition on other variables. This is the reason to impose penalty to precision matrix <span class="math inline">\(\Sigma^{-1}\)</span> to increase its sparsity.</p>
+<p><span class="citation">(Meinshausen and Bühlmann <a href="#ref-Meinshausen:2006fu">2006</a>)</span> take a simple approach: estimate sparse graphical model by fitting lasso to each variable. The correspond <span class="math inline">\(\hat\Sigma_{ij}^{-1}\)</span> is nonzero if variable estiamted coefficient of variable <span class="math inline">\(i\)</span> on <span class="math inline">\(j\)</span> or <span class="math inline">\(j\)</span> on <span class="math inline">\(i\)</span> is nonzero.(They use AND rather than OR). Then they showed method is asymptotically consistenctly estimates of <span class="math inline">\(\Sigma^{-1}\)</span> for nonzero elements.</p>
+<p>Others propose exact maximization of the <span class="math inline">\(L_1\)</span> penalized loglikelihood,
+some adapt interior-point optimization methods, and simpler approach to <span class="citation">(Meinshausen and Bühlmann <a href="#ref-Meinshausen:2006fu">2006</a>)</span>.</p>
+<p>This paper use blockwise coordinate descent approach in (Banerjee,et.al. 2007) at launch point, and propose a new algorithm for the exat problem. It also bridge the original idea and the exact problem.</p>
+</div>
+<div id="the-proposed-model" class="section level2">
+<h2><span class="header-section-number">6.3</span> The Proposed Model</h2>
+<p>Assume we have N <span class="math inline">\(MVN(\mu,\Sigma)\)</span> observations with dimension p. Let <span class="math inline">\(\Theta=\Sigma^{-1}\)</span>, and S be the empirical covariance matrix, the problem is maximize the penalized log-likelihood
 <span class="math display">\[
-F\left(u  _  {1}, \ldots, u  _  {d}\right)=P\left(U  _  {1} \leq u  _  {1}, \ldots, U  _  {d} \leq u  _  {d}\right)=\Phi  _  {d}\left(v  _  {1}, \ldots, v  _  {d} ; \mathbf{R}\right)
+\log \operatorname{det} \Theta-\operatorname{tr}(S \Theta)-\rho\|\Theta\|_{1}
 \]</span>
-<span class="math inline">\(\Phi _ d\)</span> is the porbability distribution function of the d-dimensional standardised normal distribution with zero mean, <span class="math inline">\(\mathbf R\)</span> is the correlation matrix.</p>
-<p><span class="math inline">\(v _ i=\Phi^{-1} (w _ i)\)</span> Where <span class="math inline">\(w _ i=P(U _ i\leq u _ i)\)</span> is the marginal distribution of <span class="math inline">\(U _ i\leq i\leq d\)</span>.</p>
-<p>Other copulas, like t-copula can also be applied.</p>
-<p>Notation: standard Longitudinal data format: <span class="math inline">\(\mathbf{y} _ {i}=\left(y _ {i 1}, \ldots, y _ {i m _ {i}}\right)^{\mathrm{T}}\)</span> , <span class="math inline">\(m _ i\)</span> longitudinal measurements fr i-th subject, discrete response <span class="math inline">\(y _ {ij}\)</span> is observed at time <span class="math inline">\(t _ {ij}\)</span> .Consider <span class="math inline">\(y _ {i j} \in\{0,1,2, \ldots\}\)</span> . and <span class="math inline">\(\mathbf{t} _ {i}=\left(t _ {i 1}, \ldots, t _ {i m _ {i}}\right)^{\mathrm{T}}\)</span></p>
-<p><span class="math inline">\(\{ y _ {ij},x _ {ij},t _ {ij} \}(i=1,...,n;j=1,...,m _ i).\)</span> For categorical responses, we assume that <span class="math inline">\(y _ {ij}\)</span> follows exponential family distribution (so that GLMs can be used modelling marginally discrete responses.)
-<span class="math display">\[
-f(y)=c(y ; \varphi) \exp [\{y \theta-\psi(\theta)\} / \varphi]
-\]</span>
-Since <span class="math inline">\(\psi&#39;(\theta)=E(Y):=\mu\)</span>.</p>
-<p>canonical link function:
-<span class="math display">\[
-(\psi&#39;)^{-1} (\mu)=g(\mu)
-\]</span>
-Then the GLM marginally for each <span class="math inline">\(y _ {ij}\)</span> as
-<span class="math display">\[
-g(E(y _ {ij}))=g(\mu _ {ij})=x^T _ {ij}\beta
-\]</span>
-<span class="math inline">\(\operatorname{var}(y)=\varphi \psi^{\prime \prime}(\theta)\)</span></p>
-<p>Joint distribution of <span class="math inline">\(y _ i\)</span> following the Gaussian copula representation
-<span class="math display">\[
-F _ {m _ i}(y _ i)=P(Y _ {i1}\leq y _ {i1},...,Y _ {im _ i}\leq y _ {im _ i})=\Phi _ {m _ i}(z _ {i1},...,z _ {im _ i};\mathbf R _ i)
-\]</span>
-where <span class="math inline">\(z _ {ij}=\Phi^{-1} _ 1 \{F(y _ {ij})\}\)</span></p>
-<p>This is, <span class="math inline">\(F(y _ {ij})\)</span> is the probability of <span class="math inline">\(Y _ {i _ 1} \leq y _ {i1}\)</span> , it’s in the probability space [0,1], <span class="math inline">\(\Phi _ 1^{-1} \{F(y _ {ij})\}\)</span> make the value from probability space back to sample space. Then this is in continuous sample space, then use multivariate Normal distribution as the joint distribution.</p>
-<p>In a special case when the responses are binary, the correlation between two observations is a monotone function of the corresponding element in <span class="math inline">\(R _ i\)</span> .</p>
-<p>The HPC insed in decomposite correlation coefficients <span class="math inline">\(R _ i\)</span> .</p>
-<p>…</p>
-<p>The description of HPC</p>
-<p>…</p>
-<p>modelling angles by
-<span class="math display">\[
-\omega _ {i j k}=\pi / 2-\operatorname{atan}\left(\mathbf{w} _ {i j k}^{\mathrm{T}} \boldsymbol{\gamma}\right)
-\]</span>
-<span class="math inline">\(\mathbf{w} _ {ijk}\in \mathbb R^{q}\)</span> is a covariate and <span class="math inline">\(\mathbb \gamma\)</span> is a <span class="math inline">\(q\times 1\)</span> unknown parameters.</p>
-<p>Let <span class="math inline">\(\boldsymbol{\theta}=\left(\boldsymbol{\beta}^{\mathrm{T}}, \boldsymbol{\gamma}^{\mathrm{T}}, \varphi^{\mathrm{T}}\right)\)</span>. Then follow the framework upon, we can construct likelihood and estimate <span class="math inline">\(\mathbb \theta\)</span> by MLE.</p>
-<p>Gaussian copula has continuous support on <span class="math inline">\(\mathbb R^d\)</span> while discrete response variable are defined only on discrete grid points.</p>
-<p>Full likelihood:</p>
+over the nonnegative definite matrices <span class="math inline">\(\Theta\)</span>, <span class="citation">(Yuan and Lin <a href="#ref-Yuan:2007kk">2007</a>)</span> solves this problemusing the interior-point method for the “maxdet” problem. Banerjee and others (2007) use another framework for the optimization which impetus for this paper work.</p>
+<p>They showed that the problem of penalized log-likelihood is convex and estimation of <span class="math inline">\(\Sigma\)</span> as
+W. which is</p>
 <p><span class="math display">\[
-\begin{aligned} L(\boldsymbol{\theta}) &amp;=\prod _ {i=1}^{n} P\left(Y _ {i 1}=y _ {i 1}, \ldots, Y _ {i m _ {i}}=y _ {i m _ {i}}\right) \\ &amp;=\prod _ {i=1}^{n} P\left(y _ {i 1}-1&lt;Y _ {i 1} \leq y _ {i 1} \leq y _ {i 1}, \ldots, y _ {i m _ {i}}-1&lt;Y _ {i m _ {i}} \leq y _ {i m _ {i}}\right) \\ &amp;=\prod _ {i=1}^{n} \int \cdots \int _ {\mathbf{Z} _ {i}^{-}&lt;\mathbf{u} \leq \mathbf{Z} _ {i}} \phi _ {m _ {i}}\left(\mathbf{u} ; \mathbf{R} _ {i}\right) d \mathbf{u} \end{aligned}
+W=\left( \begin{array}{cc}{W_{11}} &amp; {w_{12}} \\ {w_{12}^{T}} &amp; {w_{22}}\end{array}\right), \quad S=\left( \begin{array}{cc}{S_{11}} &amp; {s_{12}} \\ {s_{12}^{T}} &amp; {s_{22}}\end{array}\right)
 \]</span>
-积分形式应该来源于Gaussian copula的定义。</p>
+solving the problem by optimizing over each row and corresponding column of W in a block coordinate descent fashion. The solution for <span class="math inline">\(w_{12}\)</span> satisfies
+<span class="math display">\[
+w_{12}=\operatorname{argmin}_{y}\left\{y^{T} W_{11}^{-1} y :\left\|y-s_{12}\right\|_{\infty} \leqslant \rho\right\}
+\]</span>
+this is box-constrained quadratic program(QP) solve using interior-point procedure.</p>
 <blockquote>
-<p>Laplace 展开对u，精度可能不够，特别是binary</p>
-<p>包括pairwise likelihood，需要满足一定条件才能逼近的好</p>
+<p>If this procedure is initialized with a positive definite matrix, they show that the iterates from this procedure remains positive definite and invertible, even if p&gt;N</p>
 </blockquote>
-<p>This is hard to deal with, then the author use the composite likelihood by using pairwise likelihood.</p>
-<p>Construct all pairwise likelihoods via bivariate copula as
-<span class="math display">\[
-p L(\boldsymbol{\theta})=\prod _ {i=1}^{n} \prod _ {1 \leq j&lt;k \leq m _ {i}} \int _ {z _ {i j}^{-}}^{z _ {i j}} \int _ {z _ {i k}^{-}}^{z _ {i k}} \phi _ {2}\left(\mathbf{u} ; \rho _ {i j k}\right) d \mathbf{u}
+<p>Using convex duality, solve <span class="math inline">\(w_{12}\)</span> is equivalent to solving the dual problem</p>
+<p><span class="math display" id="eq:2-4">\[
+\begin{equation} 
+\min _{\beta}\left\{\frac{1}{2}\left\|W_{11}^{1 / 2} \beta-b\right\|^{2}+\rho\|\beta\|_{1}\right\}
+\tag{6.1}
+\end{equation} 
 \]</span>
-That is, using two-integral instead of <span class="math inline">\(m _ i\)</span> integrals.</p>
-<p><span class="math inline">\(\rho _ {ijk}\)</span> is specified by the HPC.</p>
-<p>log pairwise likelihood function is
-<span class="math display">\[
-p l(\boldsymbol{\theta})=\sum _ {i=1}^{n} \sum _ {1 \leq j&lt;k \leq m _ {i}} \log \int _ {z _ {i j}^{-}}^{z _ {i j}} \int _ {z _ {i k}^{-}}^{z _ {i k}} \phi _ {2}\left(\mathbf{u} ; \rho _ {i j k}\right) d \mathbf{u} :=\sum _ {i=1}^{n} \sum _ {1 \leq j&lt;k \leq m _ {i}} l _ {i j k}(\theta)
+where <span class="math inline">\(b=W_{11}^{-1 / 2} s_{12}\)</span>.
+Expanding <span class="math inline">\(W \Theta=I\)</span> as</p>
+<p><span class="math display">\[
+\left( \begin{array}{cc}{W_{11}} &amp; {w_{12}} \\ {w_{12}^{T}} &amp; {w_{22}}\end{array}\right) \left( \begin{array}{ll}{\Theta_{11}} &amp; {\theta_{12}} \\ {\theta_{12}^{T}} &amp; {\theta_{22}}\end{array}\right)=\left( \begin{array}{cc}{I} &amp; {0} \\ {0^{T}} &amp; {1}\end{array}\right)
 \]</span>
-and the score function is
+Now the subgradient equation for maximization the log-likelihood is
 <span class="math display">\[
-\mathbf{S} _ {n}(\boldsymbol{\theta})=\frac{\partial p l}{\partial \boldsymbol{\theta}}=\sum _ {i=1}^{n} \sum _ {1 \leq j&lt;k \leq m _ {i}} \frac{\partial l _ {i j k}}{\partial \boldsymbol{\theta}} :=\sum _ {i=1}^{n} \mathbf{S} _ {n i}(\boldsymbol{\theta})
+W-S-\rho \cdot \Gamma=0
 \]</span>
-Employ modified Fisher scoring algorithm to maximize the pairwise likelihood function.</p>
-<p>Song, et. al. 2009</p>
-<div id="joint-regression-analysis-of-correlated-data-using-gaussian-copulas" class="section level2">
-<h2><span class="header-section-number">4.1</span> Joint Regression Analysis of Correlated Data Using Gaussian Copulas</h2>
-<p>Estimating equations (EE)-based approach. Join marginal models for correlated outcomes. Shortcomings associated with the EE method due to lack of fuly parametric model: 1. loss of estimation efficiency 2. the lack of procedures for model assessment and selection, 3. Difficulty of incorporating vector outcomes of mixed types.</p>
-<p>Burn injury data: <span class="math inline">\(y _ 1=log(\textit{burn area}+1)\)</span> <span class="math inline">\(y _ 2\)</span> 1 for death from burn injury and 0 for survival.</p>
-<p>Normally people do two seperate regression model but the problem is <span class="math inline">\(y _ 1\)</span> and <span class="math inline">\(y _ 2\)</span> are not independent, it’s joint. How to consider the correlation in these two marginal models?</p>
-<p>Develop a unified and flexible likelihood framework to join various marginal models.</p>
-<p>Use GLMs as marginal models. To join marginal GLMs, invoke Gaussian copulas as the link model, and the resulting joint regression model is refrred to as the vector GLM(VGLM).</p>
-<p>VGLM for correlated discrete outcomes and correlated mixed outcomes. Comparisons to the moment-based EE approach.</p>
-<p>Jointly analyze vector data by the GLM approach multidimensional GLMs, or VGLMs, specify the conditional distribution of a vector response y given x as follows :
-<span class="math display">\[
-f(\mathbf{y} | \mathbf{x} ; \boldsymbol{\beta}, \boldsymbol{\varphi}, \Gamma)=\delta\left(\mathbf{y}, \eta _ {1}, \ldots, \eta _ {m} ; \boldsymbol{\varphi}, \Gamma\right)
-\]</span>
-Parametric link model <span class="math inline">\(\delta(\cdot ;\varphi,\Gamma)\)</span> is parameterized by the vector of dispersion parameters <span class="math inline">\(\boldsymbol \varphi=(\varphi _ 1,...,\varphi _ m)^T\)</span></p>
-<p>The <span class="math inline">\(\Gamma\)</span> characterizes the association among the components of <span class="math inline">\(\mathbf y\)</span>.</p>
-<p>This article consider a new class of parametric link models <span class="math inline">\(\delta(\cdot)\)</span> via multivariate distributions generated by Gaussian copulas.</p>
-<p>Multivariate ED Family distribution</p>
-<p>Cumulative distribution function of <span class="math inline">\(ED(\mu _ j,\varphi _ j)\)</span> denoted by <span class="math inline">\(G _ j(y _ j;\mu _ j,\varphi _ j)\)</span>
-<span class="math display">\[
-F(\mathbf{y} ; \boldsymbol{\mu}, \varphi, \Gamma)=C\left\{G _ {1}\left(y _ {1} ; \mu _ {1}, \varphi _ {1}\right), \ldots, G _ {m}\left(y _ {m} ; \mu _ {m}, \varphi _ {m}\right) | \Gamma\right\}
-\]</span>
-<span class="math inline">\(\boldsymbol \mu=(\mu _ 1,\cdots,\mu _ m)^T\)</span> is the vector of m means,<span class="math inline">\(\boldsymbol\varphi=(\varphi _ 1,...,\varphi _ m)^T\)</span> is dispersion parameters, <span class="math inline">\(C(\cdot)\)</span> is m-variate Gaussian copula with
-<span class="math display">\[
-\begin{aligned} C(\mathbf{u} | \Gamma) &amp;=\Phi _ {m}\left\{\Phi^{-1}\left(u _ {1}\right), \ldots, \Phi^{-1}\left(u _ {m}\right) | \Gamma\right\} \\ \mathbf{u} &amp;=\left(u _ {1}, \ldots, u _ {m}\right)^{T} \in(0,1)^{m} \end{aligned}
-\]</span>
-<span class="math inline">\(\Gamma\)</span> is Pearson correlation matrix. For non-Gaussian margins, <span class="math inline">\(\Gamma\)</span> becomes a pairwise non-linear association, van der Waerden coefficient, which is defined by
-<span class="math display">\[
-\gamma _ {i j}=\operatorname{corr}\left[\Phi^{-1}\left\{G _ {i}\left(y _ {i}\right)\right\}, \Phi^{-1}\left\{G _ {j}\left(y _ {j}\right)\right\}\right]
-\]</span>
-For continuous marginal CDF, <span class="math inline">\(\gamma _ {ij}\)</span> represents the linear correlation of two normal scores <span class="math inline">\(\Phi^{-1}\left\{G _ {t}\left(y _ {t}\right)\right\}, t=i, j\)</span> . For discrete cases, the equation still holds but interpretation would be different. For binary case with same joint probability mass function, then the <span class="math inline">\(\gamma _ {ij}\)</span> can be interpreted as the tetrachoric correlation.</p>
-<p>The density functions of MEDs with different marginal distribution, in continuous case, the MED can be expressed by
-<span class="math display">\[
-f(\mathbf{y} ; \boldsymbol{\mu}, \varphi, \Gamma)=c\left\{G _ {1}\left(y _ {1}\right), \ldots, G _ {m}\left(y _ {m}\right) | \Gamma\right\} \prod _ {i=1}^{m} g _ {i}\left(y _ {i} ; \mu _ {i}, \varphi _ {i}\right)
-\]</span>
-where <span class="math inline">\(c(\cdot)\)</span> is density of the copula <span class="math inline">\(C( \cdot)\)</span>
-<span class="math display">\[
-c(\mathbf{u} | \Gamma)=|\Gamma|^{-1 / 2} \exp \left\{\frac{1}{2} \mathbf{q}^{T}\left(I _ {m}-\Gamma^{-1}\right) \mathbf{q}\right\}
-\]</span>
-When all margins are discrete, the joint probability function of a discrete MED distribution with the form:
-<span class="math display">\[
-\begin{aligned} f(\mathbf{y}) &amp;=\mathrm{P}\left(Y _ {1}=y _ {1}, \ldots, Y _ {m}=y _ {m}\right) \\ &amp;=\sum _ {j _ {1}=1}^{2} \cdots \sum _ {j _ {m}=1}^{2}(-1)^{j _ {1}+\cdots+j _ {m}} C\left(u _ {1, j _ {1}}, \ldots, u _ {m, j _ {m}} | \Gamma\right) \end{aligned}
-\]</span>
-Another case is the mixed outcome.</p>
-<ol start="3" style="list-style-type: decimal">
-<li>Simultaneous Maximum Likelihood Inference</li>
-</ol>
-<p>Responses <span class="math inline">\(\left(\mathbf{y} _ {1}, \ldots, \mathbf{y} _ {n}\right)\)</span> with covariates <span class="math inline">\(\left(X _ {1}, \ldots, X _ {n}\right)\)</span> follows m-variate MED distribution
-<span class="math display">\[
-\mathbf{y} _ {i}\left|X _ {i}=\left(\mathbf{x} _ {i 1}, \ldots, \mathbf{x} _ {i m}\right) \sim \operatorname{MED} _ {m}\left(\boldsymbol{\mu} _ {i}, \boldsymbol{\varphi} _ {i}, \Gamma\right), \quad i=1, \ldots, n\right.
-\]</span>
-Responses <span class="math inline">\(\boldsymbol {y_i}\)</span> has mean <span class="math inline">\(\boldsymbol{\mu_i}=\left(\mu _ {i 1}\left(\mathbf{x} _ {i 1}\right), \ldots, \mu _ {i m}\left(\mathbf{x} _ {i m}\right)\right)^{T}\)</span> and dispersion <span class="math inline">\(\varphi _ {i}=\left(\varphi _ {i 1}, \ldots, \varphi _ {i m}\right)^{T}\)</span> .</p>
-<p>Mean <span class="math inline">\(\mu _ i\)</span> follows marginal GLM $h _ j(_ {ij})=_ j(x _ {ij}) $ with <span class="math inline">\(\eta _ {i j}=\mathbf{x} _ {i j}^{T} \boldsymbol{\beta} _ {j}\)</span></p>
-<p>Let <span class="math inline">\(\theta=(\beta,\varphi,\Gamma)\)</span> . For normal longitudinal or clustered data analysis, VGLM with <span class="math inline">\(\Gamma\)</span> has some specific form like AR(1), that is <span class="math inline">\(\Gamma(\alpha)\)</span></p>
-<p>Loglikelihood： <span class="math inline">\(\ell(\boldsymbol{\theta} ; Y, X)=\sum _ {i=1}^{n} \ell _ {i}\left(\boldsymbol{\theta} ; \mathbf{y} _ {i}, X _ {i}\right)\)</span>，then MLE <span class="math inline">\(\hat{\boldsymbol{\theta}}=\underset{\boldsymbol{\theta}}{\operatorname{argmax}} \ell(\boldsymbol{\theta} ; Y, X)\)</span> .</p>
-<p>Search for result we use Gauss-Newton type algorithm.</p>
-<p>The observed fisher Information using the sandwich form: <span class="math inline">\(\hat{\mathcal{I}}=\mathbf{A} _ {n}^{-1}(\hat{\boldsymbol{\theta}}) \mathbf{B} _ {n}(\hat{\boldsymbol{\theta}}) \mathbf{A} _ {n}^{-1}(\hat{\boldsymbol{\theta}})\)</span> where <span class="math inline">\(\mathbf{A} _ {n}(\theta)\)</span> is the numerical Hessian matrix and <span class="math inline">\(B _ n(\theta)=\frac{1}{n} \sum _ {i=1}^{n} \dot{\ell} _ {i}\left(\boldsymbol{\theta} ; \mathbf{y} _ {i}, X _ {i}\right) \dot{\ell} _ {i}\left(\boldsymbol{\theta} ; \mathbf{y} _ {i}, X _ {i}\right)^{T}\)</span> . The iteration updates of parameter <span class="math inline">\(\theta\)</span> is by
-<span class="math display">\[
-\theta^{k+1}=\theta^{k}+\epsilon\left\{\mathbf{B} _ {n}\left(\theta^{k}\right)\right\}^{-1} \dot{\ell}\left(\theta^{k}\right)
-\]</span>
-<span class="math inline">\(\epsilon\)</span> is step-halving term. Among Newton-Raphson, downhill simplex, quasi-Newton with numerical derivatives, the Gauss-Newton appears to privde the best trade-off.</p>
-<ol start="4" style="list-style-type: decimal">
-<li>VGLMs for Trivariate Discrete Data</li>
-</ol>
-<p>Moment-based EE method .etc</p>
-<p>Trivariate VGLMs</p>
-<p>probability mass function:
-<span class="math display">\[
-\begin{aligned} f\left(\mathbf{y} _ {i} ; \boldsymbol{\theta}\right) &amp;=P\left(Y _ {i 1}=y _ {i 1}, Y _ {i 2}=y _ {i 2}, Y _ {i 3}=y _ {i 3}\right) \\ &amp;=\sum _ {j _ {1}=1}^{2} \sum _ {j _ {2}=1}^{2} \sum _ {j _ {3}=1}^{2}(-1)^{j _ {1}+j _ {2}+j _ {3}} C\left(u _ {i, 1, j _ {1}}, u _ {i, 2, j _ {2}}, u _ {i, 3, j _ {3}} | \alpha\right) \end{aligned}
-\]</span>
-where <span class="math inline">\(C\left(u _ {i, 1, j _ {1}}, u _ {i, 2, j _ {2}}, u _ {i, 3, j _ {3}} | \alpha\right)=\Phi _ {3}\left\{\Phi^{-1}\left(u _ {i, 1, j _ {1}}\right), \Phi^{-1}\left(u _ {i, 2, j _ {2}}\right)\right. ,\Phi^{-1}\left(u _ {i, 3, j _ {3}}\right) | \alpha \}\)</span>with <span class="math inline">\(\alpha\)</span> is exchangeable correlation coefficient <span class="math inline">\(\alpha\)</span></p>
+by <em>convex optimization</em> Boyd 2004.</p>
+<p>The computation omit…</p>
+<p>…
+Note that solution of <span class="math inline">\(\beta\)</span> to the lasso problem <a href="sparse-inverse-covariance-estimation-with-the-graphical-lasso.html#eq:2-4">(6.1)</a> ,gives (up to a negative constant), the corresponding part of <span class="math inline">\(\Theta:\theta_{12}=-\theta_{22} \beta\)</span>.</p>
+<p>The main point of this paper:</p>
+<p><a href="sparse-inverse-covariance-estimation-with-the-graphical-lasso.html#eq:2-4">(6.1)</a> Lookslike a lasso LS problem, and the solutions <span class="math inline">\(\hat\beta\)</span> are easily seen to lasso estimates for the pth variable.</p>
+<p>..</p>
+<p>..</p>
+<p>And this paragraph is extreme important</p>
+<blockquote>
+<p>Now to the main point of this paper. Problem (2.4) looks like a lasso (L1-regularized) least-squares problem. In fact if <span class="math inline">\(W_{11}\)</span> = <span class="math inline">\(S_{11}\)</span>, then the solutions βˆ are easily seen to equal the lasso estimates for the pth variable on the others and hence related to the Meinshausen and Bu ̈hlmann (2006) proposal. As pointed out by Banerjee and others (2007),<span class="math inline">\(W_{11} \neq S_{11}\)</span> in general, and hence, the Meinshausen and Bu ̈hlmann (2006) approach does not yield the maximum likelihood estimator. They point out that their blockwise interior point procedure is equivalent to recursively solving and updating the lasso problem (2.4), but do not pursue this approach. We do, to great advantage, because fast coordinate descent algorithms (Friedman and others, 2007) make solution of the lasso problem very attractive.</p>
+</blockquote>
+<p>…
+然后时间不够看不懂了。</p>
+<p>这篇的要点：</p>
+<ul>
+<li>Meinshausen and Bu ̈hlmann (2006) 的思路（在introduction中），</li>
+<li>对于penalized loglikelihood的几个解决方案，interior-point optimization methods。</li>
+<li>Block-wise coordinate descent approach</li>
+<li>duality convex的那个式子</li>
+<li>Boyd 2004 p641 提供的subgradient equation for MLE.</li>
+</ul>
+<p>没看懂的</p>
+<ul>
+<li>Graphical lasso是通过哪一点作为初始然后优化了结论？</li>
+<li>优化过程的推导</li>
+<li>几个等价性的问题。</li>
+</ul>
+<p>没看的</p>
+<p>时间比较，实证分析，公式推演（基本上其实这篇文章就没看？</p>
+<p>但是只花了2个多小时来着。</p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Friedman:2008tb">
+<p>Friedman, J, T Hastie, and R Tibshirani Biostatistics. 2008. “Sparse inverse covariance estimation with the graphical lasso.” <em>Biostatistics</em>.</p>
+</div>
+<div id="ref-Meinshausen:2006fu">
+<p>Meinshausen, Nicolai, and Peter Bühlmann. 2006. “High-dimensional graphs and variable selection with the lasso.” <em>The Annals of Statistics</em> 34 (3): 1436–62.</p>
+</div>
+<div id="ref-Yuan:2007kk">
+<p>Yuan, Ming, and Y Lin. 2007. “Model selection and estimation in the Gaussian graphical model.” <em>Biometrika</em> 94 (1): 19–35.</p>
 </div>
 </div>
             </section>
@@ -361,8 +316,8 @@ where <span class="math inline">\(C\left(u _ {i, 1, j _ {1}}, u _ {i, 2, j _ {2}
           </div>
         </div>
       </div>
-<a href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-bayesian-lasso-via-reversible-jump-mcmc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

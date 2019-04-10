@@ -1,6 +1,6 @@
 # reading review
 
-
+## reviews 1 in April,2019
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -54,6 +54,17 @@ To Chap4
 Michael I. Jordan
 
 
+---
+
+[Gaussian Process for machine learning](http://www.gaussianprocess.org/gpml/chapters/RW.pdf)
+
+---
+
+
+---
+
+Modelling Dependence with copula, and application to risk management
+(Lecture notes)
 
 
 ---

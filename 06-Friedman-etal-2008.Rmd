@@ -1,0 +1,120 @@
+# Sparse inverse covariance estimation with the graphical lasso
+
+by [@Friedman:2008tb]
+
+## Summary
+
+Estimating sparse graph by lasso penalty to precision matrix.
+Using coordinate descent procedure for the lasso-> *graphical lasso*, which is remarkably fast.
+
+## Introduction
+
+Estimation of sparse undirected graphical models through $L_1$ regularization. Basic model: observations follows $MVN(\mu,\Sigma)$. An important result in graphical model is that if the $ij$ th component of $\Sigma^{-1}$ is 0, $\sigma_{ij}=0$, then the variable $i$ and $j$ are conditionally independent condition on other variables. This is the reason to impose penalty to precision matrix $\Sigma^{-1}$ to increase its sparsity.
+
+
+[@Meinshausen:2006fu] take a simple approach: estimate sparse graphical model by fitting lasso to each variable. The correspond $\hat\Sigma_{ij}^{-1}$ is nonzero if variable estiamted coefficient of variable $i$ on $j$ or $j$ on $i$ is nonzero.(They use AND rather than OR). Then they showed method is asymptotically consistenctly estimates of $\Sigma^{-1}$ for nonzero elements.
+
+Others propose exact maximization of the $L_1$ penalized loglikelihood,
+some adapt interior-point optimization methods, and simpler approach to [@Meinshausen:2006fu].
+
+This paper use blockwise coordinate descent approach in (Banerjee,et.al. 2007) at launch point, and propose a new algorithm for the exat problem. It also bridge the original idea and the exact problem.
+
+## The Proposed Model
+
+Assume we have N $MVN(\mu,\Sigma)$ observations with dimension p. Let $\Theta=\Sigma^{-1}$, and S be the empirical covariance matrix, the problem is maximize the penalized log-likelihood
+$$
+\log \operatorname{det} \Theta-\operatorname{tr}(S \Theta)-\rho\|\Theta\|_{1}
+$$
+over the nonnegative definite matrices $\Theta$, [@Yuan:2007kk] solves this problemusing the interior-point method for the "maxdet" problem. Banerjee and others (2007) use another framework for the optimization which impetus for this paper work.
+
+They showed that the problem of penalized log-likelihood is convex and estimation of $\Sigma$ as
+W. which is
+
+$$
+W=\left( \begin{array}{cc}{W_{11}} & {w_{12}} \\ {w_{12}^{T}} & {w_{22}}\end{array}\right), \quad S=\left( \begin{array}{cc}{S_{11}} & {s_{12}} \\ {s_{12}^{T}} & {s_{22}}\end{array}\right)
+$$
+solving the problem by optimizing over each row and corresponding column of W in a block coordinate descent fashion. The solution for $w_{12}$ satisfies
+$$
+w_{12}=\operatorname{argmin}_{y}\left\{y^{T} W_{11}^{-1} y :\left\|y-s_{12}\right\|_{\infty} \leqslant \rho\right\}
+$$
+this is box-constrained quadratic program(QP) solve using interior-point procedure.
+
+> If this procedure is initialized with a positive definite matrix, they show that the iterates from this procedure remains positive definite and invertible, even if p>N
+
+Using convex duality, solve $w_{12}$ is equivalent to solving the dual problem
+
+$$
+\begin{equation} 
+\min _{\beta}\left\{\frac{1}{2}\left\|W_{11}^{1 / 2} \beta-b\right\|^{2}+\rho\|\beta\|_{1}\right\}
+(\#eq:2-4)
+\end{equation} 
+$$
+where $b=W_{11}^{-1 / 2} s_{12}$.
+Expanding $W \Theta=I$ as
+
+$$
+\left( \begin{array}{cc}{W_{11}} & {w_{12}} \\ {w_{12}^{T}} & {w_{22}}\end{array}\right) \left( \begin{array}{ll}{\Theta_{11}} & {\theta_{12}} \\ {\theta_{12}^{T}} & {\theta_{22}}\end{array}\right)=\left( \begin{array}{cc}{I} & {0} \\ {0^{T}} & {1}\end{array}\right)
+$$
+Now the subgradient equation for maximization the log-likelihood is
+$$
+W-S-\rho \cdot \Gamma=0
+$$
+by *convex optimization* Boyd 2004.
+
+The computation omit...
+
+...
+Note that solution of $\beta$ to the lasso problem \@ref(eq:2-4) ,gives (up to a negative constant), the corresponding part of $\Theta:\theta_{12}=-\theta_{22} \beta$.
+
+The main point of this paper:
+
+\@ref(eq:2-4) Lookslike a lasso LS problem, and the solutions $\hat\beta$ are easily seen to lasso estimates for the pth variable.
+
+..
+
+..
+
+And this paragraph is extreme important
+
+> Now to the main point of this paper. Problem (2.4) looks like a lasso (L1-regularized) least-squares problem. In fact if $W_{11}$ = $S_{11}$, then the solutions βˆ are easily seen to equal the lasso estimates for the pth variable on the others and hence related to the Meinshausen and Bu ̈hlmann (2006) proposal. As pointed out by Banerjee and others (2007),$W_{11} \neq S_{11}$ in general, and hence, the Meinshausen and Bu ̈hlmann (2006) approach does not yield the maximum likelihood estimator. They point out that their blockwise interior point procedure is equivalent to recursively solving and updating the lasso problem (2.4), but do not pursue this approach. We do, to great advantage, because fast coordinate descent algorithms (Friedman and others, 2007) make solution of the lasso problem very attractive.
+
+...
+然后时间不够看不懂了。
+
+
+这篇的要点：
+
+- Meinshausen and Bu ̈hlmann (2006) 的思路（在introduction中），
+- 对于penalized loglikelihood的几个解决方案，interior-point optimization methods。
+- Block-wise coordinate descent approach
+- duality convex的那个式子
+- Boyd 2004 p641 提供的subgradient equation for MLE.
+
+没看懂的
+
+- Graphical lasso是通过哪一点作为初始然后优化了结论？
+- 优化过程的推导
+- 几个等价性的问题。
+
+没看的
+
+时间比较，实证分析，公式推演（基本上其实这篇文章就没看？
+
+但是只花了2个多小时来着。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
