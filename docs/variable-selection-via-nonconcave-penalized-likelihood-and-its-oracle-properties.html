@@ -25,7 +25,7 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-04-10">
+<meta name="date" content="2019-04-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -191,6 +191,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html"><i class="fa fa-check"></i><b>8</b> The Bayesian Lasso</a><ul>
 <li class="chapter" data-level="8.1" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#abstract-4"><i class="fa fa-check"></i><b>8.1</b> Abstract</a></li>
+<li class="chapter" data-level="8.2" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#hierarchical-model-and-gibbs-sampler"><i class="fa fa-check"></i><b>8.2</b> Hierarchical Model and Gibbs Sampler</a></li>
+<li class="chapter" data-level="8.3" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#choosing-the-bayesian-lasso-parameter"><i class="fa fa-check"></i><b>8.3</b> Choosing the Bayesian Lasso parameter</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#empirical-bayes-by-marginal-maximum-likelihood"><i class="fa fa-check"></i><b>8.3.1</b> Empirical Bayes by Marginal Maximum Likelihood</a></li>
+<li class="chapter" data-level="8.3.2" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#hyperpriors-for-the-lasso-parameter"><i class="fa fa-check"></i><b>8.3.2</b> Hyperpriors for the Lasso Parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#extensions"><i class="fa fa-check"></i><b>8.4</b> Extensions</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#bridge-regression"><i class="fa fa-check"></i><b>8.4.1</b> Bridge Regression</a></li>
+<li class="chapter" data-level="8.4.2" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#thehuberized-lasso"><i class="fa fa-check"></i><b>8.4.2</b> The“Huberized Lasso”</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html"><i class="fa fa-check"></i><b>9</b> Bayesian lasso regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#summary-1"><i class="fa fa-check"></i><b>9.1</b> Summary</a></li>
+<li class="chapter" data-level="9.2" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#introduction-6"><i class="fa fa-check"></i><b>9.2</b> Introduction</a></li>
+<li class="chapter" data-level="9.3" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#the-lasso-posterior-distribution"><i class="fa fa-check"></i><b>9.3</b> The Lasso posterior distribution</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#direct-characterization"><i class="fa fa-check"></i><b>9.3.1</b> Direct characterization</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -287,7 +303,7 @@ p_{\lambda}(|\theta|)=\lambda^{2}-(|\theta|-\lambda)^{2} I(|\theta|&lt;\lambda)
 theta=<span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)
 p_hard=lambda<span class="op">^</span><span class="dv">2</span><span class="op">-</span>(<span class="kw">abs</span>(theta)<span class="op">-</span>lambda)<span class="op">^</span><span class="dv">2</span><span class="op">*</span><span class="kw">as.numeric</span>(<span class="kw">abs</span>(theta)<span class="op">&lt;</span>lambda)
 <span class="kw">plot</span>(theta,p_hard,<span class="dt">type=</span><span class="st">&#39;l&#39;</span>,<span class="dt">ylab=</span><span class="st">&quot;hard threshold penalty&quot;</span>)</code></pre>
-<p><img src="paper_reanding_record_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="paper_reanding_record_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>PLS关于<span class="math inline">\(\theta\)</span>的一阶导是<span class="math inline">\(\operatorname{sgn}(\theta)\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}-z\)</span> ,其中, <span class="math inline">\(p&#39;(\theta)=I(|\theta|&lt;\lambda) sign(\theta)\cdot2(|\theta|-\lambda)\)</span>当<span class="math inline">\(\theta\)</span>很大的时候,<span class="math inline">\(p&#39;(\theta)\)</span>=0.当<span class="math inline">\(|z|\)</span> 足够大的时候，估计值就是<span class="math inline">\(\hat\theta=z\)</span> 所以说approximately unbiased estimator. 此时，“<span class="math inline">\(p&#39;(|\theta|)=0\)</span> for large <span class="math inline">\(|\theta|\)</span>” 就是无偏性的一个充分条件。就类似于Bayes selection中的一个improper prior.(？？？为啥，improper prior的定义不是不是分布的prior吗，和导数为0有什么关系？)</p>
 <p>结果得到的估计量是一个阈值条件(thresholding rule)的充分条件是 <em>the minimum of the function <span class="math inline">\(|\theta|+p&#39;_{\lambda}(|\theta|)\)</span> is positive</em>. When <span class="math inline">\(|z|&lt;\min _{\theta \neq 0}\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}\)</span>, then the derivative of PLS is positive for all positive <span class="math inline">\(\theta\)</span>’s and negative for negative <span class="math inline">\(\theta\)</span>’s.<br />
 因为PLS的一阶是<span class="math inline">\(\operatorname{sgn}(\theta)\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}-z\)</span>.
@@ -300,7 +316,7 @@ p_hard=lambda<span class="op">^</span><span class="dv">2</span><span class="op">
 theta=<span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)
 p_der=<span class="op">-</span><span class="kw">as.numeric</span>(<span class="kw">abs</span>(theta)<span class="op">&lt;</span>lambda)<span class="op">*</span><span class="dv">2</span><span class="op">*</span>(<span class="kw">abs</span>(theta)<span class="op">-</span>lambda)
 <span class="kw">plot</span>(theta,p_der,<span class="dt">type=</span><span class="st">&#39;l&#39;</span>,<span class="dt">ylab =</span> <span class="st">&quot;hard threshold 1-order derivative&quot;</span>)</code></pre>
-<p><img src="paper_reanding_record_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="paper_reanding_record_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#lines(theta,rep(1,8001),type=&#39;l&#39;)</span></code></pre>
 <p>观察PLS关于<span class="math inline">\(\theta\)</span>的一阶导，当<span class="math inline">\(|z|&lt;\min _{\theta \neq 0}\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}\)</span> 时，一阶导的符号与<span class="math inline">\(\theta\)</span>一致，+ if <span class="math inline">\(\theta&gt;0\)</span>,- if <span class="math inline">\(\theta&lt;0\)</span>.这样<span class="math inline">\(\hat\theta=0\)</span>。 而当<span class="math inline">\(|z|&gt;\min _{\theta \neq 0}|\theta|+p_{\lambda}^{\prime}(|\theta|)\)</span> 时，（可能？）存在两个跨越点。</p>
 <p><img src="chp2/Figure3.png" /><!-- --></p>
