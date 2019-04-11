@@ -65,14 +65,89 @@ $$
 f(x)=\sqrt{\frac{\lambda^{\prime}}{2 \pi}} x^{-3 / 2} \exp \left\{-\frac{\lambda^{\prime}\left(x-\mu^{\prime}\right)^{2}}{2\left(\mu^{\prime}\right)^{2} x}\right\}, \quad x>0
 $$
 
+## Choosing the Bayesian Lasso parameter
+
+The parameter of the hordinary Lasso can be chosen by cross-validation, which generalized version based on *Stein's unbiased risk estimate*. Bayesian Lasso also offers some uniquely Bayesian alternatives: empirical Bayes through marginal maximum likelihood and use of an appropriate hyperprior.
+
+
+### Empirical Bayes by Marginal Maximum Likelihood
+
+$$
+\lambda^{(k)}=\sqrt{\frac{2 p}{\sum_{j=1}^{p} E_{\lambda^{(k-1)}}\left[\tau_{j}^{2} | \tilde{\mathbf{y}}\right]}}
+$$
+with suggest initial value
+$$
+\lambda^{(0)}=p \sqrt{\hat{\sigma}_{\mathrm{LS}}^{2}} / \sum_{j=1}^{p}\left|\hat{\beta}_{j}^{\mathrm{LS}}\right|
+$$
+$\hat\sigma^2_{LS}$ and $\hat\beta_j^{LS}$ are estimates from the usual least squares procedure.
+
+
+### Hyperpriors for the Lasso Parameter
+
+An alternative to choosing $\lambda$ explicitly is to give a diffuse hyperprior.
+Consider the class of gamma priors on $\lambda^2$ (not $\lambda$).
+$$
+\pi\left(\lambda^{2}\right)=\frac{\delta^{r}}{\Gamma(r)}\left(\lambda^{2}\right)^{r-1} e^{-\delta \lambda^{2}}, \quad \lambda^{2}>0(r>0, \delta>0)
+$$
+Because the resulting conjugacy allows easy extension of the Gibbs sampler. The improper scale-invariant prior $\frac{1}{\lambda^2}$ for $\lambda^2,(r=0,\delta=0)$ is tempting but leads to an improper posterior.
+
+When use this prior, the full conditional distribution of $\lambda^2$ is gamma with shape parameter $p+r$ and rate parameter $\sum_{j=1}^{p} \tau_{j}^{2} / 2+\delta$. 
+
+The prior of $\lambda^2$ should approach 0 sufficient fast as $\lambda^2\rightarrow \infty$ but should relatively flat and place high probability near the maximum likelihood estimate.
+
+## Extensions
+
+### Bridge Regression
+
+$$
+\min _{\beta}(\tilde{\mathbf{y}}-\mathbf{X} \boldsymbol{\beta})^{\top}(\tilde{\mathbf{y}}-\mathbf{X} \boldsymbol{\beta})+\lambda \sum_{j=1}^{p}\left|\beta_{j}\right|^{q}
+$$
+
+The Bayesian analog of this penalization involves using a prior on $\boldsymbol \beta$ of the form
+
+$$
+\pi(\boldsymbol{\beta}) \propto \prod_{j=1}^{p} e^{-\lambda\left|\beta_{j}\right|^{q}}
+$$
+
+keeping in the laplace prior form, the prior woule instead use
+$$
+\pi\left(\boldsymbol{\beta} | \sigma^{2}\right) \propto \prod_{j=1}^{p} e^{-\lambda\left(\left|\beta_{j}\right| / \sqrt{\sigma^{2}}\right)^{q}}
+$$
+This is the elements of $\boldsymbol \beta$ have (conditionally) independent priors from the *exponential power* distribution.
+
+> 这一块没懂
+
+$$
+e^{-|z|^{q}} \propto \int_{0}^{\infty} \frac{1}{\sqrt{2 \pi s}} e^{-z^{2} /(2 s)} \frac{1}{s^{3 / 2}} g_{q / 2}\left(\frac{1}{2 s}\right) d s
+$$
+
+
+### The"Huberized Lasso"
+Rosset and Zhu(2004) illustrated that the Lasso may be made more robust by using loss functions that are less severe than the quadratic, which is
+$$
+\min _{\boldsymbol{\beta}} \sum_{i=1}^{n} L\left(\tilde{y}_{i}-\mathbf{x}_{i}^{\top} \boldsymbol{\beta}\right)+\lambda \sum_{j=1}^{p}\left|\beta_{j}\right|
+$$
+
+Hyperbolic loss:
+
+$$
+L(d)=\sqrt{\eta\left(\eta+d^{2} / \rho^{2}\right)}
+$$
+
+The key idea for robustification is to replace the usual linear regression model with
+
+$$
+\mathbf{y} | \mu, \mathbf{X}, \boldsymbol{\beta}, \sigma_{1}^{2}, \ldots, \sigma_{n}^{2} \sim \mathrm{N}_{n}\left(\mu \mathbf{1}_{n}+\mathbf{X} \boldsymbol{\beta}, \mathbf{D}_{\sigma}\right)
+$$
+
+To mimic the hyperbolic loss, an appropriate prior for $(\sigma_1^2,...,\sigma^2_n)$ is
+$$
+\prod_{i=1}^{n} \frac{1}{2 K_{1}(\eta) \rho^{2}} \exp \left(-\frac{\eta}{2}\left(\frac{\sigma_{i}^{2}}{\rho^{2}}+\frac{\rho^{2}}{\sigma_{i}^{2}}\right)\right)
+$$
 
 
 
-
-
-
-
-
+> 妈蛋没看懂这篇
 
 
 

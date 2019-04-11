@@ -25,7 +25,7 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-04-10">
+<meta name="date" content="2019-04-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -129,6 +129,14 @@
 <li class="chapter" data-level="8" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html"><i class="fa fa-check"></i><b>8</b> The Bayesian Lasso</a><ul>
 <li class="chapter" data-level="8.1" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#abstract-4"><i class="fa fa-check"></i><b>8.1</b> Abstract</a></li>
 <li class="chapter" data-level="8.2" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#hierarchical-model-and-gibbs-sampler"><i class="fa fa-check"></i><b>8.2</b> Hierarchical Model and Gibbs Sampler</a></li>
+<li class="chapter" data-level="8.3" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#choosing-the-bayesian-lasso-parameter"><i class="fa fa-check"></i><b>8.3</b> Choosing the Bayesian Lasso parameter</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#empirical-bayes-by-marginal-maximum-likelihood"><i class="fa fa-check"></i><b>8.3.1</b> Empirical Bayes by Marginal Maximum Likelihood</a></li>
+<li class="chapter" data-level="8.3.2" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#hyperpriors-for-the-lasso-parameter"><i class="fa fa-check"></i><b>8.3.2</b> Hyperpriors for the Lasso Parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#extensions"><i class="fa fa-check"></i><b>8.4</b> Extensions</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#bridge-regression"><i class="fa fa-check"></i><b>8.4.1</b> Bridge Regression</a></li>
+<li class="chapter" data-level="8.4.2" data-path="the-bayesian-lasso.html"><a href="the-bayesian-lasso.html#thehuberized-lasso"><i class="fa fa-check"></i><b>8.4.2</b> The“Huberized Lasso”</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -202,7 +210,79 @@ in the parameterization of the inverse-Gaussian density given by
 <span class="math display">\[
 f(x)=\sqrt{\frac{\lambda^{\prime}}{2 \pi}} x^{-3 / 2} \exp \left\{-\frac{\lambda^{\prime}\left(x-\mu^{\prime}\right)^{2}}{2\left(\mu^{\prime}\right)^{2} x}\right\}, \quad x&gt;0
 \]</span></p>
+</div>
+<div id="choosing-the-bayesian-lasso-parameter" class="section level2">
+<h2><span class="header-section-number">8.3</span> Choosing the Bayesian Lasso parameter</h2>
+<p>The parameter of the hordinary Lasso can be chosen by cross-validation, which generalized version based on <em>Stein’s unbiased risk estimate</em>. Bayesian Lasso also offers some uniquely Bayesian alternatives: empirical Bayes through marginal maximum likelihood and use of an appropriate hyperprior.</p>
+<div id="empirical-bayes-by-marginal-maximum-likelihood" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Empirical Bayes by Marginal Maximum Likelihood</h3>
+<p><span class="math display">\[
+\lambda^{(k)}=\sqrt{\frac{2 p}{\sum_{j=1}^{p} E_{\lambda^{(k-1)}}\left[\tau_{j}^{2} | \tilde{\mathbf{y}}\right]}}
+\]</span>
+with suggest initial value
+<span class="math display">\[
+\lambda^{(0)}=p \sqrt{\hat{\sigma}_{\mathrm{LS}}^{2}} / \sum_{j=1}^{p}\left|\hat{\beta}_{j}^{\mathrm{LS}}\right|
+\]</span>
+<span class="math inline">\(\hat\sigma^2_{LS}\)</span> and <span class="math inline">\(\hat\beta_j^{LS}\)</span> are estimates from the usual least squares procedure.</p>
+</div>
+<div id="hyperpriors-for-the-lasso-parameter" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> Hyperpriors for the Lasso Parameter</h3>
+<p>An alternative to choosing <span class="math inline">\(\lambda\)</span> explicitly is to give a diffuse hyperprior.
+Consider the class of gamma priors on <span class="math inline">\(\lambda^2\)</span> (not <span class="math inline">\(\lambda\)</span>).
+<span class="math display">\[
+\pi\left(\lambda^{2}\right)=\frac{\delta^{r}}{\Gamma(r)}\left(\lambda^{2}\right)^{r-1} e^{-\delta \lambda^{2}}, \quad \lambda^{2}&gt;0(r&gt;0, \delta&gt;0)
+\]</span>
+Because the resulting conjugacy allows easy extension of the Gibbs sampler. The improper scale-invariant prior <span class="math inline">\(\frac{1}{\lambda^2}\)</span> for <span class="math inline">\(\lambda^2,(r=0,\delta=0)\)</span> is tempting but leads to an improper posterior.</p>
+<p>When use this prior, the full conditional distribution of <span class="math inline">\(\lambda^2\)</span> is gamma with shape parameter <span class="math inline">\(p+r\)</span> and rate parameter <span class="math inline">\(\sum_{j=1}^{p} \tau_{j}^{2} / 2+\delta\)</span>.</p>
+<p>The prior of <span class="math inline">\(\lambda^2\)</span> should approach 0 sufficient fast as <span class="math inline">\(\lambda^2\rightarrow \infty\)</span> but should relatively flat and place high probability near the maximum likelihood estimate.</p>
+</div>
+</div>
+<div id="extensions" class="section level2">
+<h2><span class="header-section-number">8.4</span> Extensions</h2>
+<div id="bridge-regression" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Bridge Regression</h3>
+<p><span class="math display">\[
+\min _{\beta}(\tilde{\mathbf{y}}-\mathbf{X} \boldsymbol{\beta})^{\top}(\tilde{\mathbf{y}}-\mathbf{X} \boldsymbol{\beta})+\lambda \sum_{j=1}^{p}\left|\beta_{j}\right|^{q}
+\]</span></p>
+<p>The Bayesian analog of this penalization involves using a prior on <span class="math inline">\(\boldsymbol \beta\)</span> of the form</p>
+<p><span class="math display">\[
+\pi(\boldsymbol{\beta}) \propto \prod_{j=1}^{p} e^{-\lambda\left|\beta_{j}\right|^{q}}
+\]</span></p>
+<p>keeping in the laplace prior form, the prior woule instead use
+<span class="math display">\[
+\pi\left(\boldsymbol{\beta} | \sigma^{2}\right) \propto \prod_{j=1}^{p} e^{-\lambda\left(\left|\beta_{j}\right| / \sqrt{\sigma^{2}}\right)^{q}}
+\]</span>
+This is the elements of <span class="math inline">\(\boldsymbol \beta\)</span> have (conditionally) independent priors from the <em>exponential power</em> distribution.</p>
+<blockquote>
+<p>这一块没懂</p>
+</blockquote>
+<p><span class="math display">\[
+e^{-|z|^{q}} \propto \int_{0}^{\infty} \frac{1}{\sqrt{2 \pi s}} e^{-z^{2} /(2 s)} \frac{1}{s^{3 / 2}} g_{q / 2}\left(\frac{1}{2 s}\right) d s
+\]</span></p>
+</div>
+<div id="thehuberized-lasso" class="section level3">
+<h3><span class="header-section-number">8.4.2</span> The“Huberized Lasso”</h3>
+<p>Rosset and Zhu(2004) illustrated that the Lasso may be made more robust by using loss functions that are less severe than the quadratic, which is
+<span class="math display">\[
+\min _{\boldsymbol{\beta}} \sum_{i=1}^{n} L\left(\tilde{y}_{i}-\mathbf{x}_{i}^{\top} \boldsymbol{\beta}\right)+\lambda \sum_{j=1}^{p}\left|\beta_{j}\right|
+\]</span></p>
+<p>Hyperbolic loss:</p>
+<p><span class="math display">\[
+L(d)=\sqrt{\eta\left(\eta+d^{2} / \rho^{2}\right)}
+\]</span></p>
+<p>The key idea for robustification is to replace the usual linear regression model with</p>
+<p><span class="math display">\[
+\mathbf{y} | \mu, \mathbf{X}, \boldsymbol{\beta}, \sigma_{1}^{2}, \ldots, \sigma_{n}^{2} \sim \mathrm{N}_{n}\left(\mu \mathbf{1}_{n}+\mathbf{X} \boldsymbol{\beta}, \mathbf{D}_{\sigma}\right)
+\]</span></p>
+<p>To mimic the hyperbolic loss, an appropriate prior for <span class="math inline">\((\sigma_1^2,...,\sigma^2_n)\)</span> is
+<span class="math display">\[
+\prod_{i=1}^{n} \frac{1}{2 K_{1}(\eta) \rho^{2}} \exp \left(-\frac{\eta}{2}\left(\frac{\sigma_{i}^{2}}{\rho^{2}}+\frac{\rho^{2}}{\sigma_{i}^{2}}\right)\right)
+\]</span></p>
+<blockquote>
+<p>妈蛋没看懂这篇</p>
+</blockquote>
 
+</div>
 </div>
 </div>
             </section>
