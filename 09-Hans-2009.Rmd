@@ -79,7 +79,7 @@ Strictly speaking, when $\beta \in R^{p}$, this interpretation is not correct: u
 
 ### The univariate case.
 
-Pericchi & Smith (1992)引进了beta的一种后验估计方法，单变量，intercept only， normal mean. For fixed $\sigma^2$ and $\tau$, the univariate posterior is
+Pericchi & Smith (1992)引进了$\beta$的一种后验估计方法，单变量，intercept only， normal mean. For fixed $\sigma^2$ and $\tau$, the univariate posterior is
 $$
 p\left(\beta | y, \sigma^{2}, \tau\right)=w \mathrm{N}^{-}\left(\beta | \mu_{-}, v^{2}\right)+(1-w) \mathrm{N}^{+}\left(\beta | \mu_{+}, v^{2}\right)
 $$
@@ -108,3 +108,130 @@ $$
 ```{r,echo=FALSE}
 knitr::include_graphics(rep("chp9/Figure1.png", 1))
 ```
+
+## Posterior Inference via Gibbs sampling
+
+### The standard Gibbs sampler.
+
+Update each parameter one at a time, conditionally on all other parameters. The full conditional distributions with details as
+
+$$
+\begin{aligned} p\left(\beta_{j} | \beta_{-j}, \sigma^{2}, \tau, y\right) &=\phi_{j} \mathrm{N}^{+}\left(\beta_{j} | \mu_{j .}^{+}, \omega_{j j}^{-1}\right)+\left(1-\phi_{j}\right) \mathrm{N}^{-}\left(\beta_{j} | \mu_{j .}^{-}, \omega_{j j}^{-1}\right) \\ p\left(\sigma^{2} | \beta, \tau, y\right) & \propto\left(\sigma^{2}\right)^{-\left(a^{*}+1\right)} \exp \left(-b^{*} / \sigma^{2}-\tau\|\beta\|_{1} / \sigma\right) \\ p\left(\tau | \beta, \sigma^{2}, y\right) &=\mathrm{Ga}\left(\tau | p+r, \sigma^{-1}\|\beta\|_{1}+s\right) \end{aligned}
+$$
+with parameter:
+$a^{*}=(n+p) / 2+a$,$b^{*}=(y-X \beta)^{\mathrm{T}}(y-X \beta) / 2+b$,
+$$
+\mu_{j .}^{+}=\hat{\beta}_{\mathrm{OLS}, j}+\left\{\sum_{i \neq j}\left(\hat{\beta}_{\mathrm{OLS}, i}-\beta_{i}\right)\left(\omega_{i j} / \omega_{j j}\right)\right\}+\left(-\tau \sigma^{-1} \omega_{j j}^{-1}\right)
+$$
+$w_{ij}$ is the ijth element of $\Omega=\Sigma^{-1}$.The weights are
+$$
+\phi_{j}=\left\{\frac{\Phi\left(\mu_{j}^{+} \cdot \sqrt{\omega}_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}\right\} /\left\{\frac{\Phi\left(\mu_{j}^{+} \vee \omega_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}+\frac{\Phi\left(-\mu_{j}^{-} \vee \omega_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{-}, \omega_{j j}^{-1}\right)}\right\}
+$$
+
+A description of a simple and efficient reject sampling method for obtaining exact samples from $\sigma^2$ is provided in the Appendix.
+
+When predictor variables are highly correlated, autocorrelation in the chain can be high. The usual solution of block-updating is not feasible because $p\left(\beta | \sigma^{2}, \tau, y\right)$ is difficult to sample when $p$ is even moderately large.
+
+> 注意到full conditional distribution里面，$\beta_j$ conditional on $\beta_{-j}$.
+
+in 3.2, where a new Gibbs sampler is proposed that uses a reparameterization of the model to reduce autocorrelation. Even in the case of high autocorrelation, accurate estimates of the posterior mean of the regression coefficients can often be obtained under the standard Gibbs sampler via Rao-Blackwellization; at each iteration, the conditional expectation of $\beta_j$ is simply
+
+$$
+E\left(\beta_{j} | \beta_{-j}, \sigma^{2}, \tau, y\right)=\phi_{j}\left\{\mu_{j .}^{+}+\frac{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}{\Phi\left(\mu_{j}^{+} \cdot \sqrt{\omega_{j j}}\right)}\right\}+\left(1-\phi_{j}\right)\left\{\mu_{j .}^{-}-\frac{\mathrm{N}\left(0 | \mu_{j}^{-}, \omega_{j j}^{-1}\right)}{\Phi\left(-\mu_{j}^{-} \cdot \sqrt{\omega_{j j}}\right)}\right\}
+$$
+.
+
+If the classic lasso prior is used in place, then the Gibbs for $\sigma^2$ and $\tau$ are replaced by
+$$
+\begin{aligned} p\left(\sigma^{2} | \beta, \tau, y\right) &=\operatorname{IG}\left(\sigma^{2} | a+n / 2, b^{*}\right) \\ p\left(\tau | \beta, \sigma^{2}, y\right) &=\mathrm{Ga}\left(\tau | p+r,\|\beta\|_{1}+s\right) \end{aligned}
+$$
+
+> 这块不懂，得手推一下才能懂
+
+### The orthogonalized Gibbs sampler
+
+A Gibbs sampler that is less sensitive to collinearity in the design matrix can be constructed as follows: Using the idea of ortogonally.
+
+Let $\Sigma=\sigma^{2}\left(X^{\mathrm{T}} X\right)^{-1}$ according to $\sigma^{2} H^{\mathrm{T}}\left(X^{\mathrm{T}} X\right)^{-1} H=\sigma^{2} \Lambda=\sigma^{2} \operatorname{diag}\left(\lambda_{j}\right)$, where H is a $p\times p$ matrix such that $H^{\mathrm{T}} H=H H^{\mathrm{T}}=I_{p}$. Transforming the regression coefficients as $\eta=H^{\mathrm{T}} \beta$,
+
+$$
+p\left(\eta | y, \sigma^{2}, \tau\right) \propto \sum_{z \in \mathcal{Z}} \frac{\mathrm{N}\left(\eta | H^{\mathrm{T}} \mu_{z}, \sigma^{2} \Lambda\right)}{\mathrm{N}\left(0 | \mu_{z}, \Sigma\right)} 1\left(H \eta \in \mathcal{O}_{z}\right)
+$$
+
+Each element of the sum contains a term $\mathrm{N}\left(\eta | H^{\mathrm{T}} \mu_{z}, \sigma^{2} \Lambda\right) 1\left(H \eta \in \mathcal{O}_{z}\right)$, a normal distribution with diagonal covariance matrix and support restricted by linear constraints.
+
+> 这段没懂，大概的意思是用一个H矩阵转换一下？
+
+While this distribution of $\eta$ is difficult to sample, then the full conditionals are piecewise normal on the intervals $h_{0, j}^{*}<\cdots<h_{p+1, j}^{*} :$
+
+$$
+p\left(\eta_{j} | \eta_{-j}, \sigma^{2}, \tau, y\right)=\sum_{l=0}^{p} \rho_{l j}\left\{C_{l j}^{-1} \mathrm{N}\left(\eta_{j} | \xi_{l j}, \sigma^{2} \lambda_{j}\right) 1\left(h_{l, j}^{*} \leqslant \eta_{j}<h_{l+1, j}^{*}\right)\right\}
+$$
+
+> 为什么成立。。。这个piecewise normal on the intervals.
+
+### Comparing samplers
+
+Each of the three Gibbs samplers for this model has advantages and disadvantages.
+
+> 哪里来的三个！？ 一个传统Laplace prior，一个2008那个的prior，还有一个正交的？是这三个吗？
+
+The data-augmentation approach is simple to implement and performs a block update for the regression coefficients $\beta$, but involves a vector of latent variables which may result in slower mixing of the chain.
+
+> 哦原来是这个，文中一开始提出的那个带正负号indicator的latent variable $z$ 的那个Gibbs sampler
+
+The standard Gibbs sampler describe above is also simple to implement, but its mixing properties are particularly sensitive to correlation among the predictor variables.
+
+> 就是在讲orthogonalized之前那个，就是最普通的Gibbs sampler？
+
+The orthogonalized sampler is designed to reduce autocorrelation in such cases, but this reduction comes with an increase in both algorithmic complexity and computing time for a fixed number of iterations.
+
+>所以正交方法很复杂然后带来了额外的计算和额外的迭代？
+
+然后就是Efron的diabetes data, illustrate the trade-offs between the data-augmentation and orthogonalized samplers.data-augumentation的是最简单的模型，orthogonalized则是代表了最复杂的模型。两个抽样器都分别跑了100 000次。然后分析$\tau$ 和 $\beta_5$.
+
+>既然Gibbs都要100 000次，那么Random walk跑1 000 000次一点都不多吧orz
+
+因为$\beta_5$对应着一个和其他predictor 高度相关的predictor。
+lag-1 自回归系数：0.31对于第一个模型，0.08对于orthogonalized方法。
+对于$\tau$ 则是0.74和0.13.所以虽然data-augumented Gibbs是一块一块更新$\beta$的，但是orthogonalized sampler还是有更低的自相关性。
+
+但是orthogonalized sampler对于scale更敏感，加了40个白噪声predictor时，orthogonalized sampler要多跑20倍的时间。解决这个问题的一个策略是对于large-p，把$\beta$分成两部分，一个是两两不怎么相关的predictor，一个是有复杂相关关系的结构，第一个则每次更新一个，第二个几何则应用orthogonalizing transformation。
+
+## Examples
+
+### Example1:Prediction along the solution path
+
+The solution path is indexed by $s=\left\|\hat{\beta}_{\mathrm{L}}(\lambda)\right\|_{1} /\left\|\hat{\beta}_{\mathrm{OLS}}\right\|_{1} \in[0,1]$ corresponding to the fraction of the $L_1$ norm of the least-squares estimate represnete by the lasso estimate at $\lambda$.
+
+> 所以从这段来看The solution path就是那个关于latent variable$\lambda$的图上的solution
+
+Large values of $\lambda$ represent high shrinkage and hence correspond to small values of $s$
+
+Along the path at $l=1,...,50$, evenly space values in $[0,1]$, the corresponding penalty parameters $\lambda_l$ were determined. The lasso estimate at each value of $\lambda_l$ corresponds to the mode of the posterior distribution under piror with $\tau=\lambda_{l} /\left(2 \sigma^{2}\right)$. Where $\sigma^2$ was fixed at an estimate based on a least-squares fit of the full model.
+
+### Example2: Prediction when modelling $\lambda$
+
+Several methods for choosing $\lambda$: 
+
+- K-fold and generalized cross-validation
+- $C_p$-type selection
+- Empirical Bayes approach.
+
+
+Using 10-fold crossvalidation on the training data. Prediction error was calculated using the test data.
+
+We repeated this procedure T=10000 times.
+
+> 所以每次Bayes抽100000次，然后重复这个过程在10-fold cv，所以是10^6,然后再反复repeat 10000次，所以要重复10^10次抽样？
+
+
+## Discussion
+
+- Better than standard lasso.
+- Similar result
+- Reduction in average prediction error of 16%,36%,19%
+
+[Software](https://www.asc.ohio-state.edu/hans.11/software/) 
+
+

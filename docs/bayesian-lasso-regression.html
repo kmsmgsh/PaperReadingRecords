@@ -25,7 +25,7 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-04-11">
+<meta name="date" content="2019-04-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -146,6 +146,16 @@
 <li class="chapter" data-level="9.3.2" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#posterior-based-estimation-and-prediction"><i class="fa fa-check"></i><b>9.3.2</b> Posterior-based estimation and prediction</a></li>
 <li class="chapter" data-level="9.3.3" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#the-univariate-case."><i class="fa fa-check"></i><b>9.3.3</b> The univariate case.</a></li>
 </ul></li>
+<li class="chapter" data-level="9.4" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#posterior-inference-via-gibbs-sampling"><i class="fa fa-check"></i><b>9.4</b> Posterior Inference via Gibbs sampling</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#the-standard-gibbs-sampler."><i class="fa fa-check"></i><b>9.4.1</b> The standard Gibbs sampler.</a></li>
+<li class="chapter" data-level="9.4.2" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#the-orthogonalized-gibbs-sampler"><i class="fa fa-check"></i><b>9.4.2</b> The orthogonalized Gibbs sampler</a></li>
+<li class="chapter" data-level="9.4.3" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#comparing-samplers"><i class="fa fa-check"></i><b>9.4.3</b> Comparing samplers</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#examples"><i class="fa fa-check"></i><b>9.5</b> Examples</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#example1prediction-along-the-solution-path"><i class="fa fa-check"></i><b>9.5.1</b> Example1:Prediction along the solution path</a></li>
+<li class="chapter" data-level="9.5.2" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#example2-prediction-when-modelling-lambda"><i class="fa fa-check"></i><b>9.5.2</b> Example2: Prediction when modelling <span class="math inline">\(\lambda\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="bayesian-lasso-regression.html"><a href="bayesian-lasso-regression.html#discussion"><i class="fa fa-check"></i><b>9.6</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -242,7 +252,7 @@ Classic lasso prior has the similar posterior, the only change is that the locat
 </div>
 <div id="the-univariate-case." class="section level3">
 <h3><span class="header-section-number">9.3.3</span> The univariate case.</h3>
-<p>Pericchi &amp; Smith (1992)引进了beta的一种后验估计方法，单变量，intercept only， normal mean. For fixed <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau\)</span>, the univariate posterior is
+<p>Pericchi &amp; Smith (1992)引进了<span class="math inline">\(\beta\)</span>的一种后验估计方法，单变量，intercept only， normal mean. For fixed <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau\)</span>, the univariate posterior is
 <span class="math display">\[
 p\left(\beta | y, \sigma^{2}, \tau\right)=w \mathrm{N}^{-}\left(\beta | \mu_{-}, v^{2}\right)+(1-w) \mathrm{N}^{+}\left(\beta | \mu_{+}, v^{2}\right)
 \]</span>
@@ -264,8 +274,125 @@ and
 \tilde{\mu}_{+}=\left(\frac{\tilde{x} \tilde{y}+x^{\mathrm{T}} y-\sigma \tau}{\tilde{x}^{2}+x^{\mathrm{T}} x}\right), \quad \tilde{\mu}_{-}=\left(\frac{\tilde{x} \tilde{y}+x^{\mathrm{T}} y+\sigma \tau}{\tilde{x}^{2}+x^{\mathrm{T}} x}\right)
 \]</span></p>
 <p><img src="chp9/Figure1.png" /><!-- --></p>
-
 </div>
+</div>
+<div id="posterior-inference-via-gibbs-sampling" class="section level2">
+<h2><span class="header-section-number">9.4</span> Posterior Inference via Gibbs sampling</h2>
+<div id="the-standard-gibbs-sampler." class="section level3">
+<h3><span class="header-section-number">9.4.1</span> The standard Gibbs sampler.</h3>
+<p>Update each parameter one at a time, conditionally on all other parameters. The full conditional distributions with details as</p>
+<p><span class="math display">\[
+\begin{aligned} p\left(\beta_{j} | \beta_{-j}, \sigma^{2}, \tau, y\right) &amp;=\phi_{j} \mathrm{N}^{+}\left(\beta_{j} | \mu_{j .}^{+}, \omega_{j j}^{-1}\right)+\left(1-\phi_{j}\right) \mathrm{N}^{-}\left(\beta_{j} | \mu_{j .}^{-}, \omega_{j j}^{-1}\right) \\ p\left(\sigma^{2} | \beta, \tau, y\right) &amp; \propto\left(\sigma^{2}\right)^{-\left(a^{*}+1\right)} \exp \left(-b^{*} / \sigma^{2}-\tau\|\beta\|_{1} / \sigma\right) \\ p\left(\tau | \beta, \sigma^{2}, y\right) &amp;=\mathrm{Ga}\left(\tau | p+r, \sigma^{-1}\|\beta\|_{1}+s\right) \end{aligned}
+\]</span>
+with parameter:
+<span class="math inline">\(a^{*}=(n+p) / 2+a\)</span>,<span class="math inline">\(b^{*}=(y-X \beta)^{\mathrm{T}}(y-X \beta) / 2+b\)</span>,
+<span class="math display">\[
+\mu_{j .}^{+}=\hat{\beta}_{\mathrm{OLS}, j}+\left\{\sum_{i \neq j}\left(\hat{\beta}_{\mathrm{OLS}, i}-\beta_{i}\right)\left(\omega_{i j} / \omega_{j j}\right)\right\}+\left(-\tau \sigma^{-1} \omega_{j j}^{-1}\right)
+\]</span>
+<span class="math inline">\(w_{ij}\)</span> is the ijth element of <span class="math inline">\(\Omega=\Sigma^{-1}\)</span>.The weights are
+<span class="math display">\[
+\phi_{j}=\left\{\frac{\Phi\left(\mu_{j}^{+} \cdot \sqrt{\omega}_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}\right\} /\left\{\frac{\Phi\left(\mu_{j}^{+} \vee \omega_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}+\frac{\Phi\left(-\mu_{j}^{-} \vee \omega_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{-}, \omega_{j j}^{-1}\right)}\right\}
+\]</span></p>
+<p>A description of a simple and efficient reject sampling method for obtaining exact samples from <span class="math inline">\(\sigma^2\)</span> is provided in the Appendix.</p>
+<p>When predictor variables are highly correlated, autocorrelation in the chain can be high. The usual solution of block-updating is not feasible because <span class="math inline">\(p\left(\beta | \sigma^{2}, \tau, y\right)\)</span> is difficult to sample when <span class="math inline">\(p\)</span> is even moderately large.</p>
+<blockquote>
+<p>注意到full conditional distribution里面，<span class="math inline">\(\beta_j\)</span> conditional on <span class="math inline">\(\beta_{-j}\)</span>.</p>
+</blockquote>
+<p>in 3.2, where a new Gibbs sampler is proposed that uses a reparameterization of the model to reduce autocorrelation. Even in the case of high autocorrelation, accurate estimates of the posterior mean of the regression coefficients can often be obtained under the standard Gibbs sampler via Rao-Blackwellization; at each iteration, the conditional expectation of <span class="math inline">\(\beta_j\)</span> is simply</p>
+<p><span class="math display">\[
+E\left(\beta_{j} | \beta_{-j}, \sigma^{2}, \tau, y\right)=\phi_{j}\left\{\mu_{j .}^{+}+\frac{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}{\Phi\left(\mu_{j}^{+} \cdot \sqrt{\omega_{j j}}\right)}\right\}+\left(1-\phi_{j}\right)\left\{\mu_{j .}^{-}-\frac{\mathrm{N}\left(0 | \mu_{j}^{-}, \omega_{j j}^{-1}\right)}{\Phi\left(-\mu_{j}^{-} \cdot \sqrt{\omega_{j j}}\right)}\right\}
+\]</span>
+.</p>
+<p>If the classic lasso prior is used in place, then the Gibbs for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau\)</span> are replaced by
+<span class="math display">\[
+\begin{aligned} p\left(\sigma^{2} | \beta, \tau, y\right) &amp;=\operatorname{IG}\left(\sigma^{2} | a+n / 2, b^{*}\right) \\ p\left(\tau | \beta, \sigma^{2}, y\right) &amp;=\mathrm{Ga}\left(\tau | p+r,\|\beta\|_{1}+s\right) \end{aligned}
+\]</span></p>
+<blockquote>
+<p>这块不懂，得手推一下才能懂</p>
+</blockquote>
+</div>
+<div id="the-orthogonalized-gibbs-sampler" class="section level3">
+<h3><span class="header-section-number">9.4.2</span> The orthogonalized Gibbs sampler</h3>
+<p>A Gibbs sampler that is less sensitive to collinearity in the design matrix can be constructed as follows: Using the idea of ortogonally.</p>
+<p>Let <span class="math inline">\(\Sigma=\sigma^{2}\left(X^{\mathrm{T}} X\right)^{-1}\)</span> according to <span class="math inline">\(\sigma^{2} H^{\mathrm{T}}\left(X^{\mathrm{T}} X\right)^{-1} H=\sigma^{2} \Lambda=\sigma^{2} \operatorname{diag}\left(\lambda_{j}\right)\)</span>, where H is a <span class="math inline">\(p\times p\)</span> matrix such that <span class="math inline">\(H^{\mathrm{T}} H=H H^{\mathrm{T}}=I_{p}\)</span>. Transforming the regression coefficients as <span class="math inline">\(\eta=H^{\mathrm{T}} \beta\)</span>,</p>
+<p><span class="math display">\[
+p\left(\eta | y, \sigma^{2}, \tau\right) \propto \sum_{z \in \mathcal{Z}} \frac{\mathrm{N}\left(\eta | H^{\mathrm{T}} \mu_{z}, \sigma^{2} \Lambda\right)}{\mathrm{N}\left(0 | \mu_{z}, \Sigma\right)} 1\left(H \eta \in \mathcal{O}_{z}\right)
+\]</span></p>
+<p>Each element of the sum contains a term <span class="math inline">\(\mathrm{N}\left(\eta | H^{\mathrm{T}} \mu_{z}, \sigma^{2} \Lambda\right) 1\left(H \eta \in \mathcal{O}_{z}\right)\)</span>, a normal distribution with diagonal covariance matrix and support restricted by linear constraints.</p>
+<blockquote>
+<p>这段没懂，大概的意思是用一个H矩阵转换一下？</p>
+</blockquote>
+<p>While this distribution of <span class="math inline">\(\eta\)</span> is difficult to sample, then the full conditionals are piecewise normal on the intervals <span class="math inline">\(h_{0, j}^{*}&lt;\cdots&lt;h_{p+1, j}^{*} :\)</span></p>
+<p><span class="math display">\[
+p\left(\eta_{j} | \eta_{-j}, \sigma^{2}, \tau, y\right)=\sum_{l=0}^{p} \rho_{l j}\left\{C_{l j}^{-1} \mathrm{N}\left(\eta_{j} | \xi_{l j}, \sigma^{2} \lambda_{j}\right) 1\left(h_{l, j}^{*} \leqslant \eta_{j}&lt;h_{l+1, j}^{*}\right)\right\}
+\]</span></p>
+<blockquote>
+<p>为什么成立。。。这个piecewise normal on the intervals.</p>
+</blockquote>
+</div>
+<div id="comparing-samplers" class="section level3">
+<h3><span class="header-section-number">9.4.3</span> Comparing samplers</h3>
+<p>Each of the three Gibbs samplers for this model has advantages and disadvantages.</p>
+<blockquote>
+<p>哪里来的三个！？ 一个传统Laplace prior，一个2008那个的prior，还有一个正交的？是这三个吗？</p>
+</blockquote>
+<p>The data-augmentation approach is simple to implement and performs a block update for the regression coefficients <span class="math inline">\(\beta\)</span>, but involves a vector of latent variables which may result in slower mixing of the chain.</p>
+<blockquote>
+<p>哦原来是这个，文中一开始提出的那个带正负号indicator的latent variable <span class="math inline">\(z\)</span> 的那个Gibbs sampler</p>
+</blockquote>
+<p>The standard Gibbs sampler describe above is also simple to implement, but its mixing properties are particularly sensitive to correlation among the predictor variables.</p>
+<blockquote>
+<p>就是在讲orthogonalized之前那个，就是最普通的Gibbs sampler？</p>
+</blockquote>
+<p>The orthogonalized sampler is designed to reduce autocorrelation in such cases, but this reduction comes with an increase in both algorithmic complexity and computing time for a fixed number of iterations.</p>
+<blockquote>
+<p>所以正交方法很复杂然后带来了额外的计算和额外的迭代？</p>
+</blockquote>
+<p>然后就是Efron的diabetes data, illustrate the trade-offs between the data-augmentation and orthogonalized samplers.data-augumentation的是最简单的模型，orthogonalized则是代表了最复杂的模型。两个抽样器都分别跑了100 000次。然后分析<span class="math inline">\(\tau\)</span> 和 <span class="math inline">\(\beta_5\)</span>.</p>
+<blockquote>
+<p>既然Gibbs都要100 000次，那么Random walk跑1 000 000次一点都不多吧orz</p>
+</blockquote>
+<p>因为<span class="math inline">\(\beta_5\)</span>对应着一个和其他predictor 高度相关的predictor。
+lag-1 自回归系数：0.31对于第一个模型，0.08对于orthogonalized方法。
+对于<span class="math inline">\(\tau\)</span> 则是0.74和0.13.所以虽然data-augumented Gibbs是一块一块更新<span class="math inline">\(\beta\)</span>的，但是orthogonalized sampler还是有更低的自相关性。</p>
+<p>但是orthogonalized sampler对于scale更敏感，加了40个白噪声predictor时，orthogonalized sampler要多跑20倍的时间。解决这个问题的一个策略是对于large-p，把<span class="math inline">\(\beta\)</span>分成两部分，一个是两两不怎么相关的predictor，一个是有复杂相关关系的结构，第一个则每次更新一个，第二个几何则应用orthogonalizing transformation。</p>
+</div>
+</div>
+<div id="examples" class="section level2">
+<h2><span class="header-section-number">9.5</span> Examples</h2>
+<div id="example1prediction-along-the-solution-path" class="section level3">
+<h3><span class="header-section-number">9.5.1</span> Example1:Prediction along the solution path</h3>
+<p>The solution path is indexed by <span class="math inline">\(s=\left\|\hat{\beta}_{\mathrm{L}}(\lambda)\right\|_{1} /\left\|\hat{\beta}_{\mathrm{OLS}}\right\|_{1} \in[0,1]\)</span> corresponding to the fraction of the <span class="math inline">\(L_1\)</span> norm of the least-squares estimate represnete by the lasso estimate at <span class="math inline">\(\lambda\)</span>.</p>
+<blockquote>
+<p>所以从这段来看The solution path就是那个关于latent variable<span class="math inline">\(\lambda\)</span>的图上的solution</p>
+</blockquote>
+<p>Large values of <span class="math inline">\(\lambda\)</span> represent high shrinkage and hence correspond to small values of <span class="math inline">\(s\)</span></p>
+<p>Along the path at <span class="math inline">\(l=1,...,50\)</span>, evenly space values in <span class="math inline">\([0,1]\)</span>, the corresponding penalty parameters <span class="math inline">\(\lambda_l\)</span> were determined. The lasso estimate at each value of <span class="math inline">\(\lambda_l\)</span> corresponds to the mode of the posterior distribution under piror with <span class="math inline">\(\tau=\lambda_{l} /\left(2 \sigma^{2}\right)\)</span>. Where <span class="math inline">\(\sigma^2\)</span> was fixed at an estimate based on a least-squares fit of the full model.</p>
+</div>
+<div id="example2-prediction-when-modelling-lambda" class="section level3">
+<h3><span class="header-section-number">9.5.2</span> Example2: Prediction when modelling <span class="math inline">\(\lambda\)</span></h3>
+<p>Several methods for choosing <span class="math inline">\(\lambda\)</span>:</p>
+<ul>
+<li>K-fold and generalized cross-validation</li>
+<li><span class="math inline">\(C_p\)</span>-type selection</li>
+<li>Empirical Bayes approach.</li>
+</ul>
+<p>Using 10-fold crossvalidation on the training data. Prediction error was calculated using the test data.</p>
+<p>We repeated this procedure T=10000 times.</p>
+<blockquote>
+<p>所以每次Bayes抽100000次，然后重复这个过程在10-fold cv，所以是10^6,然后再反复repeat 10000次，所以要重复10^10次抽样？</p>
+</blockquote>
+</div>
+</div>
+<div id="discussion" class="section level2">
+<h2><span class="header-section-number">9.6</span> Discussion</h2>
+<ul>
+<li>Better than standard lasso.</li>
+<li>Similar result</li>
+<li>Reduction in average prediction error of 16%,36%,19%</li>
+</ul>
+<p><a href="https://www.asc.ohio-state.edu/hans.11/software/">Software</a></p>
+
 </div>
 </div>
 <h3>References</h3>
