@@ -1,0 +1,101 @@
+# Bayesian analysis of joint mean and covariance models for longitudinal data
+
+[@Xu:2014gs]
+
+## Abstract
+Use MCD to within-subject covariance matrix.
+Propose a fully Bayesian inference for joint mean and covariance model.
+Combines the Gibbs sampler and Metropolis-Hastings.
+
+## Introduction
+
+> Mao and Zhu 得看一眼，还有D.K. Xu, Z.Z. Zhang, and L.C. Wu, Joint variable selection of mean-covariance model for longitudinal data, Open Journal of Statistics
+ 以上格式是懒得下载papers里了，以后再弄，不想打断思路
+[11] T.I.LinandW.L.Wang,Bayesianinferenceinjointmodellingoflocationandscaleparametersofthetdistribution for longitudinal data
+
+proposed a fully Bayesian inference for semiparametric joint mean and variance models on the basis of B-spline approximation of nonparametric omponents.
+
+This paper extend [@Cepeda:2000vz] and Lin and Wang to fit JMCM.
+Reason:
+- It allows the use of genuine prior information for achieving better results
+- Sampling based Bayesian methods do not depend on asymptotic theory, give more reliable results with small sample sizes
+
+> 这个没懂，基于样本的贝叶斯方法不依赖渐进理论？
+
+- Provides a whole posterior distribution for the parameters of interest, from which different estimates.
+
+Bayesian approach to jmcm is developed based on the hybrid algorithms: combining Gibbs sampler and MH algorithm.
+
+
+## Joint mean and covariance models
+> 日常的自回归形式
+
+$$
+Y_{i j}-\mu_{i j}=\sum_{k=1}^{j-1} l_{i j k} \varepsilon_{i k}+\varepsilon_{i j}, \quad j=2, \ldots, m_{i}
+$$
+
+> 日常的三套方程
+
+$$
+g\left(\mu_{i j}\right)=X_{i j}^{\mathrm{T}} \beta, \quad l_{i j k}=Z_{i j k}^{\mathrm{T}} \gamma, \quad \log \left(\sigma_{i j}^{2}\right)=H_{i j}^{\mathrm{T}} \lambda
+$$
+
+> 日常的log-likelihood
+
+$$
+\begin{aligned} \ell(\theta | Y, X, Z, H) &=-\frac{1}{2} \sum_{i=1}^{n} \log \left(\left|\Sigma_{i}\right|\right)-\frac{1}{2} \sum_{i=1}^{n}\left(Y_{i}-\mu_{i}\right)^{\mathrm{T}} \Sigma_{i}^{-1}\left(Y_{i}-\mu_{i}\right) \\ &=-\frac{1}{2} \sum_{i=1}^{n} \log \left(\left|D_{i}\right|\right)-\frac{1}{2} \sum_{i=1}^{n} \varepsilon_{i}^{\mathrm{T}} D_{i}^{-1} \varepsilon_{i} \end{aligned}
+$$
+
+## Bayesian analysis of JMVMs(jmcm)
+
+### Prior
+
+$$
+\beta \sim N\left(\beta_{0}, \Sigma_{\beta}\right), \gamma \sim N\left(\gamma_{0}, \Sigma_{\gamma}\right),\lambda \sim N\left(\lambda_{0}, \Sigma_{\lambda}\right)
+$$
+
+### Gibbs sampling and conditional distribution
+
+- Sampling $\beta$
+$$
+\begin{array}{l}{p\left(\beta | Y, X, Z, H, \gamma^{(l)}, \lambda^{(l)}\right)} \\ {\propto \exp \left\{-\frac{1}{2} \sum_{i=1}^{n}\left(Y_{i}-\mu_{i}\right)^{\mathrm{T}} \Sigma_{i}^{(l)-1}\left(Y_{i}-\mu_{i}\right)-\frac{1}{2}\left(\beta-\mu_{\beta}\right)^{\mathrm{T}} \Sigma_{\beta}^{-1}\left(\beta-\mu_{\beta}\right)\right\}}\end{array}
+$$
+with 
+$$
+\beta | Y, X, Z, H, \gamma^{(l)}, \lambda^{(l)} \sim N\left(b^{*}, B^{*}\right)
+$$
+
+where
+$$
+b^{*}=B^{*}\left(\sum_{i=1}^{n} X_{i}^{\mathrm{T}} \Sigma_{i}^{(l)^{-1}} Y_{i}+\Sigma_{\beta}^{-1} \mu_{\beta}\right) \text { and } B^{*}=\left(\Sigma_{\beta}^{-1}+\sum_{i=1}^{n} X_{i}^{\mathrm{T}} \Sigma_{i}^{(l)^{-1}} X_{i}\right)^{-1}
+$$
+
+- Sampling $\gamma$
+
+$$
+p\left(\gamma | Y, X, Z, H, \beta^{(l+1)}, \lambda^{(l)}\right) \propto \exp \left\{-\frac{1}{2} \sum_{i=1}^{n} \varepsilon_{i}^{\mathrm{T}} D_{i}^{(l)-1} \varepsilon_{i}-\frac{1}{2}\left(\gamma-\mu_{\gamma}\right)^{\mathrm{T}} \Sigma_{\gamma}^{-1}\left(\gamma-\mu_{\gamma}\right)\right\}
+$$
+
+
+- Sampling $\lambda$
+$$
+\begin{array}{l}{p\left(\lambda | Y, X, Z, H, \beta^{(l+1)}, \gamma^{(l+1)}\right)} \\ {\quad \propto \exp \left\{-\frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{m_{i}} H_{i j}^{\mathrm{T}} \lambda-\frac{1}{2} \sum_{i=1}^{n} \varepsilon_{i}^{(l+1) \mathrm{T}} D_{i}^{-1} \varepsilon_{i}^{(l+1)}-\frac{1}{2}\left(\lambda-\mu_{\lambda}\right)^{\mathrm{T}} \Sigma_{\lambda}^{-1}\left(\lambda-\mu_{\lambda}\right)\right\}}\end{array}
+$$
+
+MH update process:
+
+proposal:
+$N\left(\beta^{(l)}, \sigma_{\beta}^{2} \Omega_{\beta}^{-1}\right), N\left(\gamma^{(l)}, \sigma_{\gamma}^{2} \Omega_{\gamma}^{-1}\right) \text { and } N\left(\lambda^{(l)}, \sigma_{\lambda}^{2} \Omega_{\lambda}^{-1}\right)$. with
+
+$$
+\begin{array}{l}{\Omega_{\beta}=\Sigma_{\beta}^{-1}+\sum_{i=1}^{n} X_{i}^{\mathrm{T}} \Delta_{i} \Sigma_{i}^{-1} \Delta_{i} X_{i}} \\ {\Omega_{\gamma}=\Sigma_{\gamma}^{-1}+\sum_{i=1}^{n} \frac{\partial \varepsilon_{i}^{\mathrm{T}}}{\partial \gamma} D_{i}^{-1} \frac{\partial \varepsilon_{i}}{\partial \gamma}} \\ {\Omega_{\lambda}=\Sigma_{\lambda}^{-1}+\frac{1}{2} \sum_{i=1}^{n} H_{i} H_{i}^{\mathrm{T}}}\end{array}
+$$
+
+> 基本上没啥新东西值得借鉴，除了这块很诡异的proposal的形式，咋还求上导数了呢，这样会好很多么。哦对了还可以对非Normal data也成立，不过大部分东西都用不了了。
+
+
+
+
+
+
+
