@@ -25,7 +25,7 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-04-13">
+<meta name="date" content="2019-04-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="bayesian-analysis-of-joint-mean-and-covariance-models-for-longitudinal-data.html">
-<link rel="next" href="references.html">
+<link rel="next" href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,69 @@
 
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -175,6 +238,7 @@
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data.html"><a href="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data.html#mcmc-sampling"><i class="fa fa-check"></i><b>10.4</b> MCMC Sampling</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><i class="fa fa-check"></i><b>11</b> Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -294,7 +358,7 @@ and
 <p>According to the standard Bayesian theory, we have</p>
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-1" class="theorem"><strong>Theorem 10.1  </strong></span>Let the Bayesian estimation of <span class="math inline">\(\left(\beta, \psi_{0}, \gamma, \lambda, \psi_{1}\right)\)</span> be the mean of posterior distributions. Then the resultant estimators are known as the minimum mean square error estimators.
+<span id="thm:unnamed-chunk-10" class="theorem"><strong>Theorem 10.1  </strong></span>Let the Bayesian estimation of <span class="math inline">\(\left(\beta, \psi_{0}, \gamma, \lambda, \psi_{1}\right)\)</span> be the mean of posterior distributions. Then the resultant estimators are known as the minimum mean square error estimators.
 </div>
 
 <p>These final two full conditional posterior ditributions are analytically intractable, then we use Metropolis-Hastings instead. Empirical evidence suggests that the more it interrelates with the objective distribution the faster it converges. This paper use the methodologyproposed by [Gamerman,D. 1997 Sampling from the posterior distribution in generalized linear mixed models.] Using fisher scoring algorithm to construct suitable proposals as those of Cepeda and Gamerman. This algorithm requires working variables to approximate transformation of the observations aroune the current parameter estimates. At the step of <span class="math inline">\(\lambda\)</span> iteration, <span class="math inline">\(\beta,\gamma\)</span> and <span class="math inline">\(f_k\)</span> are fixed at their current values <span class="math inline">\(\beta^{(c)}, \lambda^{(c)} \text { and } f_{k}^{(c)}\)</span>, given the working observation model is
@@ -345,7 +409,7 @@ v_{b}=2^{-1} V_{b} \sum_{i=1}^{m} B_{1 i}^{\prime}\left(\tilde{Y}_{i}-Z_{i} \lam
 而且这让人感觉再推一步就到 Hamiltonian Monte Carlo 的感觉了，毕竟都用了一二阶导数的信息来着。。。需要再把这个proposal的形式推一下</p>
 </blockquote>
 <blockquote>
-<p>总结一下，需要注意的有几点。1，Bayes下的B-spline，也就是P-spline那篇值得推一下。以及其中包括的B spline 参数的先验那个 first order random walk prior和最后得到的那个类似于Normal的形式。2，对于MH算法，那个基于Proposed by Gamerman 的基于Fisher scoring algorithm的构造proposal的方法。-3，文中写出注意的那个算法好像没啥新鲜的，就是一个一个抽，因为Gibbs。而因为之前几个参数有解析分布，可以直接抽，所以号称“block”抽，其实是一样的，还是顺着抽的思路，新<span class="math inline">\(\beta\)</span>，基于<span class="math inline">\(\beta\)</span>抽<span class="math inline">\(\psi_0\)</span>,基于<span class="math inline">\(\beta,\psi_0\)</span>抽<span class="math inline">\(\gamma\)</span>….. 2+,那个proposal的效果意外的好。</p>
+<p>总结一下，需要注意的有几点。1，Bayes下的B-spline，也就是P-spline那篇值得推一下。以及其中包括的B spline 参数的先验那个 first order random walk prior和最后得到的那个类似于Normal的形式。2，对于MH算法，那个基于Proposed by Gamerman 的基于Fisher scoring algorithm的构造proposal的方法。-3，文中写出注意的那个算法好像没啥新鲜的，就是一个一个抽，因为Gibbs。而因为之前几个参数有解析分布，可以直接抽，所以号称“block”抽，其实是一样的，还是顺着抽的思路，新<span class="math inline">\(\beta\)</span>，基于<span class="math inline">\(\beta\)</span>抽<span class="math inline">\(\psi_0\)</span>,基于<span class="math inline">\(\beta,\psi_0\)</span>抽<span class="math inline">\(\gamma\)</span>….. 2+,那个proposal的效果意外的好。1+,选knots那块咋搞定的还没懂。</p>
 </blockquote>
 
 </div>
@@ -365,7 +429,7 @@ v_{b}=2^{-1} V_{b} \sum_{i=1}^{m} B_{1 i}^{\prime}\left(\tilde{Y}_{i}-Z_{i} \lam
         </div>
       </div>
 <a href="bayesian-analysis-of-joint-mean-and-covariance-models-for-longitudinal-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

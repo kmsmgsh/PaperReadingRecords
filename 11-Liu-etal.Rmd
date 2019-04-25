@@ -182,7 +182,7 @@ knitr::include_graphics(rep("chp11/Figure2.png", 1))
 > 从figure2来看，看来这种基于fishing score method的方法收敛情况意外的好？
 而且这让人感觉再推一步就到 Hamiltonian Monte Carlo 的感觉了，毕竟都用了一二阶导数的信息来着。。。需要再把这个proposal的形式推一下
 
-> 总结一下，需要注意的有几点。1，Bayes下的B-spline，也就是P-spline那篇值得推一下。以及其中包括的B spline 参数的先验那个 first order random walk prior和最后得到的那个类似于Normal的形式。2，对于MH算法，那个基于Proposed by Gamerman 的基于Fisher scoring algorithm的构造proposal的方法。-3，文中写出注意的那个算法好像没啥新鲜的，就是一个一个抽，因为Gibbs。而因为之前几个参数有解析分布，可以直接抽，所以号称"block"抽，其实是一样的，还是顺着抽的思路，新$\beta$，基于$\beta$抽$\psi_0$,基于$\beta,\psi_0$抽$\gamma$..... 2+,那个proposal的效果意外的好。
+> 总结一下，需要注意的有几点。1，Bayes下的B-spline，也就是P-spline那篇值得推一下。以及其中包括的B spline 参数的先验那个 first order random walk prior和最后得到的那个类似于Normal的形式。2，对于MH算法，那个基于Proposed by Gamerman 的基于Fisher scoring algorithm的构造proposal的方法。-3，文中写出注意的那个算法好像没啥新鲜的，就是一个一个抽，因为Gibbs。而因为之前几个参数有解析分布，可以直接抽，所以号称"block"抽，其实是一样的，还是顺着抽的思路，新$\beta$，基于$\beta$抽$\psi_0$,基于$\beta,\psi_0$抽$\gamma$..... 2+,那个proposal的效果意外的好。1+,选knots那块咋搞定的还没懂。
 
 
 

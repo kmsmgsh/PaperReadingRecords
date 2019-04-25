@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 5 Sparse inverse covariance estimation with the graphical lasso | A paper reading record</title>
+  <title>Paper 11 Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 5 Sparse inverse covariance estimation with the graphical lasso | A paper reading record" />
+  <meta property="og:title" content="Paper 11 Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 5 Sparse inverse covariance estimation with the graphical lasso | A paper reading record" />
+  <meta name="twitter:title" content="Paper 11 Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-04-14">
+<meta name="date" content="2019-04-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html">
-<link rel="next" href="a-bayesian-lasso-via-reversible-jump-mcmc.html">
+<link rel="prev" href="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,69 +50,6 @@
 
 
 
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -238,7 +175,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data.html"><a href="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data.html#mcmc-sampling"><i class="fa fa-check"></i><b>10.4</b> MCMC Sampling</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><i class="fa fa-check"></i><b>11</b> Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix</a></li>
+<li class="chapter" data-level="11" data-path="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><i class="fa fa-check"></i><b>11</b> Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix</a><ul>
+<li class="chapter" data-level="11.1" data-path="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html#abstract-7"><i class="fa fa-check"></i><b>11.1</b> Abstract</a></li>
+<li class="chapter" data-level="11.2" data-path="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html#introduction-9"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
+<li class="chapter" data-level="11.3" data-path="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html#the-model"><i class="fa fa-check"></i><b>11.3</b> The model</a></li>
+<li class="chapter" data-level="11.4" data-path="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html#bayesian-methodology"><i class="fa fa-check"></i><b>11.4</b> Bayesian Methodology</a></li>
+<li class="chapter" data-level="11.5" data-path="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html"><a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html#centering-and-order-methods"><i class="fa fa-check"></i><b>11.5</b> Centering and Order Methods</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -260,102 +203,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sparse-inverse-covariance-estimation-with-the-graphical-lasso" class="section level1">
-<h1><span class="header-section-number">Paper 5</span> Sparse inverse covariance estimation with the graphical lasso</h1>
-<p>by <span class="citation">(Friedman, Hastie, and Biostatistics <a href="#ref-Friedman:2008tb">2008</a>)</span></p>
-<div id="summary" class="section level2">
-<h2><span class="header-section-number">5.1</span> Summary</h2>
-<p>Estimating sparse graph by lasso penalty to precision matrix.
-Using coordinate descent procedure for the lasso-&gt; <em>graphical lasso</em>, which is remarkably fast.</p>
-</div>
-<div id="introduction-4" class="section level2">
-<h2><span class="header-section-number">5.2</span> Introduction</h2>
-<p>Estimation of sparse undirected graphical models through <span class="math inline">\(L_1\)</span> regularization. Basic model: observations follows <span class="math inline">\(MVN(\mu,\Sigma)\)</span>. An important result in graphical model is that if the <span class="math inline">\(ij\)</span> th component of <span class="math inline">\(\Sigma^{-1}\)</span> is 0, <span class="math inline">\(\sigma_{ij}=0\)</span>, then the variable <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are conditionally independent condition on other variables. This is the reason to impose penalty to precision matrix <span class="math inline">\(\Sigma^{-1}\)</span> to increase its sparsity.</p>
-<p><span class="citation">(Meinshausen and Bühlmann <a href="#ref-Meinshausen:2006fu">2006</a>)</span> take a simple approach: estimate sparse graphical model by fitting lasso to each variable. The correspond <span class="math inline">\(\hat\Sigma_{ij}^{-1}\)</span> is nonzero if variable estiamted coefficient of variable <span class="math inline">\(i\)</span> on <span class="math inline">\(j\)</span> or <span class="math inline">\(j\)</span> on <span class="math inline">\(i\)</span> is nonzero.(They use AND rather than OR). Then they showed method is asymptotically consistenctly estimates of <span class="math inline">\(\Sigma^{-1}\)</span> for nonzero elements.</p>
-<p>Others propose exact maximization of the <span class="math inline">\(L_1\)</span> penalized loglikelihood,
-some adapt interior-point optimization methods, and simpler approach to <span class="citation">(Meinshausen and Bühlmann <a href="#ref-Meinshausen:2006fu">2006</a>)</span>.</p>
-<p>This paper use blockwise coordinate descent approach in (Banerjee,et.al. 2007) at launch point, and propose a new algorithm for the exat problem. It also bridge the original idea and the exact problem.</p>
-</div>
-<div id="the-proposed-model" class="section level2">
-<h2><span class="header-section-number">5.3</span> The Proposed Model</h2>
-<p>Assume we have N <span class="math inline">\(MVN(\mu,\Sigma)\)</span> observations with dimension p. Let <span class="math inline">\(\Theta=\Sigma^{-1}\)</span>, and S be the empirical covariance matrix, the problem is maximize the penalized log-likelihood
-<span class="math display">\[
-\log \operatorname{det} \Theta-\operatorname{tr}(S \Theta)-\rho\|\Theta\|_{1}
-\]</span>
-over the nonnegative definite matrices <span class="math inline">\(\Theta\)</span>, <span class="citation">(Yuan and Lin <a href="#ref-Yuan:2007kk">2007</a>)</span> solves this problemusing the interior-point method for the “maxdet” problem. Banerjee and others (2007) use another framework for the optimization which impetus for this paper work.</p>
-<p>They showed that the problem of penalized log-likelihood is convex and estimation of <span class="math inline">\(\Sigma\)</span> as
-W. which is</p>
-<p><span class="math display">\[
-W=\left( \begin{array}{cc}{W_{11}} &amp; {w_{12}} \\ {w_{12}^{T}} &amp; {w_{22}}\end{array}\right), \quad S=\left( \begin{array}{cc}{S_{11}} &amp; {s_{12}} \\ {s_{12}^{T}} &amp; {s_{22}}\end{array}\right)
-\]</span>
-solving the problem by optimizing over each row and corresponding column of W in a block coordinate descent fashion. The solution for <span class="math inline">\(w_{12}\)</span> satisfies
-<span class="math display">\[
-w_{12}=\operatorname{argmin}_{y}\left\{y^{T} W_{11}^{-1} y :\left\|y-s_{12}\right\|_{\infty} \leqslant \rho\right\}
-\]</span>
-this is box-constrained quadratic program(QP) solve using interior-point procedure.</p>
+<div id="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix" class="section level1">
+<h1><span class="header-section-number">Paper 11</span> Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix</h1>
 <blockquote>
-<p>If this procedure is initialized with a positive definite matrix, they show that the iterates from this procedure remains positive definite and invertible, even if p&gt;N</p>
+<p>这三篇应该都是很类似的，所以会比较简短。</p>
 </blockquote>
-<p>Using convex duality, solve <span class="math inline">\(w_{12}\)</span> is equivalent to solving the dual problem</p>
-<p><span class="math display" id="eq:2-4">\[
-\begin{equation} 
-\min _{\beta}\left\{\frac{1}{2}\left\|W_{11}^{1 / 2} \beta-b\right\|^{2}+\rho\|\beta\|_{1}\right\}
-\tag{5.1}
-\end{equation} 
-\]</span>
-where <span class="math inline">\(b=W_{11}^{-1 / 2} s_{12}\)</span>.
-Expanding <span class="math inline">\(W \Theta=I\)</span> as</p>
+<p><span class="citation">Cepeda and Gamerman (<a href="#ref-Cepeda:2004uw">2004</a>)</span></p>
+<div id="abstract-7" class="section level2">
+<h2><span class="header-section-number">11.1</span> Abstract</h2>
+<p>Present the Bayesian approach used to fit the models, based on a generalization of the Metropolis-Hastings algorithm of <span class="citation">(Cepeda and Gamerman <a href="#ref-Cepeda:2000vz">2000</a>)</span>. Real data is about growth and development of a group of deaf childeren. Then concluded with a few proposed extensions.</p>
+</div>
+<div id="introduction-9" class="section level2">
+<h2><span class="header-section-number">11.2</span> Introduction</h2>
+<p>Since the covariance matrix structure does not depend on the ordering of observations we can apply this model for the variance-covariance matrix in the analysis of spatial data.</p>
+<p>However, this parameters do not have a practical interpretation, but estimation of the covariance matrix may lead to better estimates of the parameters of the mean model.</p>
+<p>This paper will follow the modelling strategy proposed by Pourahmadi 1999, with similar approach presented by Pourhmadi and Daniels (2002).</p>
+<p>Next section will present the models and reviews some topics of ante-dependence models (Daniel那篇),used in our proposed models for the covariance matrix.
+Section 3 presented the Bayesian proposal based on Fisher scoring for the MCMC algorithm. 这个proposal后面Xu,Liu用过，效果看起来还很好的样子。</p>
+</div>
+<div id="the-model" class="section level2">
+<h2><span class="header-section-number">11.3</span> The model</h2>
+<p>Ante-dependence model:</p>
 <p><span class="math display">\[
-\left( \begin{array}{cc}{W_{11}} &amp; {w_{12}} \\ {w_{12}^{T}} &amp; {w_{22}}\end{array}\right) \left( \begin{array}{ll}{\Theta_{11}} &amp; {\theta_{12}} \\ {\theta_{12}^{T}} &amp; {\theta_{22}}\end{array}\right)=\left( \begin{array}{cc}{I} &amp; {0} \\ {0^{T}} &amp; {1}\end{array}\right)
+Y_{i}-\mu_{i}=\sum_{j=1}^{i-1} \phi_{i j}\left(Y_{j}-\mu_{j}\right)+v_{i}, \quad v_{i} \sim N\left(0, \sigma_{i}^{2}\right), \quad i=1, \ldots, n
+\]</span></p>
+<p>Then can be re-write as</p>
+<p><span class="math display">\[
+v=T(Y-\mu), \quad v \sim N(0, D) \quad \text { and } \quad D=\operatorname{diag}\left(\sigma_{i}^{2}\right)
 \]</span>
-Now the subgradient equation for maximization the log-likelihood is
+<span class="math inline">\(T=(t_{ij})\)</span> with
 <span class="math display">\[
-W-S-\rho \cdot \Gamma=0
+t_{i j}=\left\{\begin{array}{cl}{1} &amp; {\text { if } j=i} \\ {-\phi_{i j}} &amp; {\text { if } j&lt;i} \\ {0} &amp; {\text { elsewhere }}\end{array}\right.
 \]</span>
-by <em>convex optimization</em> Boyd 2004.</p>
-<p>The computation omit…</p>
-<p>…
-Note that solution of <span class="math inline">\(\beta\)</span> to the lasso problem <a href="sparse-inverse-covariance-estimation-with-the-graphical-lasso.html#eq:2-4">(5.1)</a> ,gives (up to a negative constant), the corresponding part of <span class="math inline">\(\Theta:\theta_{12}=-\theta_{22} \beta\)</span>.</p>
-<p>The main point of this paper:</p>
-<p><a href="sparse-inverse-covariance-estimation-with-the-graphical-lasso.html#eq:2-4">(5.1)</a> Lookslike a lasso LS problem, and the solutions <span class="math inline">\(\hat\beta\)</span> are easily seen to lasso estimates for the pth variable.</p>
-<p>..</p>
-<p>..</p>
-<p>And this paragraph is extreme important</p>
-<blockquote>
-<p>Now to the main point of this paper. Problem (2.4) looks like a lasso (L1-regularized) least-squares problem. In fact if <span class="math inline">\(W_{11}\)</span> = <span class="math inline">\(S_{11}\)</span>, then the solutions βˆ are easily seen to equal the lasso estimates for the pth variable on the others and hence related to the Meinshausen and Bu ̈hlmann (2006) proposal. As pointed out by Banerjee and others (2007),<span class="math inline">\(W_{11} \neq S_{11}\)</span> in general, and hence, the Meinshausen and Bu ̈hlmann (2006) approach does not yield the maximum likelihood estimator. They point out that their blockwise interior point procedure is equivalent to recursively solving and updating the lasso problem (2.4), but do not pursue this approach. We do, to great advantage, because fast coordinate descent algorithms (Friedman and others, 2007) make solution of the lasso problem very attractive.</p>
-</blockquote>
-<p>…
-然后时间不够看不懂了。</p>
-<p>这篇的要点：</p>
-<ul>
-<li>Meinshausen and Bu ̈hlmann (2006) 的思路（在introduction中），</li>
-<li>对于penalized loglikelihood的几个解决方案，interior-point optimization methods。</li>
-<li>Block-wise coordinate descent approach</li>
-<li>duality convex的那个式子</li>
-<li>Boyd 2004 p641 提供的subgradient equation for MLE.</li>
-</ul>
-<p>没看懂的</p>
-<ul>
-<li>Graphical lasso是通过哪一点作为初始然后优化了结论？</li>
-<li>优化过程的推导</li>
-<li>几个等价性的问题。</li>
-</ul>
-<p>没看的</p>
-<p>时间比较，实证分析，公式推演（基本上其实这篇文章就没看？</p>
-<p>但是只花了2个多小时来着。</p>
+and
+<span class="math display">\[
+\operatorname{Var}(v)=D=T \operatorname{Var}(Y-\mu) T^{\prime}=T \Sigma T^{\prime}
+\]</span>
+然后有
+<span class="math display">\[
+\tilde{Y}=\left(I_{n}-T\right) \tilde{Y}+v
+\]</span>
+以及
+<span class="math display">\[
+\phi_{i j}=w_{i j}^{\prime} \lambda, \quad 1 \leq j&lt;i \leq n
+\]</span>
+Since we have <span class="math inline">\(\phi_{i j}=\Sigma_{l=1}^{r} w_{i j, l} \lambda_{l}\)</span>, the matrix <span class="math inline">\(I_{n}-T\)</span> can be expressed as the linear combination
+<span class="math display">\[
+I_{n}-T=\lambda_{1} W_{1}+\ldots+\lambda_{r} W_{r}
+\]</span>
+As a consequence, model can be expressed as
+<span class="math display">\[
+\begin{aligned} \tilde{Y} &amp;=\lambda_{1} W_{1} \tilde{Y}+\ldots+\lambda_{r} W_{r} \tilde{Y}+v \\ &amp;=\lambda_{1} V_{1}+\ldots+\lambda_{r} V_{r}+v \\ &amp;=V \lambda+v \end{aligned}
+\]</span>
+That is, <span class="math inline">\(\tilde{Y} \sim N(V \lambda, D)\)</span>.</p>
+<p>Then the full model is
+<span class="math display">\[
+h\left(\mu_{i}\right)=x_{i}^{\prime} \beta, \quad g\left(\sigma_{i}^{2}\right)=z_{i}^{\prime} \gamma, \quad f\left(\phi_{i j}\right)=w_{i j}^{\prime} \lambda
+\]</span></p>
+</div>
+<div id="bayesian-methodology" class="section level2">
+<h2><span class="header-section-number">11.4</span> Bayesian Methodology</h2>
+<p>The likelihood function is given by</p>
+<p><span class="math display">\[
+L(\beta, \gamma, \lambda | \mathrm{Y}) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(Y-\mu)^{\prime} \Sigma^{-1}(Y-\mu)\right\}
+\]</span>
+since <span class="math inline">\(|\Sigma|=\left|T^{\prime}\right||D||T|=|D|\)</span>.</p>
+<p>A prior must be assigned to obtain the posterior distribution. For simplicity, assume <span class="math inline">\(\theta \sim N\left(\theta_{0}, \Sigma_{0}\right)\)</span> where <span class="math inline">\(\theta_{0}=\left(b_{0}, g_{0}, l_{0}\right)^{\prime}\)</span>. The values of <span class="math inline">\((b,g,l)\)</span> and <span class="math inline">\((B,G,L)\)</span> can be evaluated from <span class="math inline">\(\theta_0\)</span> and <span class="math inline">\(\Sigma_0\)</span>.</p>
+<p>The posterior is
+<span class="math display">\[
+\pi(\beta, \gamma, \lambda) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(Y-X \beta)^{\prime} \Sigma^{-1}(Y-X \beta)-\frac{1}{2}\left(\theta-\theta_{0}\right)^{\prime} \Sigma_{0}^{-1}\left(\theta-\theta_{0}\right)\right\}
+\]</span></p>
+<p><span class="math display">\[
+(\beta | \gamma, \lambda, Y) \sim N\left(b^{*}, B^{*}\right)
+\]</span></p>
+<p><span class="math display">\[
+(\beta | \gamma, \lambda, Y) \sim N\left(b^{*}, B^{*}\right)
+\]</span>
+Let
+<span class="math display">\[
+Q(Y)=\tilde{Y}^{\prime} T^{\prime} D^{-1} T \tilde{Y}=(\tilde{Y}-V \lambda)^{\prime} D^{-1}(\tilde{Y}-V \lambda)
+\]</span></p>
+<p>Therefore, it is easy to obtain that</p>
+<p><span class="math display">\[
+(\lambda | \beta, \gamma, Y) \sim N\left(l^{*}, L^{*}\right)
+\]</span>
+with <span class="math inline">\(l^{*}=L^{*}\left(L^{-1} l+V^{\prime} D^{-1} \tilde{Y}\right)\)</span> and <span class="math inline">\(L^{*}=\left(L^{-1}+V^{\prime} D^{-1} V\right)^{-1}\)</span>.</p>
+<p>The full conditional distribution of <span class="math inline">\(\gamma\)</span> given by
+<span class="math display">\[
+\pi(\gamma | \beta, \lambda) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(\tilde{Y}-V \lambda)^{\prime} D^{-1}(\tilde{Y}-V \lambda)-\frac{1}{2}(\gamma-g)^{\prime} G^{-1}(\gamma-g)\right\}
+\]</span>
+is intractable analytically and not easily generated from, then construct suitable proposals for a MH step.</p>
+</div>
+<div id="centering-and-order-methods" class="section level2">
+<h2><span class="header-section-number">11.5</span> Centering and Order Methods</h2>
 
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-Friedman:2008tb">
-<p>Friedman, J, T Hastie, and R Tibshirani Biostatistics. 2008. “Sparse inverse covariance estimation with the graphical lasso.” <em>Biostatistics</em>.</p>
+<div id="ref-Cepeda:2004uw">
+<p>Cepeda, Edilberto, and Dani Gamerman. 2004. “Bayesian modeling of joint regressions for the mean and covariance matrix.” <em>Biometrical Journal</em>, April.</p>
 </div>
-<div id="ref-Meinshausen:2006fu">
-<p>Meinshausen, Nicolai, and Peter Bühlmann. 2006. “High-dimensional graphs and variable selection with the lasso.” <em>The Annals of Statistics</em> 34 (3): 1436–62.</p>
-</div>
-<div id="ref-Yuan:2007kk">
-<p>Yuan, Ming, and Y Lin. 2007. “Model selection and estimation in the Gaussian graphical model.” <em>Biometrika</em> 94 (1): 19–35.</p>
+<div id="ref-Cepeda:2000vz">
+<p>Cepeda, Edilberto, and Dani Gamerman. 2000. “Bayesian modeling of variance heterogeneity in normal regression models.” <em>Brazilian Journal of Probability and Statistics</em> 14 (2): 207–21.</p>
 </div>
 </div>
             </section>
@@ -363,8 +313,8 @@ Note that solution of <span class="math inline">\(\beta\)</span> to the lasso pr
           </div>
         </div>
       </div>
-<a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-bayesian-lasso-via-reversible-jump-mcmc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

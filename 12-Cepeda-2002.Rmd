@@ -1,0 +1,114 @@
+# Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix
+
+> 这三篇应该都是很类似的，所以会比较简短。
+
+@Cepeda:2004uw
+
+## Abstract
+Present the Bayesian approach used to fit the models, based on a generalization of the Metropolis-Hastings algorithm of [@Cepeda:2000vz]. Real data is about growth and development of a group of deaf childeren. Then concluded with a few proposed extensions.
+
+## Introduction
+
+Since the covariance matrix structure does not depend on the ordering of observations we can apply this model for the variance-covariance matrix in the analysis of spatial data. 
+
+However, this parameters do not have a practical interpretation, but estimation of the covariance matrix may lead to better estimates of the parameters of the mean model.
+
+This paper will follow the modelling strategy proposed by Pourahmadi 1999, with similar approach presented by Pourhmadi and Daniels (2002).
+
+Next section will present the models and reviews some topics of ante-dependence models (Daniel那篇),used in our proposed models for the covariance matrix.
+Section 3 presented the Bayesian proposal based on Fisher scoring for the MCMC algorithm. 这个proposal后面Xu,Liu用过，效果看起来还很好的样子。
+
+## The model
+
+
+Ante-dependence model:
+
+$$
+Y_{i}-\mu_{i}=\sum_{j=1}^{i-1} \phi_{i j}\left(Y_{j}-\mu_{j}\right)+v_{i}, \quad v_{i} \sim N\left(0, \sigma_{i}^{2}\right), \quad i=1, \ldots, n
+$$
+
+Then can be re-write as
+
+$$
+v=T(Y-\mu), \quad v \sim N(0, D) \quad \text { and } \quad D=\operatorname{diag}\left(\sigma_{i}^{2}\right)
+$$
+$T=(t_{ij})$ with
+$$
+t_{i j}=\left\{\begin{array}{cl}{1} & {\text { if } j=i} \\ {-\phi_{i j}} & {\text { if } j<i} \\ {0} & {\text { elsewhere }}\end{array}\right.
+$$
+and
+$$
+\operatorname{Var}(v)=D=T \operatorname{Var}(Y-\mu) T^{\prime}=T \Sigma T^{\prime}
+$$
+然后有
+$$
+\tilde{Y}=\left(I_{n}-T\right) \tilde{Y}+v
+$$
+以及
+$$
+\phi_{i j}=w_{i j}^{\prime} \lambda, \quad 1 \leq j<i \leq n
+$$
+Since we have $\phi_{i j}=\Sigma_{l=1}^{r} w_{i j, l} \lambda_{l}$, the matrix $I_{n}-T$ can be expressed as the linear combination
+$$
+I_{n}-T=\lambda_{1} W_{1}+\ldots+\lambda_{r} W_{r}
+$$
+As a consequence, model can be expressed as
+$$
+\begin{aligned} \tilde{Y} &=\lambda_{1} W_{1} \tilde{Y}+\ldots+\lambda_{r} W_{r} \tilde{Y}+v \\ &=\lambda_{1} V_{1}+\ldots+\lambda_{r} V_{r}+v \\ &=V \lambda+v \end{aligned}
+$$
+That is, $\tilde{Y} \sim N(V \lambda, D)$.
+
+Then the full model is 
+$$
+h\left(\mu_{i}\right)=x_{i}^{\prime} \beta, \quad g\left(\sigma_{i}^{2}\right)=z_{i}^{\prime} \gamma, \quad f\left(\phi_{i j}\right)=w_{i j}^{\prime} \lambda
+$$
+
+## Bayesian Methodology
+
+The likelihood function is given by
+
+$$
+L(\beta, \gamma, \lambda | \mathrm{Y}) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(Y-\mu)^{\prime} \Sigma^{-1}(Y-\mu)\right\}
+$$
+since $|\Sigma|=\left|T^{\prime}\right||D||T|=|D|$.
+
+A prior must be assigned to obtain the posterior distribution. For simplicity, assume $\theta \sim N\left(\theta_{0}, \Sigma_{0}\right)$ where $\theta_{0}=\left(b_{0}, g_{0}, l_{0}\right)^{\prime}$. The values of $(b,g,l)$ and $(B,G,L)$ can be evaluated from $\theta_0$ and $\Sigma_0$.
+
+The posterior is 
+$$
+\pi(\beta, \gamma, \lambda) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(Y-X \beta)^{\prime} \Sigma^{-1}(Y-X \beta)-\frac{1}{2}\left(\theta-\theta_{0}\right)^{\prime} \Sigma_{0}^{-1}\left(\theta-\theta_{0}\right)\right\}
+$$
+
+$$
+(\beta | \gamma, \lambda, Y) \sim N\left(b^{*}, B^{*}\right)
+$$
+
+$$
+(\beta | \gamma, \lambda, Y) \sim N\left(b^{*}, B^{*}\right)
+$$
+Let
+$$
+Q(Y)=\tilde{Y}^{\prime} T^{\prime} D^{-1} T \tilde{Y}=(\tilde{Y}-V \lambda)^{\prime} D^{-1}(\tilde{Y}-V \lambda)
+$$
+
+Therefore, it is easy to obtain that
+
+$$
+(\lambda | \beta, \gamma, Y) \sim N\left(l^{*}, L^{*}\right)
+$$
+with $l^{*}=L^{*}\left(L^{-1} l+V^{\prime} D^{-1} \tilde{Y}\right)$ and $L^{*}=\left(L^{-1}+V^{\prime} D^{-1} V\right)^{-1}$. 
+
+The full conditional distribution of $\gamma$ given by
+$$
+\pi(\gamma | \beta, \lambda) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(\tilde{Y}-V \lambda)^{\prime} D^{-1}(\tilde{Y}-V \lambda)-\frac{1}{2}(\gamma-g)^{\prime} G^{-1}(\gamma-g)\right\}
+$$
+is intractable analytically and not easily generated from, then construct suitable proposals for a MH step.
+
+
+## Centering and Order Methods
+
+
+
+
+
+

@@ -9,7 +9,7 @@ Combines the Gibbs sampler and Metropolis-Hastings.
 
 ## Introduction
 
-> Mao and Zhu 得看一眼，还有D.K. Xu, Z.Z. Zhang, and L.C. Wu, Joint variable selection of mean-covariance model for longitudinal data, Open Journal of Statistics
+> [@Mao:wy] 得看一眼，还有[@Xu:2013uh]
  以上格式是懒得下载papers里了，以后再弄，不想打断思路
 [11] T.I.LinandW.L.Wang,Bayesianinferenceinjointmodellingoflocationandscaleparametersofthetdistribution for longitudinal data
 
