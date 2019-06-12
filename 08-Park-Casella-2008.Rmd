@@ -150,6 +150,11 @@ $$
 > 妈蛋没看懂这篇，要重新推一下第二节
 先跳去看看biometrika那篇看看什么情况
 
+>好多周以后我发现这篇果然很经典很短很简练但是很nb好吧
+
+appendix里面也有好多有意思的玩意：比如这段
+
+>The Monte Carlo EM method for empirical Bayes estimation of hy- perparameters proposed by Casella (2001) essentially treats the para- meters as “missing data” and then uses the EM algorithm to iteratively approximate the hyperparameters, substituting Monte Carlo estimates for any expected values that cannot be computed explicitly.
 
 
 

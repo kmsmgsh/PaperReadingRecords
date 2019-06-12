@@ -1,0 +1,95 @@
+# Homogeneity tests of covariance matrices with high-dimensional longitudinal data
+
+[@Zhong:2019wp]
+
+
+## Introduction & Background
+
+Problem: Detection and identification of changepoints among covariance of high-dimensional longitudinal data.
+
+- Number of features is greater than both sample size and the number of repeated measurements.
+
+- Under general temporal-spatial dependence.
+
+One purpose of the study was to identify which genes were gregulated by treatment. The repeated measurements enable researchers to understand gene regulation over time.
+A significant task in genomic studies is to identify gene sets with significant temporal changes.
+One application of this method is to identify gene sets with significant changes in their covariance matrices, because the covariance matrix or its inverse can be used for quantifying interaction and coregulation among genes.
+
+---
+
+Notation:
+
+$Y_{i t}=\left(Y_{i t 1}, \ldots, Y_{i t p}\right)^{\mathrm{T}}$ is a p-dimensional random vector with mean $\mu_t$ and covariance $\Sigma_t$. In the aforementioned applications, the $Y_{i t}(i=1, \ldots, n ; t=1, \ldots, T)$ represent gene expressions for p genes in a gene set measured from the ith individual at the $t$th developmental stage where n is the sample size and $T$ is the total number of finite stages. $p$ can be much larger than $n$ and $T$. 
+
+Focused question:
+Testing the homogeneity of covariance matrices:
+
+$$
+H_{0} : \Sigma_{1}=\cdots=\Sigma_{T} \quad \text { versus } \quad H_{1} : \Sigma_{k} \neq \Sigma_{l}
+$$
+for some $1 \leqslant k \neq l \leqslant T$, alternative can be written as a changepoint-type alternative:
+
+$$
+H_{1} : \Sigma_{1}=\cdots=\Sigma_{k_{1}} \neq \Sigma_{k_{1}+1}=\cdots=\Sigma_{k_{q}} \neq \Sigma_{k_{q}+1}=\cdots=\Sigma_{T}
+$$
+
+where $k_1,...,k_q$ with $1 \leqslant k_{1}<\cdots<k_{q}<T$ are unknown locations of changepoints. This is of interest because it specifies the locations of changes.
+
+Testing the homogeneity of covariance matrices is a classical problem in multivariate analysis. [__**literature**__]
+
+Likelihood ratio test, Box's M test. Resampling methods. But not work for reasons:
+
+- Require $n$ to be much larger than p
+- Only valid for independent samples without temporal dependence, which is not valid in high-dimensional longitudinal data.
+
+There are some existing methods in this testing problem. [**literature**]:
+- Testing the equality of two covariance matrices for two independent samples. [Li & Chen (2012)]
+- Test statistics for Hypothesis basedon estimators of the sum of the weighted pairwise Frobenius norm distances between any two covariance matrices. Schott(2007) & Srivastava & Yanagihara (2010)
+- Random matrix theory to test the equality of two large-dimensional covariance matrices. Zheng et al. (2015), Yang & Pan(2017).
+
+There are also similar problem in neuroscience literature but with different settings: Large-p and large T setting with $T>p$， which is different from this paper concerns: large-p, small-n, and small-T set up. 
+
+- Sieve bootstrap covariance changepoint detection method. Barnett & Onnela (2016)
+- Detecting changes in covariances by assessing the stability of multivariate kurtosis via a simulation approach.Laumann et al (2017), this method requires $T>p$ to ensure the existence of the inverse of a sample covariance matrix.
+- Aforementioned multivariate detection procedures, a marginal pairwise testing procedure was developed by Zalesky et al.(2014)
+
+> This approach relies on using a sliding window to detect changes in correlation coefficients between a pair of coordinates.
+
+No existing multivariate method can be applied directly to test for temporally dependent data in the large-p, small-n and small-T setting.
+
+In this paper, proposed a new method to deal with such problem.
+This approach takes into account both spatial and temporal dependence. Spatial dependence refers to the dependence among different components of $Y_{it}$, and temporal dependence refers to the dependence between $Y_{it}$ and $Y_{is}$ for any two time-points $t\neq s$. 
+
+This paper also proposed a method for estimating the location of changepoints $k_1,...,k_q$ among covariance matrices.
+There exists some work on identifying changepoints in high-dimensional means, but the literature for high-dimensional covariances is very small.
+
+Furthermore, this paper develop a binary segmentation procedure for identifying the locations of multiple changepoints, whose consistency is also established.
+
+
+## Basic setting 
+
+> OMG后面的公式看着就麻烦。。。。
+
+$Y_{it}=(Y_{it1},...,Y_{itp})^T$ be the observed p-dimensional random vector for the ith individual at time-point $t=1,...,T$, where $T\geq 2$ and $i=1,...,n$. Assume that $Y_{it}$ follows the model:
+$$
+Y_{i t}=\mu_{t}+\varepsilon_{i t}
+$$
+where $\mu_t$ is a p-dimensional unknown mean vector and $\varepsilon_{i t}=\left(\varepsilon_{i t 1}, \ldots, \varepsilon_{i t p}\right)^{\mathrm{T}}$ is a multivariate normally distributed random error vector with mean zero and covariance $var(\epsilon_{it})=\Sigma_{t}$. A generalization to the non-Gaussian set-up is given in the Supplementary Material. In addition, it is assumed that $\epsilon_{it}=\Gamma_tZ_i$, where $\Gamma_t$ is a $p\times m$ matrix with $m\geqslant pT$ and $Z_i$ is an m-dimensional standard multivariate normally distributed random vector, so that $cov(\epsilon_{is},\epsilon_{jt})=\Gamma_s\Gamma_t^T=C_{st}$ if $i=j\in\{1,...,n\}$ and $cov(\epsilon_{is},\epsilon_{jt})=0$ if $i\neq j$. The random errors $\left\{\varepsilon_{i t}\right\}_{i=1}^{n}$ are independent, but $\left\{\varepsilon_{i t}\right\}_{t=1}^{T}$ depend on each other. 
+
+> Of interest is to test whether any changepoints among covariance occur at some time-points $t\in \{1,..,T-1\}$. If $H_0$ is rejected, then estimate the locations of changepoints.
+
+## Homogeneity tests of covariance matrices
+
+Define a measure $D_{t}=w^{-1}(t) \sum_{s_{1}=1}^{t} \sum_{s_{2}=t+1}^{T} \operatorname{tr}\left(\left(\Sigma_{s_{1}}-\Sigma_{s_{2}}\right)^{2}\right\}$ where $w(t)=t(T-t)$, this measure $D_t$ characterizes the differences between the covariances before $t$ and after $t$. $D=0$ under $H_0$
+
+> 未完待续
+
+
+
+
+
+
+
+
+
+

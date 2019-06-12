@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 11 Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix | A paper reading record</title>
+  <title>Paper 12 MAXIMUM LIKELIHOOD ESTIMATION IN TRANSFORMED LINEAR REGRESSION WITH NONNORMAL ERRORS | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 11 Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix | A paper reading record" />
+  <meta property="og:title" content="Paper 12 MAXIMUM LIKELIHOOD ESTIMATION IN TRANSFORMED LINEAR REGRESSION WITH NONNORMAL ERRORS | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 11 Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix | A paper reading record" />
+  <meta name="twitter:title" content="Paper 12 MAXIMUM LIKELIHOOD ESTIMATION IN TRANSFORMED LINEAR REGRESSION WITH NONNORMAL ERRORS | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data.html">
-<link rel="next" href="maximum-likelihood-estimation-in-transformed-linear-regression-with-nonnormal-errors.html">
+<link rel="prev" href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html">
+<link rel="next" href="homogeneity-tests-of-covariance-matrices-with-high-dimensional-longitudinal-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -274,109 +274,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix" class="section level1">
-<h1><span class="header-section-number">Paper 11</span> Bayesian Modeling of Joint Regressions for the Mean and Covariance Matrix</h1>
+<div id="maximum-likelihood-estimation-in-transformed-linear-regression-with-nonnormal-errors" class="section level1">
+<h1><span class="header-section-number">Paper 12</span> MAXIMUM LIKELIHOOD ESTIMATION IN TRANSFORMED LINEAR REGRESSION WITH NONNORMAL ERRORS</h1>
+<p><span class="citation">(Tong et al. <a href="#ref-xingwei:2019ux">2019</a>)</span></p>
+<div id="abstract-8" class="section level2">
+<h2><span class="header-section-number">12.1</span> Abstract</h2>
+<p>Transformed linear regression with non-normal error distributions.</p>
 <blockquote>
-<p>这三篇应该都是很类似的，所以会比较简短。</p>
+<p>问题：啥是tranformed linear regression, non-normal error distributions又意味着什么？</p>
 </blockquote>
-<p><span class="citation">Cepeda and Gamerman (<a href="#ref-Cepeda:2004uw">2004</a>)</span></p>
-<div id="abstract-7" class="section level2">
-<h2><span class="header-section-number">11.1</span> Abstract</h2>
-<p>Present the Bayesian approach used to fit the models, based on a generalization of the Metropolis-Hastings algorithm of <span class="citation">(Cepeda and Gamerman <a href="#ref-Cepeda:2000vz">2000</a>)</span>. Real data is about growth and development of a group of deaf childeren. Then concluded with a few proposed extensions.</p>
+<p>The linear transformation model is an important tool in survival analysis partly due to its flexibility. In particular, it includes the Cox model and the proportional odds model as special cases when the error follows the extreme value distribution and the logistic distribution, respectively.</p>
+<blockquote>
+<p>所以这只是一个特别大的范围的模型能把survival包进去？</p>
+</blockquote>
+<p>Despite the popularity and generality of linear trarnsformation models, however, there is no general theory on the maximum likelihood estimation of the regression parameter and the transformation function. One main difficulty for this is that the transformation function near the tails diverges to infinity and can be quite unstable,</p>
+<blockquote>
+<p>所以估计方法会有问题？ 最后这句应该划重点，尾部不稳定？</p>
+</blockquote>
+<p>In this paper, we develop the maximum likelihood estimation approach and provide the near optimal conditions on the error distribution under which the consistency and asymptotic normality of the resulting estimators can be established.</p>
+<blockquote>
+<p>建立了MLE，然后“near optimal conditions on the error distribution…”</p>
+</blockquote>
+<p>Extensive numerical studies suggest that the methodology works well, and an application to the data on a typhoon forecast is provided.</p>
+<blockquote>
+<p>正常的应用一下</p>
+</blockquote>
 </div>
-<div id="introduction-9" class="section level2">
-<h2><span class="header-section-number">11.2</span> Introduction</h2>
-<p>Since the covariance matrix structure does not depend on the ordering of observations we can apply this model for the variance-covariance matrix in the analysis of spatial data.</p>
-<p>However, this parameters do not have a practical interpretation, but estimation of the covariance matrix may lead to better estimates of the parameters of the mean model.</p>
-<p>This paper will follow the modelling strategy proposed by Pourahmadi 1999, with similar approach presented by Pourhmadi and Daniels (2002).</p>
-<p>Next section will present the models and reviews some topics of ante-dependence models (Daniel那篇),used in our proposed models for the covariance matrix.
-Section 3 presented the Bayesian proposal based on Fisher scoring for the MCMC algorithm. 这个proposal后面Xu,Liu用过，效果看起来还很好的样子。</p>
+<div id="introduction-10" class="section level2">
+<h2><span class="header-section-number">12.2</span> Introduction</h2>
+<p>Various tansformations such as log and Box-Cox transformations have been proposed to make the transformed response variable more close to a normal variable among other reasons.</p>
+<p>However, it is well known that sometimes there may not exist such transformation and, furthermore one may prefer to leave the transformation arbitrary for the flexibility. That is, we face a transformed linear regression model with unknown transformation or an inference problem with some distributions other than the normal distribution.</p>
+<blockquote>
+<p>有很多传统的方法，会对response做变换，比如log，比如cox，使得response variable更接近normal。但是这种变换并不总是存在，或者有些时候会让变换保持任意使得有更好的flexibility。所以要对未知transformation的情况下做inference，而且不一定是normal。</p>
+</blockquote>
+<p>In this paper, we will consider the following linear transformation model:</p>
+<p><span class="math display">\[
+H_{0}(Y)=-X^{\prime} \beta_{0}+\varepsilon
+\]</span></p>
+<p>With <span class="math inline">\(H_0\)</span> is strictly increasing function on <span class="math inline">\(\mathbb R\)</span>,<span class="math inline">\(\beta_0\)</span> is a p-dimensional vector of regression parameters, and <span class="math inline">\(\epsilon\)</span> the error term with a known density function <span class="math inline">\(f\)</span>.</p>
+<p>One popular class of functions is given by</p>
+<p><span class="math display">\[
+f(x)=\frac{e^{x}}{\left(1+r e^{x}\right)^{1+1 / r}}
+\]</span>
+it gives Cox model and the proportional odds model with <span class="math inline">\(r=0\)</span> and 1, respectively. Among others, two areas where model has been commonly used and studied are econometrics and survival analysis. <em>[Bunch of literature]</em>.</p>
+<p>This paper will discuss inference about the model with <span class="math inline">\(f\)</span> belonging to a braod family, to be denoted by <span class="math inline">\(\mathcal F\)</span>.</p>
+<blockquote>
+<p>所以cox模型和proportional odds模型是一个在复杂变换下的线性模型，然后这篇文章想讨论的也是如何估计之前那个<span class="math inline">\(H_0\)</span>的模型，其中误差函数的模型是一族很广的模型。</p>
+</blockquote>
+<p>历史上有考虑过很多这个模型的inference问题【一大堆文献】，但是这些方法基本上只考虑了变换<span class="math inline">\(H_0\)</span>是定义在一个有界区间，主要是因为这样可以比较方便的对结果的estimator，通过empirical process theory去建立渐进性质。</p>
+<p>但是，很容易碰上误差的分布是整条实数轴上的，或者非正态分布。如果用Zeng或者以及其他人的方法对这个钱看，但是下面显示了这些方法并不是总是很好用，特别是在建立渐进性质的时候。 所以提出nonparametric maximum likelihood estimation approach 将集中在非正态分布上。这篇文章会用概念上不同的方法，并且会用新的技术和观测。</p>
 </div>
-<div id="the-model" class="section level2">
-<h2><span class="header-section-number">11.3</span> The model</h2>
-<p>Ante-dependence model:</p>
+<div id="parameter-estimation-and-inference-procedure" class="section level2">
+<h2><span class="header-section-number">12.3</span> Parameter estimation and inference procedure</h2>
+<div id="mle" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> MLE</h3>
+<p>The conditional distribution function of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> has the form
+<span class="math display">\[
+F_{Y | x}(y)=P(Y \leq y | X=x)=P\left.\left(\varepsilon \leq H_{0}(y)+X^{\prime} \beta_{0}\right)\right|_{X=x}
+\]</span>
+This yields the conditional density function of <span class="math inline">\(Y\)</span></p>
 <p><span class="math display">\[
-Y_{i}-\mu_{i}=\sum_{j=1}^{i-1} \phi_{i j}\left(Y_{j}-\mu_{j}\right)+v_{i}, \quad v_{i} \sim N\left(0, \sigma_{i}^{2}\right), \quad i=1, \ldots, n
-\]</span></p>
-<p>Then can be re-write as</p>
+f_{Y | X}(y)=h_{0}(y) f\left(H_{0}(y)+X^{\prime} \beta_{0}\right)
+\]</span>
+Given X, where <span class="math inline">\(h_{0}(y)=d H_{0}(y) / d y\)</span>. It thus follows that the log-likelihood function of <span class="math inline">\(\theta=(\beta,H)\)</span> is given by</p>
 <p><span class="math display">\[
-v=T(Y-\mu), \quad v \sim N(0, D) \quad \text { and } \quad D=\operatorname{diag}\left(\sigma_{i}^{2}\right)
+l^{*}(\theta)=\sum_{i=1}^{n}\left[\log f\left\{H\left(Y_{i}\right)+X_{i}^{\prime} \beta\right\}+\log h\left(Y_{i}\right)\right]
 \]</span>
-<span class="math inline">\(T=(t_{ij})\)</span> with
-<span class="math display">\[
-t_{i j}=\left\{\begin{array}{cl}{1} &amp; {\text { if } j=i} \\ {-\phi_{i j}} &amp; {\text { if } j&lt;i} \\ {0} &amp; {\text { elsewhere }}\end{array}\right.
-\]</span>
-and
-<span class="math display">\[
-\operatorname{Var}(v)=D=T \operatorname{Var}(Y-\mu) T^{\prime}=T \Sigma T^{\prime}
-\]</span>
-然后有
-<span class="math display">\[
-\tilde{Y}=\left(I_{n}-T\right) \tilde{Y}+v
-\]</span>
-以及
-<span class="math display">\[
-\phi_{i j}=w_{i j}^{\prime} \lambda, \quad 1 \leq j&lt;i \leq n
-\]</span>
-Since we have <span class="math inline">\(\phi_{i j}=\Sigma_{l=1}^{r} w_{i j, l} \lambda_{l}\)</span>, the matrix <span class="math inline">\(I_{n}-T\)</span> can be expressed as the linear combination
-<span class="math display">\[
-I_{n}-T=\lambda_{1} W_{1}+\ldots+\lambda_{r} W_{r}
-\]</span>
-As a consequence, model can be expressed as
-<span class="math display">\[
-\begin{aligned} \tilde{Y} &amp;=\lambda_{1} W_{1} \tilde{Y}+\ldots+\lambda_{r} W_{r} \tilde{Y}+v \\ &amp;=\lambda_{1} V_{1}+\ldots+\lambda_{r} V_{r}+v \\ &amp;=V \lambda+v \end{aligned}
-\]</span>
-That is, <span class="math inline">\(\tilde{Y} \sim N(V \lambda, D)\)</span>.</p>
-<p>Then the full model is
-<span class="math display">\[
-h\left(\mu_{i}\right)=x_{i}^{\prime} \beta, \quad g\left(\sigma_{i}^{2}\right)=z_{i}^{\prime} \gamma, \quad f\left(\phi_{i j}\right)=w_{i j}^{\prime} \lambda
-\]</span></p>
-</div>
-<div id="bayesian-methodology" class="section level2">
-<h2><span class="header-section-number">11.4</span> Bayesian Methodology</h2>
-<p>The likelihood function is given by</p>
-<p><span class="math display">\[
-L(\beta, \gamma, \lambda | \mathrm{Y}) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(Y-\mu)^{\prime} \Sigma^{-1}(Y-\mu)\right\}
-\]</span>
-since <span class="math inline">\(|\Sigma|=\left|T^{\prime}\right||D||T|=|D|\)</span>.</p>
-<p>A prior must be assigned to obtain the posterior distribution. For simplicity, assume <span class="math inline">\(\theta \sim N\left(\theta_{0}, \Sigma_{0}\right)\)</span> where <span class="math inline">\(\theta_{0}=\left(b_{0}, g_{0}, l_{0}\right)^{\prime}\)</span>. The values of <span class="math inline">\((b,g,l)\)</span> and <span class="math inline">\((B,G,L)\)</span> can be evaluated from <span class="math inline">\(\theta_0\)</span> and <span class="math inline">\(\Sigma_0\)</span>.</p>
-<p>The posterior is
-<span class="math display">\[
-\pi(\beta, \gamma, \lambda) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(Y-X \beta)^{\prime} \Sigma^{-1}(Y-X \beta)-\frac{1}{2}\left(\theta-\theta_{0}\right)^{\prime} \Sigma_{0}^{-1}\left(\theta-\theta_{0}\right)\right\}
-\]</span></p>
-<p><span class="math display">\[
-(\beta | \gamma, \lambda, Y) \sim N\left(b^{*}, B^{*}\right)
-\]</span></p>
-<p><span class="math display">\[
-(\beta | \gamma, \lambda, Y) \sim N\left(b^{*}, B^{*}\right)
-\]</span>
-Let
-<span class="math display">\[
-Q(Y)=\tilde{Y}^{\prime} T^{\prime} D^{-1} T \tilde{Y}=(\tilde{Y}-V \lambda)^{\prime} D^{-1}(\tilde{Y}-V \lambda)
-\]</span></p>
-<p>Therefore, it is easy to obtain that</p>
-<p><span class="math display">\[
-(\lambda | \beta, \gamma, Y) \sim N\left(l^{*}, L^{*}\right)
-\]</span>
-with <span class="math inline">\(l^{*}=L^{*}\left(L^{-1} l+V^{\prime} D^{-1} \tilde{Y}\right)\)</span> and <span class="math inline">\(L^{*}=\left(L^{-1}+V^{\prime} D^{-1} V\right)^{-1}\)</span>.</p>
-<p>The full conditional distribution of <span class="math inline">\(\gamma\)</span> given by
-<span class="math display">\[
-\pi(\gamma | \beta, \lambda) \propto|D|^{-1 / 2} \exp \left\{-\frac{1}{2}(\tilde{Y}-V \lambda)^{\prime} D^{-1}(\tilde{Y}-V \lambda)-\frac{1}{2}(\gamma-g)^{\prime} G^{-1}(\gamma-g)\right\}
-\]</span>
-is intractable analytically and not easily generated from, then construct suitable proposals for a MH step.</p>
-</div>
-<div id="centering-and-order-methods" class="section level2">
-<h2><span class="header-section-number">11.5</span> Centering and Order Methods</h2>
+where <span class="math inline">\(h(y)=d H(y) / d y\)</span>.</p>
+<blockquote>
+<p>没太懂，以上，大概是empirical distribution的感觉来着。。。</p>
+</blockquote>
 
+</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-Cepeda:2004uw">
-<p>Cepeda, Edilberto, and Dani Gamerman. 2004. “Bayesian modeling of joint regressions for the mean and covariance matrix.” <em>Biometrical Journal</em>, April.</p>
-</div>
-<div id="ref-Cepeda:2000vz">
-<p>Cepeda, Edilberto, and Dani Gamerman. 2000. “Bayesian modeling of variance heterogeneity in normal regression models.” <em>Brazilian Journal of Probability and Statistics</em> 14 (2): 207–21.</p>
+<div id="ref-xingwei:2019ux">
+<p>Tong, xingwei, fuqing Gao, Kani Chen, Dingjiao Cai, and Jianguo sun. 2019. “MAXIMUM LIKELIHOOD ESTIMATION IN TRANSFORMED LINEAR REGRESSION WITH NONNORMAL ERRORS.” <em>The Annals of Statistics</em>.</p>
 </div>
 </div>
             </section>
@@ -384,8 +359,8 @@ is intractable analytically and not easily generated from, then construct suitab
           </div>
         </div>
       </div>
-<a href="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="maximum-likelihood-estimation-in-transformed-linear-regression-with-nonnormal-errors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homogeneity-tests-of-covariance-matrices-with-high-dimensional-longitudinal-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

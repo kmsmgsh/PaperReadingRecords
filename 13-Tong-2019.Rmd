@@ -1,0 +1,92 @@
+# MAXIMUM LIKELIHOOD ESTIMATION IN TRANSFORMED LINEAR REGRESSION WITH NONNORMAL ERRORS
+
+[@xingwei:2019ux]
+
+## Abstract
+
+Transformed linear regression with non-normal error distributions.
+
+> 问题：啥是tranformed linear regression, non-normal error distributions又意味着什么？
+
+The linear transformation model is an important tool in survival analysis partly due to its flexibility. In particular, it includes the Cox model and the proportional odds model as special cases when the error follows the extreme value distribution and the logistic distribution, respectively.
+
+> 所以这只是一个特别大的范围的模型能把survival包进去？
+
+Despite the popularity and generality of linear trarnsformation models, however, there is no general theory on the maximum likelihood estimation of the regression parameter and the transformation function. One main difficulty for this is that the transformation function near the tails diverges to infinity and can be quite unstable,
+
+> 所以估计方法会有问题？ 最后这句应该划重点，尾部不稳定？
+
+In this paper, we develop the maximum likelihood estimation approach and provide the near optimal conditions on the error distribution under which the consistency and asymptotic normality of the resulting estimators can be established.
+
+> 建立了MLE，然后"near optimal conditions on the error distribution..."
+
+Extensive numerical studies suggest that the methodology works well, and an application to the data on a typhoon forecast is provided.
+
+> 正常的应用一下
+
+## Introduction
+
+Various tansformations such as log and Box-Cox transformations have been proposed to make the transformed response variable more close to a normal variable among other reasons.
+
+However, it is well known that sometimes there may not exist such transformation and, furthermore one may prefer to leave the transformation arbitrary for the flexibility. That is, we face a transformed linear regression model with unknown transformation or an inference problem with some distributions other than the normal distribution.
+
+>有很多传统的方法，会对response做变换，比如log，比如cox，使得response variable更接近normal。但是这种变换并不总是存在，或者有些时候会让变换保持任意使得有更好的flexibility。所以要对未知transformation的情况下做inference，而且不一定是normal。
+
+In this paper, we will consider the following linear transformation model:
+
+$$
+H_{0}(Y)=-X^{\prime} \beta_{0}+\varepsilon
+$$
+
+With $H_0$ is strictly increasing function on $\mathbb R$,$\beta_0$ is a p-dimensional vector of regression parameters, and $\epsilon$ the error term with a known density function $f$.
+
+One popular class of functions is given by
+
+$$
+f(x)=\frac{e^{x}}{\left(1+r e^{x}\right)^{1+1 / r}}
+$$
+it gives Cox model and the proportional odds model with $r=0$ and 1, respectively. Among others, two areas where model has been commonly used and studied are econometrics and survival analysis. _[Bunch of literature]_.
+
+This paper will discuss inference about the model with $f$ belonging to a braod family, to be denoted by $\mathcal F$.
+
+> 所以cox模型和proportional odds模型是一个在复杂变换下的线性模型，然后这篇文章想讨论的也是如何估计之前那个$H_0$的模型，其中误差函数的模型是一族很广的模型。
+
+历史上有考虑过很多这个模型的inference问题【一大堆文献】，但是这些方法基本上只考虑了变换$H_0$是定义在一个有界区间，主要是因为这样可以比较方便的对结果的estimator，通过empirical process theory去建立渐进性质。
+
+但是，很容易碰上误差的分布是整条实数轴上的，或者非正态分布。如果用Zeng或者以及其他人的方法对这个钱看，但是下面显示了这些方法并不是总是很好用，特别是在建立渐进性质的时候。 所以提出nonparametric maximum likelihood estimation approach 将集中在非正态分布上。这篇文章会用概念上不同的方法，并且会用新的技术和观测。
+
+## Parameter estimation and inference procedure
+
+### MLE
+
+The conditional distribution function of $Y$ given $X$ has the form 
+$$
+F_{Y | x}(y)=P(Y \leq y | X=x)=P\left.\left(\varepsilon \leq H_{0}(y)+X^{\prime} \beta_{0}\right)\right|_{X=x}
+$$
+This yields the conditional density function of $Y$
+
+$$
+f_{Y | X}(y)=h_{0}(y) f\left(H_{0}(y)+X^{\prime} \beta_{0}\right)
+$$
+Given X, where $h_{0}(y)=d H_{0}(y) / d y$. It thus follows that the log-likelihood function of $\theta=(\beta,H)$ is given by
+
+$$
+l^{*}(\theta)=\sum_{i=1}^{n}\left[\log f\left\{H\left(Y_{i}\right)+X_{i}^{\prime} \beta\right\}+\log h\left(Y_{i}\right)\right]
+$$
+where $h(y)=d H(y) / d y$.
+
+> 没太懂，以上，大概是empirical distribution的感觉来着。。。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
