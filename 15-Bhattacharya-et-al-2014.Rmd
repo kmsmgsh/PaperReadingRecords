@@ -1,0 +1,229 @@
+# Dirichlet-Laplace Priors for Optimal Shrinkage
+
+[@Bhattacharya:2015cq]
+
+## Abstract
+
+
+Bayesian paradigm, sparsity is routinely induced through two-component mixture priors having a probability mass at zero, but such priors encounter daunting computational problems in high dimensions. This has motivated continuous shrinkage priors.
+
+
+This  article proposed a new class of Dirichlet-Laplace priors relative to alternatives is assessed in simulated and real data example.
+
+
+## Introduction
+
+
+However, in many applications, it is crucial to obtain a realistic characterization of uncertainty in estimates of parameters, function of parameters, and predictions.
+Frequentist approaches using constructing asymptotic confidence regions or using the bootstrap to characterize uncertainty. But these may be broken down in high-dimensional settings.
+
+Example: In regression, one cannot naively appeal to asymptotic normality and resampling from the data when p is equal or larger than n. Resampling of data may not provide an adequate characterization of uncertainty.
+
+Most penalized estimators correspond to the mode of a Bayesian posterior distribution. Lasso is equivelant to a MAP estimation under a Gaussian linear regression model with double exponential (Laplace) prior. 
+
+A natural question is whether we can use the entire posterior distribution to provide a probabilistic measure of uncertainty.
+
+Bayesian perspective also have distinct advantages in terms of tuning parameter choice. In this case, the key tuning parameters can be marginalized over the posterior distribution instead of relying on cross-validation.
+
+"However, instead of showing that a penalized estimator obtains the minimax rate under sparsity assumption, we would like to show that the entire posterior distribution concentrates at the optimal rate, that is, the posterior probability assigned to a shrinking neighborhood of the true parameter value converges to one, with the neighborhood size proportional to the requentist minimax rate."
+
+An amazing variety of shrinkage priors has been proposed in the Bayesian literature. 
+
+- Ghosal(1999),Bontemps(2011): Provided conditions on the prior for asymptotic normality of linear regression coefficients allowing the number of predictors p to increase with sample size n. Ghosal approach requiring a very slow rate of growth. Bontemps assuming $p\leq n$.
+
+- Armagan, Dunson, and Lee(2013) considered shrinkage priors in providing simple sufficient conditions for posterior consistency in linear regression where the number of variables grows slower than the sample size, though no rate of contraction was provided.
+
+Studying "posterior contraction" in high-dimensions, ...
+Studying these properties of shrinkage pirors is challenging due to the lack of exact zeros, with the prior draws being sparse in only an approximate sense.
+
+Prior selection remains an art.
+
+The overarching goal is to obtain theory allowing design of novel priors, which are appealing from a Bayesian perspective while having frequentist optimality properties.
+
+## A NEW CLASS OF SHRINKAGE PRIORS:
+
+### Bayesian Sparsity Priors in Normal Means Problem
+
+For concreteness (?), this paper focus on the normal means problem. (not the generalized model like GLM).
+
+Based on a single observation corrupted with iid standard normal noise:
+$$
+y_{i}=\theta_{i}+\epsilon_{i}, \quad \epsilon_{i} \sim \mathrm{N}(0,1), \quad 1 \leq i \leq n
+$$
+
+Let $\ell_0[q;n]$ denote the subset of $\mathbb R^n$ given by
+$$
+l_{0}[q ; n]=\left\{\theta \in \mathbb{R}^{n} : \#\left(1 \leq j \leq n : \theta_{j} \neq 0\right) \leq q\right\}
+$$
+$l_0[q;n]$ 是$\mathbb R^n$ 的子集，这个#是啥，子集中非零元的个数吗。
+
+A vector $x\in \mathbb R^r$, let $||x||_2$ is Euclidean norm. If $\theta_0$ is $q_n$-sparse, that is, $\theta_0\in l_0[q_n;n]$, with $q_n=o(n)$, the *squared minimax rate in estimating $\theta_0$ in $\ell_2$ norm is $2 q_{n} \log \left(n / q_{n}\right)(1+o(1))$*. (Donoho et al. 1992);
+
+> Squared minimax rate是啥？
+
+(given sequences $a_n$,$b_n$, we denote $a_n=O(b_n)$ or $a_{n} \lesssim b_{n}$ if there exists a global constant $C$ such that $a_{n} \leq C b_{n}$ and $a_n=o(b_n)$ if $a_n/b_n\rightarrow0$) as $n\rightarrow 0$
+
+$$
+\inf _{\hat{\theta}} \sup _{\theta_{0} \in l_{0}\left[q_{n} ; n\right]} E_{\theta_{0}}\left\|\hat{\theta}-\theta_{0}\right\|_{2}^{2} \asymp q_{n} \log \left(n / q_{n}\right)
+$$
+In the above display, $E_{\theta_0}$ denotes an expectation with respect to an $N_n(\theta_0,I_n)$ density. 
+
+> 这玩意的意义没看懂。
+
+For a subset $S \subset\{1, \ldots, n\}$, let $|S|$ denote the cardinality of $S$ and define $\theta_{S}=\left(\theta_{j} : j \in S\right)$ for a vector $\theta\in \mathbb R^n$. Denote $supp(\theta)$ to be the *support* of $\theta$, the subset of $\{1, \ldots, n\}$ corresponding to the nonzero entries of $\theta$. For a vector $\theta \in \mathbb R^n$, a nature way to incorporate sparsity is to use **point mass mixture priors**:
+$$
+\theta_{j} \sim(1-\pi) \delta_{0}+\pi g_{\theta}, \quad j=1, \ldots, n
+$$
+where $\pi=\operatorname{Pr}\left(\theta_{j} \neq 0\right)$, $\mathbb{E}\{|\operatorname{supp}(\theta)| | \pi\}=n \pi$ is the prior guess on model size (sparsity level), and $g_\theta$ is an absolutely continuous density on $\mathbb R$. 
+
+These priors are highly appealing in allowing separate control of the level of sparsity and the size of the signal coefficients. If the sparsity parameter $\pi$ is estimated via empirical Bayes the posterior median of $\theta$ is estimated via empirical Bayes, the posterior median of $\theta$ is a minimax-optimal estimator, which can adapt to arbitrary sparsity levels as long as $q_n=o(n)$.
+
+
+> 反正就是说这个先验很好的意思？ 能满足一些性质，而且同样的，$\lambda$可以用empirical bayes选
+
+In fully bayesian framework, it is common to place a beta prior on $\pi$, leading to a beta-Bernoulli prior on the model size, which conveys an automatic multiplicity adjustment.
+
+> multiplicity adjustment这又是啥
+
+In recent article, Castillo and van der Vaart (2012) established that prior with an appropriate beta prior on $\pi$ and suitable tail conditions on $g_\theta$ leads to a minimax optimal rate of $posteiror contraction$.
+
+> posterior contraction 是啥?
+
+That is, the posterior concentrates most of its mass on a ball around $\theta_0$ of squared radius of the order of $q_n log (n/q_n)$:
+
+$$
+E_{\theta_{0}} \mathbb{P}\left(\left\|\theta-\theta_{0}\right\|_{2}<M s_{n} | y\right) \rightarrow 1, \text { as } n \rightarrow \infty
+$$
+.
+
+Narisetty et al.(2014) obtained consistency in model selection using point mass mixture priors with appropriate data-driven hyperparameters. 
+
+## Global-Local shrinkage Rules
+
+Although point mass mixture priors are intuitively appealing and possess attractive theoretical properties, posterior sampling requires a stochastic search over an enormous space, leading to slow mixing and convergence. Thus, continuous shrinkage priors and promoted by several authors. [**literatues**]
+
+Polson and Scott (2010) noted that essentially all such shrinkage priors can be represented as global-local (GL) mixtures of Gaussians,
+$$
+\theta_{j} \sim \mathrm{N}\left(0, \psi_{j} \tau\right), \quad \psi_{j} \sim f, \quad \tau \sim g
+$$
+
+> Bayes lasso确实就是这种的一个特殊形式
+
+$\tau$ controls global shrinkage toward the origin while the local scales $\{\psi_j\}$ allow deviations in the degree of shrinkage. This can be an approximate point mass priors through a continuous density concentrated near zero with heavy tails.
+
+GL priors are more convenient in computation compare to point mass priors. Because the Normal priors allows for conjugate updating for $\theta$ and $\psi$ in a block. The frequentist regularization procedures correspond to posterior modes under GL priors with appropriate choice of $f$ and $g$.
+
+However, many aspects of shrinkagepriors are poorly understood, with the lack of exact zeros compounding the difficulty in studying basic properties, such as prior expectation, tail bounds for the number of large signals, and prior concentration around sparse vectors.
+
+Hence, subjective Bayesian face difficulties in incorporating prior information regarding sparsity, and frequentists tend to be skeptical due to the lack of theoretical justification.
+
+This is warranted, reasonable seeming priors can have poor performance in high dimensional settings.
+
+> 这段话没看懂：
+
+For example, choosing $\pi=\frac{1}{2}$ in point mass mixture priors leads to an exponentially small prior probability of $2^{-n}$ assigned to the null model, so that it becomes literally impossible to override that prior informativeness with the information in the data to pick the null model.
+
+> 也就是说，如果取$\pi=\frac{1}{2}$,那么就有$\theta_j\sim \frac{1}{2}\delta_0+\frac{1}{2}g_\theta$,但是这个为啥是会leads to an exponential small prior probability of $2^{-n}$？ 感觉对这个point mass mixture prior理解不够深入。两个最简单的问题，$\delta_0$ 和$g_\theta$应该如何选取
+
+However, with a beta prior on $\pi$, this problem can be avoided. In the same vein, if one places iid $N(0,1)$ priors on the entries of $\theta$, then the induced prior on $\|\theta\|$ is highly concentrated around $\sqrt n$ leading to mmisleadin ginferences on $\theta$ almost everywhere. Although these are simple examples, similar multiplicity problems can transpire more subtly in cases where complicated models/prios are involved and hence it is fundmentally important to understand properties of the prior and the posterior in the setting of the normal mean model.
+
+There has been a recent awareness of these issues, motivating a basic assessment of the marginal properties of shrinkage priors for a single $\theta_j$. Recent priors such as the horseshoe and generalized double Pareto are carefully formulated to obtain marginals having a high concentration around zero with heavy tails. This is well justified,but as we will se below, such marginal behavior alone is not sufficient; it is necessary to study the joint distribution of $\theta$ on $\mathbb R^n$. With such motivation, we propose a class of Dirichlet-kernel priors in the next subsection.
+
+## Dirichlet-Kernel Priors
+
+Let $\phi_0$ denote the standard normal density on $\mathbb R$. Also, let $DE(\tau)$ denote a zero mean double-exponential or Laplace distribution or Laplace distribution with density $f(y)=(2 \tau)^{-1} e^{-|y| / \tau}$ for $y\in \mathbb R$. Integrating out the local scales $\psi_i$'s, the global and local prior can be equivalently represented as a global scale mixture of a kernel $\mathcal{K}(\cdot)$,
+$$
+\theta_{j} \stackrel{\mathrm{iid}}{\sim} \mathcal{K}(\cdot, \tau), \quad \tau \sim g
+$$
+where $\mathcal{K}(x)=\int \psi^{-1 / 2} \phi_{0}(x / \sqrt{\psi}) g(\psi) d \psi$ is a symmetrix unimodal density on $\mathbb R$ and $\mathcal{K}(x, \tau) :=\tau^{-1 / 2} \mathcal{K}(x / \sqrt{\tau})$. For example, $\psi_j\sim Exp(1/2)$ corresponds to a double-exponential kernel $\mathcal{K} \equiv \mathrm{DE}(1)$, while $\psi_{j} \sim \mathrm{IG}(1 / 2,1 / 2)$ results in a standard Cauchy kernel $\mathcal{K} \equiv \mathrm{Ca}(0,1)$.
+
+> 上面这几个等价得检查研究一下
+
+
+These choices lead to a kernel that is bounded in a neighborhood of zero. 
+
+However, if one instead uses a half Cauchy prior $\psi_j^{\frac{1}{2}}\sim Ca_{+}(0,1)$, then the resulting horseshoe kernel (Carvalho,Polson, and Scott 2009,2010) is unbounded with a singularity at zero. This phenomenon coupled with tail robustness properties leads to excellent empirical performance of the horseshoe.
+However, the joint distribution of $\theta$ under a horseshoe prior is understudied and further theoretical investigation is required to understand its operating characteristics. One can imagine that it concentrates more along sparse regions of the parameter space compared to common shrinkage priors isnce the singularity at zero potentially allows most of the entries to be concentrated around zero with the heavy tails ensuring concentration around the relatively small number of signals.
+
+The above class of priors rely on obtaining a suitable kernel $\mathcal K$ through appropriate normal scale mixtures. In this article, alleviate the requirements on the kernel, while having attractive theoretical properties. In particular, our proposedclass of Dirichlet-kernel (Dk) priors replaces the single global scale $\tau$ by a vector scales $(\phi_1\tau,...\phi_n\tau)$, where $\phi=(\phi_1,...,\phi_n)$ is constrained to lie in the $(n-1)$-dimensional simplex $\mathcal S^{n-1}=\{x=(x_1,...,x_n)^T:x_j\geq 0,\sum_{j=1}^n x_j=1\}$ and is assigned a $Dir(a,...,a)$ prior:
+$$
+\theta_{j} | \phi_{j}, \tau \sim \mathcal{K}\left(\cdot, \phi_{j} \tau\right), \quad \phi \sim \operatorname{Dir}(a, \ldots, a)
+$$
+
+$\mathcal K$ is any symmetric (about zero) unimodal density with exponential or heavier tails; for computational purposes, we restrict attention to the class of kernels that can be represented as scale mixture of normals. While previous shrinkage priors obtain marginal behavior similar to the point mass mixture priors, our construction aims at resembling the joint distribution of $\theta$ under a two-component mixture prior.
+
+> 没太懂这个kernel是啥，然后kernel的重要性在哪里。 然后那个积分感觉怪怪的，需要更细致的讲解。 然后这个用Dirichlet分布放在tau上。有点奇怪，需要更深的解释。
+
+Focus on the Laplace kernel from now on for concreteness, noting that all the results stated below can be generalized to other choices. The corresponding hierachical prior given $\tau$.,
+
+$$
+\theta_{j} | \phi, \tau \sim \operatorname{DE}\left(\phi_{j} \tau\right), \quad \phi \sim \operatorname{Dir}(a, \ldots, a)
+$$
+is referred to as a Dirichlet-Laplace prior, denoted $\theta|\tau\sim DL_a(\tau)$.
+
+To understand the role of $\phi$, we undertake a study of the marginal properties of $\theta_j$ conditional on $\tau$, integrating out $\phi_j$. The results are summarized in Proposition 2.1.
+
+Proposition 2.1. If $\theta | \tau \sim \operatorname{DL}_{a}(\tau)$, then the marginal distribution of $\theta_j$ given $\tau$ is unbounded with a singularity at zero for any $a<1$. Further, in the special case $a=1/n$, the marginal distribution is a wrapped Gamma distribution $WG(\tau^{-1},1/n)$, where $WG(\lambda,\alpha)$ has a density $f(x ; \lambda, \alpha) \propto|x|^{\alpha-1} e^{-\lambda|x|}$ on $\mathbb R$.
+
+Thus,marginalizing over $\phi$, we obtain an unbounded kernel $\mathcal K$, so that the marginal density of $\theta_j|\tau$ has singularity at 0 while retaining exponential tails. 
+
+The parameter $\tau$ plays a critical role in determining the tails of the marginal distribution of $\theta_j$'s. We consider a fully Bayesian framework where $\tau$ is assigned a prior $g$ on the positive real line and learnt from the data through the posterior. Specifically, we assume a $gamma(\lambda,1/2)$ prior on $\tau$ with $\lambda=na$. We continue to refer to the induced prior on $\theta$ implied by the hierarchical structure,
+$$
+\begin{array}{l}{\theta_{j} | \phi, \tau \sim \operatorname{DE}\left(\phi_{j} \tau\right), \quad \phi \sim \operatorname{Dir}(a, \ldots, a), \quad \tau \sim}  {\operatorname{gamma}(n a, 1 / 2)}\end{array}
+$$
+as a Dirichlet-Laplace prior, denoted $\theta\sim DL_a$.
+
+There is a frequentist literature on including a local penalty specific to each coefficient. The adaptive lasso relies on empirically estimated weights that are plugged in. Leng instead sampled the penalty parameters from a posterior, with a sparse point estimate obtained for each draw. These approaches do not produce a full posterior distribution but focus on sparse point estimates.
+
+## Posterior Computation
+
+The proposed class ofo DL prior leads to straightforward posterior computation via an efficient data augmented Gibbs sampler. The $DL_a$ prior can be equivalently represented as 
+
+$$
+\begin{array}{l}{\theta_{j} \sim \mathrm{N}\left(0, \psi_{j} \phi_{j}^{2} \tau^{2}\right), \psi_{j} \sim \operatorname{Exp}(1 / 2), \phi \sim \operatorname{Dir}(a, \ldots, a)}  {,\tau \sim \operatorname{gamma}(n a, 1 / 2)}\end{array}
+$$
+
+We detail the steps in the normal means setting noting that the algorithm is trivially modified to accomodate normal linear regression, robust regression with heavy tailed residuals, probit models, logistic regression, factor models, and other hierarchical Gaussian cases. To reduce auto-correlation, we rely on marginalization and blocking as much as possible. Our sampler cycles through $\text { (i) } \theta | \psi, \phi, \tau, y,(\text { ii) } \psi | \phi, \tau, \theta, \text { (iii) } \tau | \phi, \theta, \text { and (iv) } \phi|\theta$. We use the fact that the joint posterior of $(\psi, \phi, \tau)$ is conditionally independent of $y$ given $\theta$. Steps (ii)-(iv) together give us a draw from the conditional distribution of $(\psi, \phi, \tau) | \theta$ since 
+$$
+[\psi, \phi, \tau | \theta]=[\psi | \phi, \tau, \theta][\tau | \phi, \theta][\phi | \theta]
+$$
+Steps (i)-(iii) are standard and hence not derived. Step (iv) is nontrivial and we develop an efficient sampling algorithm for jointly sampling $\phi$. Usual one at a time updates of a Dirichlet vector lead to tremendously slow mixing and convergence, and hence the joint updaate in Theorem 2.1 is an important feature of our proposed prior. Consider the following parameterization for the three-parameter generalized inverse Gaussian (giG) distribution:
+$Y \sim \operatorname{giG}(\lambda, \rho, \chi)$ if $f(y) \propto y^{\lambda-1} e^{-0.5(\rho y+\chi / y)}$ for $y>0$.
+
+Theorem 2.1. The joint posterior of $\phi|\theta$ has the same distribution as $\left(T_{1} / T, \ldots, T_{n} / T\right)$, where $T_j$ are independently distributed according to a $giG(a01,1,2|\theta_j|)$ distribution, and $T=\sum_{j=1}^{n} T_{j}$.
+
+Summaries of each step are provided below:
+
+1. To sample $\theta | \psi, \phi, \tau, y$, draw $\theta_j$ independently from an $N(\mu_j,\sigma_j^2)$ distribution with 
+$$\sigma_{j}^{2}=\left\{1+1 /\left(\psi_{j} \phi_{j}^{2} \tau^{2}\right)\right\}^{-1}, \quad \mu_{j}=\left\{1+1 /\left(\psi_{j} \phi_{j}^{2} \tau^{2}\right)\right\}^{-1} y$$.
+
+
+2. The conditional posterior of $\psi | \phi, \tau, \theta$ can be sampled efficiently in a block by independently sampling $\tilde{\psi}_{j} | \phi, \theta$ from an inverse-Gaussian distribution $\mathrm{i} \mathrm{G}\left(\mu_{j}, \lambda\right)$ with $\mu_{j}=\phi_{j} \tau /\left|\theta_{j}\right|, \lambda=1$ and setting $\psi_{j}=1 / \tilde{\psi}_{j}$.
+
+3. Sample the conditional posterior of $\tau|\phi,\theta$ from a $\operatorname{giG}\left(\lambda-n, 1,2 \sum_{j=1}^{n}\left|\theta_{j}\right| / \phi_{j}\right)$ distribution.
+
+4. To sample $\phi|\theta$, draw $T_{1}, \ldots, T_{n}$ independently with $T_{j} \sim \operatorname{giG}\left(a-1,1,2\left|\theta_{j}\right|\right)$ and set $\phi_j=T_j/T$ with $T=\sum_{j=1}^n T_j$.
+
+## Concentration properties of dirichlet-laplace priors
+
+In this section, we study a number of properties of the joint density of the Dirichlet-Laplace prior $DL_a$ on $\mathbb R^n$ and investigate the implied rate of posterior contraction in the normal means setting.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

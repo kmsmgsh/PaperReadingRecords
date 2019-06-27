@@ -2,7 +2,6 @@
 
 [@Zhong:2019wp]
 
-
 ## Introduction & Background
 
 Problem: Detection and identification of changepoints among covariance of high-dimensional longitudinal data.
