@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 8 Bayesian lasso regression | A paper reading record</title>
+  <title>Paper 18 Criteria for Bayesian Model Choice With Application to Variable Selection | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 8 Bayesian lasso regression | A paper reading record" />
+  <meta property="og:title" content="Paper 18 Criteria for Bayesian Model Choice With Application to Variable Selection | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 8 Bayesian lasso regression | A paper reading record" />
+  <meta name="twitter:title" content="Paper 18 Criteria for Bayesian Model Choice With Application to Variable Selection | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="the-bayesian-lasso.html">
-<link rel="next" href="bayesian-analysis-of-joint-mean-and-covariance-models-for-longitudinal-data.html">
+<link rel="prev" href="bayesvarsel-bayesian-testing-variable-selection-and-model-averaging-in-linear-models-using-r.html">
+<link rel="next" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -336,227 +336,340 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bayesian-lasso-regression" class="section level1">
-<h1><span class="header-section-number">Paper 8</span> Bayesian lasso regression</h1>
-<p><span class="citation">(Hans <a href="#ref-Hans:2009hc">2009</a>)</span></p>
-<div id="summary-1" class="section level2">
-<h2><span class="header-section-number">8.1</span> Summary</h2>
-<p>又是independent Laplace(double-exponential) prior on regression coefficient.
-&gt; This paper introduces new aspects of the braoder Bayesian treatment of lasso regression. It is shown that the standard lasso prediction method does not neccessarily agree with model-based, Bayesian predictions.</p>
-<p>然后再加上new Gibbs sampler.</p>
+<div id="criteria-for-bayesian-model-choice-with-application-to-variable-selection" class="section level1">
+<h1><span class="header-section-number">Paper 18</span> Criteria for Bayesian Model Choice With Application to Variable Selection</h1>
+<div id="abstract-11" class="section level2">
+<h2><span class="header-section-number">18.1</span> Abstract:</h2>
+<p>在主观Bayesian model selection中，没有任何一个方法在决定先验分布中占主导地位。</p>
 </div>
-<div id="introduction-6" class="section level2">
-<h2><span class="header-section-number">8.2</span> Introduction</h2>
-<ul>
-<li><p>Lasso introduction
+<div id="introduction-13" class="section level2">
+<h2><span class="header-section-number">18.2</span> Introduction</h2>
+<div id="background" class="section level3">
+<h3><span class="header-section-number">18.2.1</span> Background</h3>
+<p>“objective model selection priors”: not subjective prior.</p>
+<p>There has been no agreement as to which are most appealing or most successful.</p>
+</div>
+<div id="notation." class="section level3">
+<h3><span class="header-section-number">18.2.2</span> Notation.</h3>
+<p>y be a daata vector of size n.
 <span class="math display">\[
-\hat{\beta}_{\mathrm{L}}=\operatorname{argmin}_{\beta}(y-X \beta)^{\mathrm{T}}(y-X \beta)+\lambda\|\beta\|_{1}
-\]</span></p></li>
-<li><p>Laplace prior</p></li>
-</ul>
-<p><span class="math display">\[
-p(\beta | \tau)=(\tau / 2)^{p} \exp \left(-\tau\|\beta\|_{1}\right)
+M_{0} : f_{0}(\mathbf{y} | \boldsymbol{\alpha}), \quad M_{i} : f_{i}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right), \quad i=1,2, \ldots, N-1
 \]</span></p>
-<p>The posterior mode of <span class="math inline">\(\beta\)</span> is the lasso estimate with penalty <span class="math inline">\(\lambda=2\tau\sigma^2\)</span>.</p>
-<blockquote>
-<p>A new, direct characterization of the posterior distribution <span class="math inline">\(p(\beta|y,\sigma^2,\tau)\)</span> is introduced, along with a discussion about estimation and prediction under the lasso from a model-based perspective. The Bayesian connection to the lasso is examined, with particular attention paid to the problem of predicting future observation via the posterior prediction distribution. The direct characterization of the posterior is shown to facilitate sampling from the postrior distribution via two new Gibbs samplers that do not require the use of latent variables.</p>
-</blockquote>
-</div>
-<div id="the-lasso-posterior-distribution" class="section level2">
-<h2><span class="header-section-number">8.3</span> The Lasso posterior distribution</h2>
-<div id="direct-characterization" class="section level3">
-<h3><span class="header-section-number">8.3.1</span> Direct characterization</h3>
-<p>Model:
+<p><span class="math inline">\(\alpha\)</span>是intercept,<span class="math inline">\(\beta_i\)</span>是<span class="math inline">\(k_i\)</span>维的参数。
+null model, prior is <span class="math inline">\(\pi_0(\alpha)\)</span>.</p>
+<p>Model selection prior:
 <span class="math display">\[
-\begin{aligned} p\left(y | \beta, \sigma^{2}, \tau\right) &amp;=\mathrm{N}\left(y | X \beta, \sigma^{2} I_{n}\right) \\ p\left(\beta | \tau, \sigma^{2}\right) &amp;=\left(\frac{\tau}{2 \sigma}\right)^{p} \exp \left(\tau \sigma^{-1}\|\beta\|_{1}\right) \end{aligned}
+\pi_{i}\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right)=\pi_{i}(\boldsymbol{\alpha}) \pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right)
+\]</span>
+然后<span class="math inline">\(M_i\)</span>的后验概率可以写成:
+<span class="math display">\[
+\operatorname{Pr}\left(M_{i} | \mathbf{y}\right)=\frac{B_{i 0}}{1+\left(\sum_{j=1}^{N-1} B_{j 0} P_{j 0}\right)}
+\]</span>
+式中的<span class="math inline">\(P_{j0}\)</span>是先验odds (prior ratio) <span class="math inline">\(P_{j 0}=\operatorname{Pr}\left(M_{j}\right) / \operatorname{Pr}\left(M_{0}\right)\)</span>也就是<span class="math inline">\(M_j\)</span>的先验除以null model的先验。
+<span class="math inline">\(B_{j0}\)</span>是模型<span class="math inline">\(M_j\)</span>关于<span class="math inline">\(M_0\)</span>的Bayes factor，定义是
+<span class="math display">\[
+B_{j 0}=\frac{m_{j}(\mathbf{y})}{m_{0}(\mathbf{y})} \quad \text { with } m_{j}(\mathbf{y})=\int f_{j}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right) \pi_{j}\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{j}\right) d \boldsymbol{\alpha} d \boldsymbol{\beta}_{j}
 \]</span></p>
-<p>This prior retains the property that, for fixed <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\sigma^2\)</span>, the mode of <span class="math inline">\(p\left(\beta | y, \sigma^{2}, \tau\right)\)</span> is the lasso estimate with penalty parameter <span class="math inline">\(\lambda=2 \tau \sigma\)</span>.</p>
-<p>A direct characterization of the posterior distribution <span class="math inline">\(p\left(\beta | y, \sigma^{2}, \tau\right)\)</span> does not require the inclusion of latent variables is constructed as follows.</p>
-<p>Let <span class="math inline">\(\mathcal{Z}=\{-1,1\}^{p}\)</span> represent the set of all <span class="math inline">\(2^p\)</span> possible p-vectors whose elements are <span class="math inline">\(\pm 1\)</span>. For any vector <span class="math inline">\(z \in \mathcal{Z}\)</span>, let <span class="math inline">\(\mathcal{O}_{z} \subset R^{p}\)</span> represent the corresponding orthant: if <span class="math inline">\(\beta \in \mathcal{O}_{z}\)</span>, then <span class="math inline">\(\beta_{j} \geqslant 0\)</span> if <span class="math inline">\(z_{j}=1\)</span> and <span class="math inline">\(\beta_{j}&lt;0\)</span> if <span class="math inline">\(z_{j}=-1\)</span>.</p>
-<blockquote>
-<p>所以说<span class="math inline">\(z_j\)</span>是<span class="math inline">\(\beta\)</span>正负的indicator？这么做有什么意义？orthant是什么意思？象限？这里指什么？j-维空间的元素-》对应<span class="math inline">\(\beta_j\)</span>和<span class="math inline">\(z_j\)</span>吗？</p>
-</blockquote>
-<p>Write the density function for the orthant-truncated normal distribution and its associated orthant integrals as
+<p><span class="math inline">\(m_{0}(\mathbf{y})=\int f_{0}(\mathbf{y} | \boldsymbol{\alpha}) \pi_{0}(\boldsymbol{\alpha}) d \boldsymbol{\alpha}\)</span>是<span class="math inline">\(M_j\)</span>模型的边际似然函数，模型<span class="math inline">\(M_j\)</span>和<span class="math inline">\(M_0\)</span>对应的模型先验是<span class="math inline">\(\pi_{j}\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{j}\right)\)</span>和<span class="math inline">\(\pi_{0}(\boldsymbol{\alpha})\)</span>.
+而这篇文章主要关注于讨论<span class="math inline">\(\pi_{j}\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{j}\right)\)</span>和<span class="math inline">\(\pi_{0}(\boldsymbol{\alpha})\)</span>的选取。</p>
+</div>
+</div>
+<div id="criteria-for-objective-model-selection-priors." class="section level2">
+<h2><span class="header-section-number">18.3</span> Criteria for objective model selection priors.</h2>
+<p>Jeffreys’s <em>desiderate</em>: precursors to the criteria developed herein.</p>
+<p>这篇文章把prior分成四类：basic,consistency criteria, predictive matching criteria and invariance criteria.</p>
+<div id="basic-criteria" class="section level3">
+<h3><span class="header-section-number">18.3.1</span> Basic criteria:</h3>
+<p>一般来说prior for <span class="math inline">\(\beta_i\)</span>应该是proper的，因为这些只出现在Bayes factors <span class="math inline">\(B_{i0}\)</span> 的分子中，如果使用了improper prior，improper prior对应的任意常数就没法消去了，使得<span class="math inline">\(B_{i0}\)</span>不是良定的。</p>
+<p>基于同样的原因，模糊的proper prior不能在<span class="math inline">\(B_{i0}\)</span>中使用。因为这个任意的模糊量会在Bayes factor中以乘的形式体现，使得Bayes factor也变成一个任意的量。
+所以有以下准则：
+Each conditional prior <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right)\)</span> must be proper(integrating to one) and cannot be arbitrarily vague in the sense of almost all of its mass being outside any believable compact set.</p>
+</div>
+<div id="consistency-criteria" class="section level3">
+<h3><span class="header-section-number">18.3.2</span> Consistency criteria</h3>
+<p>Following Liang et al(2008)考虑两个主要的consistency criteria: model selection consistency and information consistency:</p>
+<p>Criterion 2(Model selection consistency) If data y have been generated by <span class="math inline">\(M_i\)</span>, then the posterior probability of <span class="math inline">\(M_i\)</span> should converge to 1 as the sample size <span class="math inline">\(n\rightarrow\infty\)</span>.</p>
+<p>模型选择一致性不是特别有争议性，虽然有些时候真实模型并不是所有备选的模型中的一个。
+然后有一系列文献关心这个准则：</p>
+<pre><code>Fern´andez, Ley and Steel (2001),
+Berger, Ghosh and Mukhopadhyay (2003), Liang et al. (2008), Casella et al.
+(2009), Guo and Speckman (2009).</code></pre>
+<p>Criterion 3(Information consistency): For any model <span class="math inline">\(M_i\)</span>, if <span class="math inline">\(\{y_m,m=1,...\}\)</span> is a sequence of data vectors of fixed size such that, as <span class="math inline">\(m\rightarrow\infty\)</span>,
 <span class="math display">\[
-\mathrm{N}^{[z]}(\beta | m, S) \equiv \frac{\mathrm{N}(\beta | m, S)}{\mathrm{P}(z, m, S)} 1\left(\beta \in \mathcal{O}_{z}\right), \quad \mathrm{P}(z, m, S)=\int_{\mathcal{O}_{z}} \mathrm{N}(t | m, S) d t
+\Lambda_{i 0}\left(\mathbf{y}_{m}\right)=\frac{\sup _{\boldsymbol{\alpha}, \boldsymbol{\beta}_{i}} f_{i}\left(\mathbf{y}_{m} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right)}{\sup _{\boldsymbol{\alpha}} f_{0}\left(\mathbf{y}_{m} | \boldsymbol{\alpha}\right)} \rightarrow \infty \quad \text { then } B_{i 0}\left(\mathbf{y}_{m}\right) \rightarrow \infty
+\]</span>
+在正态误差的线性模型中，这个criteria等价于，如果考虑一系列的数据向量，对应的F(或t)统计量趋于无穷，那么Bayes factor也应该是一样的。</p>
+<p>Jeffreys(1961)使用了这个思路去验证Cauchy prior测试正态的均值是0, also been highlighted in</p>
+<pre><code>Berger and
+Pericchi (2001), Bayarri and Garc´ıa-Donato (2008), Liang et al. (2008).</code></pre>
+<p>可以构造一个Bayesian answer violates information consistency的例子，但是这个例子是非常小的sample sizes，然后先验有极端平的尾部。更多的，违反information consistency 会让频率和bayesian有非常大的冲突，可以被看成unattractive.</p>
+<p>第三类consistency用来表述objective model selection priors typically depend on specific featues of the model. 比如sample size或者考虑特殊的covariates。</p>
+<p>Criterion 4(Intrinsic prior consistency) Let <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}, n\right)\)</span> denote the prior for the model specific parameters of model <span class="math inline">\(M_i\)</span> with sample size n. Then as <span class="math inline">\(n\rightarrow \infty\)</span> and under suitable conditions on the evolution of the model with n, <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}, n\right)\)</span> should converge to a proper prior <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right)\)</span></p>
+<p>思想是模型的特征和样本大小frequently affect model selection priors, 比如一些特征应该在n很大时消失。如果存在一个这样的极限先验，就叫intrinsic prior, Berger and Pericchi(2001).</p>
+</div>
+<div id="predictive-matching-criteria." class="section level3">
+<h3><span class="header-section-number">18.3.3</span> 2.4 Predictive matching criteria.</h3>
+<p>如果一个先验的量级差了2，在一维的情况不会有很大区别，但是在50维的情况下，就会导致Bayes factor上差<span class="math inline">\(2^{50}\)</span>。</p>
+<p>Jeffreys 定义了 “minimal sample size” logically be unable to discriminate between two hypotheses, and argued that the prior distributions should be chosen to the yield equal marginal likelihoods for the two hypotheses.</p>
+<p>如果无法区分的两个hypotheses，那么选取的先验分布在这两个hypotheses下也应该得到相等的边际似然。</p>
+<p>例子：</p>
+<p><span class="math display">\[
+M_{1} : y \sim \frac{1}{\sigma} p_{1}\left(\frac{y-\mu}{\sigma}\right) \quad \text { and } \quad M_{2} : y \sim \frac{1}{\sigma} p_{2}\left(\frac{y-\mu}{\sigma}\right)
 \]</span></p>
-<p>Applying Bayes’ theorem to the lasso regression model, the posterior distribution is orthant-wise Gaussian,
-<span class="math display">\[
-p\left(\beta | y, \sigma^{2}, \tau\right)=\sum_{z \in \mathcal{Z}} \omega_{z} \mathrm{N}^{[z]}\left(\beta | \mu_{z}, \Sigma\right)
-\]</span>
-i.e. a collection of <span class="math inline">\(2^p\)</span> different normal distributions that are each restricted to a different orthant.</p>
-<blockquote>
-<p>所以这个象限确实是象限的意思看来。。。因为每个维度（数轴）由正负分成两个象限，然后这几个象限两两组合，所以<span class="math inline">\(2^p\)</span> 个不同的象限</p>
-</blockquote>
-<p>The covariance structure in each of the <span class="math inline">\(2^p\)</span> orthants is the same, <span class="math inline">\(\Sigma=\sigma^{2}\left(X^{\mathrm{T}} X\right)^{-1}\)</span>, whereas the location parameters depend on the orthants: <span class="math inline">\(\mu_{z}=\hat{\beta}_{\mathrm{OLS}}-\tau \sigma^{-1} \Sigma z\)</span>, where <span class="math inline">\(\hat{\beta}_{\mathrm{O} \mathrm{L} \mathrm{S}}=\left(X^{\mathrm{T}} X\right)^{-1} X^{\mathrm{T}} y\)</span>. The normalized weight for each orthant is</p>
-<p><span class="math display">\[
-\omega_{z}=\left\{\frac{\mathrm{P}\left(z, \mu_{z}, \Sigma\right)}{\mathrm{N}\left(0 | \mu_{z}, \Sigma\right)}\right\} /\left\{\sum_{z \in \mathcal{Z}} \frac{\mathrm{P}\left(z, \mu_{z}, \Sigma\right)}{\mathrm{N}\left(0 | \mu_{z}, \Sigma\right)}\right\}
-\]</span>
-Classic lasso prior has the similar posterior, the only change is that the location parameters become <span class="math inline">\(\mu_{z}=\hat{\beta}_{\mathrm{ous}}-\tau \Sigma z\)</span>.</p>
-<blockquote>
-<p>感觉这个想法很牛逼但是没搞懂为啥要这么做。。。。基于orthant的分布, orthant-truncated normal distribution</p>
-</blockquote>
-<p>如果可以计算multivariate normal orthant integrals, 后验分布可以被积出来或者sample出来当p很小的时候，那么久可以直接得到后验的inference，然后估计<span class="math inline">\(\sigma^2,\tau\)</span>的后验均值。对于很大的p，后验估计可以通过MCMC搞定。</p>
-<p><span class="math inline">\(\sigma^{-2} \sim \operatorname{Ga}(a, b)\)</span>,<span class="math inline">\(\tau \sim \operatorname{Ga}(r, s)\)</span>.</p>
+<p>Definition 1. The model/prior pairs <span class="math inline">\(\{M_i,\pi_i\}\)</span> and <span class="math inline">\(\{M_j,\pi_j\}\)</span> are <em>predictive matching</em> at sample size <span class="math inline">\(n^*\)</span> if the predictive distributions <span class="math inline">\(m_{i}\left(\mathbf{y}^{*}\right)\)</span> and <span class="math inline">\(m_{j}\left(\mathbf{y}^{*}\right)\)</span> are close in terms of some distance measure for data of that sample size. The model/prior pairs <span class="math inline">\(\{M_i,\pi_i\}\)</span> and <span class="math inline">\(\{M_i,\pi_i\}\)</span> and <span class="math inline">\(\{M_j,\pi_j\}\)</span> are exact predictive matching at sample size <span class="math inline">\(n^*\)</span> if <span class="math inline">\(m_{i}\left(\mathbf{y}^{*}\right)=m_{j}\left(\mathbf{y}^{*}\right)\)</span> for all <span class="math inline">\(\mathbf{y}^*\)</span> of sample size <span class="math inline">\(n^*\)</span>.</p>
+<p><em>Predictive matching at sample size <span class="math inline">\(n^*\)</span>.</em>
+一组模型和先验被称为 predictive matching at sample size <span class="math inline">\(n^*\)</span>,如果预测分布<span class="math inline">\(m_i(\boldsymbol y^*)\)</span> 和 <span class="math inline">\(m_j(\boldsymbol y^*)\)</span>基于此样本量，距离测度非常靠近。如果是 exact predictive matching at sample size <span class="math inline">\(n^*\)</span> 如果 <span class="math inline">\(m_{i}\left(\mathbf{y}^{*}\right)=m_{j}\left(\mathbf{y}^{*}\right)\)</span>. 也就是之前是靠的很近，exact是完全相等。</p>
+<p>Definition 2 (Minimal training sample). A minimal training sample <span class="math inline">\(\boldsymbol y_i^*\)</span> for <span class="math inline">\(\{M_i,\pi_i\}\)</span> is a sample of minimal size <span class="math inline">\(n^*_i\geq 1\)</span> with a finite nonzero marginal density <span class="math inline">\(m_i(\boldsymbol y_i^*)\)</span>.</p>
+<p>Definition 3 (Null predictive matching). The model selection priors are <em>null predictive matching</em> if each of the model/prior pairs <span class="math inline">\(\{M_i,\pi_i\}\)</span> and <span class="math inline">\(\{M_0,\pi_0\}\)</span> are exact predictive matching for all minimal training samples <span class="math inline">\(\boldsymbol y^*_i\)</span> for <span class="math inline">\(\{M_i,\pi_i\}\)</span></p>
+<p>就是把j改成对null model成立。</p>
+<p>Definition 4 (Dimensional predictive matching). The model selection priors are dimensional predictive matching if each of the model/prior pairs <span class="math inline">\(\{M_i.\pi_i\}\)</span> and <span class="math inline">\(\{M_j,\pi_j\}\)</span> of the same complexity/dimension (i.e., <span class="math inline">\(k_i=k_j\)</span>) are exact predictive matching for all minimal training samples <span class="math inline">\(\boldsymbol y_i^*\)</span> for models of that dimension.</p>
+<p>只要是同样维度的模型，就match，是dimensional predictive matching所描述的问题。</p>
 </div>
-<div id="posterior-based-estimation-and-prediction" class="section level3">
-<h3><span class="header-section-number">8.3.2</span> Posterior-based estimation and prediction</h3>
-<p>Strictly speaking, when <span class="math inline">\(\beta \in R^{p}\)</span>, this interpretation is not correct: under this loss function, the expected posterior loss is equal to one for all <span class="math inline">\(b \in R^{p}\)</span> and so any point <span class="math inline">\(b \in R^{p}\)</span> is a suitable <span class="math inline">\(\hat b\)</span>. The posterior mode can, though, be interpreted as the limit of a sequence of Bayes rules. The posterior mode can, though, be interpreted as the limit of a sequence of Bayes rules. Consider the sequence of loss functions <span class="math inline">\(l_{\varepsilon}(b, \beta)=1-1\left\{\beta \in B_{\varepsilon(b)}\right\}\)</span>, where the indicator function equals one if an <span class="math inline">\(\epsilon-\)</span>ball centred at <span class="math inline">\(b\)</span> contains <span class="math inline">\(\beta\)</span> and is zero otherwise. In the limit as <span class="math inline">\(\epsilon \rightarrow 0\)</span>, the sequence of Bayes-optimal estimators <span class="math inline">\(\hat{b}_{\varepsilon}\)</span> converges to the posterior mode.</p>
-<blockquote>
-<p>这一段没懂，怎么就和0-1损失函数等价了，而且对于<span class="math inline">\(\beta\in R^p\)</span> 为啥不成立，而且这个sequence的loss function是什么意思？要去看Bernardo&amp;Smith,2000,pp. 257-258吗。。</p>
-</blockquote>
-<p>给定<span class="math inline">\(\beta\)</span>的点估计<span class="math inline">\(\hat\beta\)</span>,接下来要考虑的问题就是预测问题<span class="math inline">\(\tilde y\)</span> with given new value <span class="math inline">\(\tilde X\)</span>,是<span class="math inline">\(\tilde X\hat \beta\)</span>.而对于贝尔意思问题，就是考虑y的边际分布<span class="math inline">\(p\left(\tilde{y} | y, \sigma^{2}, \tau\right)=\int p\left(\tilde{y} | y, \beta, \sigma^{2}, \tau\right) p\left(\beta | y, \sigma^{2}, \tau\right) d \beta\)</span>. 对于回归问题，posterior predictive mean is <span class="math inline">\(E\left(\tilde{y} | y, \sigma^{2}, \tau\right)=\tilde{X} E\left(\beta | y, \sigma^{2}, \tau\right)\)</span>. 所以posterior mean同时可以促进点估计和预测。（Bayes 后验这套对参数的点估计和预测都有用？）
-而对于0-1损失函数这套不成立，后验估计分布的最高点不一定是<span class="math inline">\(\tilde{X} \hat{\beta}_{\mathrm{L}}\)</span>. 最基础的lasso预测，如果预测是在一列0-1损失函数上得出的，需要使用数值优化方法极大化<span class="math inline">\(p\left(\tilde{y} | y, \sigma^{2}, \tau\right)\)</span>.</p>
+<div id="invariance-criteria" class="section level3">
+<h3><span class="header-section-number">18.3.4</span> Invariance criteria</h3>
+<p>model selection is invariance to the units of measurement being used:</p>
+<p>Criterion 6(Measurement invariance). The units of measurement used for the observations or model parameters should not affect Bayesian answers.</p>
+<p>More generally, model structures are invariant to group fransformations.</p>
+<p>Definition 5. The family of densities for <span class="math inline">\(\mathbf{y} \in \mathbb{R}^{n}, \mathfrak{F} :=\{f(\mathbf{y} | \boldsymbol{\theta}) : \boldsymbol{\theta} \in \Theta\}\)</span> is said to be <em>invariant under the group of transformations</em> <span class="math inline">\(G :=\left\{g : \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}\right\}\)</span> if, for every <span class="math inline">\(g \in \mathfrak{G}\)</span> and <span class="math inline">\(\theta \in \Theta\)</span>, there exists a unique <span class="math inline">\(\theta^*\in \Theta\)</span> such that <span class="math inline">\(X=g(Y)\)</span> has density <span class="math inline">\(f\left(\mathbf{x} | \boldsymbol{\theta}^{*}\right) \in \mathfrak{F}\)</span>. In such a situation, <span class="math inline">\(\theta^*\)</span> will be denoted <span class="math inline">\(\overline g(\theta)\)</span>.</p>
+<p>Criterion 7(Group invariance). If all models are invariant under a group of transformations <span class="math inline">\(G_0\)</span>, then the conditional distributions, <span class="math inline">\(\pi(\beta_i|\alpha)\)</span>, should be chosen in such a way that the conditional marginal distributions
+<span class="math display">\[
+f_{i}(\mathbf{y} | \boldsymbol{\alpha})=\int f_{i}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right) \pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right) d \boldsymbol{\beta}_{i}
+\]</span></p>
 </div>
-<div id="the-univariate-case." class="section level3">
-<h3><span class="header-section-number">8.3.3</span> The univariate case.</h3>
-<p>Pericchi &amp; Smith (1992)引进了<span class="math inline">\(\beta\)</span>的一种后验估计方法，单变量，intercept only， normal mean. For fixed <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau\)</span>, the univariate posterior is
-<span class="math display">\[
-p\left(\beta | y, \sigma^{2}, \tau\right)=w \mathrm{N}^{-}\left(\beta | \mu_{-}, v^{2}\right)+(1-w) \mathrm{N}^{+}\left(\beta | \mu_{+}, v^{2}\right)
-\]</span>
-where <span class="math inline">\(N^{-}\)</span> and <span class="math inline">\(N^+\)</span> correspond to <span class="math inline">\(N^{[z]}\)</span> for <span class="math inline">\(z=-1\)</span> and <span class="math inline">\(z=1\)</span>,respectively. The common scale term is <span class="math inline">\(v^{2}=\sigma^{2}\left(x^{\mathrm{T}} x\right)^{-1}\)</span>, and the two location parameters are <span class="math inline">\(\mu_{+}=\hat{\beta}_{\mathrm{ols}}-\tau \sigma^{-1} v^{2}\)</span> and <span class="math inline">\(\mu_{-}=\hat{\beta}_{\mathrm{ols}}+\tau \sigma^{-1} v^{2}\)</span>. The weight is</p>
+</div>
+<div id="objective-prior-distributions-for-variable-selection-in-normal-linear-models." class="section level2">
+<h2><span class="header-section-number">18.4</span> Objective prior distributions for variable selection in normal linear models.</h2>
+<div id="introduction-14" class="section level3">
+<h3><span class="header-section-number">18.4.1</span> Introduction</h3>
+<p>Variable selection in normal linear models.</p>
 <p><span class="math display">\[
-w=\frac{\Phi\left(\frac{-\mu_{-}}{v}\right) / \mathrm{N}\left(0 | \mu_{-}, v^{2}\right)}{\Phi\left(\frac{-\mu_{-}}{v}\right) / \mathrm{N}\left(0 | \mu_{-}, v^{2}\right)+\Phi\left(\frac{\mu_{+}}{v}\right) / \mathrm{N}\left(0 | \mu_{+}, v^{2}\right)}
-\]</span>
-where <span class="math inline">\(\Phi(\cdot)\)</span> is the standard normal cumulative distribution function.
+\begin{aligned} M_{0} : f_{0}\left(\mathbf{y} | \boldsymbol{\beta}_{0}, \sigma\right) &amp;=\mathcal{N}_{n}\left(\mathbf{y} | \mathbf{X}_{0} \boldsymbol{\beta}_{0}, \sigma^{2} \mathbf{I}\right) \\ M_{i} : f_{i}\left(\mathbf{y} | \boldsymbol{\beta}_{i}, \boldsymbol{\beta}_{0}, \sigma\right) &amp;=\mathcal{N}_{n}\left(\mathbf{y} | \mathbf{X}_{0} \boldsymbol{\beta}_{0}+\mathbf{X}_{i} \boldsymbol{\beta}_{i}, \sigma^{2} \mathbf{I}\right), \quad i=1, \ldots, 2^{p}-1 \end{aligned}
+\]</span></p>
+<p>Zellner and Siow (1980) common objective estimation priors for <span class="math inline">\(\alpha\)</span> and multivariate Cauchy priors for <span class="math inline">\(\pi_i(\beta_i|\alpha)\)</span>, centered at zero and with prior scale matrix <span class="math inline">\(\sigma^{2} n\left(\mathbf{X}_{i}^{\prime} \mathbf{X}_{i}\right)^{-1}\)</span>; Zellner (1986) use similar scale matrix called “g-prior”.</p>
+</div>
+<div id="proposed-prior-the-robust-prior" class="section level3">
+<h3><span class="header-section-number">18.4.2</span> Proposed prior (the “robust prior”)</h3>
+<p>Under model <span class="math inline">\(M_i\)</span>, the prior is of the form
 <span class="math display">\[
-E\left(\beta | y, \sigma^{2}, \tau\right)=\hat{\beta}_{\mathrm{OLS}}+\tau \sigma^{-1} v^{2}\{w-(1-w) \}
+\begin{aligned} \pi_{i}^{R}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right) &amp;=\pi\left(\boldsymbol{\beta}_{0}, \sigma\right) \times \pi_{i}^{R}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right) \\ &amp;=\sigma^{-1} \times \int_{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \boldsymbol{\Sigma}_{i}\right) p_{i}^{R}(g) d g \end{aligned}
 \]</span>
-denote as <span class="math inline">\(\hat\beta_B\)</span>.Because <span class="math inline">\(-1 \leqslant w-(1-w) \leqslant 1\)</span>, the effect of the prior on the posterior mean relative to the least-squares estimate is bounded, <span class="math inline">\(\left|\hat{\beta}_{\mathrm{B}}-\hat{\beta}_{\mathrm{O} \mathrm{LS}}\right| \leqslant \tau \sigma\left(x^{\mathrm{T}} x\right)^{-1}\)</span>, and the bound is controlled by the amount of penalization.</p>
-<p><span class="math display">\[
-p\left(\tilde{y} | y, \sigma^{2}, \tau\right)=w\left\{\frac{\Phi\left(\frac{-\tilde{\mu}_{-}}{\tilde{v}}\right)}{\Phi\left(\frac{-\mu_{-}}{v}\right)} \mathrm{N}\left(\tilde{y} | \tilde{x} \mu_{-}, \tilde{\sigma}^{2}\right)\right\}+(1-w)\left\{\frac{\Phi\left(\frac{\tilde{\mu}_{+}}{\tilde{v}}\right)}{\Phi\left(\frac{\mu_{+}}{v}\right)} \mathrm{N}\left(\tilde{y} | \tilde{x} \mu_{+}, \tilde{\sigma}^{2}\right)\right\}
+where <span class="math inline">\(\mathbf{\Sigma}_{i}=\operatorname{Cov}\left(\hat{\boldsymbol{\beta}}_{i}\right)=\sigma^{2}\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\)</span> is the covariance of the maximum likelihood estimator of <span class="math inline">\(\beta_i\)</span>, with
+<span class="math display">\[
+\mathbf{V}_{i}=\left(\mathbf{I}_{n}-\mathbf{X}_{0}\left(\mathbf{X}_{0}^{t} \mathbf{X}_{0}\right)^{-1} \mathbf{X}_{0}^{t}\right) \mathbf{X}_{i}
 \]</span>
-where <span class="math inline">\(\tilde{v}^{2}=v^{2} /\left\{1+\tilde{x}^{2} /\left(x^{\mathrm{T}} x\right)\right\}, \tilde{\sigma}^{2}=\sigma^{2}\left\{1+\tilde{x}^{2} /\left(x^{\mathrm{T}} x\right)\right\}\)</span>.
 and
 <span class="math display">\[
-\tilde{\mu}_{+}=\left(\frac{\tilde{x} \tilde{y}+x^{\mathrm{T}} y-\sigma \tau}{\tilde{x}^{2}+x^{\mathrm{T}} x}\right), \quad \tilde{\mu}_{-}=\left(\frac{\tilde{x} \tilde{y}+x^{\mathrm{T}} y+\sigma \tau}{\tilde{x}^{2}+x^{\mathrm{T}} x}\right)
+p_{i}^{R}(g)=a\left[\rho_{i}(b+n)\right]^{a}(g+b)^{-(a+1)} 1_{\left\{g&gt;\rho_{i}(b+n)-b\right\}}
+\]</span>
+<span class="math display">\[
+\text { with } a&gt;0, b&gt;0 \quad \text { and } \quad \rho_{i} \geq \frac{b}{b+n}
 \]</span></p>
-<p><img src="chp9/Figure1.png" width="532" /></p>
+<p>Under these condition, the <span class="math inline">\(p_i^R(g)\)</span> is a proper density, and <span class="math inline">\(g\)</span> is positive, so that <span class="math inline">\(\pi_i^R(\beta_i|\beta_0,\sigma)\)</span> is proper, satisfying the first part of the Basic criterion.</p>
+<p><span class="math inline">\(p_i^R(g)\)</span>是proper prior</p>
+<p><span class="math display">\[
+a[\rho_i(b+n)]^a(g+b)^{-(a+1)}1_{\{g&gt;\rho_i(b+n)-b\}}
+\]</span>
+with <span class="math inline">\(a&gt;0,b&gt;0\)</span> and <span class="math inline">\(\rho_i\geq\frac{b}{b+n}\)</span>.
+所以
+<span class="math inline">\(\rho_i(b+n)-b\geq 0\)</span>
+然后对g的prior进行积分的话，积分下限就从0，变成<span class="math inline">\(\rho_i(b+n)-b\geq 0\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+&amp;\int _{\rho_i(b+n)-b}^\infty a[\rho_i(b+n)]^a (g+b)^{-(a+1)}dg\\
+=&amp; a[\rho_i(b+n)]^a \left (-\frac{1}{a}(g+b)^{-a}\right)|^{\infty}_{\rho_i(b+n)-b}\\
+=&amp;a[\rho_i(b+n)]^a\left(\frac{1}{a}(\rho_i(b+n))^{-a}\right)\\
+=&amp;1
+\end{align}
+\]</span>
+所以是proper prior.
+但是<span class="math inline">\(\beta_i\)</span>的积分为1应该怎么写。。。
+<span class="math display">\[
+\begin{align}
+&amp;\int ^{\infty}_{-\infty} \sigma^{-1} \left( \int _{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \mathbf{\Sigma}_{i}\right) p_i^R(g)dg \right)d\boldsymbol\beta_i\\
+=&amp; \int ^{\infty}_{-\infty} \sigma^{-1} \left( \int _{0}^{\infty}(2\pi)^{-\frac{k_i}{2}}|g\Sigma|^{-\frac{1}{2}}exp(-\frac{1}{2}(\beta_i)^T(g\Sigma_i)^{-1}(\beta_i))\\
+\cdot a\left[\rho_{i}(b+n)\right]^{a}(g+b)^{-(a+1)} 1_{\left\{g&gt;\rho_{i}(b+n)-b\right\}} dg\right)d\beta_i
+\end{align}
+\]</span></p>
+<p>Result 1. The <em>conditional marginals</em>
+<span class="math display">\[
+f_{i}\left(\mathbf{y} | \boldsymbol{\beta}_{0}, \sigma\right)=\int \mathcal{N}_{n}\left(\mathbf{y} | \mathbf{X}_{0} \boldsymbol{\beta}_{0}+\mathbf{X}_{i} \boldsymbol{\beta}_{i}, \sigma^{2} \mathbf{I}\right) \pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right) d \boldsymbol{\beta}_{i}
+\]</span>
+are invariant under <span class="math inline">\(G_0\)</span> if and only if <span class="math inline">\(\pi(\beta_i|\beta_0,\sigma)\)</span> has the form:<span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right)=\sigma^{-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)\)</span>,<span class="math inline">\(h_i\)</span> is any proper density with support <span class="math inline">\(\mathcal R^k\)</span>. For example, the robust prior is a particular case with
+<span class="math display">\[
+h_{i}^{R}(\mathbf{u})=\int \mathcal{N}_{k_{i}}\left(\mathbf{u} | \mathbf{0}, g\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\right) p_{i}^{R}(g) d g.
+\]</span>
+基于Group invariance criterion, 以上结论导出了，条件on common parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\beta_i\)</span> must be scaled by <span class="math inline">\(\sigma\)</span>, centered at zero and not depend on <span class="math inline">\(\beta_0\)</span>. Robust prior 满足Group invariance criterion.</p>
+<p>right-Haar density for the common parameters <span class="math inline">\((\beta_0,\sigma)\)</span>, namely
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\beta}_{0}, \sigma\right)=\pi^{H}\left(\boldsymbol{\beta}_{0}, \sigma\right)=\sigma^{-1}
+\]</span></p>
+<p>The overall model prior would be of the form
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)
+\]</span></p>
+<p>Result 2. For <span class="math inline">\(M_i\)</span>, let the prior <span class="math inline">\(\pi_i(\beta_0,\beta_i,\sigma)\)</span> be of the form like previous part, where <span class="math inline">\(h_i\)</span> is symmetric about zero. Then all model/prior pairs <span class="math inline">\(\{M_i,\pi_i\}\)</span> are exact predictive matching for <span class="math inline">\(n^*=k_0+1\)</span>.</p>
+<p>Group invariance criterion and Predictive matching criterion imply that model selection priors should be of the form <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)\)</span>, with <span class="math inline">\(h_i\)</span> symmetric about zero. Robust prior satisfies these criteria as robust prior is clearly symmetric about zero.
+任何scale of Normal mixture 也满足这些criteria, 因为 <span class="math inline">\(h(\cdot)\)</span> 是关于0对称的。</p>
+<div id="justification-of-the-prior-for-the-model-specific-parameters" class="section level4">
+<h4><span class="header-section-number">18.4.2.1</span> Justification of the prior for the model specific parameters</h4>
+<p>Result 3. For <span class="math inline">\(M_i\)</span>, let the prior be as in <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)\)</span> form, where <span class="math inline">\(h_i\)</span> is the scale mixture of normals in <span class="math inline">\(h_{i}^{R}(\mathbf{u})=\int \mathcal{N}_{k_{i}}\left(\mathbf{u} | \mathbf{0}, g\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\right) p_{i}^{R}(g) d g\)</span>. The priors are then null predictive matching and dimensional predictive matching for samples of size <span class="math inline">\(k_0+k_i\)</span>, and no choice of the conditional scale matrix other than <span class="math inline">\(\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\)</span> (or a multiple) can achieve this predictive matching.</p>
+<p>这里是surprising 的结论，predictive matching result for larger sample sizes <span class="math inline">\((k_0+k_i)\)</span> than are encountered in typical predictive matching results. 这个结论只在scale matrices proportional to <span class="math inline">\(\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\)</span>时成立。</p>
 </div>
 </div>
-<div id="posterior-inference-via-gibbs-sampling" class="section level2">
-<h2><span class="header-section-number">8.4</span> Posterior Inference via Gibbs sampling</h2>
-<div id="the-standard-gibbs-sampler." class="section level3">
-<h3><span class="header-section-number">8.4.1</span> The standard Gibbs sampler.</h3>
-<p>Update each parameter one at a time, conditionally on all other parameters. The full conditional distributions with details as</p>
-<p><span class="math display">\[
-\begin{aligned} p\left(\beta_{j} | \beta_{-j}, \sigma^{2}, \tau, y\right) &amp;=\phi_{j} \mathrm{N}^{+}\left(\beta_{j} | \mu_{j .}^{+}, \omega_{j j}^{-1}\right)+\left(1-\phi_{j}\right) \mathrm{N}^{-}\left(\beta_{j} | \mu_{j .}^{-}, \omega_{j j}^{-1}\right) \\ p\left(\sigma^{2} | \beta, \tau, y\right) &amp; \propto\left(\sigma^{2}\right)^{-\left(a^{*}+1\right)} \exp \left(-b^{*} / \sigma^{2}-\tau\|\beta\|_{1} / \sigma\right) \\ p\left(\tau | \beta, \sigma^{2}, y\right) &amp;=\mathrm{Ga}\left(\tau | p+r, \sigma^{-1}\|\beta\|_{1}+s\right) \end{aligned}
-\]</span>
-with parameter:
-<span class="math inline">\(a^{*}=(n+p) / 2+a\)</span>,<span class="math inline">\(b^{*}=(y-X \beta)^{\mathrm{T}}(y-X \beta) / 2+b\)</span>,
+<div id="choosing-the-hyperparameters-for-p_irg" class="section level3">
+<h3><span class="header-section-number">18.4.3</span> Choosing the hyperparameters for <span class="math inline">\(p_i^R(g)\)</span></h3>
+<div id="introduction." class="section level4">
+<h4><span class="header-section-number">18.4.3.1</span> Introduction.</h4>
+<p>Bayes factor of <span class="math inline">\(M_i\)</span> to <span class="math inline">\(M_0\)</span> can be expressed by
 <span class="math display">\[
-\mu_{j .}^{+}=\hat{\beta}_{\mathrm{OLS}, j}+\left\{\sum_{i \neq j}\left(\hat{\beta}_{\mathrm{OLS}, i}-\beta_{i}\right)\left(\omega_{i j} / \omega_{j j}\right)\right\}+\left(-\tau \sigma^{-1} \omega_{j j}^{-1}\right)
+B_{i 0}=Q_{i 0}^{-\left(n-k_{0}\right) / 2} \frac{2 a}{k_{i}+2 a}\left[\rho_{i}(n+b)\right]^{-k_{i} / 2} \mathrm{AP}_{i}
 \]</span>
-<span class="math inline">\(w_{ij}\)</span> is the ijth element of <span class="math inline">\(\Omega=\Sigma^{-1}\)</span>.The weights are
+in this case, <span class="math inline">\(AP_i\)</span> is the hypergeometric function of two variables, or Apell hypergeometric function
 <span class="math display">\[
-\phi_{j}=\left\{\frac{\Phi\left(\mu_{j}^{+} \cdot \sqrt{\omega}_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}\right\} /\left\{\frac{\Phi\left(\mu_{j}^{+} \vee \omega_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}+\frac{\Phi\left(-\mu_{j}^{-} \vee \omega_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{-}, \omega_{j j}^{-1}\right)}\right\}
+\mathrm{AP}_{i}=\mathrm{F}_{1}\left[a+\frac{k_{i}}{2} ; \frac{k_{i}+k_{0}-n}{2}, \frac{n-k_{0}}{2} ; a+1+\frac{k_{i}}{2} ; \frac{(b-1)}{\rho_{i}(b+n)} ; \frac{b-Q_{i 0}^{-1}}{\rho_{i}(b+n)}\right]
+\]</span>
+and <span class="math inline">\(Q_{i 0}=\mathrm{SSE}_{i} / \mathrm{SSE}_{0}\)</span> is the ratio of the sum of squared errors of models <span class="math inline">\(M_i\)</span> and <span class="math inline">\(M_0\)</span>.</p>
+<p>有一个closed form of Bayes factor不是必须的，但是当处理<span class="math inline">\(2^p\)</span>个模型的问题时，一个closed form of Bayes factor会非常有用。</p>
+<p>建议的超参数是<span class="math inline">\(a=1/2,b=1\)</span> and <span class="math inline">\(\rho_{i}=\left(k_{i}+k_{0}\right)^{-1}\)</span>.</p>
+</div>
+<div id="implications-of-the-consistency-criteria." class="section level4">
+<h4><span class="header-section-number">18.4.3.2</span> Implications of the consistency criteria.</h4>
+<p>一致性准则提供了一个值得考虑的知道关于如何选取 a,b 和 <span class="math inline">\(\rho_i\)</span>. 特别的，可以导出如下结论</p>
+<p>Result 4. The three consistency criterion are satisfied by the robust prior if a and <span class="math inline">\(\rho_i\)</span> do not depend on n, <span class="math inline">\(\lim _{n \rightarrow \infty} \frac{b}{n}=c \geq 0\)</span>,<span class="math inline">\(\lim _{n \rightarrow \infty} \rho_{i}(b+n)=\infty \text { and } n \geq k_{i}+k_{0}+2 a\)</span>.</p>
+<p><em>Use of model selection consistency</em></p>
+<p>假设<span class="math inline">\(M_i\)</span> 是真实模型，考虑任意其他模型<span class="math inline">\(M_j\)</span>.一个关键性的假设关于模型选择一致性是，asymptotically, the design matrices are such that the models are differentiated, in the sense that
+<span class="math display">\[
+\lim _{n \rightarrow \infty} \frac{\boldsymbol{\beta}_{i}^{t} \mathbf{V}_{i}^{t}\left(\mathbf{I}-\mathbf{P}_{j}\right) \mathbf{V}_{i} \boldsymbol{\beta}_{i}}{n}=b_{j} \in(0, \infty)
+\]</span>
+where <span class="math inline">\(\mathbf{P}_{j}=\mathbf{V}_{j}\left(\mathbf{V}_{j}^{t} \mathbf{V}_{j}\right)^{-1} \mathbf{V}_{j}^{t}\)</span>.</p>
+<p>Result 5. Suppose the formula upon is satisfied and that the priors <span class="math inline">\(\pi_i(\beta_0,\beta_i,\sigma)\)</span> are of the form (15), with <span class="math inline">\(h_{i}(\mathbf{u})=\int \mathcal{N}_{k_{i}}\left(\mathbf{u} | \mathbf{0}, g\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\right) p_{i}(g) d g\)</span>. If the <span class="math inline">\(p_i(g)\)</span> are proper densities such that
+<span class="math display">\[
+\lim _{n \rightarrow \infty} \int_{0}^{\infty}(1+g)^{-k_{i} / 2} p_{i}(g) d g=0
+\]</span>
+model selection consistency will result.</p>
+<p>Corollary 1. The prior distributions in <span class="math inline">\(\begin{aligned} \pi_{i}^{R}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right) &amp;=\pi\left(\boldsymbol{\beta}_{0}, \sigma\right) \times \pi_{i}^{R}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right) \\ &amp;=\sigma^{-1} \times \int_{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \boldsymbol{\Sigma}_{i}\right) p_{i}^{R}(g) d g \end{aligned}\)</span> are model selection consistent if
+<span class="math display">\[
+\lim _{n \rightarrow \infty} \rho_{i}(b+n)=\infty
 \]</span></p>
-<p>A description of a simple and efficient reject sampling method for obtaining exact samples from <span class="math inline">\(\sigma^2\)</span> is provided in the Appendix.</p>
-<p>When predictor variables are highly correlated, autocorrelation in the chain can be high. The usual solution of block-updating is not feasible because <span class="math inline">\(p\left(\beta | \sigma^{2}, \tau, y\right)\)</span> is difficult to sample when <span class="math inline">\(p\)</span> is even moderately large.</p>
-<blockquote>
-<p>注意到full conditional distribution里面，<span class="math inline">\(\beta_j\)</span> conditional on <span class="math inline">\(\beta_{-j}\)</span>.</p>
-</blockquote>
-<p>in 3.2, where a new Gibbs sampler is proposed that uses a reparameterization of the model to reduce autocorrelation. Even in the case of high autocorrelation, accurate estimates of the posterior mean of the regression coefficients can often be obtained under the standard Gibbs sampler via Rao-Blackwellization; at each iteration, the conditional expectation of <span class="math inline">\(\beta_j\)</span> is simply</p>
-<p><span class="math display">\[
-E\left(\beta_{j} | \beta_{-j}, \sigma^{2}, \tau, y\right)=\phi_{j}\left\{\mu_{j .}^{+}+\frac{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}{\Phi\left(\mu_{j}^{+} \cdot \sqrt{\omega_{j j}}\right)}\right\}+\left(1-\phi_{j}\right)\left\{\mu_{j .}^{-}-\frac{\mathrm{N}\left(0 | \mu_{j}^{-}, \omega_{j j}^{-1}\right)}{\Phi\left(-\mu_{j}^{-} \cdot \sqrt{\omega_{j j}}\right)}\right\}
+</div>
+<div id="choice-of-hyper-parameters" class="section level4">
+<h4><span class="header-section-number">18.4.3.3</span> choice of hyper-parameters</h4>
+<p>b=1 has a notable computational advantage.</p>
+<p>看不下去了。以后再看吧</p>
+</div>
+</div>
+</div>
+<div id="section-18.5" class="section level2">
+<h2><span class="header-section-number">18.5</span> 总结</h2>
+<p>重新理解摘要：在客观贝叶斯模型选择问题中，没有哪一个基准在决定客观先验时占主导地位。事实上，很多准则分别被提出来，并且应用在寻找合适的先验上。这篇文章formalize大部分常见的准则,并且放在一起形成了新的准则。结果导出新的客观模型选择先验拥有很多良好的性质。</p>
+<p>而且正常情况improper prior不能直接应用，导致无法简单的找到一个“vague proper priors”.(由于normalising constant的随意性)</p>
+<p>这篇文章使用的model selection 方法基于Bayes factor，使用后验概率来衡量模型的好坏：
+<span class="math display">\[
+\operatorname{Pr}\left(M_{i} | \mathbf{y}\right)=\frac{B_{i 0}}{1+\left(\sum_{j=1}^{N-1} B_{j 0} P_{j 0}\right)}
+\]</span></p>
+<p>然后给出了几个基本准则</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>基础准则： conditional prior <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right)\)</span> 必须是proper。</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>模型选择的一致性：当sample size <span class="math inline">\(n\rightarrow \infty\)</span>时，如果数据来自模型<span class="math inline">\(M_i\)</span>,那么<span class="math inline">\(M_i\)</span>的后验概率应该收敛到1.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>信息一致性：一个数据向量的序列<span class="math inline">\(\{\boldsymbol y_m,m=1,...\}\)</span>，维度固定，当<span class="math inline">\(m\rightarrow \infty\)</span>,有
+<span class="math display">\[
+\Lambda_{i 0}\left(\mathbf{y}_{m}\right)=\frac{\sup _{\boldsymbol{\alpha}, \boldsymbol{\beta}_{i}} f_{i}\left(\mathbf{y}_{m} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right)}{\sup _{\boldsymbol{\alpha}} f_{0}\left(\mathbf{y}_{m} | \boldsymbol{\alpha}\right)} \rightarrow \infty \quad \text { then } B_{i 0}\left(\mathbf{y}_{m}\right) \rightarrow \infty
+\]</span>
+等价的来说，一系列数据对应的F或者t统计量趋向于无穷，那么Bayes factor也一样。这个准则的目的是避免Bayes方法和frequency方法有冲突。一般而言我们往往不会关心和frequency方法有冲突的先验。</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>intrinsic prior consistency，如果一个先验和样本量n有关，那么当<span class="math inline">\(n\rightarrow\infty\)</span> 时，这个先验应该收敛到一个proper prior。</li>
+</ol></li>
+<li><ol start="5" style="list-style-type: decimal">
+<li>Predictive matching criteria: 很复杂，简单来说我的理解就是，如果数据量较小<span class="math inline">\(&lt;n^*\)</span>,没法把两个模型分开的话，就称这两个模型在样本量<span class="math inline">\(n^*\)</span>上predictive matching at sample size <span class="math inline">\(n^*\)</span>.</li>
+</ol></li>
+</ul>
+<p>模型选择先验应该对 appropriately defined “minimal sample size” in comparing <span class="math inline">\(M_i\)</span> with <span class="math inline">\(M_j\)</span>满足predictive matching.</p>
+<ul>
+<li><ol start="6" style="list-style-type: decimal">
+<li>Measurement invariance: 观测的单位和模型参数的单位不应该影响Bayes选择的结论。</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: decimal">
+<li>Group invariance，如果全部模型关于一个group of transformations <span class="math inline">\(G_0\)</span> invariant,那么条件分布 <span class="math inline">\(\pi_i(\beta_i|\alpha)\)</span>用某种方式选择使得条件边际分布
+<span class="math display">\[
+f_{i}(\mathbf{y} | \boldsymbol{\alpha})=\int f_{i}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right) \pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right) d \boldsymbol{\beta}_{i}
+\]</span>
+也关于<span class="math inline">\(G_0\)</span>不变。</li>
+</ol></li>
+</ul>
+<p>推荐的先验：或者叫“robust prior”:
+有这个形式:
+<span class="math display">\[
+\begin{aligned} \pi_{i}^{R}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right) &amp;=\pi\left(\boldsymbol{\beta}_{0}, \sigma\right) \times \pi_{i}^{R}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right) \\ &amp;=\sigma^{-1} \times \int_{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \boldsymbol{\Sigma}_{i}\right) p_{i}^{R}(g) d g \end{aligned}
+\]</span>
+同时也是g-prior,就是正态先验然后在方差那多个g，然后把g积掉。
+<span class="math inline">\(\boldsymbol{\Sigma}_{i}=\operatorname{Cov}\left(\hat{\boldsymbol{\beta}}_{i}\right)=\sigma^{2}\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\)</span> 是covariance of the MLE for <span class="math inline">\(\beta_i\)</span> with
+<span class="math display">\[
+\mathbf{V}_{i}=\left(\mathbf{I}_{n}-\mathbf{X}_{0}\left(\mathbf{X}_{0}^{t} \mathbf{X}_{0}\right)^{-1} \mathbf{X}_{0}^{t}\right) \mathbf{X}_{i}
+\]</span>
+and
+<span class="math display">\[
+p_{i}^{R}(g)=a\left[\rho_{i}(b+n)\right]^{a}(g+b)^{-(a+1)} 1_{\left\{g&gt;\rho_{i}(b+n)-b\right\}}
+\]</span>
+with
+<span class="math display">\[
+a&gt;0, b&gt;0 \quad \text { and } \quad \rho_{i} \geq \frac{b}{b+n}.
+\]</span></p>
+<p>这个先验有很好的性质，比如其尾部表现和多元student分布一致。而先验尾部的厚度又和information consistency criteria息息相关。</p>
+<p>这里提出了一个更一般的形式：
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right)=\sigma^{-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)
+\]</span>
+robust prior是这个形式下的一种特殊情况
+<span class="math display">\[
+h_{i}^{R}(\mathbf{u})=\int \mathcal{N}_{k_{i}}\left(\mathbf{u} | \mathbf{0}, g\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\right) p_{i}^{R}(g) d g
+\]</span>
+而对于高斯模型的条件边际分布，是<span class="math inline">\(G_0\)</span>不变当且仅当先验有上文的那个general形式。</p>
+<p>如果先验有形式：
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)
+\]</span>
+那么当先验有如上形式时，任意模型和先验对<span class="math inline">\(\{M_i,\pi_i\}\)</span>是exacet predictive matching for <span class="math inline">\(n^*=k_0+1\)</span>。</p>
+<p>既然有那么好的形式，那另外一个问题也自然而然的产生了，对于robust prior, 超参数该如何选取？</p>
+<p>对于这个问题，consistency criteria可以指导超参数的选取。</p>
+<p>然后根据这个可以得出a,b,<span class="math inline">\(\rho_i\)</span>该满足的一系列条件。</p>
+<p>然而有了条件还不够，到底具体的该如何选取？</p>
+<p>满足一定的条件下，
+<span class="math display">\[
+a=1/2
 \]</span>
 .</p>
-<p>If the classic lasso prior is used in place, then the Gibbs for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau\)</span> are replaced by
+<p>b应该取的让<span class="math inline">\(b/n-&gt;c=0\)</span>，这样会比较flat tailed. 总的来说
 <span class="math display">\[
-\begin{aligned} p\left(\sigma^{2} | \beta, \tau, y\right) &amp;=\operatorname{IG}\left(\sigma^{2} | a+n / 2, b^{*}\right) \\ p\left(\tau | \beta, \sigma^{2}, y\right) &amp;=\mathrm{Ga}\left(\tau | p+r,\|\beta\|_{1}+s\right) \end{aligned}
+b=1
 \]</span></p>
-<blockquote>
-<p>这块不懂，得手推一下才能懂</p>
-</blockquote>
-</div>
-<div id="the-orthogonalized-gibbs-sampler" class="section level3">
-<h3><span class="header-section-number">8.4.2</span> The orthogonalized Gibbs sampler</h3>
-<p>A Gibbs sampler that is less sensitive to collinearity in the design matrix can be constructed as follows: Using the idea of ortogonally.</p>
-<p>Let <span class="math inline">\(\Sigma=\sigma^{2}\left(X^{\mathrm{T}} X\right)^{-1}\)</span> according to <span class="math inline">\(\sigma^{2} H^{\mathrm{T}}\left(X^{\mathrm{T}} X\right)^{-1} H=\sigma^{2} \Lambda=\sigma^{2} \operatorname{diag}\left(\lambda_{j}\right)\)</span>, where H is a <span class="math inline">\(p\times p\)</span> matrix such that <span class="math inline">\(H^{\mathrm{T}} H=H H^{\mathrm{T}}=I_{p}\)</span>. Transforming the regression coefficients as <span class="math inline">\(\eta=H^{\mathrm{T}} \beta\)</span>,</p>
+<p><span class="math inline">\(\rho_i\)</span>的选取应该是最复杂的，</p>
 <p><span class="math display">\[
-p\left(\eta | y, \sigma^{2}, \tau\right) \propto \sum_{z \in \mathcal{Z}} \frac{\mathrm{N}\left(\eta | H^{\mathrm{T}} \mu_{z}, \sigma^{2} \Lambda\right)}{\mathrm{N}\left(0 | \mu_{z}, \Sigma\right)} 1\left(H \eta \in \mathcal{O}_{z}\right)
+\left.\rho_{i} \text { must be a constant (independent of } n\right) \text { and } \rho_{i} \geq 1 /\left(1+k_{0}+k_{i}\right)
 \]</span></p>
-<p>Each element of the sum contains a term <span class="math inline">\(\mathrm{N}\left(\eta | H^{\mathrm{T}} \mu_{z}, \sigma^{2} \Lambda\right) 1\left(H \eta \in \mathcal{O}_{z}\right)\)</span>, a normal distribution with diagonal covariance matrix and support restricted by linear constraints.</p>
-<blockquote>
-<p>这段没懂，大概的意思是用一个H矩阵转换一下？</p>
-</blockquote>
-<p>While this distribution of <span class="math inline">\(\eta\)</span> is difficult to sample, then the full conditionals are piecewise normal on the intervals <span class="math inline">\(h_{0, j}^{*}&lt;\cdots&lt;h_{p+1, j}^{*} :\)</span></p>
+<p>….
+The choice <span class="math inline">\(\rho_{i}=1 /\left(k_{0}+k_{i}+1\right)\)</span> is the minimum value of <span class="math inline">\(\rho_i\)</span> and is, hence, certainly a candidate.</p>
+<p><span class="math inline">\(\rho_i=1/(k_0+k_i)\)</span>.</p>
+<p>总结，变量选择的方法：</p>
+<p>先验：
+<span class="math display">\[
+\pi_{i}^{R}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1} \times \int_{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \mathbf{\Sigma}_{i}\right) p_{i}^{R}(g) d g
+\]</span></p>
 <p><span class="math display">\[
-p\left(\eta_{j} | \eta_{-j}, \sigma^{2}, \tau, y\right)=\sum_{l=0}^{p} \rho_{l j}\left\{C_{l j}^{-1} \mathrm{N}\left(\eta_{j} | \xi_{l j}, \sigma^{2} \lambda_{j}\right) 1\left(h_{l, j}^{*} \leqslant \eta_{j}&lt;h_{l+1, j}^{*}\right)\right\}
-\]</span></p>
-<blockquote>
-<p>为什么成立。。。这个piecewise normal on the intervals.</p>
-</blockquote>
-</div>
-<div id="comparing-samplers" class="section level3">
-<h3><span class="header-section-number">8.4.3</span> Comparing samplers</h3>
-<p>Each of the three Gibbs samplers for this model has advantages and disadvantages.</p>
-<blockquote>
-<p>哪里来的三个！？ 一个传统Laplace prior，一个2008那个的prior，还有一个正交的？是这三个吗？</p>
-</blockquote>
-<p>The data-augmentation approach is simple to implement and performs a block update for the regression coefficients <span class="math inline">\(\beta\)</span>, but involves a vector of latent variables which may result in slower mixing of the chain.</p>
-<blockquote>
-<p>哦原来是这个，文中一开始提出的那个带正负号indicator的latent variable <span class="math inline">\(z\)</span> 的那个Gibbs sampler</p>
-</blockquote>
-<p>The standard Gibbs sampler describe above is also simple to implement, but its mixing properties are particularly sensitive to correlation among the predictor variables.</p>
-<blockquote>
-<p>就是在讲orthogonalized之前那个，就是最普通的Gibbs sampler？</p>
-</blockquote>
-<p>The orthogonalized sampler is designed to reduce autocorrelation in such cases, but this reduction comes with an increase in both algorithmic complexity and computing time for a fixed number of iterations.</p>
-<blockquote>
-<p>所以正交方法很复杂然后带来了额外的计算和额外的迭代？</p>
-</blockquote>
-<p>然后就是Efron的diabetes data, illustrate the trade-offs between the data-augmentation and orthogonalized samplers.data-augumentation的是最简单的模型，orthogonalized则是代表了最复杂的模型。两个抽样器都分别跑了100 000次。然后分析<span class="math inline">\(\tau\)</span> 和 <span class="math inline">\(\beta_5\)</span>.</p>
-<blockquote>
-<p>既然Gibbs都要100 000次，那么Random walk跑1 000 000次一点都不多吧orz</p>
-</blockquote>
-<p>因为<span class="math inline">\(\beta_5\)</span>对应着一个和其他predictor 高度相关的predictor。
-lag-1 自回归系数：0.31对于第一个模型，0.08对于orthogonalized方法。
-对于<span class="math inline">\(\tau\)</span> 则是0.74和0.13.所以虽然data-augumented Gibbs是一块一块更新<span class="math inline">\(\beta\)</span>的，但是orthogonalized sampler还是有更低的自相关性。</p>
-<p>但是orthogonalized sampler对于scale更敏感，加了40个白噪声predictor时，orthogonalized sampler要多跑20倍的时间。解决这个问题的一个策略是对于large-p，把<span class="math inline">\(\beta\)</span>分成两部分，一个是两两不怎么相关的predictor，一个是有复杂相关关系的结构，第一个则每次更新一个，第二个几何则应用orthogonalizing transformation。</p>
-</div>
-</div>
-<div id="examples" class="section level2">
-<h2><span class="header-section-number">8.5</span> Examples</h2>
-<div id="example1prediction-along-the-solution-path" class="section level3">
-<h3><span class="header-section-number">8.5.1</span> Example1:Prediction along the solution path</h3>
-<p>The solution path is indexed by <span class="math inline">\(s=\left\|\hat{\beta}_{\mathrm{L}}(\lambda)\right\|_{1} /\left\|\hat{\beta}_{\mathrm{OLS}}\right\|_{1} \in[0,1]\)</span> corresponding to the fraction of the <span class="math inline">\(L_1\)</span> norm of the least-squares estimate represnete by the lasso estimate at <span class="math inline">\(\lambda\)</span>.</p>
-<blockquote>
-<p>所以从这段来看The solution path就是那个关于latent variable<span class="math inline">\(\lambda\)</span>的图上的solution</p>
-</blockquote>
-<p>Large values of <span class="math inline">\(\lambda\)</span> represent high shrinkage and hence correspond to small values of <span class="math inline">\(s\)</span></p>
-<p>Along the path at <span class="math inline">\(l=1,...,50\)</span>, evenly space values in <span class="math inline">\([0,1]\)</span>, the corresponding penalty parameters <span class="math inline">\(\lambda_l\)</span> were determined. The lasso estimate at each value of <span class="math inline">\(\lambda_l\)</span> corresponds to the mode of the posterior distribution under piror with <span class="math inline">\(\tau=\lambda_{l} /\left(2 \sigma^{2}\right)\)</span>. Where <span class="math inline">\(\sigma^2\)</span> was fixed at an estimate based on a least-squares fit of the full model.</p>
-</div>
-<div id="example2-prediction-when-modelling-lambda" class="section level3">
-<h3><span class="header-section-number">8.5.2</span> Example2: Prediction when modelling <span class="math inline">\(\lambda\)</span></h3>
-<p>Several methods for choosing <span class="math inline">\(\lambda\)</span>:</p>
-<ul>
-<li>K-fold and generalized cross-validation</li>
-<li><span class="math inline">\(C_p\)</span>-type selection</li>
-<li>Empirical Bayes approach.</li>
-</ul>
-<p>Using 10-fold crossvalidation on the training data. Prediction error was calculated using the test data.</p>
-<p>We repeated this procedure T=10000 times.</p>
-<blockquote>
-<p>所以每次Bayes抽100000次，然后重复这个过程在10-fold cv，所以是10^6,然后再反复repeat 10000次，所以要重复10^10次抽样？</p>
-</blockquote>
-</div>
-</div>
-<div id="discussion" class="section level2">
-<h2><span class="header-section-number">8.6</span> Discussion</h2>
-<ul>
-<li>Better than standard lasso.</li>
-<li>Similar result</li>
-<li>Reduction in average prediction error of 16%,36%,19%</li>
-</ul>
-<p><a href="https://www.asc.ohio-state.edu/hans.11/software/">Software</a></p>
+\begin{array}{l}{\text { where } \boldsymbol{\Sigma}_{i}=\sigma^{2}\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}, \mathbf{V}_{i}=\left(\mathbf{I}_{n}-\mathbf{X}_{0}\left(\mathbf{X}_{0}^{t} \mathbf{X}_{0}\right)^{-1} \mathbf{X}_{0}^{t}\right) \mathbf{X}_{i}, \text { and }} \\ {\qquad p_{i}^{R}(g)=\frac{1}{2}\left[\frac{(1+n)}{\left(k_{i}+k_{0}\right)}\right]^{1 / 2}(g+1)^{-3 / 2} 1_{\left\{g&gt;\left(k_{i}+k_{0}\right)^{-1}(1+n)-1\right\}}}\end{array}
+\]</span>
+那么Bayes factor就有closed form：
+<span class="math display">\[
+\begin{aligned} B_{i 0}=&amp;\left[\frac{n+1}{k_{i}+k_{0}}\right]^{-k_{i} / 2} \\ &amp; \times \frac{Q_{i 0}^{-\left(n-k_{0}\right) / 2}}{k_{i}+1} _2 F_{1}\left[\frac{k_{i}+1}{2} ; \frac{n-k_{0}}{2} ; \frac{k_{i}+3}{2} ; \frac{\left(1-Q_{i 0}^{-1}\right)\left(k_{i}+k_{0}\right)}{(1+n)}\right] \end{aligned}
+\]</span>
+其中
+<span class="math inline">\(_{2} F_{1}\)</span>是standard hypergeometric function. and <span class="math inline">\(Q_{i 0}=\mathrm{SSE}_{i} / \mathrm{SSE}_{0}\)</span></p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-Hans:2009hc">
-<p>Hans, Chris. 2009. “Bayesian lasso regression.” <em>Biometrika</em> 96 (4): 835–45.</p>
 </div>
 </div>
             </section>
@@ -564,8 +677,8 @@ lag-1 自回归系数：0.31对于第一个模型，0.08对于orthogonalized方�
           </div>
         </div>
       </div>
-<a href="the-bayesian-lasso.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bayesian-analysis-of-joint-mean-and-covariance-models-for-longitudinal-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesvarsel-bayesian-testing-variable-selection-and-model-averaging-in-linear-models-using-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

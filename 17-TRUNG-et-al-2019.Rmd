@@ -1,0 +1,34 @@
+# Modeling local dependence in latent vector autoregressive models
+
+[@Tran:2019wq]
+
+## 英文摘要简介
+
+
+We propose a [Bayesian latent vector autoregressive(LVAR)] model to analyze [multivariate longitudinal] data of [binary and ordinal variables (items)] as a function of [a small number of continuous latent variables].
+
+We focus on the [evolution of the latent variables] while taking into account [the correlation structure of the responses].
+
+[Often local independence] is assumed in this context. Local independence implies that, given the latent variables, the responses are assumed mmutually independent cross-sectionally and longitudinally.
+
+但是在实践中latent variable作为条件可能不能移除responses的相关性。
+in practice conditioning on the latent variables may not remove the dependence of the response.
+
+We *address* local dependency **by further conditioning on** item-specific random effects.
+
+**A simulation study shows that wrongly assuming** local independence **may give biased estimates for** the regression coefficients of the LVAR process **as well as** the item-specific parameters.
+
+
+**Novel features of our proposal include**  1) correcting有偏估计的模型参数,特别是LVAR process的回归系数， 2) measuring the magnitude of local dependence. 测量局部相关性的量级。
+
+We applied our model on data obtained from []. The purpose was to examine the [values] of [oral health information] on top of [general health information].
+
+Varius applications in medicine, sociology, psychology, etc. require analyzing multivariate longitudinal data. In these applications, a set of subjects is repeatedly measured over time and the subject's condition is expressed by a number of correlated variables(items).
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+# Objective Bayesian Methods for Model Selection: Introduction and Comparison
+
+
+
+
+
+
+
+
+### 2.3 The Fractional Bayes Factor (FBF) Approach
+
+由于这个方法这篇文章的内容一时半会没看懂，于是去看 O'Hagan (1995)的了，为了避免未来（明后天？）写整理的时候忘掉，于是直接先写这部分的内容。
+
+这个方法是从上一节所描述的The Intrinsic Bayes Factor approach发展而来的。为了使minimal dataset构造出的proper prior性质比较好，所以最好用一些方法取遍$x(\ell)$。比如说平均，或者中位数等等方法。但是为了简化这个选取过程 Let $b=m/n$. If both m and n are large, the likelihood $f_i(y|\theta_i)$ based only n the training sample y will approximate to the full likelihood $f_i(y|\theta_i)$ raised to the power b. 
+$$
+\begin{array}{l}{\qquad B_{b}(\mathbf{x})=q_{1}(b, \mathbf{x}) / q_{2}(b, \mathbf{x})} \\ {\text { where }} \\ {\qquad q_{i}(b, \mathbf{x})=\frac{\int \pi_{i}\left(\theta_{i}\right) f_{i}\left(\mathbf{x} | \theta_{i}\right) \mathrm{d} \theta_{i}}{\int \pi_{i}\left(\theta_{i}\right) f_{i}\left(\mathbf{x} | \theta_{i}\right)^{b} \mathrm{d} \theta_{i}}}\end{array} 
+$$
+if the improper prior have the form $\pi_{i}\left(\boldsymbol{\theta}_{i}\right)=c_{i} h_{i}\left(\boldsymbol{\theta}_{i}\right)$, the indeterminate constant $c_i$ cancels out, leaving 
+$$
+q_{i}(b | \mathbf{x})=\frac{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \mathrm{d} \boldsymbol{\theta}_{i}}{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right)^{b} \mathrm{d} \boldsymbol{\theta}_{i}}
+$$
+
+所以上标$^b$就是字面意思power b，而不是标识。
+
+
+
+
+

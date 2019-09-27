@@ -1,0 +1,129 @@
+# A Review of Bayesian Variable Selection Methods: What, How and Which
+
+R.B. O'Hara and M.J.Sillanpaa
+[@OHara:2009in]
+
+## Abstract
+
+This paper concentrated on 
+
+- Kuo & Mallick method
+- Gibbs Variable Selection(GVS)
+- Stochastic Search Variable Selection (SSVS)
+- Adaptive shrinkage with Jeffreys' prior
+- Reversible jump MCMC
+- Laplacian prior, Bayesian lasso
+
+## Introduction
+$y_i$ for individual $i(i=1,...,N)$ using $p$ covariates with values $x_{i, j}, j=1, \dots, p$
+
+
+### Notation:
+$$
+y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
+$$
+$\alpha$ is the intercept and $e_{i} \sim N\left(0, \sigma^{2}\right)$ are the errors.
+
+Variable selection procedure can be seen as one of deciding which of the regression parameters, the $\theta_j$s, are equal to zero. 
+
+For example, $\theta_j$ should therefore have a "slab and spike" prior, can be found in [@Ishwaran:2005ir] and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
+Usually use auxiliary indicator to indicate presence and absence of covariate.
+That is, the parameter have two part, with defining as 
+$$
+\theta_j=I_j\beta_j
+$$
+The variable selection problem here becomes to estimate $I_j$ and $\beta_j$.
+
+
+
+### Concepts and Properties
+
+#### Sparseness
+
+The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.
+
+One measurement of sparsness is $P(I_j=1)$ (e.g. George and McCulloch 1993).
+
+And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.
+
+#### Tuning
+
+As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter. 
+Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains. 
+
+Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).
+
+"It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job."
+
+However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.
+
+Several methods may have issues in the marginal identifiability (confounding) of variables $I_j$ and $\beta_j$. 
+It may need monitor the posterior of the product $\theta_j=I_j\times\beta_j$. If $I_j$ and $\beta_j$ is independent, then, when $\beta_j$ is near 0,the likelihood could be almost identical for $I_j=1$ or $I_j=0$.
+
+#### Global adaptation
+
+A natural strategy for building model is put Normal prior on $\beta_j|(I_j=1)$.
+If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
+$\beta_j|(I_j=1)$ drawn from $N(0,\tau^2)$, where $\tau^2$ is an unknown parameter to be estimated.
+
+
+#### Local adaptation
+
+Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, $\beta_{j} |\left(I_{j}=1\right)$ is drawn from $N(0,\tau_j^2)$ instead of $\tau^2$.
+
+#### Bayesian Model Averaging
+
+The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of $I_j$.
+
+Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.
+
+
+### Variable Selection Methods
+
+#### Indicator model selection
+
+Directly set the slab, $\theta_j|(I_j=1)$ equal to $\beta_j$ and the spike, $\theta_j|(I_j=0)$ equal to 0. There are two methods in such approach, differing in the way treat $\beta_j|(I_j=0)$
+
+
+*Kuo & Mallick*: Simply set $\theta_j=I_j\beta_j$, assume indicators and effects are independent in prior. $P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)$.
+
+*GVS*: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling $\beta_{j} |\left(I_{j}=0\right)$ from a "pseudo-prior", that is, a prior distribution which has no effect on the posterior. This approach also set $\theta_{j}=I_{j} \beta_{j}$, but the indicator and effect are assumed to depen on each other. $P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)$, for example, a mixture prior is assumed for $\beta_j$:
+$P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)$.
+
+
+#### Stochastic search variable selection (SSVS)
+
+The spike is a narrow distribution concentrated around zero. Then in this case, the $\theta_j=\beta_j$ and the indicators affects the prior distribution of $\beta_j$. Then, $P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)$. 
+$$
+P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+$$
+
+#### Adaptive Shrinkage
+
+Instead of using indicator, specifying a prior directly on $\theta_j$ approximates the "slab and spike" shape.
+The prior should shrinking values of $\beta_j$ towards zero if there is no evidence in the data for non-zero values.
+
+The degree of sparseness of the model can be adjusted by changing the prior distribution of $\tau_j^2$.
+
+*Jeffreys' prior*. A scale invariant Jeffreys' prior, $P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}$.
+
+*Laplacian shrinkage*. Using an exponential prior for $\tau_j^2$ with a parameter $\mu$. More details see the Bayesian lasso literature.
+
+#### Model space approach
+
+The model before are developed through placing priors on the individual covariates $\theta_j$s. An alternative approach is place priors on $N_v$, the number of covariates selected in the model and their coefficients $\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)$.
+
+*Reversible jump MCMC* This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable $j$, and then proposing either addition to model or deleting from model. More details can be found in 
+
+
+
+
+
+![](https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png)
+
+
+
+
+
+
+

@@ -1,0 +1,162 @@
+# BayesVarSel: Bayesian Testing, Variable Selection and model averaging in Linear Models using R
+
+
+摘要
+介绍了使用BayesVarSel包进行主观Bayes的假设检验问题以及变量选择问题，并且提供了model average和prediction的工具。
+默认使用 *criteria-based-prior* by Bayarri et al (2012).
+
+introduction
+
+1.1 检验
+贝叶斯假设检验，例子是 检验两个总体的均值是否相等，给出了相应的代码和例子。
+第二个例子是回归参数的检验以及实例代码。
+
+1.2 Variable selection
+可以把Variable selection问题看成是一个multiple-test问题，比如有p个variables,那么模型选择就变成$2^p$ 个hypothesis test的问题
+用这个思路BayesVarSel包里有对应的函数Btest
+
+2. Basic Formulae
+考虑高斯线性模型
+$$
+M_{F} : \boldsymbol{y}=\boldsymbol{X}_{0} \boldsymbol{\alpha}+\boldsymbol{X} \boldsymbol{\beta}+\varepsilon, \boldsymbol{\varepsilon} \sim N_{n}\left(\mathbf{0}, \sigma^{2} \boldsymbol{I}_{n}\right)
+$$
+要做covariates 是否对回归有显著变化的test，那么就考虑和null-model就行对比
+$$
+M_{0} : \boldsymbol{y}=\boldsymbol{X}_{0} \boldsymbol{\alpha}+\varepsilon, \boldsymbol{\varepsilon} \sim N_{n}\left(\mathbf{0}, \sigma^{2} \boldsymbol{I}_{n}\right)
+$$
+也就是有Bayes Factor如下：
+$$
+B_{F 0}=\frac{m_{F}(\boldsymbol{y})}{m_{0}(\boldsymbol{y})}
+$$
+$m_F$和$m_0$是integrated likelihood 或者 predictive marginal:也就是把其他参数积掉的模型：
+$$
+m_{0}(\boldsymbol{y})=\int M_{0}(\boldsymbol{y} | \boldsymbol{\alpha}, \sigma) \pi_{0}(\boldsymbol{\alpha}, \sigma) d \boldsymbol{\alpha} d \sigma
+$$
+以及
+$$
+m_{F}(\boldsymbol{y})=\int M_{F}(\boldsymbol{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}, \sigma) \pi_{F}(\boldsymbol{\alpha}, \boldsymbol{\beta}, \sigma) d \boldsymbol{\beta} d \boldsymbol{\alpha} d \sigma
+$$
+
+$\pi_0$ is the prior distribution for the parameters.
+默认的参数prior是robust prior by Bayarri et al.(2012) 
+
+$$
+\operatorname{Pr}\left(H_{F} | \boldsymbol{y}\right)=\frac{B_{F 0} \operatorname{Pr}\left(H_{F}\right)}{\left(\operatorname{Pr}\left(H_{0}\right)+B_{F 0} \operatorname{Pr}\left(H_{F}\right)\right)}, \operatorname{Pr}\left(H_{0} | \boldsymbol{y}\right)=1-\operatorname{Pr}\left(H_{F} | \boldsymbol{y}\right)
+$$
+bayes factor乘以$H_F$ 的先验概率，这就是null model的先验概率加上$H_F$的先验概率，权值是Bayes factor。因为Bayes factor是$H_F$的后验概率除以$H_0$的后验概率。
+
+但是当变量数量很多的时候,有些模型evidence会虚假的高(因为很多假设都是同时考虑的（有什么关系？）)。基于Scott and Berger(2006)多元假设必须控制每个$H_\gamma$的先验，这篇文章里作者建议使用
+$$
+\operatorname{Pr}\left(H_{\gamma}\right)=\left((p+1)\left(\begin{array}{c}{p} \\ {p_{\gamma}}\end{array}\right)\right)^{-1}
+$$
+作为先验。
+
+不管是常数先验还是上文这个ScottBerger prior，都是一种更复杂的先验的特殊情况:
+$$
+\operatorname{Pr}\left(M_{\gamma} | \theta\right)=\theta^{p_{\gamma}}(1-\theta)^{p-p_{\gamma}}
+$$
+$\theta\in (0,1)$ 是一个变量被包含在模型中的概率.
+对应的常数先验是$\theta=1/2$,ScottBerger先验则是$\theta\sim Unif(0,1)$. Ley and Steel (2009)则用另外一种形式
+$$
+\theta \sim \operatorname{Beta}(\theta | 1, b)
+$$
+一般来讲，用户会对有关于多少个变量的先验信息，记为$w^{\star}$.
+这个信息可以体现在b里面：$b=\left(p-w^{\star}\right) / w^{\star}$.
+这样先验的性质就是covariates的数量的期望就是$w^{\star}$.
+把上式带到上上式中就可以（积掉$\theta$）就有
+$$
+\operatorname{Pr}\left(M_{\gamma} | b\right) \propto \Gamma\left(p_{\gamma}+1\right) \Gamma\left(p-p_{\gamma}+b\right)
+$$
+
+
+3. Hypothesis testing with BayesVarSel
+
+使用这个包里面Btest进行实现test。主要说模型比较如何用，如何定义nested model。
+
+4. Variable selection with BayesVarSel
+
+如果要算全部$2^p$个模型，当p很大的时候就很不现实，需要特殊的函数处理这个multiple testing problem.
+
+- Bvs : 当$p\leq 25$时，使用这个，会穷举所有hypotheses
+- PBvs : Parallel Version of Bvs
+- GibbsBvs:  Simulations from the posterior distribution over the model space using a Gibbs sampling scheme. (use when p>25)
+
+然后使用USCrime 和 SDM两个数据。
+
+4.1 Common arguments
+
+fixed.cov: 固定的covariate，也就是说Null-model（对比的基准）包含哪些model，一般来说使用`c("Intercept")`。如果要只包含error的话使用`fixed.cov=NULL`.
+
+4.2 Specific arguments
+
+5. Summary
+
+Summarize the result analysis tools.
+
+可以直接打印Bvs对象，得到的信息是Highest Posterior Probability model给出的intercept的点估计以及包含的variable。
+
+如果不是用Bvs 或者PBvs，而是用GibbsBvs，那么结果就是渐进的而不是exact的。 Approximation基于Garcia-Donato and Martinez-Beneito(2013)的方法。
+返回值是一个HPM。
+
+Barbieri and Berger (2004) 证明了，under general conditions, 如果单一模型要用于预测，MPM是最优的。
+
+- 图像总结和jointness.
+
+  - $\operatorname{Pr}\left(x_{i}, x_{j} | \boldsymbol{y}\right)$ 对应 `option="joint"`.
+A matrix plot with the joint inclusion probabilities.
+  - $\operatorname{Pr}\left(x_{i} | x_{j}, \boldsymbol{y}\right)$ 对应 `option="conditional`
+  - $\operatorname{Pr}\left(x_{i} | \operatorname{Not} x_{j}, \boldsymbol{y}\right)$ 对于 `option=conditional`
+  - number of variables的条形图`option=dimension`
+
+## 6 Movel averaged estimations and predictions
+
+考虑感兴趣的统计量$\Lambda$,在模型$M_\gamma$下这个量有后验分布$\pi^{N}\left(\Lambda | \boldsymbol{y}, M_{\gamma}\right)$,with non-informative prior $\pi_\gamma^{N}$. 则考虑所有考虑到的模型取平均，则可以得到均值：
+$$
+f(\Lambda | \boldsymbol{y})=\sum_{\gamma} \pi^{N}\left(\Lambda | \boldsymbol{y}, M_{\gamma}\right) \operatorname{Pr}\left(M_{\gamma} | \boldsymbol{y}\right)
+$$
+对于$\pi^{N}\left(\Lambda | \boldsymbol{y}, M_{\gamma}\right)$,使用reference piror by Berger and Bernardo (1992), Berger et al.(2009).当模型都已知的时候，这个先验有着非常好的理论性质。
+
+主要关心的$\Lambda$有两类，第一类是回归系数$\beta_i$ 第二个是预测值$y^\star$当已知预测的covariate$x^\star$时。
+
+### 6.1 Estimation
+Inclusion probaiblities $Pr(x_i|\boldsymbol y)$
+
+$$
+f(\boldsymbol{\alpha}, \boldsymbol{\beta} | \boldsymbol{y})=\sum_{\gamma} S t_{p_{\gamma}+p_{0}}\left(\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{\gamma}\right) |\left(\hat{\boldsymbol{\alpha}}, \hat{\boldsymbol{\beta}}_{\gamma}\right),\left(\boldsymbol{Z}_{\gamma}^{t} \boldsymbol{Z}_{\gamma}\right)^{-1} \frac{S S E_{\gamma}}{n-p_{\gamma}-p_{0}}, n-p_{\gamma}-p_{0}\right) \operatorname{Pr}\left(M_{\gamma} | \boldsymbol{y}\right)
+$$
+没懂的是为什么会推出来multivariate student distribution会在这里出现来着，是通过normal error推出来的吗。
+除此以外应该没什么，就是通过Bvs，PBvs得到，然后如果p太大用Gibbs算。
+
+### 6.2 Prediction
+
+和之前的分布差不多，预测的分布如下：
+$$
+f\left(y^{\star} | \boldsymbol{y}, \boldsymbol{x}^{\star}\right)=\sum_{\gamma} S t\left(y^{\star} | \boldsymbol{x}_{\gamma}^{\star}\left(\hat{\boldsymbol{\alpha}}, \hat{\boldsymbol{\beta}}_{\gamma}\right), \frac{S S E_{\gamma}}{h_{\gamma}}, n-p_{\gamma}-p_{0}\right) \operatorname{Pr}\left(M_{\gamma} | \boldsymbol{y}\right)
+$$
+where
+$$
+h_{\gamma}=1-\boldsymbol{x}_{\gamma}^{\star}\left(\left(\boldsymbol{x}_{\gamma}^{\star}\right)^{t} \boldsymbol{x}_{\gamma}^{\star}+\boldsymbol{Z}_{\gamma}^{t} \boldsymbol{Z}_{\gamma}\right)^{-1}\left(\boldsymbol{x}_{\gamma}^{\star}\right)^{t}
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
