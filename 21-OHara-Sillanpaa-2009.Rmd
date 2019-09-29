@@ -113,10 +113,10 @@ The degree of sparseness of the model can be adjusted by changing the prior dist
 
 The model before are developed through placing priors on the individual covariates $\theta_j$s. An alternative approach is place priors on $N_v$, the number of covariates selected in the model and their coefficients $\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)$.
 
-*Reversible jump MCMC* This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable $j$, and then proposing either addition to model or deleting from model. More details can be found in 
+*Reversible jump MCMC* This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable $j$, and then proposing either addition to model or deleting from model. More details can be found in [here](https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html)
 
-
-
+*Composite model space* (CMS)
+This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing $N_{max}$ to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value $I_j$.
 
 
 ![](https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png)

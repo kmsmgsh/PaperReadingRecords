@@ -10,6 +10,14 @@ introduction
 1.1 检验
 贝叶斯假设检验，例子是 检验两个总体的均值是否相等，给出了相应的代码和例子。
 第二个例子是回归参数的检验以及实例代码。
+比如说
+检验
+$$
+H_{0} : \beta_{d p i}=\beta_{d d p i}=\beta_{p o p 15}=\beta_{p o p 75}=0
+$$
+以及类似模型对应的variable selection.
+
+![](https://cdn.mathpix.com/snip/images/7fE_5P-mhk3XyPLzQk4I7kmmTNgx7NcqIp4sLHmp9Qw.original.fullsize.png)
 
 1.2 Variable selection
 可以把Variable selection问题看成是一个multiple-test问题，比如有p个variables,那么模型选择就变成$2^p$ 个hypothesis test的问题

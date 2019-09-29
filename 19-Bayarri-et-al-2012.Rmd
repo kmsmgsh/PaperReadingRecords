@@ -42,7 +42,7 @@ $m_{0}(\mathbf{y})=\int f_{0}(\mathbf{y} | \boldsymbol{\alpha}) \pi_{0}(\boldsym
 
 Jeffreys's *desiderate*: precursors to the criteria developed herein.
 
-这篇文章把prior分成四类：basic,consistency criteria, predictive matching criteria and invariance criteria.
+这篇文章把prior的criteria分成四类：basic,consistency criteria, predictive matching criteria and invariance criteria.
 
 ### Basic criteria:
 
