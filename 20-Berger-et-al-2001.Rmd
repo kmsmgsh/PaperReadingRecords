@@ -1,5 +1,80 @@
 # Objective Bayesian Methods for Model Selection: Introduction and Comparison
 
+## Bayes Factors
+### Basic Framework
+Comparing q models for the data $x$,
+$$
+M_{i} : \mathbf{X} \text { has density } f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right), \quad i=1, \ldots, \boldsymbol{q}
+$$
+The marginal or predictive densities of $\mathbf X$,
+$$
+m_{i}(\mathbf{x})=\int f_{i}\left(\mathbf{x} | \theta_{i}\right) \pi_{i}\left(\theta_{i}\right) d \theta_{i}
+$$
+The Bayes factor of $M_j$ to $M_i$ is given by
+$$
+B_{j i}=\frac{m_{j}(\mathbf{x})}{m_{i}(\mathbf{x})}=\frac{\int f_{j}\left(\mathbf{x} | \boldsymbol{\theta}_{j}\right) \pi_{j}\left(\boldsymbol{\theta}_{j}\right) d \boldsymbol{\theta}_{j}}{\int f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \pi_{i}\left(\boldsymbol{\theta}_{i}\right) d \boldsymbol{\theta}_{i}}
+$$
+Bayes factor is the "odds provided by the data for $M_j$ versus $M_i$."
+Also called the "weighted likelihood ratio of $M_j$ to $M_i$ with priors being theh "weighting functions."
+
+If we involve the model prior $P\left(M_{j}\right)$, then the posterior probability of model $M_i$, given the data $x$, is
+$$
+P\left(M_{i} | \mathbf{x}\right)=\frac{P\left(M_{i}\right) m_{i}(\mathbf{x})}{\sum_{j=1}^{q} P\left(M_{j}\right) m_{j}(\mathbf{x})}=\left[\sum_{j=1}^{q} \frac{P\left(M_{j}\right)}{P\left(M_{i}\right)} B_{j i}\right]^{-1}
+$$
+that is,
+$$
+      P\left(M_{k} | \boldsymbol{X}_{n}\right)=\frac{P\left(M_{k}\right) \int f_{k}\left(\boldsymbol{X}_{n} | \boldsymbol{\theta}_{k}\right) \pi_{k}\left(\boldsymbol{\theta}_{k}\right) d \boldsymbol{\theta}_{k}}{\sum_{\alpha=1}^{r} P\left(M_{\alpha}\right) \int f_{\alpha}\left(\boldsymbol{X}_{n} | \boldsymbol{\theta}_{\alpha}\right) \pi_{\alpha}\left(\boldsymbol{\theta}_{\alpha}\right) d \boldsymbol{\theta}_{\alpha}}
+$$
+which is equivelent to renormalized marginal probabilities, given by
+$$
+\overline{m}_{i}(\mathbf{x})=\frac{m_{i}(\mathbf{x})}{\sum_{j=1}^{q} m_{j}(\mathbf{x})}
+$$
+
+### Motivation for the Bayesian Approach to Model Selection
+
+- Reason 1: Bayes factors and posterior model probabilities are easy to understand.
+The interpretation of Bayes factors as odds and directly probabilities. Not the indirectly on p-value.
+
+- Reason 2: Bayesian model selection is consistent.
+Rather surprisingly, use of most classical model selection tools, such as p-values, $C_p$ statistics, and AIC does not guarantee consistency. If true model is not included in entertain models, Bayesian model selection will choose that model among the candidates that is closest to the true model in terms of Kullback_Leibler divergence.
+
+- Reason 3: Bayesian model selectio procedures are automatic Ockham's razors.Bayesian procedures naturally penalize model complexity, and need no introduction of a penalty term.
+
+- Reason 4. The Bayesian approach to model selection is conceptually the same, regardless of the number of models under consideration. 传统的frequency方法对两个模型和多个模型的比较方法不一样，比如两个模型之间的选取使用hypothesis testing，而多个则不太一样。Bayesian方法则比较一致。
+
+- Reason 5. The Bayesian approach does not require nested models, standard distributions, or regular asymptotics. 
+
+- Reason 6. The Bayesian approach can account for model uncertainty.
+Classical approach would yield overoptimistic estimates of accuracy. So it is often recommend to use part of data to select model and rest to make estimation and prediction. Bayesian can take all the models into account rather than choose one. This is known as 'Bayesian model averaging' to handle model uncertainty.
+
+- Reason 7. The Bayesian approach can yield optimal conditional frequentist procedures.
+
+### Utility Functions and Prediction
+Approach model selection from the perspective of decision analysis.
+Bayesian model averaging is an important methodology in prediction.
+
+
+
+Select one specific model method: the *largest posterior probability* 
+
+### Motivation for Objective Bayesian Model Selection
+
+Subjective & Objective Bayesian Analysis.
+
+Subjective Bayesian analysis is attractive, but needed elicitations from subject experts.
+
+In the case that one often initially entertains a wide variety of models, and careful subjective specification of prior distributions for all the parameters of all the models is essentially impossible.
+
+### Difficulties in Objective Bayesian Model Selection
+
+- Difficulty 1. Computation can be difficult. Hard to calculate Bayes factor. Need integral, could be difficult in high dimension circumstance. Total number of model under consideration can be enormous.
+
+- Difficulty 2. When the models have parameter space of differing dimensions, use of improper noninformative priors yields indeterminate answers. 假设两个improper无信息先验$\pi_i^N$ 和 $\pi_j^N$ are entertained for models $M_i$ and $M_j$. Formal Bayes factor in this case is $B_{ji}$. If use another improper prior like $c_{i} \pi_{i}^{N} \text { and } c_{j} \pi_{j}^{N}$, then in this case Bayes factor would be $\left(c_{j} / c_{i}\right) B_{j i}$. Since the choice of $c_{j} / c_{i}$ is arbitrary, the Bayes factor is clearly indeterminate.
+
+- Difficulty 3. Use of 'vague proper priors' usually gives bad answers in Bayesian model selection.
+
+
+
 
 
 
