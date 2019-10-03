@@ -142,6 +142,197 @@ For $\sigma_1^2$ and $\sigma_2^2$, one often sees the variances being equated an
 
 ### Preview
 
+There are several methods of developing default Bayesian model selection procedures. The Conventional Prior (CP) approach, the Bayes Information Criterion (BIC), the Intrinsic Bayes Factor (IBF) approach, and the Fractional Bayes Factor (FBF) approach. 
+
+Conventional Prior approach is the most obvious default Bayesian method can be employed for model selection. This method also is highly recommend by the criteria of Bayesian variable selection.
+
+However, it is not always easy to implement Conventional Prior approach in practice. Another crude approximations to Bayes factor, typified by the Bayesian Information Criterion(BIC) is used.
+
+Concerns over the accuracy and applicability of BIC have resulted some new methods of Bayesian model selection. Two most prominent methods are Fractional Bayes factor approach of O'Hagan(1995) and Intinsic Bayes Factor approach of Berger and Pericchi (1996).
+
+## Objective Bayesian Model Selection Methods, with Illustrations in the Linear Model
+
+4 methods are introduced and discussed. Conventional Prior (CP), Bayes Information Criterion (BIC) the Intinsic Bayes Factor(IBF) and Fractional Bayes Factor (FBF).
+
+
+
+### Conventional Prior Approach
+
+一般来说，如果使用统一的improper prior, Normalising constant会在Bayes factor中消掉不是问题。但是这种情况只对common + orthogonal 的参数适用。因为common，所以上下都有，orthogonal，这样difficulty 4就不会发生（或者引起的问题就比较小。）
+Alternative methods for this is using default proper priors (but not vague proper priors) for parameters that would occur in one model but not the other.
+
+> 那问题来了，如果不用vague proper prior的话，那用什么prior呢。
+
+He presented arguments justifying certain default proper priors, but mostly on a case-by-case basis This line of development has been successfully followed by many others (Zellner and Siow 1980, Berger and Pericchi 1996......[literatures])
+
+__Illustration 1__ Normal Mean, Jeffreys' Conventional Prior
+
+The data is $\mathbf{X}=\left(X_{1}, \dots, X_{n}\right)$ where $X_i$ are iid $\mathcal{N}\left(\mu, \sigma_{2}^{2}\right)$ under $M_2$. Under $M_1$, $X_i$ are $\mathcal N(0,\sigma_1^2)$. Note that, due to the difficulty 4, we differentiate between $\sigma_1^2$ and $\sigma_2^2$.
+However, in this situation the mean and variance can be shown to be orthogonal parameters (i.e. the expected Fisher information matrix is diagonal), in which case Jeffreys argues that $\sigma_1^2$ and $\sigma_2^2$ do have the same meaning across models and can be identified as $\sigma_1^2=\sigma_2^2=\sigma^2$. In this case, Jeffreys suggests that the variances can be assigned the same(improper) noninformative prior $\pi^J(\sigma)=1/\sigma$, since the indeterminate multiplicative constant for the prior would cancel in the Bayes factor.
+
+But it can't be done for $\mu$. This is $M_2$ only parameter. it needs to be assigned a proper prior. Jeffreys obtains the following desiderata that this proper prior should satisfy: 1. should be centered at zero (i.e. centered at $M_1$); 2. have scale $\sigma$. 3. be symmetric around zero 4. have no moments.
+
+> 这个have no moments 好奇怪，是为什么呢？
+
+He argues that the simplest distribution that satisfies these conditions is the Cauchy $(0,\sigma^2)$. In summary, Jeffryes's conventional prior for this problem is:
+$$
+\pi_{1}^{J}\left(\sigma_{1}\right)=\frac{1}{\sigma_{1}}, \quad \pi_{2}^{J}\left(\mu, \sigma_{2}\right)=\frac{1}{\sigma_{2}} \cdot \frac{1}{\pi \sigma_{2}\left(1+\mu^{2} / \sigma_{2}^{2}\right)}
+$$
+
+好句子： Although this solution appears to be rather ad hoc, it is quite reasonable.
+
+ad hoc可以指临时，特别.
+
+Choosing the scale of the pior for $\mu$ to be $\sigma_2$ (the only available non-subjective 'scaling' in the problem) and centering it at $M_1$ are natural choice. And Cauchy priors are known to be robust in various ways. Although it is easy to object to having such choice imposed on the analysis, it is crucial to keep in mind that there is no real default Bayesian alternative here. 这段话没有解释但是很重要所以全文摘录了。对于mu的scale(因为没有moment所以不说方差),可能会引入主观的东西，（虽然为了达成目的，这些选择都很自然），但是很重要的事没有real default Bayesian alternative here. 替代的objective(客观)方法要么对应利用一些（proper）default prior，或者更糟，最后不对应任何真实的Bayes分析。
+
+__Illustration 2:__
+
+In Zellner and Siow (1980), a generalization of the above conventional Jeffreys prior is suggested for comparing two nested models within the normal linear model. Let $\mathbf X=[1:\mathbf Z_1:\mathbf Z_2]$ be the design matrix for the 'full' linear model.Assumed that the regressors are measured in terms of deviations from their sample means, that is, $\mathbf{1}^{t} \mathbf{Z}_{j}=0, j=1,2$.Assumed that the model has been parameterized in an orthogonal fashion, so that $\mathbf{Z}_{1}^{t} \mathbf{Z}_{2}=0$
+
+Then the corresponding normal linear model $M_2$ for n observations $y=\left(y_{1}, \dots, y_{n}\right)^{t}$ is 
+$$
+\mathbf{y}=\alpha \mathbf{1}+\mathbf{Z}_{1} \boldsymbol{\beta}_{1}+\mathbf{Z}_{2} \boldsymbol{\beta}_{2}+\boldsymbol{\varepsilon}
+$$
+where $\epsilon \sim \mathcal N_n(0,\sigma^2I_n)$
+The dimensions of $\beta_1$ and $\beta_2$ are $k_1-1$ and p, respectively.
+
+For comparison of $M_2$ with the model $M_1:\beta_2=0$,Zellner and Siow(1980) propose the following default conventional priors:
+$$
+\begin{aligned} \pi_{1}^{Z S}\left(\alpha, \beta_{1}, \sigma\right) &=1 / \sigma \\ \pi_{2}^{Z S}\left(\alpha, \beta_{1}, \sigma, \beta_{2}\right) &=h\left(\beta_{2} | \sigma\right) / \sigma \end{aligned}
+$$
+第一个是improper prior,第二个是proper prior.
+ $h(\beta_2|\sigma)$ is the $\text { Cauchy }_{p}\left(\mathbf{0}, \mathbf{Z}_{2}^{t} \mathbf{Z}_{2} /\left(n \sigma^{2}\right)\right)$ density
+$$
+h\left(\boldsymbol{\beta}_{2} | \sigma\right)=c \frac{\left|\mathbf{Z}_{2}^{t} \mathbf{Z}_{2}\right|^{1 / 2}}{\left(n \sigma^{2}\right)^{p / 2}}\left(1+\frac{\boldsymbol{\beta}_{2}^{t} \mathbf{Z}_{2}^{t} \mathbf{Z}_{2} \boldsymbol{\beta}_{2}}{n \sigma^{2}}\right)^{-(p+1) / 2}
+$$
+with $c=\Gamma[(p+1) / 2] / \pi^{(p+1) / 2}$. Thus the improper priors of the "common" $(\alpha,\beta_1,\sigma)$ are assumed to be the same for the two models (justifiable by orthogonality), while the conditional prior of the (unique to $M_2$) parameter $\beta_2$, given $\sigma$, is assumed to be the (proper)p-dimensional Cauchy distribution, with location at 0 and covariance matrix $\mathbf{Z}_{2}^t \mathbf{Z}_{2} /\left(n \sigma^{2}\right)$, "a matrix suggested by the form of the information matrix", quote from Zellner and Siow(1980).
+
+The nested model case can be solved in the method above, for the case when there are more than two models, or the models are non-nested, Zellner and Siow(1984) utilize what is often called the 'encompassing' approach.  Wherein one compares each submodel, $M_i$, to the *encompassing* model,$M_0$, that contains all possible covariates from the submodel. The pairwise Bayes factor $B_{0i},i=1,...,q$. The Bayes factor of $M_j$ to $M_i$ is then defined to be 
+$$
+B_{j i}=B_{0 i} / B_{0 j}
+$$
+."encompassing" model方法就是找这一堆模型的最大集合作为基准(full)模型然后比较得到Bayes factor。
+(这里笔记写的比较简练来着。。。。)
+
+
+
+
+
+__Illustration 2(continued): Linear Model, Conjugate $g$-priors__
+
+similar model seeting:
+$$
+M: \mathbf{y}=\mathbf{X} \boldsymbol{\beta}+\boldsymbol{\varepsilon}, \quad \boldsymbol{\varepsilon} \sim \mathcal{N}_{n}\left(\mathbf{0}, \sigma^{2} \mathbf{I}_{n}\right)
+$$
+, the $g-prior$ density is defined by
+$$
+\pi(\sigma)=\frac{1}{\sigma}, \quad \pi(\beta | \sigma) \text { is } \mathcal{N}_{k}\left(\mathbf{0}, g \sigma^{2}\left(\mathbf{X}^{t} \mathbf{X}\right)^{-1}\right)
+$$
+sometimes g is estimated by empirical Bayes methods.
+
+$g-priors$ 最关键的性质是其边际分布，$m(y)$,有closed form,
+$$
+m(\mathbf{y})=\frac{\Gamma(n / 2)}{2 \pi^{n / 2}(1+g)^{k / 2}}\left(\mathbf{y}^{t} \mathbf{y}-\frac{g}{(1+g)} \mathbf{y}^{t} \mathbf{X}\left(\mathbf{X}^{t} \mathbf{X}\right)^{-1} \mathbf{X}^{t} \mathbf{y}\right)^{-n / 2}
+$$
+这样，比较任意两个线性模型的Bayes factors和后验模型概率就能直接计算。
+
+不幸的是,$g-priors$用于模型选择时，有一些不太好的性质。
+考虑模型$M^*:\beta=0$,当$\hat\beta$ goes to infinity, so that one becomes *certain* that $M^*$ is wrong, the Bayes factor of $M^*$ to $M$ goes to the nonzero constant $(1+g)^{(k-n) / 2}$.
+
+虽然conventional prior approach在性质上很appealing,但是以上的讨论说明了很难实现，即是在简单的模型linear model上也很难。没有一个普世的方法决定conventional priors.所以接下来说一说比较容易实现的方法。
+
+### 2.2 Intrinsic Bayes Factor (IBF) approach
+
+q models $M_1,...,M_q$
+noninformative priors $\pi_i^N(\theta_i),i=1,...,q$.
+Chosen 'reference prior' by Berger and Bernardo 1992.
+
+> what is reference prior in this case?
+
+Define the corresponding marginal or predictive densities of $\mathbf X$,
+$$
+m_{i}^{N}(\mathbf{x})=\int f_{i}\left(\mathbf{x} | \theta_{i}\right) \pi_{i}^{N}\left(\theta_{i}\right) d \theta_{i}
+$$
+
+General stategy for defining IBF
+- Definition of a proper and minimal 'training sample', viewed as some subset of the entie data x.
+
+__Definition__. A training sample, $x(\ell)$, is called proper if $0<m_{i}^{N}(\mathbf{x}(l))<\infty$ for all $M_i$, and *minimal* if it is proper and no subset is proper. 
+
+也就是说，思路是先拿最小限度的数据把先验$\pi_i^N$ 从improper prior通过最小限度数据的likelihood构成的posterior当做proper posterior $\pi_i^N(\theta_i|x(\ell))$, and then use the latter to define Bayes factors for the remaining data.
+结果就是,为了比较$M_j$和$M_i$, can be seen (under most circumstances) to be 
+$$
+B_{j i}(l)=B_{j i}^{N}(\mathbf{x}) \cdot B_{i j}^{N}(\mathbf{x}(l))
+$$
+where
+$$
+B_{j i}^{N}=B_{j i}^{N}(\mathbf{x})=\frac{m_{j}^{N}(\mathbf{x})}{m_{i}^{N}(\mathbf{x})} \quad \text { and } \quad B_{i j}^{N}(l)=B_{i j}^{N}(\mathbf{x}(l))=\frac{m_{i}^{N}(\mathbf{x}(l))}{m_{j}^{N}(\mathbf{x}(l))}
+$$
+。
+来源思路如下：
+
+一般的Bayes Factor:
+$$
+B_{i0}=\frac{m_i(y)}{m_0(y)}
+$$
+where
+$$
+\begin{equation}
+m_i(y)=\int \pi_i(\theta_i)f(y|\theta_i)d\theta_i \\
+m_0(y)=\int \pi_0(\theta_0)f(y|\theta_0)d\theta_0
+\end{equation}
+$$
+把improper prior $\pi_i(\theta_i)$，通过$x(\ell)$，得到后验
+$$
+\pi_i(\theta_i|x(\ell))=\frac{f(x(\ell)|\theta_i)\pi_i(\theta_i)}{\int f(x(\ell)|\theta_i)\pi_i(\theta_i)d\theta_i}
+$$
+其中分母能写成$m_i^N(x(\ell))$.
+这样
+$$
+\begin{align*}
+B_{i0}
+&=\frac{\int\pi^N_i(\theta_i|x(\ell))f_i(x(-\ell)|\theta_i)d\theta_i}{\int\pi^N_0(\theta_0|x(\ell))f_0(x(-\ell)|\theta_0)d\theta_0}\\
+&=\frac{\int\frac{\pi^N_i(\theta_i)f_i(x(\ell)|\theta_i)}{m^N_i(x(\ell))}f_i(x(-\ell)|\theta_i)d\theta_i}{\int\frac{\pi^N_0(\theta_0)f_0(x(\ell)|\theta_0)}{m^N_0(x(\ell))}f_0(x(-\ell)|\theta_0)d\theta_0}\\
+&=\frac{\frac{m_i^N}{m_i^N(x(\ell))}}{\frac{m_0^N}{m_0^N(x(\ell))}}\\
+&=\frac{m^N_i}{m_0^N}\frac{m_0^N(x(\ell))}{m_i^N(x(\ell))}\\
+&=B_{0i}^N(x(\ell))\cdot B_{i0}^N(x)
+\end{align*}
+$$
+
+The problem is $B_{ji}(\ell)$ no longer depends on the scales of $\pi^N_j$ and $\pi^N_j$, instead, it does depend on the arbitrary choice of the (minimal) training sample $x(\ell)$. To eliminate the dependence and to increase stability, we can use several methods like "average" or other similar approach:
+
+$$
+B_{j i}^{A I}=B_{j i}^{N} \cdot \frac{1}{L} \sum_{l=1}^{L} B_{i j}^{N}, \quad B_{j i}^{M I}=B_{j i}^{N} \cdot \operatorname{Med}\left[B_{i j}^{N}(l)\right]
+$$
+That is, use average or median to approach $B^N_{0i}(x(\ell))$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

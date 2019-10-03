@@ -256,7 +256,11 @@
 <li class="chapter" data-level="19.1.4" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#motivation-for-objective-bayesian-model-selection"><i class="fa fa-check"></i><b>19.1.4</b> Motivation for Objective Bayesian Model Selection</a></li>
 <li class="chapter" data-level="19.1.5" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#difficulties-in-objective-bayesian-model-selection"><i class="fa fa-check"></i><b>19.1.5</b> Difficulties in Objective Bayesian Model Selection</a></li>
 <li class="chapter" data-level="19.1.6" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#preview"><i class="fa fa-check"></i><b>19.1.6</b> Preview</a></li>
-<li class="chapter" data-level="19.1.7" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#the-fractional-bayes-factor-fbf-approach"><i class="fa fa-check"></i><b>19.1.7</b> 2.3 The Fractional Bayes Factor (FBF) Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#objective-bayesian-model-selection-methods-with-illustrations-in-the-linear-model"><i class="fa fa-check"></i><b>19.2</b> Objective Bayesian Model Selection Methods, with Illustrations in the Linear Model</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#conventional-prior-approach"><i class="fa fa-check"></i><b>19.2.1</b> Conventional Prior Approach</a></li>
+<li class="chapter" data-level="19.2.2" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#intrinsic-bayes-factor-ibf-approach"><i class="fa fa-check"></i><b>19.2.2</b> 2.2 Intrinsic Bayes Factor (IBF) approach</a></li>
+<li class="chapter" data-level="19.2.3" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#the-fractional-bayes-factor-fbf-approach"><i class="fa fa-check"></i><b>19.2.3</b> 2.3 The Fractional Bayes Factor (FBF) Approach</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><i class="fa fa-check"></i><b>20</b> A Review of Bayesian Variable Selection Methods: What, How and Which</a><ul>
@@ -415,9 +419,141 @@ For <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline
 </div>
 <div id="preview" class="section level3">
 <h3><span class="header-section-number">19.1.6</span> Preview</h3>
+<p>There are several methods of developing default Bayesian model selection procedures. The Conventional Prior (CP) approach, the Bayes Information Criterion (BIC), the Intrinsic Bayes Factor (IBF) approach, and the Fractional Bayes Factor (FBF) approach.</p>
+<p>Conventional Prior approach is the most obvious default Bayesian method can be employed for model selection. This method also is highly recommend by the criteria of Bayesian variable selection.</p>
+<p>However, it is not always easy to implement Conventional Prior approach in practice. Another crude approximations to Bayes factor, typified by the Bayesian Information Criterion(BIC) is used.</p>
+<p>Concerns over the accuracy and applicability of BIC have resulted some new methods of Bayesian model selection. Two most prominent methods are Fractional Bayes factor approach of O’Hagan(1995) and Intinsic Bayes Factor approach of Berger and Pericchi (1996).</p>
+</div>
+</div>
+<div id="objective-bayesian-model-selection-methods-with-illustrations-in-the-linear-model" class="section level2">
+<h2><span class="header-section-number">19.2</span> Objective Bayesian Model Selection Methods, with Illustrations in the Linear Model</h2>
+<p>4 methods are introduced and discussed. Conventional Prior (CP), Bayes Information Criterion (BIC) the Intinsic Bayes Factor(IBF) and Fractional Bayes Factor (FBF).</p>
+<div id="conventional-prior-approach" class="section level3">
+<h3><span class="header-section-number">19.2.1</span> Conventional Prior Approach</h3>
+<p>一般来说，如果使用统一的improper prior, Normalising constant会在Bayes factor中消掉不是问题。但是这种情况只对common + orthogonal 的参数适用。因为common，所以上下都有，orthogonal，这样difficulty 4就不会发生（或者引起的问题就比较小。）
+Alternative methods for this is using default proper priors (but not vague proper priors) for parameters that would occur in one model but not the other.</p>
+<blockquote>
+<p>那问题来了，如果不用vague proper prior的话，那用什么prior呢。</p>
+</blockquote>
+<p>He presented arguments justifying certain default proper priors, but mostly on a case-by-case basis This line of development has been successfully followed by many others (Zellner and Siow 1980, Berger and Pericchi 1996……[literatures])</p>
+<p><strong>Illustration 1</strong> Normal Mean, Jeffreys’ Conventional Prior</p>
+<p>The data is <span class="math inline">\(\mathbf{X}=\left(X_{1}, \dots, X_{n}\right)\)</span> where <span class="math inline">\(X_i\)</span> are iid <span class="math inline">\(\mathcal{N}\left(\mu, \sigma_{2}^{2}\right)\)</span> under <span class="math inline">\(M_2\)</span>. Under <span class="math inline">\(M_1\)</span>, <span class="math inline">\(X_i\)</span> are <span class="math inline">\(\mathcal N(0,\sigma_1^2)\)</span>. Note that, due to the difficulty 4, we differentiate between <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span>.
+However, in this situation the mean and variance can be shown to be orthogonal parameters (i.e. the expected Fisher information matrix is diagonal), in which case Jeffreys argues that <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> do have the same meaning across models and can be identified as <span class="math inline">\(\sigma_1^2=\sigma_2^2=\sigma^2\)</span>. In this case, Jeffreys suggests that the variances can be assigned the same(improper) noninformative prior <span class="math inline">\(\pi^J(\sigma)=1/\sigma\)</span>, since the indeterminate multiplicative constant for the prior would cancel in the Bayes factor.</p>
+<p>But it can’t be done for <span class="math inline">\(\mu\)</span>. This is <span class="math inline">\(M_2\)</span> only parameter. it needs to be assigned a proper prior. Jeffreys obtains the following desiderata that this proper prior should satisfy: 1. should be centered at zero (i.e. centered at <span class="math inline">\(M_1\)</span>); 2. have scale <span class="math inline">\(\sigma\)</span>. 3. be symmetric around zero 4. have no moments.</p>
+<blockquote>
+<p>这个have no moments 好奇怪，是为什么呢？</p>
+</blockquote>
+<p>He argues that the simplest distribution that satisfies these conditions is the Cauchy <span class="math inline">\((0,\sigma^2)\)</span>. In summary, Jeffryes’s conventional prior for this problem is:
+<span class="math display">\[
+\pi_{1}^{J}\left(\sigma_{1}\right)=\frac{1}{\sigma_{1}}, \quad \pi_{2}^{J}\left(\mu, \sigma_{2}\right)=\frac{1}{\sigma_{2}} \cdot \frac{1}{\pi \sigma_{2}\left(1+\mu^{2} / \sigma_{2}^{2}\right)}
+\]</span></p>
+<p>好句子： Although this solution appears to be rather ad hoc, it is quite reasonable.</p>
+<p>ad hoc可以指临时，特别.</p>
+<p>Choosing the scale of the pior for <span class="math inline">\(\mu\)</span> to be <span class="math inline">\(\sigma_2\)</span> (the only available non-subjective ‘scaling’ in the problem) and centering it at <span class="math inline">\(M_1\)</span> are natural choice. And Cauchy priors are known to be robust in various ways. Although it is easy to object to having such choice imposed on the analysis, it is crucial to keep in mind that there is no real default Bayesian alternative here. 这段话没有解释但是很重要所以全文摘录了。对于mu的scale(因为没有moment所以不说方差),可能会引入主观的东西，（虽然为了达成目的，这些选择都很自然），但是很重要的事没有real default Bayesian alternative here. 替代的objective(客观)方法要么对应利用一些（proper）default prior，或者更糟，最后不对应任何真实的Bayes分析。</p>
+<p><strong>Illustration 2:</strong></p>
+<p>In Zellner and Siow (1980), a generalization of the above conventional Jeffreys prior is suggested for comparing two nested models within the normal linear model. Let <span class="math inline">\(\mathbf X=[1:\mathbf Z_1:\mathbf Z_2]\)</span> be the design matrix for the ‘full’ linear model.Assumed that the regressors are measured in terms of deviations from their sample means, that is, <span class="math inline">\(\mathbf{1}^{t} \mathbf{Z}_{j}=0, j=1,2\)</span>.Assumed that the model has been parameterized in an orthogonal fashion, so that <span class="math inline">\(\mathbf{Z}_{1}^{t} \mathbf{Z}_{2}=0\)</span></p>
+<p>Then the corresponding normal linear model <span class="math inline">\(M_2\)</span> for n observations <span class="math inline">\(y=\left(y_{1}, \dots, y_{n}\right)^{t}\)</span> is
+<span class="math display">\[
+\mathbf{y}=\alpha \mathbf{1}+\mathbf{Z}_{1} \boldsymbol{\beta}_{1}+\mathbf{Z}_{2} \boldsymbol{\beta}_{2}+\boldsymbol{\varepsilon}
+\]</span>
+where <span class="math inline">\(\epsilon \sim \mathcal N_n(0,\sigma^2I_n)\)</span>
+The dimensions of <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> are <span class="math inline">\(k_1-1\)</span> and p, respectively.</p>
+<p>For comparison of <span class="math inline">\(M_2\)</span> with the model <span class="math inline">\(M_1:\beta_2=0\)</span>,Zellner and Siow(1980) propose the following default conventional priors:
+<span class="math display">\[
+\begin{aligned} \pi_{1}^{Z S}\left(\alpha, \beta_{1}, \sigma\right) &amp;=1 / \sigma \\ \pi_{2}^{Z S}\left(\alpha, \beta_{1}, \sigma, \beta_{2}\right) &amp;=h\left(\beta_{2} | \sigma\right) / \sigma \end{aligned}
+\]</span>
+第一个是improper prior,第二个是proper prior.
+<span class="math inline">\(h(\beta_2|\sigma)\)</span> is the <span class="math inline">\(\text { Cauchy }_{p}\left(\mathbf{0}, \mathbf{Z}_{2}^{t} \mathbf{Z}_{2} /\left(n \sigma^{2}\right)\right)\)</span> density
+<span class="math display">\[
+h\left(\boldsymbol{\beta}_{2} | \sigma\right)=c \frac{\left|\mathbf{Z}_{2}^{t} \mathbf{Z}_{2}\right|^{1 / 2}}{\left(n \sigma^{2}\right)^{p / 2}}\left(1+\frac{\boldsymbol{\beta}_{2}^{t} \mathbf{Z}_{2}^{t} \mathbf{Z}_{2} \boldsymbol{\beta}_{2}}{n \sigma^{2}}\right)^{-(p+1) / 2}
+\]</span>
+with <span class="math inline">\(c=\Gamma[(p+1) / 2] / \pi^{(p+1) / 2}\)</span>. Thus the improper priors of the “common” <span class="math inline">\((\alpha,\beta_1,\sigma)\)</span> are assumed to be the same for the two models (justifiable by orthogonality), while the conditional prior of the (unique to <span class="math inline">\(M_2\)</span>) parameter <span class="math inline">\(\beta_2\)</span>, given <span class="math inline">\(\sigma\)</span>, is assumed to be the (proper)p-dimensional Cauchy distribution, with location at 0 and covariance matrix <span class="math inline">\(\mathbf{Z}_{2}^t \mathbf{Z}_{2} /\left(n \sigma^{2}\right)\)</span>, “a matrix suggested by the form of the information matrix”, quote from Zellner and Siow(1980).</p>
+<p>The nested model case can be solved in the method above, for the case when there are more than two models, or the models are non-nested, Zellner and Siow(1984) utilize what is often called the ‘encompassing’ approach. Wherein one compares each submodel, <span class="math inline">\(M_i\)</span>, to the <em>encompassing</em> model,<span class="math inline">\(M_0\)</span>, that contains all possible covariates from the submodel. The pairwise Bayes factor <span class="math inline">\(B_{0i},i=1,...,q\)</span>. The Bayes factor of <span class="math inline">\(M_j\)</span> to <span class="math inline">\(M_i\)</span> is then defined to be
+<span class="math display">\[
+B_{j i}=B_{0 i} / B_{0 j}
+\]</span>
+.“encompassing” model方法就是找这一堆模型的最大集合作为基准(full)模型然后比较得到Bayes factor。
+(这里笔记写的比较简练来着。。。。)</p>
+<p><strong>Illustration 2(continued): Linear Model, Conjugate <span class="math inline">\(g\)</span>-priors</strong></p>
+<p>similar model seeting:
+<span class="math display">\[
+M: \mathbf{y}=\mathbf{X} \boldsymbol{\beta}+\boldsymbol{\varepsilon}, \quad \boldsymbol{\varepsilon} \sim \mathcal{N}_{n}\left(\mathbf{0}, \sigma^{2} \mathbf{I}_{n}\right)
+\]</span>
+, the <span class="math inline">\(g-prior\)</span> density is defined by
+<span class="math display">\[
+\pi(\sigma)=\frac{1}{\sigma}, \quad \pi(\beta | \sigma) \text { is } \mathcal{N}_{k}\left(\mathbf{0}, g \sigma^{2}\left(\mathbf{X}^{t} \mathbf{X}\right)^{-1}\right)
+\]</span>
+sometimes g is estimated by empirical Bayes methods.</p>
+<p><span class="math inline">\(g-priors\)</span> 最关键的性质是其边际分布，<span class="math inline">\(m(y)\)</span>,有closed form,
+<span class="math display">\[
+m(\mathbf{y})=\frac{\Gamma(n / 2)}{2 \pi^{n / 2}(1+g)^{k / 2}}\left(\mathbf{y}^{t} \mathbf{y}-\frac{g}{(1+g)} \mathbf{y}^{t} \mathbf{X}\left(\mathbf{X}^{t} \mathbf{X}\right)^{-1} \mathbf{X}^{t} \mathbf{y}\right)^{-n / 2}
+\]</span>
+这样，比较任意两个线性模型的Bayes factors和后验模型概率就能直接计算。</p>
+<p>不幸的是,<span class="math inline">\(g-priors\)</span>用于模型选择时，有一些不太好的性质。
+考虑模型<span class="math inline">\(M^*:\beta=0\)</span>,当<span class="math inline">\(\hat\beta\)</span> goes to infinity, so that one becomes <em>certain</em> that <span class="math inline">\(M^*\)</span> is wrong, the Bayes factor of <span class="math inline">\(M^*\)</span> to <span class="math inline">\(M\)</span> goes to the nonzero constant <span class="math inline">\((1+g)^{(k-n) / 2}\)</span>.</p>
+<p>虽然conventional prior approach在性质上很appealing,但是以上的讨论说明了很难实现，即是在简单的模型linear model上也很难。没有一个普世的方法决定conventional priors.所以接下来说一说比较容易实现的方法。</p>
+</div>
+<div id="intrinsic-bayes-factor-ibf-approach" class="section level3">
+<h3><span class="header-section-number">19.2.2</span> 2.2 Intrinsic Bayes Factor (IBF) approach</h3>
+<p>q models <span class="math inline">\(M_1,...,M_q\)</span>
+noninformative priors <span class="math inline">\(\pi_i^N(\theta_i),i=1,...,q\)</span>.
+Chosen ‘reference prior’ by Berger and Bernardo 1992.</p>
+<blockquote>
+<p>what is reference prior in this case?</p>
+</blockquote>
+<p>Define the corresponding marginal or predictive densities of <span class="math inline">\(\mathbf X\)</span>,
+<span class="math display">\[
+m_{i}^{N}(\mathbf{x})=\int f_{i}\left(\mathbf{x} | \theta_{i}\right) \pi_{i}^{N}\left(\theta_{i}\right) d \theta_{i}
+\]</span></p>
+<p>General stategy for defining IBF
+- Definition of a proper and minimal ‘training sample’, viewed as some subset of the entie data x.</p>
+<p><strong>Definition</strong>. A training sample, <span class="math inline">\(x(\ell)\)</span>, is called proper if <span class="math inline">\(0&lt;m_{i}^{N}(\mathbf{x}(l))&lt;\infty\)</span> for all <span class="math inline">\(M_i\)</span>, and <em>minimal</em> if it is proper and no subset is proper.</p>
+<p>也就是说，思路是先拿最小限度的数据把先验<span class="math inline">\(\pi_i^N\)</span> 从improper prior通过最小限度数据的likelihood构成的posterior当做proper posterior <span class="math inline">\(\pi_i^N(\theta_i|x(\ell))\)</span>, and then use the latter to define Bayes factors for the remaining data.
+结果就是,为了比较<span class="math inline">\(M_j\)</span>和<span class="math inline">\(M_i\)</span>, can be seen (under most circumstances) to be
+<span class="math display">\[
+B_{j i}(l)=B_{j i}^{N}(\mathbf{x}) \cdot B_{i j}^{N}(\mathbf{x}(l))
+\]</span>
+where
+<span class="math display">\[
+B_{j i}^{N}=B_{j i}^{N}(\mathbf{x})=\frac{m_{j}^{N}(\mathbf{x})}{m_{i}^{N}(\mathbf{x})} \quad \text { and } \quad B_{i j}^{N}(l)=B_{i j}^{N}(\mathbf{x}(l))=\frac{m_{i}^{N}(\mathbf{x}(l))}{m_{j}^{N}(\mathbf{x}(l))}
+\]</span>
+。
+来源思路如下：</p>
+<p>一般的Bayes Factor:
+<span class="math display">\[
+B_{i0}=\frac{m_i(y)}{m_0(y)}
+\]</span>
+where
+<span class="math display">\[
+\begin{equation}
+m_i(y)=\int \pi_i(\theta_i)f(y|\theta_i)d\theta_i \\
+m_0(y)=\int \pi_0(\theta_0)f(y|\theta_0)d\theta_0
+\end{equation}
+\]</span>
+把improper prior <span class="math inline">\(\pi_i(\theta_i)\)</span>，通过<span class="math inline">\(x(\ell)\)</span>，得到后验
+<span class="math display">\[
+\pi_i(\theta_i|x(\ell))=\frac{f(x(\ell)|\theta_i)\pi_i(\theta_i)}{\int f(x(\ell)|\theta_i)\pi_i(\theta_i)d\theta_i}
+\]</span>
+其中分母能写成<span class="math inline">\(m_i^N(x(\ell))\)</span>.
+这样
+<span class="math display">\[
+\begin{align*}
+B_{i0}
+&amp;=\frac{\int\pi^N_i(\theta_i|x(\ell))f_i(x(-\ell)|\theta_i)d\theta_i}{\int\pi^N_0(\theta_0|x(\ell))f_0(x(-\ell)|\theta_0)d\theta_0}\\
+&amp;=\frac{\int\frac{\pi^N_i(\theta_i)f_i(x(\ell)|\theta_i)}{m^N_i(x(\ell))}f_i(x(-\ell)|\theta_i)d\theta_i}{\int\frac{\pi^N_0(\theta_0)f_0(x(\ell)|\theta_0)}{m^N_0(x(\ell))}f_0(x(-\ell)|\theta_0)d\theta_0}\\
+&amp;=\frac{\frac{m_i^N}{m_i^N(x(\ell))}}{\frac{m_0^N}{m_0^N(x(\ell))}}\\
+&amp;=\frac{m^N_i}{m_0^N}\frac{m_0^N(x(\ell))}{m_i^N(x(\ell))}\\
+&amp;=B_{0i}^N(x(\ell))\cdot B_{i0}^N(x)
+\end{align*}
+\]</span></p>
+<p>The problem is <span class="math inline">\(B_{ji}(\ell)\)</span> no longer depends on the scales of <span class="math inline">\(\pi^N_j\)</span> and <span class="math inline">\(\pi^N_j\)</span>, instead, it does depend on the arbitrary choice of the (minimal) training sample <span class="math inline">\(x(\ell)\)</span>. To eliminate the dependence and to increase stability, we can use several methods like “average” or other similar approach:</p>
+<p><span class="math display">\[
+B_{j i}^{A I}=B_{j i}^{N} \cdot \frac{1}{L} \sum_{l=1}^{L} B_{i j}^{N}, \quad B_{j i}^{M I}=B_{j i}^{N} \cdot \operatorname{Med}\left[B_{i j}^{N}(l)\right]
+\]</span>
+That is, use average or median to approach <span class="math inline">\(B^N_{0i}(x(\ell))\)</span>.</p>
 </div>
 <div id="the-fractional-bayes-factor-fbf-approach" class="section level3">
-<h3><span class="header-section-number">19.1.7</span> 2.3 The Fractional Bayes Factor (FBF) Approach</h3>
+<h3><span class="header-section-number">19.2.3</span> 2.3 The Fractional Bayes Factor (FBF) Approach</h3>
 <p>由于这个方法这篇文章的内容一时半会没看懂，于是去看 O’Hagan (1995)的了，为了避免未来（明后天？）写整理的时候忘掉，于是直接先写这部分的内容。</p>
 <p>这个方法是从上一节所描述的The Intrinsic Bayes Factor approach发展而来的。为了使minimal dataset构造出的proper prior性质比较好，所以最好用一些方法取遍<span class="math inline">\(x(\ell)\)</span>。比如说平均，或者中位数等等方法。但是为了简化这个选取过程 Let <span class="math inline">\(b=m/n\)</span>. If both m and n are large, the likelihood <span class="math inline">\(f_i(y|\theta_i)\)</span> based only n the training sample y will approximate to the full likelihood <span class="math inline">\(f_i(y|\theta_i)\)</span> raised to the power b.
 <span class="math display">\[
