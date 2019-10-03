@@ -73,6 +73,90 @@ In the case that one often initially entertains a wide variety of models, and ca
 
 - Difficulty 3. Use of 'vague proper priors' usually gives bad answers in Bayesian model selection.
 
+这里需要把例子展开写一下。
+
+Example: Suppose we observe $\mathbf{X}=\left(X_{1}, \dots, X_{n}\right)$ where the $X_i$ are iid $\mathcal{N}(0,1)$ prior, with variance $K$ largel, this is the usual vague proper prior for a normal mean. An easy calculation using the definition of Bayes factor yields:
+$$
+B_{21}=(n K+1)^{-1 / 2} \exp \left(\frac{K n^{2}}{2(1+K n)} \bar{x}^{2}\right)
+$$
+计算过程如下：
+由Bayes factor的定义：
+$$
+B_{j i}=\frac{m_{j}(\mathbf{x})}{m_{i}(\mathbf{x})}=\frac{\int f_{j}\left(\mathbf{x} | \boldsymbol{\theta}_{j}\right) \pi_{j}\left(\boldsymbol{\theta}_{j}\right) d \boldsymbol{\theta}_{j}}{\int f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \pi_{i}\left(\boldsymbol{\theta}_{i}\right) d \boldsymbol{\theta}_{i}}
+$$
+在这个模型中,分母是模型$M_1$,所以就是
+$$
+\begin{align}
+f_1(x)&=\prod _{i=1}^n\frac{1}{\sqrt{2\pi}}exp(-\frac{x_i^2}{2})\\
+&=\frac{1}{(2\pi)^{\frac{n}{2}}}exp(-\frac{1}{2}\sum_{i=1}^n x_i^2)
+\end{align}
+$$
+
+,分子则是
+
+$$
+\begin{align}
+&\int \prod_{i=1}^n \left [\frac{1}{\sqrt{2\pi}}exp(-\frac{(x_i-\theta)^2}{2})\right ]\frac{1}{\sqrt{2\pi K}}exp(-\frac{\theta^2}{2K})d\theta\\
+=& \int \frac{1}{2\pi\sqrt K} exp(- \frac{K\sum _{i=1}^nx_i^2-2\theta n\overline xK+nK\theta^2+\theta^2}{2K})d\theta\\
+\end{align}
+$$
+由于有gaussian积分的形式
+$$
+\int exp(-ay^2+xy)dy=\sqrt{\frac{\pi}{a}}exp(\frac{1}{4a}x^2)
+$$
+所以分子的积分形式有
+$$
+\begin{align}
+& \int  \frac{1}{(2\pi)^{\frac{n+1}{2}}\sqrt K} exp(- \frac{K\sum _{i=1}^nx_i^2-2\theta n\overline xK+nK\theta^2+\theta^2}{2K})d\theta\\
+=& \frac{1}{(2\pi)^{\frac{n+1}{2}}\sqrt K} exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) \int exp(-\frac{-2\theta n\overline x K+(nK+1)\theta^2}{2K})d\theta\\
+=& \frac{1}{(2\pi)^{\frac{n+1}{2}}  \sqrt K} exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) \sqrt{\frac{2\pi K}{nK+1}}exp(\frac{Kn^2}{2(1+Kn)}\overline x^2)\\
+=&  \frac{1}{(2\pi)^{\frac{n}{2}}}  exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) (nK+1)^{-1/2}exp(\frac{Kn^2}{2(1+Kn)}\overline x^2)
+\end{align}
+$$
+则Bayes factor是
+$$
+B_{21}=(n K+1)^{-1 / 2} \exp \left(\frac{K n^{2}}{2(1+K n)} \bar{x}^{2}\right)
+$$
+
+For large K (or large n), this is roughly $(nK)^{-1/2exp(z^2/2)}$, where $z=\sqrt n \overline x$. So $B_{21}$ depends very strongly on K, which is chosen arbitrarily.
+
+In contrast, the usual noninformative prior for $\theta$ in this situation is $\pi^N_2(\theta)=1$. The resulting Bayes factor is $B_{21}=\sqrt{n / 2 \pi} \exp \left(z^{2} / 2\right)$, which is reasonable value. In this case, never use 'arbitrary' vague proper priors for model selection, but improper noninformative priors may give reasonable results. 
+
+However, this is violate the basic principle of basic criteria. The "proper" prior is essential for the Bayesian factor for its scale and normalising constant problem.
+
+- Difficulty 4. Even 'common parameters' can change meaning from one model to another, so that prior distributions must change in a corresponding fashion. Here is an example.
+
+这个难点主要是在实践中遇到的设计阵一般都不是正交设计，有些解释变量会有相关性，这样模型的coefficient就会有不同的scale of coefficient。
+
+比如说对于如下模型:
+$$
+\begin{aligned} M_{1}: Y=X_{1} \beta_{1}+\varepsilon_{1}, & \varepsilon_{1} \sim \mathcal{N}\left(0, \sigma_{1}^{2}\right) \\ M_{2}: Y=X_{1} \beta_{1}+X_{2} \beta_{2}+\varepsilon_{2}, & \varepsilon_{2} \sim \mathcal{N}\left(0, \sigma_{2}^{2}\right) \end{aligned}
+$$
+Y是汽油消费量，$X_1$是weight，$X_2$是engine size。
+Prior density is of the form $\pi_2(\beta_1,\beta_2,\sigma_2)=\pi_{21}(\beta_1)\pi_{22}(\beta_2)\pi_{23}(\sigma_2)$. Since $\beta_1$ is 'common' to the two models, one frequently sees the same prior, $\pi_{21}(\beta_1)$ also used for this parameter in $M_1$.
+
+However, this is not reasonable, since $\beta_1$ has a very different meaning (and value) under $M_1$ than under $M_2$. It is unreasonable to set the same prior to $beta_1$ in both model. This happens because of the considerable positive correlation between weight and engine size.
+
+Although the design matrix is orthogonal design, it could be an issue for variance estimation.
+For $\sigma_1^2$ and $\sigma_2^2$, one often sees the variances being equated and assigned the same prior, even though it is clear that $\sigma^2_1$ will typically be larger than $\sigma^2_2$.
+
+### Preview
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

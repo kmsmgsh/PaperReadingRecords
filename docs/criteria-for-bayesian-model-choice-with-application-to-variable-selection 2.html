@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record</title>
+  <title>Paper 18 Criteria for Bayesian Model Choice With Application to Variable Selection | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record" />
+  <meta property="og:title" content="Paper 18 Criteria for Bayesian Model Choice With Application to Variable Selection | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record" />
+  <meta name="twitter:title" content="Paper 18 Criteria for Bayesian Model Choice With Application to Variable Selection | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-10-03">
+<meta name="date" content="2019-10-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html">
-<link rel="next" href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html">
+<link rel="prev" href="bayesvarsel-bayesian-testing-variable-selection-and-model-averaging-in-linear-models-using-r.html">
+<link rel="next" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,69 @@
 
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -249,15 +312,7 @@
 <li class="chapter" data-level="18.5" data-path="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html"><a href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html#section-18.5"><i class="fa fa-check"></i><b>18.5</b> 总结</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><i class="fa fa-check"></i><b>19</b> Objective Bayesian Methods for Model Selection: Introduction and Comparison</a><ul>
-<li class="chapter" data-level="19.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#bayes-factors"><i class="fa fa-check"></i><b>19.1</b> Bayes Factors</a><ul>
-<li class="chapter" data-level="19.1.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#basic-framework"><i class="fa fa-check"></i><b>19.1.1</b> Basic Framework</a></li>
-<li class="chapter" data-level="19.1.2" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#motivation-for-the-bayesian-approach-to-model-selection"><i class="fa fa-check"></i><b>19.1.2</b> Motivation for the Bayesian Approach to Model Selection</a></li>
-<li class="chapter" data-level="19.1.3" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#utility-functions-and-prediction"><i class="fa fa-check"></i><b>19.1.3</b> Utility Functions and Prediction</a></li>
-<li class="chapter" data-level="19.1.4" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#motivation-for-objective-bayesian-model-selection"><i class="fa fa-check"></i><b>19.1.4</b> Motivation for Objective Bayesian Model Selection</a></li>
-<li class="chapter" data-level="19.1.5" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#difficulties-in-objective-bayesian-model-selection"><i class="fa fa-check"></i><b>19.1.5</b> Difficulties in Objective Bayesian Model Selection</a></li>
-<li class="chapter" data-level="19.1.6" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#preview"><i class="fa fa-check"></i><b>19.1.6</b> Preview</a></li>
-<li class="chapter" data-level="19.1.7" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#the-fractional-bayes-factor-fbf-approach"><i class="fa fa-check"></i><b>19.1.7</b> 2.3 The Fractional Bayes Factor (FBF) Approach</a></li>
-</ul></li>
+<li class="chapter" data-level="19.0.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#the-fractional-bayes-factor-fbf-approach"><i class="fa fa-check"></i><b>19.0.1</b> 2.3 The Fractional Bayes Factor (FBF) Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><i class="fa fa-check"></i><b>20</b> A Review of Bayesian Variable Selection Methods: What, How and Which</a><ul>
 <li class="chapter" data-level="20.1" data-path="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html#abstract-12"><i class="fa fa-check"></i><b>20.1</b> Abstract</a></li>
@@ -288,148 +343,340 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="objective-bayesian-methods-for-model-selection-introduction-and-comparison" class="section level1">
-<h1><span class="header-section-number">Paper 19</span> Objective Bayesian Methods for Model Selection: Introduction and Comparison</h1>
-<div id="bayes-factors" class="section level2">
-<h2><span class="header-section-number">19.1</span> Bayes Factors</h2>
-<div id="basic-framework" class="section level3">
-<h3><span class="header-section-number">19.1.1</span> Basic Framework</h3>
-<p>Comparing q models for the data <span class="math inline">\(x\)</span>,
+<div id="criteria-for-bayesian-model-choice-with-application-to-variable-selection" class="section level1">
+<h1><span class="header-section-number">Paper 18</span> Criteria for Bayesian Model Choice With Application to Variable Selection</h1>
+<div id="abstract-11" class="section level2">
+<h2><span class="header-section-number">18.1</span> Abstract:</h2>
+<p>在主观Bayesian model selection中，没有任何一个方法在决定先验分布中占主导地位。</p>
+</div>
+<div id="introduction-13" class="section level2">
+<h2><span class="header-section-number">18.2</span> Introduction</h2>
+<div id="background" class="section level3">
+<h3><span class="header-section-number">18.2.1</span> Background</h3>
+<p>“objective model selection priors”: not subjective prior.</p>
+<p>There has been no agreement as to which are most appealing or most successful.</p>
+</div>
+<div id="notation." class="section level3">
+<h3><span class="header-section-number">18.2.2</span> Notation.</h3>
+<p>y be a daata vector of size n.
 <span class="math display">\[
-M_{i} : \mathbf{X} \text { has density } f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right), \quad i=1, \ldots, \boldsymbol{q}
+M_{0} : f_{0}(\mathbf{y} | \boldsymbol{\alpha}), \quad M_{i} : f_{i}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right), \quad i=1,2, \ldots, N-1
+\]</span></p>
+<p><span class="math inline">\(\alpha\)</span>是intercept,<span class="math inline">\(\beta_i\)</span>是<span class="math inline">\(k_i\)</span>维的参数。
+null model, prior is <span class="math inline">\(\pi_0(\alpha)\)</span>.</p>
+<p>Model selection prior:
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right)=\pi_{i}(\boldsymbol{\alpha}) \pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right)
 \]</span>
-The marginal or predictive densities of <span class="math inline">\(\mathbf X\)</span>,
+然后<span class="math inline">\(M_i\)</span>的后验概率可以写成:
 <span class="math display">\[
-m_{i}(\mathbf{x})=\int f_{i}\left(\mathbf{x} | \theta_{i}\right) \pi_{i}\left(\theta_{i}\right) d \theta_{i}
+\operatorname{Pr}\left(M_{i} | \mathbf{y}\right)=\frac{B_{i 0}}{1+\left(\sum_{j=1}^{N-1} B_{j 0} P_{j 0}\right)}
 \]</span>
-The Bayes factor of <span class="math inline">\(M_j\)</span> to <span class="math inline">\(M_i\)</span> is given by
+式中的<span class="math inline">\(P_{j0}\)</span>是先验odds (prior ratio) <span class="math inline">\(P_{j 0}=\operatorname{Pr}\left(M_{j}\right) / \operatorname{Pr}\left(M_{0}\right)\)</span>也就是<span class="math inline">\(M_j\)</span>的先验除以null model的先验。
+<span class="math inline">\(B_{j0}\)</span>是模型<span class="math inline">\(M_j\)</span>关于<span class="math inline">\(M_0\)</span>的Bayes factor，定义是
 <span class="math display">\[
-B_{j i}=\frac{m_{j}(\mathbf{x})}{m_{i}(\mathbf{x})}=\frac{\int f_{j}\left(\mathbf{x} | \boldsymbol{\theta}_{j}\right) \pi_{j}\left(\boldsymbol{\theta}_{j}\right) d \boldsymbol{\theta}_{j}}{\int f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \pi_{i}\left(\boldsymbol{\theta}_{i}\right) d \boldsymbol{\theta}_{i}}
+B_{j 0}=\frac{m_{j}(\mathbf{y})}{m_{0}(\mathbf{y})} \quad \text { with } m_{j}(\mathbf{y})=\int f_{j}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right) \pi_{j}\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{j}\right) d \boldsymbol{\alpha} d \boldsymbol{\beta}_{j}
+\]</span></p>
+<p><span class="math inline">\(m_{0}(\mathbf{y})=\int f_{0}(\mathbf{y} | \boldsymbol{\alpha}) \pi_{0}(\boldsymbol{\alpha}) d \boldsymbol{\alpha}\)</span>是<span class="math inline">\(M_j\)</span>模型的边际似然函数，模型<span class="math inline">\(M_j\)</span>和<span class="math inline">\(M_0\)</span>对应的模型先验是<span class="math inline">\(\pi_{j}\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{j}\right)\)</span>和<span class="math inline">\(\pi_{0}(\boldsymbol{\alpha})\)</span>.
+而这篇文章主要关注于讨论<span class="math inline">\(\pi_{j}\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{j}\right)\)</span>和<span class="math inline">\(\pi_{0}(\boldsymbol{\alpha})\)</span>的选取。</p>
+</div>
+</div>
+<div id="criteria-for-objective-model-selection-priors." class="section level2">
+<h2><span class="header-section-number">18.3</span> Criteria for objective model selection priors.</h2>
+<p>Jeffreys’s <em>desiderate</em>: precursors to the criteria developed herein.</p>
+<p>这篇文章把prior的criteria分成四类：basic,consistency criteria, predictive matching criteria and invariance criteria.</p>
+<div id="basic-criteria" class="section level3">
+<h3><span class="header-section-number">18.3.1</span> Basic criteria:</h3>
+<p>一般来说prior for <span class="math inline">\(\beta_i\)</span>应该是proper的，因为这些只出现在Bayes factors <span class="math inline">\(B_{i0}\)</span> 的分子中，如果使用了improper prior，improper prior对应的任意常数就没法消去了，使得<span class="math inline">\(B_{i0}\)</span>不是良定的。</p>
+<p>基于同样的原因，模糊的proper prior不能在<span class="math inline">\(B_{i0}\)</span>中使用。因为这个任意的模糊量会在Bayes factor中以乘的形式体现，使得Bayes factor也变成一个任意的量。
+所以有以下准则：
+Each conditional prior <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right)\)</span> must be proper(integrating to one) and cannot be arbitrarily vague in the sense of almost all of its mass being outside any believable compact set.</p>
+</div>
+<div id="consistency-criteria" class="section level3">
+<h3><span class="header-section-number">18.3.2</span> Consistency criteria</h3>
+<p>Following Liang et al(2008)考虑两个主要的consistency criteria: model selection consistency and information consistency:</p>
+<p>Criterion 2(Model selection consistency) If data y have been generated by <span class="math inline">\(M_i\)</span>, then the posterior probability of <span class="math inline">\(M_i\)</span> should converge to 1 as the sample size <span class="math inline">\(n\rightarrow\infty\)</span>.</p>
+<p>模型选择一致性不是特别有争议性，虽然有些时候真实模型并不是所有备选的模型中的一个。
+然后有一系列文献关心这个准则：</p>
+<pre><code>Fern´andez, Ley and Steel (2001),
+Berger, Ghosh and Mukhopadhyay (2003), Liang et al. (2008), Casella et al.
+(2009), Guo and Speckman (2009).</code></pre>
+<p>Criterion 3(Information consistency): For any model <span class="math inline">\(M_i\)</span>, if <span class="math inline">\(\{y_m,m=1,...\}\)</span> is a sequence of data vectors of fixed size such that, as <span class="math inline">\(m\rightarrow\infty\)</span>,
+<span class="math display">\[
+\Lambda_{i 0}\left(\mathbf{y}_{m}\right)=\frac{\sup _{\boldsymbol{\alpha}, \boldsymbol{\beta}_{i}} f_{i}\left(\mathbf{y}_{m} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right)}{\sup _{\boldsymbol{\alpha}} f_{0}\left(\mathbf{y}_{m} | \boldsymbol{\alpha}\right)} \rightarrow \infty \quad \text { then } B_{i 0}\left(\mathbf{y}_{m}\right) \rightarrow \infty
 \]</span>
-Bayes factor is the “odds provided by the data for <span class="math inline">\(M_j\)</span> versus <span class="math inline">\(M_i\)</span>.”
-Also called the “weighted likelihood ratio of <span class="math inline">\(M_j\)</span> to <span class="math inline">\(M_i\)</span> with priors being theh”weighting functions.&quot;</p>
-<p>If we involve the model prior <span class="math inline">\(P\left(M_{j}\right)\)</span>, then the posterior probability of model <span class="math inline">\(M_i\)</span>, given the data <span class="math inline">\(x\)</span>, is
+在正态误差的线性模型中，这个criteria等价于，如果考虑一系列的数据向量，对应的F(或t)统计量趋于无穷，那么Bayes factor也应该是一样的。</p>
+<p>Jeffreys(1961)使用了这个思路去验证Cauchy prior测试正态的均值是0, also been highlighted in</p>
+<pre><code>Berger and
+Pericchi (2001), Bayarri and Garc´ıa-Donato (2008), Liang et al. (2008).</code></pre>
+<p>可以构造一个Bayesian answer violates information consistency的例子，但是这个例子是非常小的sample sizes，然后先验有极端平的尾部。更多的，违反information consistency 会让频率和bayesian有非常大的冲突，可以被看成unattractive.</p>
+<p>第三类consistency用来表述objective model selection priors typically depend on specific featues of the model. 比如sample size或者考虑特殊的covariates。</p>
+<p>Criterion 4(Intrinsic prior consistency) Let <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}, n\right)\)</span> denote the prior for the model specific parameters of model <span class="math inline">\(M_i\)</span> with sample size n. Then as <span class="math inline">\(n\rightarrow \infty\)</span> and under suitable conditions on the evolution of the model with n, <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}, n\right)\)</span> should converge to a proper prior <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right)\)</span></p>
+<p>思想是模型的特征和样本大小frequently affect model selection priors, 比如一些特征应该在n很大时消失。如果存在一个这样的极限先验，就叫intrinsic prior, Berger and Pericchi(2001).</p>
+</div>
+<div id="predictive-matching-criteria." class="section level3">
+<h3><span class="header-section-number">18.3.3</span> 2.4 Predictive matching criteria.</h3>
+<p>如果一个先验的量级差了2，在一维的情况不会有很大区别，但是在50维的情况下，就会导致Bayes factor上差<span class="math inline">\(2^{50}\)</span>。</p>
+<p>Jeffreys 定义了 “minimal sample size” logically be unable to discriminate between two hypotheses, and argued that the prior distributions should be chosen to the yield equal marginal likelihoods for the two hypotheses.</p>
+<p>如果无法区分的两个hypotheses，那么选取的先验分布在这两个hypotheses下也应该得到相等的边际似然。</p>
+<p>例子：</p>
+<p><span class="math display">\[
+M_{1} : y \sim \frac{1}{\sigma} p_{1}\left(\frac{y-\mu}{\sigma}\right) \quad \text { and } \quad M_{2} : y \sim \frac{1}{\sigma} p_{2}\left(\frac{y-\mu}{\sigma}\right)
+\]</span></p>
+<p>Definition 1. The model/prior pairs <span class="math inline">\(\{M_i,\pi_i\}\)</span> and <span class="math inline">\(\{M_j,\pi_j\}\)</span> are <em>predictive matching</em> at sample size <span class="math inline">\(n^*\)</span> if the predictive distributions <span class="math inline">\(m_{i}\left(\mathbf{y}^{*}\right)\)</span> and <span class="math inline">\(m_{j}\left(\mathbf{y}^{*}\right)\)</span> are close in terms of some distance measure for data of that sample size. The model/prior pairs <span class="math inline">\(\{M_i,\pi_i\}\)</span> and <span class="math inline">\(\{M_i,\pi_i\}\)</span> and <span class="math inline">\(\{M_j,\pi_j\}\)</span> are exact predictive matching at sample size <span class="math inline">\(n^*\)</span> if <span class="math inline">\(m_{i}\left(\mathbf{y}^{*}\right)=m_{j}\left(\mathbf{y}^{*}\right)\)</span> for all <span class="math inline">\(\mathbf{y}^*\)</span> of sample size <span class="math inline">\(n^*\)</span>.</p>
+<p><em>Predictive matching at sample size <span class="math inline">\(n^*\)</span>.</em>
+一组模型和先验被称为 predictive matching at sample size <span class="math inline">\(n^*\)</span>,如果预测分布<span class="math inline">\(m_i(\boldsymbol y^*)\)</span> 和 <span class="math inline">\(m_j(\boldsymbol y^*)\)</span>基于此样本量，距离测度非常靠近。如果是 exact predictive matching at sample size <span class="math inline">\(n^*\)</span> 如果 <span class="math inline">\(m_{i}\left(\mathbf{y}^{*}\right)=m_{j}\left(\mathbf{y}^{*}\right)\)</span>. 也就是之前是靠的很近，exact是完全相等。</p>
+<p>Definition 2 (Minimal training sample). A minimal training sample <span class="math inline">\(\boldsymbol y_i^*\)</span> for <span class="math inline">\(\{M_i,\pi_i\}\)</span> is a sample of minimal size <span class="math inline">\(n^*_i\geq 1\)</span> with a finite nonzero marginal density <span class="math inline">\(m_i(\boldsymbol y_i^*)\)</span>.</p>
+<p>Definition 3 (Null predictive matching). The model selection priors are <em>null predictive matching</em> if each of the model/prior pairs <span class="math inline">\(\{M_i,\pi_i\}\)</span> and <span class="math inline">\(\{M_0,\pi_0\}\)</span> are exact predictive matching for all minimal training samples <span class="math inline">\(\boldsymbol y^*_i\)</span> for <span class="math inline">\(\{M_i,\pi_i\}\)</span></p>
+<p>就是把j改成对null model成立。</p>
+<p>Definition 4 (Dimensional predictive matching). The model selection priors are dimensional predictive matching if each of the model/prior pairs <span class="math inline">\(\{M_i.\pi_i\}\)</span> and <span class="math inline">\(\{M_j,\pi_j\}\)</span> of the same complexity/dimension (i.e., <span class="math inline">\(k_i=k_j\)</span>) are exact predictive matching for all minimal training samples <span class="math inline">\(\boldsymbol y_i^*\)</span> for models of that dimension.</p>
+<p>只要是同样维度的模型，就match，是dimensional predictive matching所描述的问题。</p>
+</div>
+<div id="invariance-criteria" class="section level3">
+<h3><span class="header-section-number">18.3.4</span> Invariance criteria</h3>
+<p>model selection is invariance to the units of measurement being used:</p>
+<p>Criterion 6(Measurement invariance). The units of measurement used for the observations or model parameters should not affect Bayesian answers.</p>
+<p>More generally, model structures are invariant to group fransformations.</p>
+<p>Definition 5. The family of densities for <span class="math inline">\(\mathbf{y} \in \mathbb{R}^{n}, \mathfrak{F} :=\{f(\mathbf{y} | \boldsymbol{\theta}) : \boldsymbol{\theta} \in \Theta\}\)</span> is said to be <em>invariant under the group of transformations</em> <span class="math inline">\(G :=\left\{g : \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}\right\}\)</span> if, for every <span class="math inline">\(g \in \mathfrak{G}\)</span> and <span class="math inline">\(\theta \in \Theta\)</span>, there exists a unique <span class="math inline">\(\theta^*\in \Theta\)</span> such that <span class="math inline">\(X=g(Y)\)</span> has density <span class="math inline">\(f\left(\mathbf{x} | \boldsymbol{\theta}^{*}\right) \in \mathfrak{F}\)</span>. In such a situation, <span class="math inline">\(\theta^*\)</span> will be denoted <span class="math inline">\(\overline g(\theta)\)</span>.</p>
+<p>Criterion 7(Group invariance). If all models are invariant under a group of transformations <span class="math inline">\(G_0\)</span>, then the conditional distributions, <span class="math inline">\(\pi(\beta_i|\alpha)\)</span>, should be chosen in such a way that the conditional marginal distributions
 <span class="math display">\[
-P\left(M_{i} | \mathbf{x}\right)=\frac{P\left(M_{i}\right) m_{i}(\mathbf{x})}{\sum_{j=1}^{q} P\left(M_{j}\right) m_{j}(\mathbf{x})}=\left[\sum_{j=1}^{q} \frac{P\left(M_{j}\right)}{P\left(M_{i}\right)} B_{j i}\right]^{-1}
-\]</span>
-that is,
-<span class="math display">\[
-      P\left(M_{k} | \boldsymbol{X}_{n}\right)=\frac{P\left(M_{k}\right) \int f_{k}\left(\boldsymbol{X}_{n} | \boldsymbol{\theta}_{k}\right) \pi_{k}\left(\boldsymbol{\theta}_{k}\right) d \boldsymbol{\theta}_{k}}{\sum_{\alpha=1}^{r} P\left(M_{\alpha}\right) \int f_{\alpha}\left(\boldsymbol{X}_{n} | \boldsymbol{\theta}_{\alpha}\right) \pi_{\alpha}\left(\boldsymbol{\theta}_{\alpha}\right) d \boldsymbol{\theta}_{\alpha}}
-\]</span>
-which is equivelent to renormalized marginal probabilities, given by
-<span class="math display">\[
-\overline{m}_{i}(\mathbf{x})=\frac{m_{i}(\mathbf{x})}{\sum_{j=1}^{q} m_{j}(\mathbf{x})}
+f_{i}(\mathbf{y} | \boldsymbol{\alpha})=\int f_{i}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right) \pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right) d \boldsymbol{\beta}_{i}
 \]</span></p>
 </div>
-<div id="motivation-for-the-bayesian-approach-to-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.2</span> Motivation for the Bayesian Approach to Model Selection</h3>
-<ul>
-<li><p>Reason 1: Bayes factors and posterior model probabilities are easy to understand.
-The interpretation of Bayes factors as odds and directly probabilities. Not the indirectly on p-value.</p></li>
-<li><p>Reason 2: Bayesian model selection is consistent.
-Rather surprisingly, use of most classical model selection tools, such as p-values, <span class="math inline">\(C_p\)</span> statistics, and AIC does not guarantee consistency. If true model is not included in entertain models, Bayesian model selection will choose that model among the candidates that is closest to the true model in terms of Kullback_Leibler divergence.</p></li>
-<li><p>Reason 3: Bayesian model selectio procedures are automatic Ockham’s razors.Bayesian procedures naturally penalize model complexity, and need no introduction of a penalty term.</p></li>
-<li><p>Reason 4. The Bayesian approach to model selection is conceptually the same, regardless of the number of models under consideration. 传统的frequency方法对两个模型和多个模型的比较方法不一样，比如两个模型之间的选取使用hypothesis testing，而多个则不太一样。Bayesian方法则比较一致。</p></li>
-<li><p>Reason 5. The Bayesian approach does not require nested models, standard distributions, or regular asymptotics.</p></li>
-<li><p>Reason 6. The Bayesian approach can account for model uncertainty.
-Classical approach would yield overoptimistic estimates of accuracy. So it is often recommend to use part of data to select model and rest to make estimation and prediction. Bayesian can take all the models into account rather than choose one. This is known as ‘Bayesian model averaging’ to handle model uncertainty.</p></li>
-<li><p>Reason 7. The Bayesian approach can yield optimal conditional frequentist procedures.</p></li>
-</ul>
 </div>
-<div id="utility-functions-and-prediction" class="section level3">
-<h3><span class="header-section-number">19.1.3</span> Utility Functions and Prediction</h3>
-<p>Approach model selection from the perspective of decision analysis.
-Bayesian model averaging is an important methodology in prediction.</p>
-<p>Select one specific model method: the <em>largest posterior probability</em></p>
-</div>
-<div id="motivation-for-objective-bayesian-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.4</span> Motivation for Objective Bayesian Model Selection</h3>
-<p>Subjective &amp; Objective Bayesian Analysis.</p>
-<p>Subjective Bayesian analysis is attractive, but needed elicitations from subject experts.</p>
-<p>In the case that one often initially entertains a wide variety of models, and careful subjective specification of prior distributions for all the parameters of all the models is essentially impossible.</p>
-</div>
-<div id="difficulties-in-objective-bayesian-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.5</span> Difficulties in Objective Bayesian Model Selection</h3>
-<ul>
-<li><p>Difficulty 1. Computation can be difficult. Hard to calculate Bayes factor. Need integral, could be difficult in high dimension circumstance. Total number of model under consideration can be enormous.</p></li>
-<li><p>Difficulty 2. When the models have parameter space of differing dimensions, use of improper noninformative priors yields indeterminate answers. 假设两个improper无信息先验<span class="math inline">\(\pi_i^N\)</span> 和 <span class="math inline">\(\pi_j^N\)</span> are entertained for models <span class="math inline">\(M_i\)</span> and <span class="math inline">\(M_j\)</span>. Formal Bayes factor in this case is <span class="math inline">\(B_{ji}\)</span>. If use another improper prior like <span class="math inline">\(c_{i} \pi_{i}^{N} \text { and } c_{j} \pi_{j}^{N}\)</span>, then in this case Bayes factor would be <span class="math inline">\(\left(c_{j} / c_{i}\right) B_{j i}\)</span>. Since the choice of <span class="math inline">\(c_{j} / c_{i}\)</span> is arbitrary, the Bayes factor is clearly indeterminate.</p></li>
-<li><p>Difficulty 3. Use of ‘vague proper priors’ usually gives bad answers in Bayesian model selection.</p></li>
-</ul>
-<p>这里需要把例子展开写一下。</p>
-<p>Example: Suppose we observe <span class="math inline">\(\mathbf{X}=\left(X_{1}, \dots, X_{n}\right)\)</span> where the <span class="math inline">\(X_i\)</span> are iid <span class="math inline">\(\mathcal{N}(0,1)\)</span> prior, with variance <span class="math inline">\(K\)</span> largel, this is the usual vague proper prior for a normal mean. An easy calculation using the definition of Bayes factor yields:
-<span class="math display">\[
-B_{21}=(n K+1)^{-1 / 2} \exp \left(\frac{K n^{2}}{2(1+K n)} \bar{x}^{2}\right)
-\]</span>
-计算过程如下：
-由Bayes factor的定义：
-<span class="math display">\[
-B_{j i}=\frac{m_{j}(\mathbf{x})}{m_{i}(\mathbf{x})}=\frac{\int f_{j}\left(\mathbf{x} | \boldsymbol{\theta}_{j}\right) \pi_{j}\left(\boldsymbol{\theta}_{j}\right) d \boldsymbol{\theta}_{j}}{\int f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \pi_{i}\left(\boldsymbol{\theta}_{i}\right) d \boldsymbol{\theta}_{i}}
-\]</span>
-在这个模型中,分母是模型<span class="math inline">\(M_1\)</span>,所以就是
-<span class="math display">\[
-\begin{align}
-f_1(x)&amp;=\prod _{i=1}^n\frac{1}{\sqrt{2\pi}}exp(-\frac{x_i^2}{2})\\
-&amp;=\frac{1}{(2\pi)^{\frac{n}{2}}}exp(-\frac{1}{2}\sum_{i=1}^n x_i^2)
-\end{align}
+<div id="objective-prior-distributions-for-variable-selection-in-normal-linear-models." class="section level2">
+<h2><span class="header-section-number">18.4</span> Objective prior distributions for variable selection in normal linear models.</h2>
+<div id="introduction-14" class="section level3">
+<h3><span class="header-section-number">18.4.1</span> Introduction</h3>
+<p>Variable selection in normal linear models.</p>
+<p><span class="math display">\[
+\begin{aligned} M_{0} : f_{0}\left(\mathbf{y} | \boldsymbol{\beta}_{0}, \sigma\right) &amp;=\mathcal{N}_{n}\left(\mathbf{y} | \mathbf{X}_{0} \boldsymbol{\beta}_{0}, \sigma^{2} \mathbf{I}\right) \\ M_{i} : f_{i}\left(\mathbf{y} | \boldsymbol{\beta}_{i}, \boldsymbol{\beta}_{0}, \sigma\right) &amp;=\mathcal{N}_{n}\left(\mathbf{y} | \mathbf{X}_{0} \boldsymbol{\beta}_{0}+\mathbf{X}_{i} \boldsymbol{\beta}_{i}, \sigma^{2} \mathbf{I}\right), \quad i=1, \ldots, 2^{p}-1 \end{aligned}
 \]</span></p>
-<p>,分子则是</p>
+<p>Zellner and Siow (1980) common objective estimation priors for <span class="math inline">\(\alpha\)</span> and multivariate Cauchy priors for <span class="math inline">\(\pi_i(\beta_i|\alpha)\)</span>, centered at zero and with prior scale matrix <span class="math inline">\(\sigma^{2} n\left(\mathbf{X}_{i}^{\prime} \mathbf{X}_{i}\right)^{-1}\)</span>; Zellner (1986) use similar scale matrix called “g-prior”.</p>
+</div>
+<div id="proposed-prior-the-robust-prior" class="section level3">
+<h3><span class="header-section-number">18.4.2</span> Proposed prior (the “robust prior”)</h3>
+<p>Under model <span class="math inline">\(M_i\)</span>, the prior is of the form
+<span class="math display">\[
+\begin{aligned} \pi_{i}^{R}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right) &amp;=\pi\left(\boldsymbol{\beta}_{0}, \sigma\right) \times \pi_{i}^{R}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right) \\ &amp;=\sigma^{-1} \times \int_{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \boldsymbol{\Sigma}_{i}\right) p_{i}^{R}(g) d g \end{aligned}
+\]</span>
+where <span class="math inline">\(\mathbf{\Sigma}_{i}=\operatorname{Cov}\left(\hat{\boldsymbol{\beta}}_{i}\right)=\sigma^{2}\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\)</span> is the covariance of the maximum likelihood estimator of <span class="math inline">\(\beta_i\)</span>, with
+<span class="math display">\[
+\mathbf{V}_{i}=\left(\mathbf{I}_{n}-\mathbf{X}_{0}\left(\mathbf{X}_{0}^{t} \mathbf{X}_{0}\right)^{-1} \mathbf{X}_{0}^{t}\right) \mathbf{X}_{i}
+\]</span>
+and
+<span class="math display">\[
+p_{i}^{R}(g)=a\left[\rho_{i}(b+n)\right]^{a}(g+b)^{-(a+1)} 1_{\left\{g&gt;\rho_{i}(b+n)-b\right\}}
+\]</span>
+<span class="math display">\[
+\text { with } a&gt;0, b&gt;0 \quad \text { and } \quad \rho_{i} \geq \frac{b}{b+n}
+\]</span></p>
+<p>Under these condition, the <span class="math inline">\(p_i^R(g)\)</span> is a proper density, and <span class="math inline">\(g\)</span> is positive, so that <span class="math inline">\(\pi_i^R(\beta_i|\beta_0,\sigma)\)</span> is proper, satisfying the first part of the Basic criterion.</p>
+<p><span class="math inline">\(p_i^R(g)\)</span>是proper prior</p>
+<p><span class="math display">\[
+a[\rho_i(b+n)]^a(g+b)^{-(a+1)}1_{\{g&gt;\rho_i(b+n)-b\}}
+\]</span>
+with <span class="math inline">\(a&gt;0,b&gt;0\)</span> and <span class="math inline">\(\rho_i\geq\frac{b}{b+n}\)</span>.
+所以
+<span class="math inline">\(\rho_i(b+n)-b\geq 0\)</span>
+然后对g的prior进行积分的话，积分下限就从0，变成<span class="math inline">\(\rho_i(b+n)-b\geq 0\)</span>.</p>
 <p><span class="math display">\[
 \begin{align}
-&amp;\int \prod_{i=1}^n \left [\frac{1}{\sqrt{2\pi}}exp(-\frac{(x_i-\theta)^2}{2})\right ]\frac{1}{\sqrt{2\pi K}}exp(-\frac{\theta^2}{2K})d\theta\\
-=&amp; \int \frac{1}{2\pi\sqrt K} exp(- \frac{K\sum _{i=1}^nx_i^2-2\theta n\overline xK+nK\theta^2+\theta^2}{2K})d\theta\\
+&amp;\int _{\rho_i(b+n)-b}^\infty a[\rho_i(b+n)]^a (g+b)^{-(a+1)}dg\\
+=&amp; a[\rho_i(b+n)]^a \left (-\frac{1}{a}(g+b)^{-a}\right)|^{\infty}_{\rho_i(b+n)-b}\\
+=&amp;a[\rho_i(b+n)]^a\left(\frac{1}{a}(\rho_i(b+n))^{-a}\right)\\
+=&amp;1
 \end{align}
 \]</span>
-由于有gaussian积分的形式
-<span class="math display">\[
-\int exp(-ay^2+xy)dy=\sqrt{\frac{\pi}{a}}exp(\frac{1}{4a}x^2)
-\]</span>
-所以分子的积分形式有
+所以是proper prior.
+但是<span class="math inline">\(\beta_i\)</span>的积分为1应该怎么写。。。
 <span class="math display">\[
 \begin{align}
-&amp; \int  \frac{1}{(2\pi)^{\frac{n+1}{2}}\sqrt K} exp(- \frac{K\sum _{i=1}^nx_i^2-2\theta n\overline xK+nK\theta^2+\theta^2}{2K})d\theta\\
-=&amp; \frac{1}{(2\pi)^{\frac{n+1}{2}}\sqrt K} exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) \int exp(-\frac{-2\theta n\overline x K+(nK+1)\theta^2}{2K})d\theta\\
-=&amp; \frac{1}{(2\pi)^{\frac{n+1}{2}}  \sqrt K} exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) \sqrt{\frac{2\pi K}{nK+1}}exp(\frac{Kn^2}{2(1+Kn)}\overline x^2)\\
-=&amp;  \frac{1}{(2\pi)^{\frac{n}{2}}}  exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) (nK+1)^{-1/2}exp(\frac{Kn^2}{2(1+Kn)}\overline x^2)
+&amp;\int ^{\infty}_{-\infty} \sigma^{-1} \left( \int _{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \mathbf{\Sigma}_{i}\right) p_i^R(g)dg \right)d\boldsymbol\beta_i\\
+=&amp; \int ^{\infty}_{-\infty} \sigma^{-1} \left( \int _{0}^{\infty}(2\pi)^{-\frac{k_i}{2}}|g\Sigma|^{-\frac{1}{2}}exp(-\frac{1}{2}(\beta_i)^T(g\Sigma_i)^{-1}(\beta_i))\\
+\cdot a\left[\rho_{i}(b+n)\right]^{a}(g+b)^{-(a+1)} 1_{\left\{g&gt;\rho_{i}(b+n)-b\right\}} dg\right)d\beta_i
 \end{align}
-\]</span>
-则Bayes factor是
-<span class="math display">\[
-B_{21}=(n K+1)^{-1 / 2} \exp \left(\frac{K n^{2}}{2(1+K n)} \bar{x}^{2}\right)
 \]</span></p>
-<p>For large K (or large n), this is roughly <span class="math inline">\((nK)^{-1/2exp(z^2/2)}\)</span>, where <span class="math inline">\(z=\sqrt n \overline x\)</span>. So <span class="math inline">\(B_{21}\)</span> depends very strongly on K, which is chosen arbitrarily.</p>
-<p>In contrast, the usual noninformative prior for <span class="math inline">\(\theta\)</span> in this situation is <span class="math inline">\(\pi^N_2(\theta)=1\)</span>. The resulting Bayes factor is <span class="math inline">\(B_{21}=\sqrt{n / 2 \pi} \exp \left(z^{2} / 2\right)\)</span>, which is reasonable value. In this case, never use ‘arbitrary’ vague proper priors for model selection, but improper noninformative priors may give reasonable results.</p>
-<p>However, this is violate the basic principle of basic criteria. The “proper” prior is essential for the Bayesian factor for its scale and normalising constant problem.</p>
+<p>Result 1. The <em>conditional marginals</em>
+<span class="math display">\[
+f_{i}\left(\mathbf{y} | \boldsymbol{\beta}_{0}, \sigma\right)=\int \mathcal{N}_{n}\left(\mathbf{y} | \mathbf{X}_{0} \boldsymbol{\beta}_{0}+\mathbf{X}_{i} \boldsymbol{\beta}_{i}, \sigma^{2} \mathbf{I}\right) \pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right) d \boldsymbol{\beta}_{i}
+\]</span>
+are invariant under <span class="math inline">\(G_0\)</span> if and only if <span class="math inline">\(\pi(\beta_i|\beta_0,\sigma)\)</span> has the form:<span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right)=\sigma^{-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)\)</span>,<span class="math inline">\(h_i\)</span> is any proper density with support <span class="math inline">\(\mathcal R^k\)</span>. For example, the robust prior is a particular case with
+<span class="math display">\[
+h_{i}^{R}(\mathbf{u})=\int \mathcal{N}_{k_{i}}\left(\mathbf{u} | \mathbf{0}, g\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\right) p_{i}^{R}(g) d g.
+\]</span>
+基于Group invariance criterion, 以上结论导出了，条件on common parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\beta_i\)</span> must be scaled by <span class="math inline">\(\sigma\)</span>, centered at zero and not depend on <span class="math inline">\(\beta_0\)</span>. Robust prior 满足Group invariance criterion.</p>
+<p>right-Haar density for the common parameters <span class="math inline">\((\beta_0,\sigma)\)</span>, namely
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\beta}_{0}, \sigma\right)=\pi^{H}\left(\boldsymbol{\beta}_{0}, \sigma\right)=\sigma^{-1}
+\]</span></p>
+<p>The overall model prior would be of the form
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)
+\]</span></p>
+<p>Result 2. For <span class="math inline">\(M_i\)</span>, let the prior <span class="math inline">\(\pi_i(\beta_0,\beta_i,\sigma)\)</span> be of the form like previous part, where <span class="math inline">\(h_i\)</span> is symmetric about zero. Then all model/prior pairs <span class="math inline">\(\{M_i,\pi_i\}\)</span> are exact predictive matching for <span class="math inline">\(n^*=k_0+1\)</span>.</p>
+<p>Group invariance criterion and Predictive matching criterion imply that model selection priors should be of the form <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)\)</span>, with <span class="math inline">\(h_i\)</span> symmetric about zero. Robust prior satisfies these criteria as robust prior is clearly symmetric about zero.
+任何scale of Normal mixture 也满足这些criteria, 因为 <span class="math inline">\(h(\cdot)\)</span> 是关于0对称的。</p>
+<div id="justification-of-the-prior-for-the-model-specific-parameters" class="section level4">
+<h4><span class="header-section-number">18.4.2.1</span> Justification of the prior for the model specific parameters</h4>
+<p>Result 3. For <span class="math inline">\(M_i\)</span>, let the prior be as in <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)\)</span> form, where <span class="math inline">\(h_i\)</span> is the scale mixture of normals in <span class="math inline">\(h_{i}^{R}(\mathbf{u})=\int \mathcal{N}_{k_{i}}\left(\mathbf{u} | \mathbf{0}, g\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\right) p_{i}^{R}(g) d g\)</span>. The priors are then null predictive matching and dimensional predictive matching for samples of size <span class="math inline">\(k_0+k_i\)</span>, and no choice of the conditional scale matrix other than <span class="math inline">\(\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\)</span> (or a multiple) can achieve this predictive matching.</p>
+<p>这里是surprising 的结论，predictive matching result for larger sample sizes <span class="math inline">\((k_0+k_i)\)</span> than are encountered in typical predictive matching results. 这个结论只在scale matrices proportional to <span class="math inline">\(\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\)</span>时成立。</p>
+</div>
+</div>
+<div id="choosing-the-hyperparameters-for-p_irg" class="section level3">
+<h3><span class="header-section-number">18.4.3</span> Choosing the hyperparameters for <span class="math inline">\(p_i^R(g)\)</span></h3>
+<div id="introduction." class="section level4">
+<h4><span class="header-section-number">18.4.3.1</span> Introduction.</h4>
+<p>Bayes factor of <span class="math inline">\(M_i\)</span> to <span class="math inline">\(M_0\)</span> can be expressed by
+<span class="math display">\[
+B_{i 0}=Q_{i 0}^{-\left(n-k_{0}\right) / 2} \frac{2 a}{k_{i}+2 a}\left[\rho_{i}(n+b)\right]^{-k_{i} / 2} \mathrm{AP}_{i}
+\]</span>
+in this case, <span class="math inline">\(AP_i\)</span> is the hypergeometric function of two variables, or Apell hypergeometric function
+<span class="math display">\[
+\mathrm{AP}_{i}=\mathrm{F}_{1}\left[a+\frac{k_{i}}{2} ; \frac{k_{i}+k_{0}-n}{2}, \frac{n-k_{0}}{2} ; a+1+\frac{k_{i}}{2} ; \frac{(b-1)}{\rho_{i}(b+n)} ; \frac{b-Q_{i 0}^{-1}}{\rho_{i}(b+n)}\right]
+\]</span>
+and <span class="math inline">\(Q_{i 0}=\mathrm{SSE}_{i} / \mathrm{SSE}_{0}\)</span> is the ratio of the sum of squared errors of models <span class="math inline">\(M_i\)</span> and <span class="math inline">\(M_0\)</span>.</p>
+<p>有一个closed form of Bayes factor不是必须的，但是当处理<span class="math inline">\(2^p\)</span>个模型的问题时，一个closed form of Bayes factor会非常有用。</p>
+<p>建议的超参数是<span class="math inline">\(a=1/2,b=1\)</span> and <span class="math inline">\(\rho_{i}=\left(k_{i}+k_{0}\right)^{-1}\)</span>.</p>
+</div>
+<div id="implications-of-the-consistency-criteria." class="section level4">
+<h4><span class="header-section-number">18.4.3.2</span> Implications of the consistency criteria.</h4>
+<p>一致性准则提供了一个值得考虑的知道关于如何选取 a,b 和 <span class="math inline">\(\rho_i\)</span>. 特别的，可以导出如下结论</p>
+<p>Result 4. The three consistency criterion are satisfied by the robust prior if a and <span class="math inline">\(\rho_i\)</span> do not depend on n, <span class="math inline">\(\lim _{n \rightarrow \infty} \frac{b}{n}=c \geq 0\)</span>,<span class="math inline">\(\lim _{n \rightarrow \infty} \rho_{i}(b+n)=\infty \text { and } n \geq k_{i}+k_{0}+2 a\)</span>.</p>
+<p><em>Use of model selection consistency</em></p>
+<p>假设<span class="math inline">\(M_i\)</span> 是真实模型，考虑任意其他模型<span class="math inline">\(M_j\)</span>.一个关键性的假设关于模型选择一致性是，asymptotically, the design matrices are such that the models are differentiated, in the sense that
+<span class="math display">\[
+\lim _{n \rightarrow \infty} \frac{\boldsymbol{\beta}_{i}^{t} \mathbf{V}_{i}^{t}\left(\mathbf{I}-\mathbf{P}_{j}\right) \mathbf{V}_{i} \boldsymbol{\beta}_{i}}{n}=b_{j} \in(0, \infty)
+\]</span>
+where <span class="math inline">\(\mathbf{P}_{j}=\mathbf{V}_{j}\left(\mathbf{V}_{j}^{t} \mathbf{V}_{j}\right)^{-1} \mathbf{V}_{j}^{t}\)</span>.</p>
+<p>Result 5. Suppose the formula upon is satisfied and that the priors <span class="math inline">\(\pi_i(\beta_0,\beta_i,\sigma)\)</span> are of the form (15), with <span class="math inline">\(h_{i}(\mathbf{u})=\int \mathcal{N}_{k_{i}}\left(\mathbf{u} | \mathbf{0}, g\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\right) p_{i}(g) d g\)</span>. If the <span class="math inline">\(p_i(g)\)</span> are proper densities such that
+<span class="math display">\[
+\lim _{n \rightarrow \infty} \int_{0}^{\infty}(1+g)^{-k_{i} / 2} p_{i}(g) d g=0
+\]</span>
+model selection consistency will result.</p>
+<p>Corollary 1. The prior distributions in <span class="math inline">\(\begin{aligned} \pi_{i}^{R}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right) &amp;=\pi\left(\boldsymbol{\beta}_{0}, \sigma\right) \times \pi_{i}^{R}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right) \\ &amp;=\sigma^{-1} \times \int_{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \boldsymbol{\Sigma}_{i}\right) p_{i}^{R}(g) d g \end{aligned}\)</span> are model selection consistent if
+<span class="math display">\[
+\lim _{n \rightarrow \infty} \rho_{i}(b+n)=\infty
+\]</span></p>
+</div>
+<div id="choice-of-hyper-parameters" class="section level4">
+<h4><span class="header-section-number">18.4.3.3</span> choice of hyper-parameters</h4>
+<p>b=1 has a notable computational advantage.</p>
+<p>看不下去了。以后再看吧</p>
+</div>
+</div>
+</div>
+<div id="section-18.5" class="section level2">
+<h2><span class="header-section-number">18.5</span> 总结</h2>
+<p>重新理解摘要：在客观贝叶斯模型选择问题中，没有哪一个基准在决定客观先验时占主导地位。事实上，很多准则分别被提出来，并且应用在寻找合适的先验上。这篇文章formalize大部分常见的准则,并且放在一起形成了新的准则。结果导出新的客观模型选择先验拥有很多良好的性质。</p>
+<p>而且正常情况improper prior不能直接应用，导致无法简单的找到一个“vague proper priors”.(由于normalising constant的随意性)</p>
+<p>这篇文章使用的model selection 方法基于Bayes factor，使用后验概率来衡量模型的好坏：
+<span class="math display">\[
+\operatorname{Pr}\left(M_{i} | \mathbf{y}\right)=\frac{B_{i 0}}{1+\left(\sum_{j=1}^{N-1} B_{j 0} P_{j 0}\right)}
+\]</span></p>
+<p>然后给出了几个基本准则</p>
 <ul>
-<li>Difficulty 4. Even ‘common parameters’ can change meaning from one model to another, so that prior distributions must change in a corresponding fashion. Here is an example.</li>
+<li><ol style="list-style-type: decimal">
+<li>基础准则： conditional prior <span class="math inline">\(\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right)\)</span> 必须是proper。</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>模型选择的一致性：当sample size <span class="math inline">\(n\rightarrow \infty\)</span>时，如果数据来自模型<span class="math inline">\(M_i\)</span>,那么<span class="math inline">\(M_i\)</span>的后验概率应该收敛到1.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>信息一致性：一个数据向量的序列<span class="math inline">\(\{\boldsymbol y_m,m=1,...\}\)</span>，维度固定，当<span class="math inline">\(m\rightarrow \infty\)</span>,有
+<span class="math display">\[
+\Lambda_{i 0}\left(\mathbf{y}_{m}\right)=\frac{\sup _{\boldsymbol{\alpha}, \boldsymbol{\beta}_{i}} f_{i}\left(\mathbf{y}_{m} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right)}{\sup _{\boldsymbol{\alpha}} f_{0}\left(\mathbf{y}_{m} | \boldsymbol{\alpha}\right)} \rightarrow \infty \quad \text { then } B_{i 0}\left(\mathbf{y}_{m}\right) \rightarrow \infty
+\]</span>
+等价的来说，一系列数据对应的F或者t统计量趋向于无穷，那么Bayes factor也一样。这个准则的目的是避免Bayes方法和frequency方法有冲突。一般而言我们往往不会关心和frequency方法有冲突的先验。</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>intrinsic prior consistency，如果一个先验和样本量n有关，那么当<span class="math inline">\(n\rightarrow\infty\)</span> 时，这个先验应该收敛到一个proper prior。</li>
+</ol></li>
+<li><ol start="5" style="list-style-type: decimal">
+<li>Predictive matching criteria: 很复杂，简单来说我的理解就是，如果数据量较小<span class="math inline">\(&lt;n^*\)</span>,没法把两个模型分开的话，就称这两个模型在样本量<span class="math inline">\(n^*\)</span>上predictive matching at sample size <span class="math inline">\(n^*\)</span>.</li>
+</ol></li>
 </ul>
-<p>这个难点主要是在实践中遇到的设计阵一般都不是正交设计，有些解释变量会有相关性，这样模型的coefficient就会有不同的scale of coefficient。</p>
-<p>比如说对于如下模型:
+<p>模型选择先验应该对 appropriately defined “minimal sample size” in comparing <span class="math inline">\(M_i\)</span> with <span class="math inline">\(M_j\)</span>满足predictive matching.</p>
+<ul>
+<li><ol start="6" style="list-style-type: decimal">
+<li>Measurement invariance: 观测的单位和模型参数的单位不应该影响Bayes选择的结论。</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: decimal">
+<li>Group invariance，如果全部模型关于一个group of transformations <span class="math inline">\(G_0\)</span> invariant,那么条件分布 <span class="math inline">\(\pi_i(\beta_i|\alpha)\)</span>用某种方式选择使得条件边际分布
 <span class="math display">\[
-\begin{aligned} M_{1}: Y=X_{1} \beta_{1}+\varepsilon_{1}, &amp; \varepsilon_{1} \sim \mathcal{N}\left(0, \sigma_{1}^{2}\right) \\ M_{2}: Y=X_{1} \beta_{1}+X_{2} \beta_{2}+\varepsilon_{2}, &amp; \varepsilon_{2} \sim \mathcal{N}\left(0, \sigma_{2}^{2}\right) \end{aligned}
+f_{i}(\mathbf{y} | \boldsymbol{\alpha})=\int f_{i}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right) \pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\alpha}\right) d \boldsymbol{\beta}_{i}
 \]</span>
-Y是汽油消费量，<span class="math inline">\(X_1\)</span>是weight，<span class="math inline">\(X_2\)</span>是engine size。
-Prior density is of the form <span class="math inline">\(\pi_2(\beta_1,\beta_2,\sigma_2)=\pi_{21}(\beta_1)\pi_{22}(\beta_2)\pi_{23}(\sigma_2)\)</span>. Since <span class="math inline">\(\beta_1\)</span> is ‘common’ to the two models, one frequently sees the same prior, <span class="math inline">\(\pi_{21}(\beta_1)\)</span> also used for this parameter in <span class="math inline">\(M_1\)</span>.</p>
-<p>However, this is not reasonable, since <span class="math inline">\(\beta_1\)</span> has a very different meaning (and value) under <span class="math inline">\(M_1\)</span> than under <span class="math inline">\(M_2\)</span>. It is unreasonable to set the same prior to <span class="math inline">\(beta_1\)</span> in both model. This happens because of the considerable positive correlation between weight and engine size.</p>
-<p>Although the design matrix is orthogonal design, it could be an issue for variance estimation.
-For <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span>, one often sees the variances being equated and assigned the same prior, even though it is clear that <span class="math inline">\(\sigma^2_1\)</span> will typically be larger than <span class="math inline">\(\sigma^2_2\)</span>.</p>
-</div>
-<div id="preview" class="section level3">
-<h3><span class="header-section-number">19.1.6</span> Preview</h3>
-</div>
-<div id="the-fractional-bayes-factor-fbf-approach" class="section level3">
-<h3><span class="header-section-number">19.1.7</span> 2.3 The Fractional Bayes Factor (FBF) Approach</h3>
-<p>由于这个方法这篇文章的内容一时半会没看懂，于是去看 O’Hagan (1995)的了，为了避免未来（明后天？）写整理的时候忘掉，于是直接先写这部分的内容。</p>
-<p>这个方法是从上一节所描述的The Intrinsic Bayes Factor approach发展而来的。为了使minimal dataset构造出的proper prior性质比较好，所以最好用一些方法取遍<span class="math inline">\(x(\ell)\)</span>。比如说平均，或者中位数等等方法。但是为了简化这个选取过程 Let <span class="math inline">\(b=m/n\)</span>. If both m and n are large, the likelihood <span class="math inline">\(f_i(y|\theta_i)\)</span> based only n the training sample y will approximate to the full likelihood <span class="math inline">\(f_i(y|\theta_i)\)</span> raised to the power b.
+也关于<span class="math inline">\(G_0\)</span>不变。</li>
+</ol></li>
+</ul>
+<p>推荐的先验：或者叫“robust prior”:
+有这个形式:
 <span class="math display">\[
-\begin{array}{l}{\qquad B_{b}(\mathbf{x})=q_{1}(b, \mathbf{x}) / q_{2}(b, \mathbf{x})} \\ {\text { where }} \\ {\qquad q_{i}(b, \mathbf{x})=\frac{\int \pi_{i}\left(\theta_{i}\right) f_{i}\left(\mathbf{x} | \theta_{i}\right) \mathrm{d} \theta_{i}}{\int \pi_{i}\left(\theta_{i}\right) f_{i}\left(\mathbf{x} | \theta_{i}\right)^{b} \mathrm{d} \theta_{i}}}\end{array} 
+\begin{aligned} \pi_{i}^{R}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right) &amp;=\pi\left(\boldsymbol{\beta}_{0}, \sigma\right) \times \pi_{i}^{R}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right) \\ &amp;=\sigma^{-1} \times \int_{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \boldsymbol{\Sigma}_{i}\right) p_{i}^{R}(g) d g \end{aligned}
 \]</span>
-if the improper prior have the form <span class="math inline">\(\pi_{i}\left(\boldsymbol{\theta}_{i}\right)=c_{i} h_{i}\left(\boldsymbol{\theta}_{i}\right)\)</span>, the indeterminate constant <span class="math inline">\(c_i\)</span> cancels out, leaving
+同时也是g-prior,就是正态先验然后在方差那多个g，然后把g积掉。
+<span class="math inline">\(\boldsymbol{\Sigma}_{i}=\operatorname{Cov}\left(\hat{\boldsymbol{\beta}}_{i}\right)=\sigma^{2}\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\)</span> 是covariance of the MLE for <span class="math inline">\(\beta_i\)</span> with
 <span class="math display">\[
-q_{i}(b | \mathbf{x})=\frac{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \mathrm{d} \boldsymbol{\theta}_{i}}{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right)^{b} \mathrm{d} \boldsymbol{\theta}_{i}}
+\mathbf{V}_{i}=\left(\mathbf{I}_{n}-\mathbf{X}_{0}\left(\mathbf{X}_{0}^{t} \mathbf{X}_{0}\right)^{-1} \mathbf{X}_{0}^{t}\right) \mathbf{X}_{i}
+\]</span>
+and
+<span class="math display">\[
+p_{i}^{R}(g)=a\left[\rho_{i}(b+n)\right]^{a}(g+b)^{-(a+1)} 1_{\left\{g&gt;\rho_{i}(b+n)-b\right\}}
+\]</span>
+with
+<span class="math display">\[
+a&gt;0, b&gt;0 \quad \text { and } \quad \rho_{i} \geq \frac{b}{b+n}.
 \]</span></p>
-<p>所以上标<span class="math inline">\(^b\)</span>就是字面意思power b，而不是标识。</p>
+<p>这个先验有很好的性质，比如其尾部表现和多元student分布一致。而先验尾部的厚度又和information consistency criteria息息相关。</p>
+<p>这里提出了一个更一般的形式：
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\beta}_{i} | \boldsymbol{\beta}_{0}, \sigma\right)=\sigma^{-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)
+\]</span>
+robust prior是这个形式下的一种特殊情况
+<span class="math display">\[
+h_{i}^{R}(\mathbf{u})=\int \mathcal{N}_{k_{i}}\left(\mathbf{u} | \mathbf{0}, g\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}\right) p_{i}^{R}(g) d g
+\]</span>
+而对于高斯模型的条件边际分布，是<span class="math inline">\(G_0\)</span>不变当且仅当先验有上文的那个general形式。</p>
+<p>如果先验有形式：
+<span class="math display">\[
+\pi_{i}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1-k_{i}} h_{i}\left(\frac{\boldsymbol{\beta}_{i}}{\sigma}\right)
+\]</span>
+那么当先验有如上形式时，任意模型和先验对<span class="math inline">\(\{M_i,\pi_i\}\)</span>是exacet predictive matching for <span class="math inline">\(n^*=k_0+1\)</span>。</p>
+<p>既然有那么好的形式，那另外一个问题也自然而然的产生了，对于robust prior, 超参数该如何选取？</p>
+<p>对于这个问题，consistency criteria可以指导超参数的选取。</p>
+<p>然后根据这个可以得出a,b,<span class="math inline">\(\rho_i\)</span>该满足的一系列条件。</p>
+<p>然而有了条件还不够，到底具体的该如何选取？</p>
+<p>满足一定的条件下，
+<span class="math display">\[
+a=1/2
+\]</span>
+.</p>
+<p>b应该取的让<span class="math inline">\(b/n-&gt;c=0\)</span>，这样会比较flat tailed. 总的来说
+<span class="math display">\[
+b=1
+\]</span></p>
+<p><span class="math inline">\(\rho_i\)</span>的选取应该是最复杂的，</p>
+<p><span class="math display">\[
+\left.\rho_{i} \text { must be a constant (independent of } n\right) \text { and } \rho_{i} \geq 1 /\left(1+k_{0}+k_{i}\right)
+\]</span></p>
+<p>….
+The choice <span class="math inline">\(\rho_{i}=1 /\left(k_{0}+k_{i}+1\right)\)</span> is the minimum value of <span class="math inline">\(\rho_i\)</span> and is, hence, certainly a candidate.</p>
+<p><span class="math inline">\(\rho_i=1/(k_0+k_i)\)</span>.</p>
+<p>总结，变量选择的方法：</p>
+<p>先验：
+<span class="math display">\[
+\pi_{i}^{R}\left(\boldsymbol{\beta}_{0}, \boldsymbol{\beta}_{i}, \sigma\right)=\sigma^{-1} \times \int_{0}^{\infty} \mathcal{N}_{k_{i}}\left(\boldsymbol{\beta}_{i} | \mathbf{0}, g \mathbf{\Sigma}_{i}\right) p_{i}^{R}(g) d g
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{l}{\text { where } \boldsymbol{\Sigma}_{i}=\sigma^{2}\left(\mathbf{V}_{i}^{t} \mathbf{V}_{i}\right)^{-1}, \mathbf{V}_{i}=\left(\mathbf{I}_{n}-\mathbf{X}_{0}\left(\mathbf{X}_{0}^{t} \mathbf{X}_{0}\right)^{-1} \mathbf{X}_{0}^{t}\right) \mathbf{X}_{i}, \text { and }} \\ {\qquad p_{i}^{R}(g)=\frac{1}{2}\left[\frac{(1+n)}{\left(k_{i}+k_{0}\right)}\right]^{1 / 2}(g+1)^{-3 / 2} 1_{\left\{g&gt;\left(k_{i}+k_{0}\right)^{-1}(1+n)-1\right\}}}\end{array}
+\]</span>
+那么Bayes factor就有closed form：
+<span class="math display">\[
+\begin{aligned} B_{i 0}=&amp;\left[\frac{n+1}{k_{i}+k_{0}}\right]^{-k_{i} / 2} \\ &amp; \times \frac{Q_{i 0}^{-\left(n-k_{0}\right) / 2}}{k_{i}+1} _2 F_{1}\left[\frac{k_{i}+1}{2} ; \frac{n-k_{0}}{2} ; \frac{k_{i}+3}{2} ; \frac{\left(1-Q_{i 0}^{-1}\right)\left(k_{i}+k_{0}\right)}{(1+n)}\right] \end{aligned}
+\]</span>
+其中
+<span class="math inline">\(_{2} F_{1}\)</span>是standard hypergeometric function. and <span class="math inline">\(Q_{i 0}=\mathrm{SSE}_{i} / \mathrm{SSE}_{0}\)</span></p>
 
-</div>
 </div>
 </div>
             </section>
@@ -437,8 +684,8 @@ q_{i}(b | \mathbf{x})=\frac{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}
           </div>
         </div>
       </div>
-<a href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesvarsel-bayesian-testing-variable-selection-and-model-averaging-in-linear-models-using-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

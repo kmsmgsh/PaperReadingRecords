@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record</title>
+  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record" />
+  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record" />
+  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-10-03">
+<meta name="date" content="2019-10-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html">
-<link rel="next" href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html">
+<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,69 @@
 
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -249,15 +312,7 @@
 <li class="chapter" data-level="18.5" data-path="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html"><a href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html#section-18.5"><i class="fa fa-check"></i><b>18.5</b> 总结</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><i class="fa fa-check"></i><b>19</b> Objective Bayesian Methods for Model Selection: Introduction and Comparison</a><ul>
-<li class="chapter" data-level="19.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#bayes-factors"><i class="fa fa-check"></i><b>19.1</b> Bayes Factors</a><ul>
-<li class="chapter" data-level="19.1.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#basic-framework"><i class="fa fa-check"></i><b>19.1.1</b> Basic Framework</a></li>
-<li class="chapter" data-level="19.1.2" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#motivation-for-the-bayesian-approach-to-model-selection"><i class="fa fa-check"></i><b>19.1.2</b> Motivation for the Bayesian Approach to Model Selection</a></li>
-<li class="chapter" data-level="19.1.3" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#utility-functions-and-prediction"><i class="fa fa-check"></i><b>19.1.3</b> Utility Functions and Prediction</a></li>
-<li class="chapter" data-level="19.1.4" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#motivation-for-objective-bayesian-model-selection"><i class="fa fa-check"></i><b>19.1.4</b> Motivation for Objective Bayesian Model Selection</a></li>
-<li class="chapter" data-level="19.1.5" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#difficulties-in-objective-bayesian-model-selection"><i class="fa fa-check"></i><b>19.1.5</b> Difficulties in Objective Bayesian Model Selection</a></li>
-<li class="chapter" data-level="19.1.6" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#preview"><i class="fa fa-check"></i><b>19.1.6</b> Preview</a></li>
-<li class="chapter" data-level="19.1.7" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#the-fractional-bayes-factor-fbf-approach"><i class="fa fa-check"></i><b>19.1.7</b> 2.3 The Fractional Bayes Factor (FBF) Approach</a></li>
-</ul></li>
+<li class="chapter" data-level="19.0.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#the-fractional-bayes-factor-fbf-approach"><i class="fa fa-check"></i><b>19.0.1</b> 2.3 The Fractional Bayes Factor (FBF) Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><i class="fa fa-check"></i><b>20</b> A Review of Bayesian Variable Selection Methods: What, How and Which</a><ul>
 <li class="chapter" data-level="20.1" data-path="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html#abstract-12"><i class="fa fa-check"></i><b>20.1</b> Abstract</a></li>
@@ -288,148 +343,117 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="objective-bayesian-methods-for-model-selection-introduction-and-comparison" class="section level1">
-<h1><span class="header-section-number">Paper 19</span> Objective Bayesian Methods for Model Selection: Introduction and Comparison</h1>
-<div id="bayes-factors" class="section level2">
-<h2><span class="header-section-number">19.1</span> Bayes Factors</h2>
-<div id="basic-framework" class="section level3">
-<h3><span class="header-section-number">19.1.1</span> Basic Framework</h3>
-<p>Comparing q models for the data <span class="math inline">\(x\)</span>,
-<span class="math display">\[
-M_{i} : \mathbf{X} \text { has density } f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right), \quad i=1, \ldots, \boldsymbol{q}
-\]</span>
-The marginal or predictive densities of <span class="math inline">\(\mathbf X\)</span>,
-<span class="math display">\[
-m_{i}(\mathbf{x})=\int f_{i}\left(\mathbf{x} | \theta_{i}\right) \pi_{i}\left(\theta_{i}\right) d \theta_{i}
-\]</span>
-The Bayes factor of <span class="math inline">\(M_j\)</span> to <span class="math inline">\(M_i\)</span> is given by
-<span class="math display">\[
-B_{j i}=\frac{m_{j}(\mathbf{x})}{m_{i}(\mathbf{x})}=\frac{\int f_{j}\left(\mathbf{x} | \boldsymbol{\theta}_{j}\right) \pi_{j}\left(\boldsymbol{\theta}_{j}\right) d \boldsymbol{\theta}_{j}}{\int f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \pi_{i}\left(\boldsymbol{\theta}_{i}\right) d \boldsymbol{\theta}_{i}}
-\]</span>
-Bayes factor is the “odds provided by the data for <span class="math inline">\(M_j\)</span> versus <span class="math inline">\(M_i\)</span>.”
-Also called the “weighted likelihood ratio of <span class="math inline">\(M_j\)</span> to <span class="math inline">\(M_i\)</span> with priors being theh”weighting functions.&quot;</p>
-<p>If we involve the model prior <span class="math inline">\(P\left(M_{j}\right)\)</span>, then the posterior probability of model <span class="math inline">\(M_i\)</span>, given the data <span class="math inline">\(x\)</span>, is
-<span class="math display">\[
-P\left(M_{i} | \mathbf{x}\right)=\frac{P\left(M_{i}\right) m_{i}(\mathbf{x})}{\sum_{j=1}^{q} P\left(M_{j}\right) m_{j}(\mathbf{x})}=\left[\sum_{j=1}^{q} \frac{P\left(M_{j}\right)}{P\left(M_{i}\right)} B_{j i}\right]^{-1}
-\]</span>
-that is,
-<span class="math display">\[
-      P\left(M_{k} | \boldsymbol{X}_{n}\right)=\frac{P\left(M_{k}\right) \int f_{k}\left(\boldsymbol{X}_{n} | \boldsymbol{\theta}_{k}\right) \pi_{k}\left(\boldsymbol{\theta}_{k}\right) d \boldsymbol{\theta}_{k}}{\sum_{\alpha=1}^{r} P\left(M_{\alpha}\right) \int f_{\alpha}\left(\boldsymbol{X}_{n} | \boldsymbol{\theta}_{\alpha}\right) \pi_{\alpha}\left(\boldsymbol{\theta}_{\alpha}\right) d \boldsymbol{\theta}_{\alpha}}
-\]</span>
-which is equivelent to renormalized marginal probabilities, given by
-<span class="math display">\[
-\overline{m}_{i}(\mathbf{x})=\frac{m_{i}(\mathbf{x})}{\sum_{j=1}^{q} m_{j}(\mathbf{x})}
-\]</span></p>
-</div>
-<div id="motivation-for-the-bayesian-approach-to-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.2</span> Motivation for the Bayesian Approach to Model Selection</h3>
+<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
+<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
+<p>R.B. O’Hara and M.J.Sillanpaa
+<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
+<div id="abstract-12" class="section level2">
+<h2><span class="header-section-number">20.1</span> Abstract</h2>
+<p>This paper concentrated on</p>
 <ul>
-<li><p>Reason 1: Bayes factors and posterior model probabilities are easy to understand.
-The interpretation of Bayes factors as odds and directly probabilities. Not the indirectly on p-value.</p></li>
-<li><p>Reason 2: Bayesian model selection is consistent.
-Rather surprisingly, use of most classical model selection tools, such as p-values, <span class="math inline">\(C_p\)</span> statistics, and AIC does not guarantee consistency. If true model is not included in entertain models, Bayesian model selection will choose that model among the candidates that is closest to the true model in terms of Kullback_Leibler divergence.</p></li>
-<li><p>Reason 3: Bayesian model selectio procedures are automatic Ockham’s razors.Bayesian procedures naturally penalize model complexity, and need no introduction of a penalty term.</p></li>
-<li><p>Reason 4. The Bayesian approach to model selection is conceptually the same, regardless of the number of models under consideration. 传统的frequency方法对两个模型和多个模型的比较方法不一样，比如两个模型之间的选取使用hypothesis testing，而多个则不太一样。Bayesian方法则比较一致。</p></li>
-<li><p>Reason 5. The Bayesian approach does not require nested models, standard distributions, or regular asymptotics.</p></li>
-<li><p>Reason 6. The Bayesian approach can account for model uncertainty.
-Classical approach would yield overoptimistic estimates of accuracy. So it is often recommend to use part of data to select model and rest to make estimation and prediction. Bayesian can take all the models into account rather than choose one. This is known as ‘Bayesian model averaging’ to handle model uncertainty.</p></li>
-<li><p>Reason 7. The Bayesian approach can yield optimal conditional frequentist procedures.</p></li>
+<li>Kuo &amp; Mallick method</li>
+<li>Gibbs Variable Selection(GVS)</li>
+<li>Stochastic Search Variable Selection (SSVS)</li>
+<li>Adaptive shrinkage with Jeffreys’ prior</li>
+<li>Reversible jump MCMC</li>
+<li>Laplacian prior, Bayesian lasso</li>
 </ul>
 </div>
-<div id="utility-functions-and-prediction" class="section level3">
-<h3><span class="header-section-number">19.1.3</span> Utility Functions and Prediction</h3>
-<p>Approach model selection from the perspective of decision analysis.
-Bayesian model averaging is an important methodology in prediction.</p>
-<p>Select one specific model method: the <em>largest posterior probability</em></p>
-</div>
-<div id="motivation-for-objective-bayesian-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.4</span> Motivation for Objective Bayesian Model Selection</h3>
-<p>Subjective &amp; Objective Bayesian Analysis.</p>
-<p>Subjective Bayesian analysis is attractive, but needed elicitations from subject experts.</p>
-<p>In the case that one often initially entertains a wide variety of models, and careful subjective specification of prior distributions for all the parameters of all the models is essentially impossible.</p>
-</div>
-<div id="difficulties-in-objective-bayesian-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.5</span> Difficulties in Objective Bayesian Model Selection</h3>
-<ul>
-<li><p>Difficulty 1. Computation can be difficult. Hard to calculate Bayes factor. Need integral, could be difficult in high dimension circumstance. Total number of model under consideration can be enormous.</p></li>
-<li><p>Difficulty 2. When the models have parameter space of differing dimensions, use of improper noninformative priors yields indeterminate answers. 假设两个improper无信息先验<span class="math inline">\(\pi_i^N\)</span> 和 <span class="math inline">\(\pi_j^N\)</span> are entertained for models <span class="math inline">\(M_i\)</span> and <span class="math inline">\(M_j\)</span>. Formal Bayes factor in this case is <span class="math inline">\(B_{ji}\)</span>. If use another improper prior like <span class="math inline">\(c_{i} \pi_{i}^{N} \text { and } c_{j} \pi_{j}^{N}\)</span>, then in this case Bayes factor would be <span class="math inline">\(\left(c_{j} / c_{i}\right) B_{j i}\)</span>. Since the choice of <span class="math inline">\(c_{j} / c_{i}\)</span> is arbitrary, the Bayes factor is clearly indeterminate.</p></li>
-<li><p>Difficulty 3. Use of ‘vague proper priors’ usually gives bad answers in Bayesian model selection.</p></li>
-</ul>
-<p>这里需要把例子展开写一下。</p>
-<p>Example: Suppose we observe <span class="math inline">\(\mathbf{X}=\left(X_{1}, \dots, X_{n}\right)\)</span> where the <span class="math inline">\(X_i\)</span> are iid <span class="math inline">\(\mathcal{N}(0,1)\)</span> prior, with variance <span class="math inline">\(K\)</span> largel, this is the usual vague proper prior for a normal mean. An easy calculation using the definition of Bayes factor yields:
-<span class="math display">\[
-B_{21}=(n K+1)^{-1 / 2} \exp \left(\frac{K n^{2}}{2(1+K n)} \bar{x}^{2}\right)
-\]</span>
-计算过程如下：
-由Bayes factor的定义：
-<span class="math display">\[
-B_{j i}=\frac{m_{j}(\mathbf{x})}{m_{i}(\mathbf{x})}=\frac{\int f_{j}\left(\mathbf{x} | \boldsymbol{\theta}_{j}\right) \pi_{j}\left(\boldsymbol{\theta}_{j}\right) d \boldsymbol{\theta}_{j}}{\int f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \pi_{i}\left(\boldsymbol{\theta}_{i}\right) d \boldsymbol{\theta}_{i}}
-\]</span>
-在这个模型中,分母是模型<span class="math inline">\(M_1\)</span>,所以就是
-<span class="math display">\[
-\begin{align}
-f_1(x)&amp;=\prod _{i=1}^n\frac{1}{\sqrt{2\pi}}exp(-\frac{x_i^2}{2})\\
-&amp;=\frac{1}{(2\pi)^{\frac{n}{2}}}exp(-\frac{1}{2}\sum_{i=1}^n x_i^2)
-\end{align}
-\]</span></p>
-<p>,分子则是</p>
+<div id="introduction-15" class="section level2">
+<h2><span class="header-section-number">20.2</span> Introduction</h2>
+<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
+<div id="notation" class="section level3">
+<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
 <p><span class="math display">\[
-\begin{align}
-&amp;\int \prod_{i=1}^n \left [\frac{1}{\sqrt{2\pi}}exp(-\frac{(x_i-\theta)^2}{2})\right ]\frac{1}{\sqrt{2\pi K}}exp(-\frac{\theta^2}{2K})d\theta\\
-=&amp; \int \frac{1}{2\pi\sqrt K} exp(- \frac{K\sum _{i=1}^nx_i^2-2\theta n\overline xK+nK\theta^2+\theta^2}{2K})d\theta\\
-\end{align}
+y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
 \]</span>
-由于有gaussian积分的形式
+<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
+<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
+<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
+Usually use auxiliary indicator to indicate presence and absence of covariate.
+That is, the parameter have two part, with defining as
 <span class="math display">\[
-\int exp(-ay^2+xy)dy=\sqrt{\frac{\pi}{a}}exp(\frac{1}{4a}x^2)
+\theta_j=I_j\beta_j
 \]</span>
-所以分子的积分形式有
-<span class="math display">\[
-\begin{align}
-&amp; \int  \frac{1}{(2\pi)^{\frac{n+1}{2}}\sqrt K} exp(- \frac{K\sum _{i=1}^nx_i^2-2\theta n\overline xK+nK\theta^2+\theta^2}{2K})d\theta\\
-=&amp; \frac{1}{(2\pi)^{\frac{n+1}{2}}\sqrt K} exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) \int exp(-\frac{-2\theta n\overline x K+(nK+1)\theta^2}{2K})d\theta\\
-=&amp; \frac{1}{(2\pi)^{\frac{n+1}{2}}  \sqrt K} exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) \sqrt{\frac{2\pi K}{nK+1}}exp(\frac{Kn^2}{2(1+Kn)}\overline x^2)\\
-=&amp;  \frac{1}{(2\pi)^{\frac{n}{2}}}  exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) (nK+1)^{-1/2}exp(\frac{Kn^2}{2(1+Kn)}\overline x^2)
-\end{align}
-\]</span>
-则Bayes factor是
-<span class="math display">\[
-B_{21}=(n K+1)^{-1 / 2} \exp \left(\frac{K n^{2}}{2(1+K n)} \bar{x}^{2}\right)
-\]</span></p>
-<p>For large K (or large n), this is roughly <span class="math inline">\((nK)^{-1/2exp(z^2/2)}\)</span>, where <span class="math inline">\(z=\sqrt n \overline x\)</span>. So <span class="math inline">\(B_{21}\)</span> depends very strongly on K, which is chosen arbitrarily.</p>
-<p>In contrast, the usual noninformative prior for <span class="math inline">\(\theta\)</span> in this situation is <span class="math inline">\(\pi^N_2(\theta)=1\)</span>. The resulting Bayes factor is <span class="math inline">\(B_{21}=\sqrt{n / 2 \pi} \exp \left(z^{2} / 2\right)\)</span>, which is reasonable value. In this case, never use ‘arbitrary’ vague proper priors for model selection, but improper noninformative priors may give reasonable results.</p>
-<p>However, this is violate the basic principle of basic criteria. The “proper” prior is essential for the Bayesian factor for its scale and normalising constant problem.</p>
-<ul>
-<li>Difficulty 4. Even ‘common parameters’ can change meaning from one model to another, so that prior distributions must change in a corresponding fashion. Here is an example.</li>
-</ul>
-<p>这个难点主要是在实践中遇到的设计阵一般都不是正交设计，有些解释变量会有相关性，这样模型的coefficient就会有不同的scale of coefficient。</p>
-<p>比如说对于如下模型:
-<span class="math display">\[
-\begin{aligned} M_{1}: Y=X_{1} \beta_{1}+\varepsilon_{1}, &amp; \varepsilon_{1} \sim \mathcal{N}\left(0, \sigma_{1}^{2}\right) \\ M_{2}: Y=X_{1} \beta_{1}+X_{2} \beta_{2}+\varepsilon_{2}, &amp; \varepsilon_{2} \sim \mathcal{N}\left(0, \sigma_{2}^{2}\right) \end{aligned}
-\]</span>
-Y是汽油消费量，<span class="math inline">\(X_1\)</span>是weight，<span class="math inline">\(X_2\)</span>是engine size。
-Prior density is of the form <span class="math inline">\(\pi_2(\beta_1,\beta_2,\sigma_2)=\pi_{21}(\beta_1)\pi_{22}(\beta_2)\pi_{23}(\sigma_2)\)</span>. Since <span class="math inline">\(\beta_1\)</span> is ‘common’ to the two models, one frequently sees the same prior, <span class="math inline">\(\pi_{21}(\beta_1)\)</span> also used for this parameter in <span class="math inline">\(M_1\)</span>.</p>
-<p>However, this is not reasonable, since <span class="math inline">\(\beta_1\)</span> has a very different meaning (and value) under <span class="math inline">\(M_1\)</span> than under <span class="math inline">\(M_2\)</span>. It is unreasonable to set the same prior to <span class="math inline">\(beta_1\)</span> in both model. This happens because of the considerable positive correlation between weight and engine size.</p>
-<p>Although the design matrix is orthogonal design, it could be an issue for variance estimation.
-For <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span>, one often sees the variances being equated and assigned the same prior, even though it is clear that <span class="math inline">\(\sigma^2_1\)</span> will typically be larger than <span class="math inline">\(\sigma^2_2\)</span>.</p>
+The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
 </div>
-<div id="preview" class="section level3">
-<h3><span class="header-section-number">19.1.6</span> Preview</h3>
+<div id="concepts-and-properties" class="section level3">
+<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
+<div id="sparseness" class="section level4">
+<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
+<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
+<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
+<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
 </div>
-<div id="the-fractional-bayes-factor-fbf-approach" class="section level3">
-<h3><span class="header-section-number">19.1.7</span> 2.3 The Fractional Bayes Factor (FBF) Approach</h3>
-<p>由于这个方法这篇文章的内容一时半会没看懂，于是去看 O’Hagan (1995)的了，为了避免未来（明后天？）写整理的时候忘掉，于是直接先写这部分的内容。</p>
-<p>这个方法是从上一节所描述的The Intrinsic Bayes Factor approach发展而来的。为了使minimal dataset构造出的proper prior性质比较好，所以最好用一些方法取遍<span class="math inline">\(x(\ell)\)</span>。比如说平均，或者中位数等等方法。但是为了简化这个选取过程 Let <span class="math inline">\(b=m/n\)</span>. If both m and n are large, the likelihood <span class="math inline">\(f_i(y|\theta_i)\)</span> based only n the training sample y will approximate to the full likelihood <span class="math inline">\(f_i(y|\theta_i)\)</span> raised to the power b.
+<div id="tuning" class="section level4">
+<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
+<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
+Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
+<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
+<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
+<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
+<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
+It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
+</div>
+<div id="global-adaptation" class="section level4">
+<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
+<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
+If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
+<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
+</div>
+<div id="local-adaptation" class="section level4">
+<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
+<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
+</div>
+<div id="bayesian-model-averaging" class="section level4">
+<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
+<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
+<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
+</div>
+</div>
+<div id="variable-selection-methods" class="section level3">
+<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
+<div id="indicator-model-selection" class="section level4">
+<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
+<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
+<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
+<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
+<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
+</div>
+<div id="stochastic-search-variable-selection-ssvs" class="section level4">
+<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
+<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
 <span class="math display">\[
-\begin{array}{l}{\qquad B_{b}(\mathbf{x})=q_{1}(b, \mathbf{x}) / q_{2}(b, \mathbf{x})} \\ {\text { where }} \\ {\qquad q_{i}(b, \mathbf{x})=\frac{\int \pi_{i}\left(\theta_{i}\right) f_{i}\left(\mathbf{x} | \theta_{i}\right) \mathrm{d} \theta_{i}}{\int \pi_{i}\left(\theta_{i}\right) f_{i}\left(\mathbf{x} | \theta_{i}\right)^{b} \mathrm{d} \theta_{i}}}\end{array} 
-\]</span>
-if the improper prior have the form <span class="math inline">\(\pi_{i}\left(\boldsymbol{\theta}_{i}\right)=c_{i} h_{i}\left(\boldsymbol{\theta}_{i}\right)\)</span>, the indeterminate constant <span class="math inline">\(c_i\)</span> cancels out, leaving
-<span class="math display">\[
-q_{i}(b | \mathbf{x})=\frac{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \mathrm{d} \boldsymbol{\theta}_{i}}{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right)^{b} \mathrm{d} \boldsymbol{\theta}_{i}}
+P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
 \]</span></p>
-<p>所以上标<span class="math inline">\(^b\)</span>就是字面意思power b，而不是标识。</p>
+</div>
+<div id="adaptive-shrinkage" class="section level4">
+<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
+<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
+The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
+<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
+<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
+<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
+</div>
+<div id="model-space-approach" class="section level4">
+<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
+<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
+<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
+<p><em>Composite model space</em> (CMS)
+This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
+<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
 
 </div>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-OHara:2009in">
+<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
+</div>
+<div id="ref-Ishwaran:2005ir">
+<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
 </div>
 </div>
             </section>
@@ -437,8 +461,8 @@ q_{i}(b | \mathbf{x})=\frac{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}
           </div>
         </div>
       </div>
-<a href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

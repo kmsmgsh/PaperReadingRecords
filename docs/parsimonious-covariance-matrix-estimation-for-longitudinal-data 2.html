@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record</title>
+  <title>Paper 15 Parsimonious Covariance Matrix Estimation for Longitudinal Data | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record" />
+  <meta property="og:title" content="Paper 15 Parsimonious Covariance Matrix Estimation for Longitudinal Data | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 19 Objective Bayesian Methods for Model Selection: Introduction and Comparison | A paper reading record" />
+  <meta name="twitter:title" content="Paper 15 Parsimonious Covariance Matrix Estimation for Longitudinal Data | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-10-03">
+<meta name="date" content="2019-10-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html">
-<link rel="next" href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html">
+<link rel="prev" href="dirichlet-laplace-priors-for-optimal-shrinkage.html">
+<link rel="next" href="modeling-local-dependence-in-latent-vector-autoregressive-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,69 @@
 
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -249,15 +312,7 @@
 <li class="chapter" data-level="18.5" data-path="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html"><a href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html#section-18.5"><i class="fa fa-check"></i><b>18.5</b> 总结</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><i class="fa fa-check"></i><b>19</b> Objective Bayesian Methods for Model Selection: Introduction and Comparison</a><ul>
-<li class="chapter" data-level="19.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#bayes-factors"><i class="fa fa-check"></i><b>19.1</b> Bayes Factors</a><ul>
-<li class="chapter" data-level="19.1.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#basic-framework"><i class="fa fa-check"></i><b>19.1.1</b> Basic Framework</a></li>
-<li class="chapter" data-level="19.1.2" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#motivation-for-the-bayesian-approach-to-model-selection"><i class="fa fa-check"></i><b>19.1.2</b> Motivation for the Bayesian Approach to Model Selection</a></li>
-<li class="chapter" data-level="19.1.3" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#utility-functions-and-prediction"><i class="fa fa-check"></i><b>19.1.3</b> Utility Functions and Prediction</a></li>
-<li class="chapter" data-level="19.1.4" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#motivation-for-objective-bayesian-model-selection"><i class="fa fa-check"></i><b>19.1.4</b> Motivation for Objective Bayesian Model Selection</a></li>
-<li class="chapter" data-level="19.1.5" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#difficulties-in-objective-bayesian-model-selection"><i class="fa fa-check"></i><b>19.1.5</b> Difficulties in Objective Bayesian Model Selection</a></li>
-<li class="chapter" data-level="19.1.6" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#preview"><i class="fa fa-check"></i><b>19.1.6</b> Preview</a></li>
-<li class="chapter" data-level="19.1.7" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#the-fractional-bayes-factor-fbf-approach"><i class="fa fa-check"></i><b>19.1.7</b> 2.3 The Fractional Bayes Factor (FBF) Approach</a></li>
-</ul></li>
+<li class="chapter" data-level="19.0.1" data-path="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html"><a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html#the-fractional-bayes-factor-fbf-approach"><i class="fa fa-check"></i><b>19.0.1</b> 2.3 The Fractional Bayes Factor (FBF) Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><i class="fa fa-check"></i><b>20</b> A Review of Bayesian Variable Selection Methods: What, How and Which</a><ul>
 <li class="chapter" data-level="20.1" data-path="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html"><a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html#abstract-12"><i class="fa fa-check"></i><b>20.1</b> Abstract</a></li>
@@ -288,148 +343,305 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="objective-bayesian-methods-for-model-selection-introduction-and-comparison" class="section level1">
-<h1><span class="header-section-number">Paper 19</span> Objective Bayesian Methods for Model Selection: Introduction and Comparison</h1>
-<div id="bayes-factors" class="section level2">
-<h2><span class="header-section-number">19.1</span> Bayes Factors</h2>
-<div id="basic-framework" class="section level3">
-<h3><span class="header-section-number">19.1.1</span> Basic Framework</h3>
-<p>Comparing q models for the data <span class="math inline">\(x\)</span>,
+<div id="parsimonious-covariance-matrix-estimation-for-longitudinal-data" class="section level1">
+<h1><span class="header-section-number">Paper 15</span> Parsimonious Covariance Matrix Estimation for Longitudinal Data</h1>
+<p><span class="citation">(Smith and Kohn <a href="#ref-Smith:2012vj">2012</a>)</span></p>
+<div id="abstract-10" class="section level2">
+<h2><span class="header-section-number">15.1</span> Abstract</h2>
+<p>Data-driven method to identify parsimony in the covariance matrix of longitudinal data and to exploit any such parsimony to produce a statistically efficient <strong><strong>estimator</strong></strong> of the covariance matrix. Use MCD. Off-diagonal elements of Cholesky factor is likely to be zero. Use hierarchical Bayesian model to identify zeros in Cholesky factor.</p>
+</div>
+<div id="introduction-12" class="section level2">
+<h2><span class="header-section-number">15.2</span> Introduction</h2>
+<p>Model for covariance matrix of multivariate Gaussian longitudinal data. MCD:
+<span class="math inline">\(e \sim N(0, \Sigma)\)</span>.
 <span class="math display">\[
-M_{i} : \mathbf{X} \text { has density } f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right), \quad i=1, \ldots, \boldsymbol{q}
+\Sigma^{-1}=B D B^{\prime}
 \]</span>
-The marginal or predictive densities of <span class="math inline">\(\mathbf X\)</span>,
+The factor B can be interpreted as <span class="math inline">\(B^{\prime} e=\zeta\)</span>. To flexibly identify zeros in the lower triangle of <span class="math inline">\(B\)</span>, place a hierarchical prior on it.
 <span class="math display">\[
-m_{i}(\mathbf{x})=\int f_{i}\left(\mathbf{x} | \theta_{i}\right) \pi_{i}\left(\theta_{i}\right) d \theta_{i}
-\]</span>
-The Bayes factor of <span class="math inline">\(M_j\)</span> to <span class="math inline">\(M_i\)</span> is given by
-<span class="math display">\[
-B_{j i}=\frac{m_{j}(\mathbf{x})}{m_{i}(\mathbf{x})}=\frac{\int f_{j}\left(\mathbf{x} | \boldsymbol{\theta}_{j}\right) \pi_{j}\left(\boldsymbol{\theta}_{j}\right) d \boldsymbol{\theta}_{j}}{\int f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \pi_{i}\left(\boldsymbol{\theta}_{i}\right) d \boldsymbol{\theta}_{i}}
-\]</span>
-Bayes factor is the “odds provided by the data for <span class="math inline">\(M_j\)</span> versus <span class="math inline">\(M_i\)</span>.”
-Also called the “weighted likelihood ratio of <span class="math inline">\(M_j\)</span> to <span class="math inline">\(M_i\)</span> with priors being theh”weighting functions.&quot;</p>
-<p>If we involve the model prior <span class="math inline">\(P\left(M_{j}\right)\)</span>, then the posterior probability of model <span class="math inline">\(M_i\)</span>, given the data <span class="math inline">\(x\)</span>, is
-<span class="math display">\[
-P\left(M_{i} | \mathbf{x}\right)=\frac{P\left(M_{i}\right) m_{i}(\mathbf{x})}{\sum_{j=1}^{q} P\left(M_{j}\right) m_{j}(\mathbf{x})}=\left[\sum_{j=1}^{q} \frac{P\left(M_{j}\right)}{P\left(M_{i}\right)} B_{j i}\right]^{-1}
-\]</span>
-that is,
-<span class="math display">\[
-      P\left(M_{k} | \boldsymbol{X}_{n}\right)=\frac{P\left(M_{k}\right) \int f_{k}\left(\boldsymbol{X}_{n} | \boldsymbol{\theta}_{k}\right) \pi_{k}\left(\boldsymbol{\theta}_{k}\right) d \boldsymbol{\theta}_{k}}{\sum_{\alpha=1}^{r} P\left(M_{\alpha}\right) \int f_{\alpha}\left(\boldsymbol{X}_{n} | \boldsymbol{\theta}_{\alpha}\right) \pi_{\alpha}\left(\boldsymbol{\theta}_{\alpha}\right) d \boldsymbol{\theta}_{\alpha}}
-\]</span>
-which is equivelent to renormalized marginal probabilities, given by
-<span class="math display">\[
-\overline{m}_{i}(\mathbf{x})=\frac{m_{i}(\mathbf{x})}{\sum_{j=1}^{q} m_{j}(\mathbf{x})}
+\zeta\sim N(0,D^{-1})
 \]</span></p>
-</div>
-<div id="motivation-for-the-bayesian-approach-to-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.2</span> Motivation for the Bayesian Approach to Model Selection</h3>
+<blockquote>
+<p>突然想起来Bickel还是谁的那篇，好像也是这个思路？但是晚了6-7年。</p>
+</blockquote>
+<p>This work is related to that on <strong>Gaussian covariance selection models</strong>, also called <strong>Gaussian graphical models</strong>, that studies covariance matrices with patterns of zeros in the inverse. <em>However</em>, parsimony in the Cholesky factor <span class="math inline">\(B\)</span> does not imply equivalent parsimony in the graphical model, and vice versa.</p>
+<p>“The work of Pourhamadi (1999,2000) is closest to ours”. He used the modififed Cholesky decomposition <span class="math inline">\(\Sigma^{-1}=B&#39;DB\)</span>, and modeled the strict lower-triangular elements of B as linear functions of explanatory variables. The approach of Pourhamadi subsumes many of the models used for a covariance matrix in longitudinal data, including autoregressive and antedependence models.
+The interpretation of the Cholesky decomposition for longitudinal data are stressed, also here.
+However, pourhamadi’s approach differs from ours because it is parametric and does not attempt to formally identify any structural zeros. He also estimated his model by maximum likelihood and did not average over models. In contrast, the Bayesian approach provides a framework for averaging over parsimonious configurations of B, and inference is based on the finite sample posterior distribution.</p>
+<p>An alternative factorization of the covariance matrix used by a number of authors is the psectral decomposition, <span class="math inline">\(\Sigma=O&#39;\Lambda O\)</span> where <span class="math inline">\(O\)</span> is the orthonormal matrix of eigenvectors and <span class="math inline">\(\Lambda\)</span> is the diagonal matrix of corresponding eigenvalues. The matrix <span class="math inline">\(O\)</span> is further decomposed into a product of Given rotation matrices, so that <span class="math inline">\(\Sigma\)</span> is parameterized in terms of its eigen-values and Givens angles.</p>
+<p>Yang and Berger (1994) placed a reference prior on the Givens angles and eigenvalues and used it to carry out Bayesian inference on <span class="math inline">\(\Sigma\)</span>.</p>
+<blockquote>
+<p>HPC also use Givens angles, but different way. What’s the relationship between these two methods?</p>
+</blockquote>
+<p>However, it does not identify any specific parsimonious structure in the covariance matrix or its inverse, which is an objective of our approach for covariance matrices arising in longitudinal data.</p>
+<p>This paper proposed method can efficiently estimate the covariance matrix and its inverse when the Cholesky factor is sparse or has elements close to szero. Performance is shown to be competitive with Yang and Berger (1994), which is recognized as one of the most statistically efficient covariance matrix estimators in the current literature.</p>
+<hr />
+<blockquote>
+<p>不要再抄了T.T</p>
+</blockquote>
 <ul>
-<li><p>Reason 1: Bayes factors and posterior model probabilities are easy to understand.
-The interpretation of Bayes factors as odds and directly probabilities. Not the indirectly on p-value.</p></li>
-<li><p>Reason 2: Bayesian model selection is consistent.
-Rather surprisingly, use of most classical model selection tools, such as p-values, <span class="math inline">\(C_p\)</span> statistics, and AIC does not guarantee consistency. If true model is not included in entertain models, Bayesian model selection will choose that model among the candidates that is closest to the true model in terms of Kullback_Leibler divergence.</p></li>
-<li><p>Reason 3: Bayesian model selectio procedures are automatic Ockham’s razors.Bayesian procedures naturally penalize model complexity, and need no introduction of a penalty term.</p></li>
-<li><p>Reason 4. The Bayesian approach to model selection is conceptually the same, regardless of the number of models under consideration. 传统的frequency方法对两个模型和多个模型的比较方法不一样，比如两个模型之间的选取使用hypothesis testing，而多个则不太一样。Bayesian方法则比较一致。</p></li>
-<li><p>Reason 5. The Bayesian approach does not require nested models, standard distributions, or regular asymptotics.</p></li>
-<li><p>Reason 6. The Bayesian approach can account for model uncertainty.
-Classical approach would yield overoptimistic estimates of accuracy. So it is often recommend to use part of data to select model and rest to make estimation and prediction. Bayesian can take all the models into account rather than choose one. This is known as ‘Bayesian model averaging’ to handle model uncertainty.</p></li>
-<li><p>Reason 7. The Bayesian approach can yield optimal conditional frequentist procedures.</p></li>
+<li>The first example is an analysis from a longitudinal repeated-measure experiment on the live weight of a sample of cows from Diggle, Liang, and Zeger(1994,p.100).</li>
+<li>The second example uses an econometric model,</li>
+<li>The last example considers a multivariate capital asset pricing model.</li>
 </ul>
+<p>Section 2: Bayesian hierarchical model.
+Section 3: Bayesian inference, sampling scheme
+Section 4: Simulation study
+Section 5: Real data analysis
+Section 6: Summarizes</p>
 </div>
-<div id="utility-functions-and-prediction" class="section level3">
-<h3><span class="header-section-number">19.1.3</span> Utility Functions and Prediction</h3>
-<p>Approach model selection from the perspective of decision analysis.
-Bayesian model averaging is an important methodology in prediction.</p>
-<p>Select one specific model method: the <em>largest posterior probability</em></p>
-</div>
-<div id="motivation-for-objective-bayesian-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.4</span> Motivation for Objective Bayesian Model Selection</h3>
-<p>Subjective &amp; Objective Bayesian Analysis.</p>
-<p>Subjective Bayesian analysis is attractive, but needed elicitations from subject experts.</p>
-<p>In the case that one often initially entertains a wide variety of models, and careful subjective specification of prior distributions for all the parameters of all the models is essentially impossible.</p>
-</div>
-<div id="difficulties-in-objective-bayesian-model-selection" class="section level3">
-<h3><span class="header-section-number">19.1.5</span> Difficulties in Objective Bayesian Model Selection</h3>
-<ul>
-<li><p>Difficulty 1. Computation can be difficult. Hard to calculate Bayes factor. Need integral, could be difficult in high dimension circumstance. Total number of model under consideration can be enormous.</p></li>
-<li><p>Difficulty 2. When the models have parameter space of differing dimensions, use of improper noninformative priors yields indeterminate answers. 假设两个improper无信息先验<span class="math inline">\(\pi_i^N\)</span> 和 <span class="math inline">\(\pi_j^N\)</span> are entertained for models <span class="math inline">\(M_i\)</span> and <span class="math inline">\(M_j\)</span>. Formal Bayes factor in this case is <span class="math inline">\(B_{ji}\)</span>. If use another improper prior like <span class="math inline">\(c_{i} \pi_{i}^{N} \text { and } c_{j} \pi_{j}^{N}\)</span>, then in this case Bayes factor would be <span class="math inline">\(\left(c_{j} / c_{i}\right) B_{j i}\)</span>. Since the choice of <span class="math inline">\(c_{j} / c_{i}\)</span> is arbitrary, the Bayes factor is clearly indeterminate.</p></li>
-<li><p>Difficulty 3. Use of ‘vague proper priors’ usually gives bad answers in Bayesian model selection.</p></li>
-</ul>
-<p>这里需要把例子展开写一下。</p>
-<p>Example: Suppose we observe <span class="math inline">\(\mathbf{X}=\left(X_{1}, \dots, X_{n}\right)\)</span> where the <span class="math inline">\(X_i\)</span> are iid <span class="math inline">\(\mathcal{N}(0,1)\)</span> prior, with variance <span class="math inline">\(K\)</span> largel, this is the usual vague proper prior for a normal mean. An easy calculation using the definition of Bayes factor yields:
+<div id="the-model-and-prior" class="section level2">
+<h2><span class="header-section-number">15.3</span> The model and prior:</h2>
+<p>Suppose <span class="math inline">\(e_{1}, \ldots, e_{n}\)</span> are n vectors with dimension m follows normal distribution <span class="math inline">\(N(0,\Sigma)\)</span>. This section and the next consider modeling and estimating the <span class="math inline">\(m\times m\)</span> covariance <span class="math inline">\(\Sigma\)</span>.</p>
+<p>Factor the inverse of the covariance matrix <span class="math inline">\(\Sigma^{-1}=\{\sigma^{i,j}\}\)</span> into a full-rank <span class="math inline">\(m\times m\)</span> matrix <span class="math inline">\(B=\{b_{i,j}\}\)</span> and diagonal matrix <span class="math inline">\(D=diag\{d_1,...,d_m\}\)</span>. To allow parsimony in the representation, each of the lower triangular elements of <span class="math inline">\(B\)</span> can be exactly zero with positive probability. This is achieved by introducing binary indicator variable <span class="math inline">\(\gamma_{i,j}\)</span>, so that
 <span class="math display">\[
-B_{21}=(n K+1)^{-1 / 2} \exp \left(\frac{K n^{2}}{2(1+K n)} \bar{x}^{2}\right)
+b_{i, j}=0 \quad \text { iff } \quad \gamma_{i, j}=0
 \]</span>
-计算过程如下：
-由Bayes factor的定义：
+and
 <span class="math display">\[
-B_{j i}=\frac{m_{j}(\mathbf{x})}{m_{i}(\mathbf{x})}=\frac{\int f_{j}\left(\mathbf{x} | \boldsymbol{\theta}_{j}\right) \pi_{j}\left(\boldsymbol{\theta}_{j}\right) d \boldsymbol{\theta}_{j}}{\int f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \pi_{i}\left(\boldsymbol{\theta}_{i}\right) d \boldsymbol{\theta}_{i}}
+b_{i, j} \neq 0 \quad \text { iff } \quad \gamma_{i, j}=1
 \]</span>
-在这个模型中,分母是模型<span class="math inline">\(M_1\)</span>,所以就是
+for elements <span class="math inline">\(j=1,...,m-1\)</span>,<span class="math inline">\(i&gt;j\)</span>. Then the Cholesky factor <span class="math inline">\(B\)</span> is known only conditional on the “model parameter”<span class="math inline">\(\gamma=\left\{\gamma_{i, j} | j=1, \ldots, m-1 ; i&gt;j\right\}\)</span>.</p>
+<p>For the autoregressive process, <span class="math inline">\(B\)</span> is a band matrix.</p>
+<div id="likelihood" class="section level3">
+<h3><span class="header-section-number">15.3.1</span> Likelihood</h3>
+<p>When the mean is 0, the likelihood for <span class="math inline">\(B,D,\gamma\)</span> is
 <span class="math display">\[
-\begin{align}
-f_1(x)&amp;=\prod _{i=1}^n\frac{1}{\sqrt{2\pi}}exp(-\frac{x_i^2}{2})\\
-&amp;=\frac{1}{(2\pi)^{\frac{n}{2}}}exp(-\frac{1}{2}\sum_{i=1}^n x_i^2)
-\end{align}
-\]</span></p>
-<p>,分子则是</p>
+\begin{array}{l}{p(e | B, D, \gamma)} \\ {\qquad=(2 \pi)^{-n m / 2}|D|^{n / 2} \exp \left\{-\frac{1}{2} \sum_{i=1}^{n} e_{i}^{\prime} B D B^{\prime} e_{i}\right\}} \\ {=(2 \pi)^{-n m / 2} \prod_{i=1}^{m}\left(d_{i}\right)^{n / 2} \exp \left\{-\frac{1}{2} \sum_{k=1}^{m} d_{k} b_{k}^{\prime} A b_{k}\right\}}\end{array}
+\]</span>
+The matrix A is positive definite almost surely if <span class="math inline">\(m\leq n\)</span>.</p>
+<p>The quadratic form in the likelihood can be written in terms of a quadratic function of <span class="math inline">\(\beta_k\)</span>, so that</p>
 <p><span class="math display">\[
-\begin{align}
-&amp;\int \prod_{i=1}^n \left [\frac{1}{\sqrt{2\pi}}exp(-\frac{(x_i-\theta)^2}{2})\right ]\frac{1}{\sqrt{2\pi K}}exp(-\frac{\theta^2}{2K})d\theta\\
-=&amp; \int \frac{1}{2\pi\sqrt K} exp(- \frac{K\sum _{i=1}^nx_i^2-2\theta n\overline xK+nK\theta^2+\theta^2}{2K})d\theta\\
-\end{align}
-\]</span>
-由于有gaussian积分的形式
-<span class="math display">\[
-\int exp(-ay^2+xy)dy=\sqrt{\frac{\pi}{a}}exp(\frac{1}{4a}x^2)
-\]</span>
-所以分子的积分形式有
-<span class="math display">\[
-\begin{align}
-&amp; \int  \frac{1}{(2\pi)^{\frac{n+1}{2}}\sqrt K} exp(- \frac{K\sum _{i=1}^nx_i^2-2\theta n\overline xK+nK\theta^2+\theta^2}{2K})d\theta\\
-=&amp; \frac{1}{(2\pi)^{\frac{n+1}{2}}\sqrt K} exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) \int exp(-\frac{-2\theta n\overline x K+(nK+1)\theta^2}{2K})d\theta\\
-=&amp; \frac{1}{(2\pi)^{\frac{n+1}{2}}  \sqrt K} exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) \sqrt{\frac{2\pi K}{nK+1}}exp(\frac{Kn^2}{2(1+Kn)}\overline x^2)\\
-=&amp;  \frac{1}{(2\pi)^{\frac{n}{2}}}  exp(-\frac{1}{2} \sum _{i=1}^nx_i^2) (nK+1)^{-1/2}exp(\frac{Kn^2}{2(1+Kn)}\overline x^2)
-\end{align}
-\]</span>
-则Bayes factor是
-<span class="math display">\[
-B_{21}=(n K+1)^{-1 / 2} \exp \left(\frac{K n^{2}}{2(1+K n)} \bar{x}^{2}\right)
+b_{k}^{\prime} A b_{k}=\left\{\begin{array}{ll}{a_{k, k}+2 \beta_{k}^{\prime} a_{k}+\beta_{k}^{\prime} A_{k} \beta_{k}} &amp; {\text { for } k=1, \ldots, m-1} \\ {a_{m, m}} &amp; {\text { for } k=m}\end{array}\right. 
 \]</span></p>
-<p>For large K (or large n), this is roughly <span class="math inline">\((nK)^{-1/2exp(z^2/2)}\)</span>, where <span class="math inline">\(z=\sqrt n \overline x\)</span>. So <span class="math inline">\(B_{21}\)</span> depends very strongly on K, which is chosen arbitrarily.</p>
-<p>In contrast, the usual noninformative prior for <span class="math inline">\(\theta\)</span> in this situation is <span class="math inline">\(\pi^N_2(\theta)=1\)</span>. The resulting Bayes factor is <span class="math inline">\(B_{21}=\sqrt{n / 2 \pi} \exp \left(z^{2} / 2\right)\)</span>, which is reasonable value. In this case, never use ‘arbitrary’ vague proper priors for model selection, but improper noninformative priors may give reasonable results.</p>
-<p>However, this is violate the basic principle of basic criteria. The “proper” prior is essential for the Bayesian factor for its scale and normalising constant problem.</p>
+<p>搞懂了，这个成立的好别扭。
+<span class="math display">\[
+d_1b_1e_1e_1&#39;b_1&#39;+d_2b_2e_1e_1&#39;b_2&#39;+...+d_kb_ke_1e_1&#39;b_k&#39;+\\
+d_1b_1e_2e_2&#39;b_1&#39;+d_2b_2e_2e_2&#39;b_2&#39;+...+d_kb_ke_2e_2&#39;b_k&#39;+\\
+\cdots\\\
+d_1b_1e_ne_n&#39;b_1&#39;+d_2b_2e_ne_n&#39;b_2&#39;+...+d_kb_ke_ne_n&#39;b_k&#39;+\\
+\]</span>
+每一列放在一起合并同类项
+<span class="math display">\[
+d_1b_1Ab_1&#39;+d_2b_2Ab_2&#39;+\cdots+d_kb_kAb_k&#39;
+\]</span></p>
+<p>Let <span class="math inline">\(\beta_{k}=\left\{b_{i, k} | i&gt;k, \gamma_{i, k}=1 \right\}\)</span>,就是B矩阵中处于下三角部分，而且指示变量为1的部分是<span class="math inline">\(\beta_k\)</span>,第一列到倒数第一列都是满员的，最后一列不含<span class="math inline">\(\beta\)</span>只有一个1.</p>
+<p>所以
+<span class="math display">\[
+b_{k}^{\prime} A b_{k}=\left\{\begin{array}{ll}{a_{k, k}+2 \beta_{k}^{\prime} a_{k}+\beta_{k}^{\prime} A_{k} \beta_{k}} &amp; {\text { for } k=1, \ldots, m-1} \\ {a_{m, m}} &amp; {\text { for } k=m}\end{array}\right.
+\]</span>
+因为<span class="math inline">\(b_k&#39;=(1,\beta_{k}&#39;)\)</span>,所以就有如上形式，写成二次型打开就好，如下：
+<span class="math display">\[
+(1,\beta_k&#39;)
+\left[
+\begin{matrix}
+a_{kk}&amp; a_k\\
+a_k&amp;A_{k}
+\end{matrix}
+\right]
+\left(
+\begin{matrix}
+1\\
+\beta_k
+\end{matrix}
+\right)
+\]</span>
+因为B是下三角，所以中间矩阵是以<span class="math inline">\(a_{kk}\)</span>开头的,维度随时在变（因为那一列是从0开始，直到第k个元才是1）。
+<img src="chp16/matrix.png" width="709" />
+The total number of unconstrained elements in <span class="math inline">\(B\)</span> corresponding to model <span class="math inline">\(\gamma\)</span> is denoted as <span class="math inline">\(q_{\gamma}=\sum_{k=1}^{m-1} q_{k}\)</span>. Note that <span class="math inline">\(A_k\)</span> is strictly positive definite if <span class="math inline">\(0&lt;q_{k}&lt;n\)</span>.</p>
+<p><span class="math inline">\(\gamma_{ik}\)</span>是<span class="math inline">\(i,k\)</span>元不为0的指示变量，<span class="math inline">\(\gamma\)</span>指模型本身，也就是说对于某个<span class="math inline">\(\gamma\)</span>,就是<span class="math inline">\(\mathbb \{\{0\},\{1\}\}^p\)</span> 的一个子集，就是<span class="math inline">\(\{1,0,1,0,0,0,1,1\}\)</span>.</p>
+<p>We denote the number of unconstrained elements in the kth column (i.e. the dimension of <span class="math inline">\(\beta_k\)</span>) as <span class="math inline">\(q_k\)</span>,也就是对于模型<span class="math inline">\(\gamma\)</span>,其中bayes factor的第k列有<span class="math inline">\(q_k\)</span> 需要顾及的元素，<span class="math inline">\(q_k\leq m-k\)</span>.</p>
+<p>总的free parameter则就是<span class="math inline">\(q_\gamma=\sum_{k=1}^{m-1}q_k\)</span>. <span class="math inline">\(A_k\)</span> is strictly positive definite if <span class="math inline">\(0&lt;q_k&lt;n\)</span>.</p>
+<p>Thus the likelihood can be expressed as
+<span class="math display">\[
+\begin{array}{l}{\qquad p\left(e | B_{\gamma}, D, \gamma\right)=(2 \pi)^{-n m / 2} \prod_{k=1}^{m}\left(d_{k}\right)^{n / 2}} \\ {\qquad \times \exp \left(-\frac{d_{k}}{2}\left\{S_{k}(\gamma)+\left(\beta_{k}-m_{k}\right)^{\prime} A_{k}\left(\beta_{k}-m_{k}\right)\right\}\right)} \\ {\text { where } m_{k}=-A_{k}^{-1} a_{k} \text { and } S_{k}(\gamma)=a_{k, k}-a_{k}^{\prime} A_{k}^{-1} a_{k}}\end{array}
+\]</span></p>
+<blockquote>
+<p>来源于之前那个式子然而把二次型+一次型的形状凑成一个二次型加多余的东西的形式</p>
+</blockquote>
+</div>
+<div id="prior-specifiction" class="section level3">
+<h3><span class="header-section-number">15.3.2</span> Prior specifiction</h3>
+<p>We begin with the conditional prior <span class="math inline">\(p(B|\gamma,D)\)</span>.
+Given <span class="math inline">\(\gamma\)</span>, some of auto-regressive coefficient are fixed at zero. Prior only put on free elements, denoted as <span class="math inline">\(B_\gamma\)</span>. We construct a fractional conditional prior for <span class="math inline">\(B_\gamma\)</span> by setting
+<span class="math display">\[
+p\left(B_{\gamma} | \gamma, D\right) \propto p(e | B, D, \gamma)^{1 / n}
+\]</span></p>
+<blockquote>
+<p>这是啥“fractional conditional prior”,为啥<span class="math inline">\(B_\gamma\)</span>的先验是关于<span class="math inline">\(e\)</span>的一个函数<span class="math inline">\(p(e|B,D,\gamma)^{1/n}\)</span></p>
+</blockquote>
+<blockquote>
+<p>等等，这不是power prior吗，关系是啥</p>
+</blockquote>
+<p>power prior
+<span class="math display">\[
+\pi\left(\theta | D_{0}, a_{0}\right) \propto L\left(\theta | D_{0}\right)^{a_{0}} \pi_{0}\left(\theta | c_{0}\right)
+\]</span>
+<span class="math inline">\(\pi_0(\theta|c_0)\)</span> is the initial prior.</p>
+<p>The rational for such a prior is that it is similar to the likelihood but provides only <span class="math inline">\(1/n\)</span> th of the weight provided by the likelihood. It follows from our likelihood that</p>
+<p><span class="math display">\[
+\begin{aligned} p\left(\beta_{1}, \ldots, \beta_{m} | D, \gamma\right)=\prod_{k=1}^{m-1} p\left(\beta_{k} | D, \gamma\right) &amp; \text { with } \\ &amp; \beta_{k} | D, \gamma \sim N\left(m_{k}, \Omega_{k}\right) \end{aligned}
+\]</span>
+with <span class="math inline">\(\Omega_{k}=\frac{n}{d_{k}} A_{k}^{-1}\)</span>.</p>
+<blockquote>
+<p>因为在第一块其是二次型，减均值，然后中间的系数是方差的逆，注意注意这篇文章“”是B矩阵的非对角元，别搞混了。</p>
+</blockquote>
+<blockquote>
+<p>问题是n是咋来的:</p>
+</blockquote>
+<blockquote>
+<p>原来是之前那个prior，所以前面的系数就从<span class="math inline">\(-\frac{d_k}{2}\)</span>变成了<span class="math inline">\(-\frac{d_k}{2n}\)</span>，所以就体现到了方差上.</p>
+</blockquote>
+<p>The indicator variables <span class="math inline">\(\gamma_{i,j}\)</span>, where <span class="math inline">\(j=1,...,m-1\)</span> and <span class="math inline">\(i&gt;j\)</span>, are taken a priori independent, with <span class="math inline">\(p(\gamma_{i,j}=1|\omega)=\omega\)</span>.</p>
+<blockquote>
+<p>所以<span class="math inline">\(\omega\)</span>就是先验概率：<span class="math inline">\(\gamma_{i,j}\)</span>等于1的概率，而且<span class="math inline">\(\gamma_{i,j}\)</span>之间的先验互相独立</p>
+</blockquote>
+<p>This implies that for given <span class="math inline">\(\omega\)</span>, the prior expected number of non-zero elements in the strict lower triangle of <span class="math inline">\(B\)</span> is <span class="math inline">\(m(m-1)\omega/2\)</span>.</p>
+<p>We give a uniform prior [0,1] to <span class="math inline">\(\omega\)</span>. To make simulation more efficient, the parameter <span class="math inline">\(\omega\)</span> is integrated out of the analysis, so that</p>
+<p><span class="math display">\[
+\begin{aligned} p(\gamma) &amp;=\int p(\gamma | \omega) p(\omega) d \omega \\ &amp;=\int_{0}^{1} \omega^{q_{\gamma}}(1-\omega)^{\left(r-q_{\gamma}\right)} d \omega=\operatorname{beta}\left(q_{\gamma}+1, r-q_{\gamma}+1\right) \end{aligned}
+\]</span></p>
+<p><span class="math inline">\(beta(\cdot,\cdot)\)</span> is the beta function and <span class="math inline">\(r=m(m-1) / 2\)</span> is the total number of elements in the strict lower triangle of <span class="math inline">\(B\)</span>.</p>
+<blockquote>
+<p>所以是不是beta分布捏</p>
+</blockquote>
+<blockquote>
+<p>好像不是</p>
+</blockquote>
+<p>The prior for the diagonal elements <span class="math inline">\(d_1,...,d_m\)</span> of <span class="math inline">\(D\)</span> is</p>
+<p><span class="math display">\[
+\begin{array}{l}{p\left(d_{1}, \ldots, d_{m} | \xi, \kappa\right)=\prod_{k=1}^{m} p\left(d_{k} | \xi, \kappa\right), \quad \text { where }} \\ {\qquad p\left(d_{k} | \xi, \kappa\right)=\frac{d_{k}^{\xi / \kappa-1} \exp \left(-d_{k} / \kappa\right)}{\Gamma(\xi / \kappa) \kappa^{\xi / \kappa}}}\end{array}
+\]</span></p>
+<p>That is, the <span class="math inline">\(d_k\)</span> are independent, with each <span class="math inline">\(d_k\)</span> having a gamma distribution with parameter <span class="math inline">\(\xi/\kappa\)</span> and <span class="math inline">\(\kappa\)</span>, so the prior mean is <span class="math inline">\(\xi\)</span> and the prior variance is <span class="math inline">\(\xi\kappa\)</span>. It can be shown that the joint posterior distribution <span class="math inline">\(B,D,\gamma\)</span> is insensitive to small pertubations in <span class="math inline">\(\xi\)</span> and <span class="math inline">\(\kappa\)</span>, and that the improper prior <span class="math inline">\(p(d_k)\propto 1/d_k\)</span> leads to a proper posterior.</p>
+<p>We set <span class="math inline">\(\xi=100\)</span> and <span class="math inline">\(\kappa=1000\)</span> in all empirical work, which makes the prior for the <span class="math inline">\(d_i\)</span> proper but uninformative for all of the examples in this article.</p>
+<blockquote>
+<p>gamma分布的形式，这篇文章用的是shape/scale的形式，密度函数为<span class="math inline">\(\frac{1}{\Gamma(k) \theta^{k}} x^{k-1} e^{-\frac{x}{\theta}}\)</span></p>
+</blockquote>
+<p>We also looked at a shrinkage prior for the <span class="math inline">\(d_i\)</span> to see whether estimation of the covariance matrix could be further improved. In particular, consider hierarchical shrinkage prior that assumes that the <span class="math inline">\(log(d_i)\)</span> are independent and <span class="math inline">\(N(\mu_d,\tau_d)\)</span> and the prior for <span class="math inline">\(\mu_d\)</span> and <span class="math inline">\(\tau_d\)</span> is <span class="math inline">\(p\left(\mu_{d}, \tau_{d}\right) \propto 1 / \tau_{d}\)</span>.</p>
+<blockquote>
+<p>等等，shrinkage prior，待我翻一下另外那篇论文。。。</p>
+</blockquote>
+<blockquote>
+<p>嗯，这个不是长得很像，就是jeffrey’s prior: <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>,基础形式没问题。所以是不是可以用Laplacian prior来代替一下？</p>
+</blockquote>
+<blockquote>
+<p>但是这个shrinkage Jeffrey’s prior是在均值上诶，应该不等价</p>
+</blockquote>
+<p>Sample <span class="math inline">\(d_i\)</span> from first prior because it is conjugate, but also can use log-normal prior but requires a MH step for generation of the <span class="math inline">\(d_i\)</span>.</p>
+<p>In the simulation study that these two prior showed similar performance. The benefits of the shrinkage prior is resulted in a more efficient estimator when <span class="math inline">\(\Sigma=I\)</span>. The reason is the shrinkage prior allows diagonal elements of <span class="math inline">\(D\)</span> to shrinkage to a common value close to 1.</p>
+</div>
+</div>
+<div id="inference-and-simulation-method" class="section level2">
+<h2><span class="header-section-number">15.4</span> Inference and Simulation method</h2>
+<div id="bayesian-inference." class="section level3">
+<h3><span class="header-section-number">15.4.1</span> Bayesian inference.</h3>
+<p>Posterior Mean estimators:
+<span class="math display">\[
+E(B | e)=\sum_{\gamma} E(B | \gamma, e) p(\gamma | e)
+\]</span>
+This is called Bayesian model average estimator, this is weighted average of the posterior means of <span class="math inline">\(B\)</span>, conditional on the posterior probabilities <span class="math inline">\(p(\gamma,e)\)</span>.</p>
+<p>But analytically evaluating <span class="math inline">\(E(B|e)\)</span> could be computationally difficult because we need integrate out <span class="math inline">\(\gamma\)</span>.</p>
+<p>Then estimate it by
+<span class="math display">\[
+\widehat{B}=J^{-1} \sum_{j=1}^{J} E\left(B | \gamma^{[j]}, D^{[j]}, e\right)
+\]</span></p>
+<blockquote>
+<p>中间这段没明白：</p>
+</blockquote>
+<p>The posterior conditional distribution of the non-upper-diagonal elements <span class="math inline">\(B_\gamma\)</span> is calculated in Appendix, and whos that <span class="math inline">\(\beta_1,...,\beta_{m-1}\)</span> are independently distributed with conditional posterior mean <span class="math inline">\(E(\beta_k|D,\gamma,e)=-A^{-1}_ka_k\)</span></p>
+<blockquote>
+<p>哦对，来源于那个二次型</p>
+</blockquote>
+<p>Similarly, the mixture estimator of the posterior mean <span class="math inline">\(E(D|e)\)</span> is given by
+<span class="math display">\[
+\widehat{D}=J^{-1} \sum_{j=1}^{J} E\left(D | \gamma^{[j]}, B^{[j]}, e\right)
+\]</span></p>
+<p>Histogram estimates of the posterior means <span class="math inline">\(E(\Sigma|e)\)</span> and <span class="math inline">\(E(\Sigma^{-1}|e)\)</span> can be constructed based on the iterates <span class="math inline">\(D^{[j]}\)</span> and <span class="math inline">\(B^{[j]}\)</span>, <span class="math inline">\(j=1,...,J\)</span>. For example, the histogram estimate of the posterior mean of <span class="math inline">\(\Sigma^{-1}\)</span> is
+<span class="math display">\[
+\widehat{\Sigma^{-1}}=J^{-1} \sum_{j=1}^{J} B^{[j]} D^{[j]}\left(B^{\prime}\right)^{[j]}
+\]</span></p>
+<p>The marginal posterior probability intervals for all parameters can be obtained by Monte Carlo estimates.</p>
+<p>If <span class="math inline">\(\theta\)</span> is a scalar quantity of interest, then the lower and upper bounds of a <span class="math inline">\(100(1-\alpha)\%\)</span> marginal posterior probabiity interval for <span class="math inline">\(\theta\)</span> can be estimated by counting off the <span class="math inline">\(J\alpha/2\)</span> lowest and highest generated value <span class="math inline">\(\theta^{[j]} \sim \theta | e\)</span>.</p>
+<p>Example showed in Section 5.</p>
+<p>The expected proportion of non-zero lower triangular elements in <span class="math inline">\(B\)</span> is given by the posterior mean <span class="math inline">\(E(\omega|e)\)</span>, which is estimated by</p>
+<p><span class="math display">\[
+\hat{\omega}=\frac{1}{J} \sum_{j=1}^{J} q_{\gamma}[j] / r
+\]</span></p>
+<p><span class="math inline">\(\omega\)</span> is a measure of the level of parsimony in <span class="math inline">\(\Sigma\)</span>. If <span class="math inline">\(\omega=0\)</span>, then <span class="math inline">\(\Sigma=D^{-1}\)</span> and the elements of <span class="math inline">\(e_i\)</span> are uncorrelated. If <span class="math inline">\(\omega=1\)</span>, then B has all non-zeros on the lower triangle, and there are <span class="math inline">\(m(m+1)/2\)</span> free parameters to estimate in the decomposition of <span class="math inline">\(\Sigma^{-1}\)</span>.</p>
+<blockquote>
+<p>也就是说，都不相关的话，那么parsimonious度量就是0，0%的variable in B 是不为0的。<span class="math inline">\(\omega=1\)</span>的话说明100%的元素都不为0.</p>
+</blockquote>
+<p>It is useful to estimate <span class="math inline">\(p\left(\gamma_{i, k}=1 | e\right)\)</span>, which is the marginal posterior probability that <span class="math inline">\(b_{i,k}\)</span> is non-zero. Also can be obtained by histogram estimate
+<span class="math display">\[
+\hat{p}\left(\gamma_{i, k}=1 | e\right)=\frac{1}{J} \sum_{j=1}^{J} \gamma_{i, k}^{[j]}
+\]</span></p>
+<div id="bayes-estimators-for-other-loss-functions." class="section level4">
+<h4><span class="header-section-number">15.4.1.1</span> Bayes Estimators for Other Loss Functions.</h4>
+<p>It is common to calculate Bayes estimators of the covariance matrix with respect ot various alternative loss functions.</p>
+<p>For example:
+<span class="math display">\[
+L_{1}(\widehat{\Sigma}, \Sigma)=\operatorname{tr}\left(\widehat{\Sigma} \Sigma^{-1}\right)-\log \left|\widehat{\Sigma} \Sigma^{-1}\right|-m
+\]</span>
+and
+<span class="math display">\[
+L_{2}(\widehat{\Sigma}, \Sigma)=\operatorname{tr}\left(\widehat{\Sigma} \Sigma^{-1}-I\right)^{2}
+\]</span></p>
+<p>and showed that the Bayes estimators for <span class="math inline">\(\Sigma\)</span> for these two loss functions are
+<span class="math display">\[
+\delta_{1}=\left(E\left[\Sigma^{-1} | e\right]\right)^{-1}
+\]</span>
+and
+<span class="math display">\[
+\operatorname{vec}\left(\delta_{2}\right)=\left(E\left[\Sigma^{-1} \otimes \Sigma^{-1} | e\right]\right)^{-1} \operatorname{vec}\left(E\left[\Sigma^{-1} | e\right]\right)
+\]</span></p>
+<blockquote>
+<p>这里就随便跟打广告似的提了下，欲知详情如何，请看Yang and Berger(1994) 分解，此案下不表</p>
+</blockquote>
+</div>
+</div>
+<div id="markov-chain-monte-carlo-sampling" class="section level3">
+<h3><span class="header-section-number">15.4.2</span> Markov Chain Monte Carlo Sampling</h3>
+<p>This section shows how to generate a sample from the joint posterior distribution of <span class="math inline">\(\Sigma,B,D\)</span> using the following MCMC sampling scheme, with <span class="math inline">\(\omega\)</span> integrated out as in previous example with beta function.</p>
+<p>Sampling Scheme. The sampling scheme comprises the following three steps:</p>
 <ul>
-<li>Difficulty 4. Even ‘common parameters’ can change meaning from one model to another, so that prior distributions must change in a corresponding fashion. Here is an example.</li>
+<li>Generate from <span class="math inline">\(B | \gamma, D, e\)</span></li>
+<li>Generate from <span class="math inline">\(D|B,\gamma,e\)</span></li>
+<li>Generate from <span class="math inline">\(\gamma_{i, j} | \gamma_{\backslash i, j}, D, e\)</span>, for <span class="math inline">\(j=1,...,m-1\)</span>,i&gt;j.</li>
 </ul>
-<p>这个难点主要是在实践中遇到的设计阵一般都不是正交设计，有些解释变量会有相关性，这样模型的coefficient就会有不同的scale of coefficient。</p>
-<p>比如说对于如下模型:
-<span class="math display">\[
-\begin{aligned} M_{1}: Y=X_{1} \beta_{1}+\varepsilon_{1}, &amp; \varepsilon_{1} \sim \mathcal{N}\left(0, \sigma_{1}^{2}\right) \\ M_{2}: Y=X_{1} \beta_{1}+X_{2} \beta_{2}+\varepsilon_{2}, &amp; \varepsilon_{2} \sim \mathcal{N}\left(0, \sigma_{2}^{2}\right) \end{aligned}
-\]</span>
-Y是汽油消费量，<span class="math inline">\(X_1\)</span>是weight，<span class="math inline">\(X_2\)</span>是engine size。
-Prior density is of the form <span class="math inline">\(\pi_2(\beta_1,\beta_2,\sigma_2)=\pi_{21}(\beta_1)\pi_{22}(\beta_2)\pi_{23}(\sigma_2)\)</span>. Since <span class="math inline">\(\beta_1\)</span> is ‘common’ to the two models, one frequently sees the same prior, <span class="math inline">\(\pi_{21}(\beta_1)\)</span> also used for this parameter in <span class="math inline">\(M_1\)</span>.</p>
-<p>However, this is not reasonable, since <span class="math inline">\(\beta_1\)</span> has a very different meaning (and value) under <span class="math inline">\(M_1\)</span> than under <span class="math inline">\(M_2\)</span>. It is unreasonable to set the same prior to <span class="math inline">\(beta_1\)</span> in both model. This happens because of the considerable positive correlation between weight and engine size.</p>
-<p>Although the design matrix is orthogonal design, it could be an issue for variance estimation.
-For <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span>, one often sees the variances being equated and assigned the same prior, even though it is clear that <span class="math inline">\(\sigma^2_1\)</span> will typically be larger than <span class="math inline">\(\sigma^2_2\)</span>.</p>
-</div>
-<div id="preview" class="section level3">
-<h3><span class="header-section-number">19.1.6</span> Preview</h3>
-</div>
-<div id="the-fractional-bayes-factor-fbf-approach" class="section level3">
-<h3><span class="header-section-number">19.1.7</span> 2.3 The Fractional Bayes Factor (FBF) Approach</h3>
-<p>由于这个方法这篇文章的内容一时半会没看懂，于是去看 O’Hagan (1995)的了，为了避免未来（明后天？）写整理的时候忘掉，于是直接先写这部分的内容。</p>
-<p>这个方法是从上一节所描述的The Intrinsic Bayes Factor approach发展而来的。为了使minimal dataset构造出的proper prior性质比较好，所以最好用一些方法取遍<span class="math inline">\(x(\ell)\)</span>。比如说平均，或者中位数等等方法。但是为了简化这个选取过程 Let <span class="math inline">\(b=m/n\)</span>. If both m and n are large, the likelihood <span class="math inline">\(f_i(y|\theta_i)\)</span> based only n the training sample y will approximate to the full likelihood <span class="math inline">\(f_i(y|\theta_i)\)</span> raised to the power b.
-<span class="math display">\[
-\begin{array}{l}{\qquad B_{b}(\mathbf{x})=q_{1}(b, \mathbf{x}) / q_{2}(b, \mathbf{x})} \\ {\text { where }} \\ {\qquad q_{i}(b, \mathbf{x})=\frac{\int \pi_{i}\left(\theta_{i}\right) f_{i}\left(\mathbf{x} | \theta_{i}\right) \mathrm{d} \theta_{i}}{\int \pi_{i}\left(\theta_{i}\right) f_{i}\left(\mathbf{x} | \theta_{i}\right)^{b} \mathrm{d} \theta_{i}}}\end{array} 
-\]</span>
-if the improper prior have the form <span class="math inline">\(\pi_{i}\left(\boldsymbol{\theta}_{i}\right)=c_{i} h_{i}\left(\boldsymbol{\theta}_{i}\right)\)</span>, the indeterminate constant <span class="math inline">\(c_i\)</span> cancels out, leaving
-<span class="math display">\[
-q_{i}(b | \mathbf{x})=\frac{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right) \mathrm{d} \boldsymbol{\theta}_{i}}{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}\left(\mathbf{x} | \boldsymbol{\theta}_{i}\right)^{b} \mathrm{d} \boldsymbol{\theta}_{i}}
+<p>In step 3, the <span class="math inline">\(\gamma_{\backslash i,j}\)</span> means <span class="math inline">\(\gamma\)</span> with the element <span class="math inline">\(\gamma_{i,j}\)</span> excluded.</p>
+<p>Step 1 is simple because it is as we derived, the non-zero entry of <span class="math inline">\(B\)</span>, the <span class="math inline">\(\beta_k\)</span> is conditional multivariate normal distribution.</p>
+<p>The more crucial part is generating <span class="math inline">\(\gamma_{i,j}\)</span>, which is, the full conditional density function can be written as</p>
+<p><span class="math display">\[
+\underbrace{p\left(\gamma_{i, j} | \gamma_{i, j}, D, e\right)}_{\pi^{*}\left(\gamma_{i, j}\right)} \propto \underbrace{p(e | \gamma, D)}_{l\left(\gamma_{i, j}\right)} \underbrace{p\left(\gamma_{i, j} | \gamma_{i, j}\right)}_{\pi\left(\gamma_{i, j}\right)}
 \]</span></p>
-<p>所以上标<span class="math inline">\(^b\)</span>就是字面意思power b，而不是标识。</p>
+<p>The transition kernel <span class="math inline">\(Q\)</span> can be use to generate <span class="math inline">\(\gamma_{i,j}\)</span> is
+<span class="math display">\[
+Q\left(\gamma_{i, j}^{c}=1 \rightarrow \gamma_{i, j}^{g}=0\right)=\pi\left(\gamma_{i, j}=0\right) \frac{l\left(\gamma_{i, j}=0\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+\]</span>
+and
+<span class="math display">\[
+Q\left(\gamma_{i, j}^{c}=0 \rightarrow \gamma_{i, j}^{g}=1\right)=\pi\left(\gamma_{i, j}=1\right) \frac{l\left(\gamma_{i, j}=1\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+\]</span></p>
+<p>This transition kernel fulfill the detail balance condition and has <span class="math inline">\(\pi^*\)</span> as its invariant distribution.</p>
+</div>
+</div>
+<div id="simulation-analysis" class="section level2">
+<h2><span class="header-section-number">15.5</span> Simulation Analysis</h2>
+</div>
+<div id="real-data-analysis" class="section level2">
+<h2><span class="header-section-number">15.6</span> Real data analysis</h2>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">15.7</span> Conclusion</h2>
+<p>This article obtains statistically efficient estimators of the covariance matrix for longitudinal data.</p>
+<p>The Cholesky decomposition has a clear interpretation, the results of Wermuth (1980) and Roberato (2000), as well as the results for the finance application in real data analysis part.</p>
 
 </div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Smith:2012vj">
+<p>Smith, Michael, and Robert Kohn. 2012. “Parsimonious covariance matrix estimation for longitudinal data.” <em>Journal of the American Statistical Association</em>, January.</p>
 </div>
 </div>
             </section>
@@ -437,8 +649,8 @@ q_{i}(b | \mathbf{x})=\frac{\int h_{i}\left(\boldsymbol{\theta}_{i}\right) f_{i}
           </div>
         </div>
       </div>
-<a href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dirichlet-laplace-priors-for-optimal-shrinkage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modeling-local-dependence-in-latent-vector-autoregressive-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
