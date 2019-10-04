@@ -25,7 +25,7 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-10-03">
+<meta name="date" content="2019-10-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -551,6 +551,47 @@ B_{i0}
 B_{j i}^{A I}=B_{j i}^{N} \cdot \frac{1}{L} \sum_{l=1}^{L} B_{i j}^{N}, \quad B_{j i}^{M I}=B_{j i}^{N} \cdot \operatorname{Med}\left[B_{i j}^{N}(l)\right]
 \]</span>
 That is, use average or median to approach <span class="math inline">\(B^N_{0i}(x(\ell))\)</span>.</p>
+<p>For the AIBF, it is typically neccessary to place the more “complex” model in the numerator. For example, let <span class="math inline">\(M_j\)</span> be the more complex model, then define <span class="math inline">\(B_{ij}^{AI}\)</span> by <span class="math inline">\(B_{ij}^{A I}=1 / B_{j i}^{AI}\)</span>.
+The IBFs defined in
+<span class="math display">\[
+P\left(M_{i} | \mathbf{x}\right)=\frac{P\left(M_{i}\right) m_{i}(\mathbf{x})}{\sum_{j=1}^{q} P\left(M_{j}\right) m_{j}(\mathbf{x})}=\left[\sum_{j=1}^{q} \frac{P\left(M_{j}\right)}{P\left(M_{i}\right)} B_{j i}\right]^{-1}
+\]</span>
+the posterior probability of <span class="math inline">\(M_i\)</span>.
+Use IBF in the formula upon, IBFs is a resampling summaries of the evidence of the data for the comparison of models, since in the averages there is sample re-use.</p>
+<p><strong>Illustration 1 (continued) Normal Mean, AIBF and MIBF</strong></p>
+<p>Start with non-informative prior: <span class="math inline">\(\pi_{1}^{N}\left(\sigma_{1}\right)=1 / \sigma_{1}\)</span> and <span class="math inline">\(\pi_{2}^{N}\left(\mu, \sigma_{2}\right)=1 / \sigma_{2}^{2}\)</span>.
+Note that <span class="math inline">\(\pi_2^N\)</span> is not the reference prior.</p>
+<blockquote>
+<p>What is reference prior? see THE FORMAL DEFINITION OF REFERENCE PRIORS by Berger, Bernardo and Sun.</p>
+</blockquote>
+<p><span class="math display">\[
+m_{1}^{N}(\mathbf{x}(l))=\frac{1}{2 \pi\left(x_{i}^{2}+x_{j}^{2}\right)}, \quad m_{2}^{N}(\mathbf{x}(l))=\frac{1}{\sqrt{\pi}\left(x_{i}-x_{j}\right)^{2}}
+\]</span>
+Computation yields the Bayes factor for data x, when using <span class="math inline">\(\pi_1^N\)</span> and <span class="math inline">\(\pi_2^N\)</span> directly as the prior:
+<span class="math display">\[
+B_{21}^{N}=\sqrt{\frac{2 \pi}{n}} \cdot\left(1+\frac{n \bar{x}^{2}}{s^{2}}\right)^{n / 2}
+\]</span>
+where <span class="math inline">\(s^{2}=\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\)</span>.
+Then AIBF is then clearly equal to
+<span class="math display">\[
+B_{21}^{A I}=B_{21}^{N} \cdot \frac{1}{L} \sum_{l=1}^{L} \frac{\left(x_{1}(l)-x_{2}(l)\right)^{2}}{2 \sqrt{\pi}\left[x_{1}^{2}(l)+x_{2}^{2}(l)\right]}
+\]</span>
+and MIBF is given by
+<span class="math display">\[
+B_{21}^{M I}=B_{21}^{N} \cdot \operatorname{Med}_{l=1, \ldots, L}\left[\frac{\left(x_{1}(l)-_{2}(l)\right)^{2}}{\left.2 \sqrt{\pi} | x_{1}^{2}(l)+x_{2}^{2}(l)\right]}\right]
+\]</span>
+计算过程是
+<span class="math display">\[
+\begin{align}
+&amp;\int \pi(\theta) f(x(\ell)|\theta)d\theta\\
+=&amp;\int \frac{1}{\sigma_1^2} \mathcal N(x_1,x_2|0,\sigma_1^2)\\
+=&amp;\int \frac{1}{\sigma_1} \frac{1}{2\pi\sigma_1^2}exp(-\frac{1}{2\sigma_1^2}(x_1^2+x_2^2))d\sigma_1\\
+=&amp;\int \frac{1}{2\pi} \sigma_1^{-3}exp(-\frac{1}{2}\sigma_1^{-2}(x_1^2+x_2^2))d\sigma_1\\
+=&amp;\frac{1}{2\pi}\int t^{\frac{3}{2}} t^{-\frac{3}{2}} (-\frac{1}{2})exp(-\frac{x_1^2+x_2^2}{2}t)dt 
+\\
+=&amp;\frac{1}{2\pi(x_1^2+x_2^2)}
+\end{align} 
+\]</span></p>
 </div>
 <div id="the-fractional-bayes-factor-fbf-approach" class="section level3">
 <h3><span class="header-section-number">19.2.3</span> 2.3 The Fractional Bayes Factor (FBF) Approach</h3>

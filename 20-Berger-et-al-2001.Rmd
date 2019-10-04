@@ -306,11 +306,49 @@ B_{j i}^{A I}=B_{j i}^{N} \cdot \frac{1}{L} \sum_{l=1}^{L} B_{i j}^{N}, \quad B_
 $$
 That is, use average or median to approach $B^N_{0i}(x(\ell))$.
 
+For the AIBF, it is typically neccessary to place the more "complex" model in the numerator. For example, let $M_j$ be the more complex model, then define $B_{ij}^{AI}$ by $B_{ij}^{A I}=1 / B_{j i}^{AI}$. 
+The IBFs defined in 
+$$
+P\left(M_{i} | \mathbf{x}\right)=\frac{P\left(M_{i}\right) m_{i}(\mathbf{x})}{\sum_{j=1}^{q} P\left(M_{j}\right) m_{j}(\mathbf{x})}=\left[\sum_{j=1}^{q} \frac{P\left(M_{j}\right)}{P\left(M_{i}\right)} B_{j i}\right]^{-1}
+$$
+the posterior probability of $M_i$.
+Use IBF in the formula upon, IBFs is a resampling summaries of the evidence of the data for the comparison of models, since in the averages there is sample re-use.
 
+__Illustration 1 (continued) Normal Mean, AIBF and MIBF__
 
+Start with non-informative prior: $\pi_{1}^{N}\left(\sigma_{1}\right)=1 / \sigma_{1}$ and $\pi_{2}^{N}\left(\mu, \sigma_{2}\right)=1 / \sigma_{2}^{2}$. 
+Note that $\pi_2^N$ is not the reference prior.
 
+> What is reference prior? see THE FORMAL DEFINITION OF REFERENCE PRIORS by Berger, Bernardo and Sun.
 
-
+$$
+m_{1}^{N}(\mathbf{x}(l))=\frac{1}{2 \pi\left(x_{i}^{2}+x_{j}^{2}\right)}, \quad m_{2}^{N}(\mathbf{x}(l))=\frac{1}{\sqrt{\pi}\left(x_{i}-x_{j}\right)^{2}}
+$$
+Computation yields the Bayes factor for data x, when using $\pi_1^N$ and $\pi_2^N$ directly as the prior:
+$$
+B_{21}^{N}=\sqrt{\frac{2 \pi}{n}} \cdot\left(1+\frac{n \bar{x}^{2}}{s^{2}}\right)^{n / 2}
+$$
+where $s^{2}=\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}$.
+Then AIBF is then clearly equal to 
+$$
+B_{21}^{A I}=B_{21}^{N} \cdot \frac{1}{L} \sum_{l=1}^{L} \frac{\left(x_{1}(l)-x_{2}(l)\right)^{2}}{2 \sqrt{\pi}\left[x_{1}^{2}(l)+x_{2}^{2}(l)\right]}
+$$
+and MIBF is given by
+$$
+B_{21}^{M I}=B_{21}^{N} \cdot \operatorname{Med}_{l=1, \ldots, L}\left[\frac{\left(x_{1}(l)-_{2}(l)\right)^{2}}{\left.2 \sqrt{\pi} | x_{1}^{2}(l)+x_{2}^{2}(l)\right]}\right]
+$$
+计算过程是
+$$
+\begin{align}
+&\int \pi(\theta) f(x(\ell)|\theta)d\theta\\
+=&\int \frac{1}{\sigma_1^2} \mathcal N(x_1,x_2|0,\sigma_1^2)\\
+=&\int \frac{1}{\sigma_1} \frac{1}{2\pi\sigma_1^2}exp(-\frac{1}{2\sigma_1^2}(x_1^2+x_2^2))d\sigma_1\\
+=&\int \frac{1}{2\pi} \sigma_1^{-3}exp(-\frac{1}{2}\sigma_1^{-2}(x_1^2+x_2^2))d\sigma_1\\
+=&\frac{1}{2\pi}\int t^{\frac{3}{2}} t^{-\frac{3}{2}} (-\frac{1}{2})exp(-\frac{x_1^2+x_2^2}{2}t)dt 
+\\
+=&\frac{1}{2\pi(x_1^2+x_2^2)}
+\end{align} 
+$$
 
 
 
