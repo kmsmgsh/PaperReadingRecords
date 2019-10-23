@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 6 A Bayesian Lasso via reversible-jump MCMC | A paper reading record</title>
+  <title>Paper 21 Marginal Likelihood From the Gibbs Output | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 6 A Bayesian Lasso via reversible-jump MCMC | A paper reading record" />
+  <meta property="og:title" content="Paper 21 Marginal Likelihood From the Gibbs Output | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 6 A Bayesian Lasso via reversible-jump MCMC | A paper reading record" />
+  <meta name="twitter:title" content="Paper 21 Marginal Likelihood From the Gibbs Output | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="sparse-inverse-covariance-estimation-with-the-graphical-lasso.html">
-<link rel="next" href="the-bayesian-lasso.html">
+<link rel="prev" href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html">
+<link rel="next" href="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -368,158 +368,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-bayesian-lasso-via-reversible-jump-mcmc" class="section level1">
-<h1><span class="header-section-number">Paper 6</span> A Bayesian Lasso via reversible-jump MCMC</h1>
-<p><span class="citation">Chen, Wang, and McKeown (<a href="#ref-Chen:uv">2011</a>)</span></p>
-<div id="section-6.1" class="section level2">
-<h2><span class="header-section-number">6.1</span> 先验：标题党：</h2>
-<ul>
-<li>怎么在Bayes问题中使用Lasso penalty，是如原文中所说的Laplace prior吗？如何抽？</li>
-<li>Reversible-Jump MCMC是什么，该去看哪篇文章</li>
-<li>细节：略过，因为是signal processing的，总感觉不是统计的。。。</li>
-</ul>
+<div id="marginal-likelihood-from-the-gibbs-output" class="section level1">
+<h1><span class="header-section-number">Paper 21</span> Marginal Likelihood From the Gibbs Output</h1>
+<div id="abstract-13" class="section level2">
+<h2><span class="header-section-number">21.1</span> Abstract</h2>
+<p>Computing the marginal denstiy of the sample data(marginal likelihood) given parameter draws from the posterior distribution.</p>
+<p>This could be challenge, an estimate of the posterior density is shown to be available if all complete conditional densities used in the Gibbs sampler have closed form expressions. The posterior density is estimated at a high density point.</p>
 </div>
-<div id="abstract-3" class="section level2">
-<h2><span class="header-section-number">6.2</span> Abstract:</h2>
+<div id="introduction-16" class="section level2">
+<h2><span class="header-section-number">21.2</span> Introduction</h2>
+<p>The marginal likelihood, which is the normalizing constant of the posterior density and an input ot the computation of Bayes factors, has proved extremely challenging. Marginal likelihood is obtained by integrating the likelihood function with respect to the prior density, whereas the MCMC method produces draws from the posterior.</p>
+<p>One way to deal with this problem is to compute Bayes factors without attempting to calculate the marginal likelihood by introducing a model indicator into the lisst of unknown parameters.</p>
 <blockquote>
-<p>In this paper, we propose a new, fully hierarchical, Bayesian version of the Lasso model by employing flexible sparsity promoting priors, A reversible-jump MCMC algorithm is developed for joint posterior inference over both discrete and continuous parameter space.</p>
+<p>How to do this? by Carlin and Polson(1991), Carlin and Chib(1995), and many others.</p>
 </blockquote>
-<p>号称比Optimization-based，Gibbs sampler-based and Binomial-Gaussian prior model，有更精确，更准确地sparsity 特征。</p>
-<p>在diabetes数据上和fMRI数据上进行了跑分。
-Extension：MCMC-based algorithm for Binomial-Gaussian estimate via simulations。</p>
-<blockquote>
-<p>因为涉及到fMRI data感觉如果可能的话得找代码跑一遍看看</p>
-</blockquote>
+<p>To use these methods, it is neccessary to specify all of the competing models at the outset, which may not be always possible, and to carefully specify certain tuning constants to ensure that the simulation algorithm mixeed suitably in model space.</p>
 </div>
-<div id="introduction-5" class="section level2">
-<h2><span class="header-section-number">6.3</span> Introduction</h2>
-<div id="sparse-linear-models" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> Sparse linear models:</h3>
-<p><span class="math display">\[
-\mathbf{y}=X \boldsymbol{\beta}+\mathbf{e}
-\]</span>
-对于fMRI data维度诅咒很常见，Multivariate autogregressive models(mAR) 是常见的对fMRI建模的方法。
-但是，在fMRI data的实践中，如果使用传统的full mAR 对大脑之间的联系，当ROIs（感兴趣的区域）节点数远大于时间节点数的话，模型提取信息的能力会下降。（break down）
-目前，考虑20个ROIs
-，那么每当mAR模型的阶数加一，则会出现额外的400个参数需要确定。然而观测数则很少。</p>
-<blockquote>
-<p>因为涉及fMRI所以稍微写细一点</p>
-</blockquote>
-<p>处理cod（curse of dimensionality)的一个方法就是降维。In the example of modelling brain networks using fMRI, this variable selection procedure could significantly reduce the number of edges in the learned networks, resulting in sparse connectivity networks.</p>
-<p>以下这段和统计好像无关，signal processing 上的。
-Sparse linear approximation of a signal from a set of overcomplete dictionary is also an intensive research topic in both the signal processing and compressed sensing literature. basis pursuit.</p>
-<p>“spike and slab” priors on the regression coefficients were proposed in <span class="citation">(Mitchell and Beauchamp <a href="#ref-Mitchell:1988kd">1988</a>)</span></p>
-<blockquote>
-<p>Using the Laplace or Bernoulli–Gaussian mixture prior on the regression coefficients and introducing latent variables to identify subsets have been the popular choice.</p>
-</blockquote>
-<p>This paper propose a fully Bayesian Lasso framework with the RJ-MCMC approach.</p>
-<p>Variable/model selection methods, penalized regression approach, a easy to implement framework by Fan et.al. (2004).</p>
-<p>Lasso in Bayesian, posterior mode with Laplace (double-exponential) prior. D. Hunter, R. Li (2005) proposed Minorize-Maximize algorithm, to transfer the problem of maximizing the posterior function. “the Laplace prior to sequentially maximizing its quadratic surrogate functions.”</p>
-<p>Several Laplace-like priorhas veen recently proposed.[37]
-Mixture of delta-mass, Jeffrey’s non-informative mixing distribution.[10]
-This paper employ a Laplace prior for regression coefficients and implement it as RJ-MCMC-based approach. [27]“The Bayesian lasso”.</p>
-</div>
-<div id="related-work-and-our-contribution" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Related work and our contribution</h3>
-<p>Tuning parameter, usually selected by minimize the generalized CV erros. As a full Bayesian approach with Laplace prior on <span class="math inline">\(\beta\)</span>, giving the shrinkage tuning parameter a prior and the posterior of the model can be derived by integrating parameters via its posterior distribution. In this occasion, the proposed Bayesian Lasso estimator has a different posterior distribution from the ordinary Lasso with Laplace prior.</p>
-<p>Motivated by [24,37], two extra parameters in the proposed Bayesian lasso model to separately control the model selection and estimation shrinkage issues. Poisson prior on the model size together with Laplace prior on <span class="math inline">\(\beta\)</span>. Joint posterior distribution is highly non-standard and a standard MCMC is not applicable, employ RJ-MCMC than.</p>
-</div>
-<div id="notations" class="section level3">
-<h3><span class="header-section-number">6.3.3</span> Notations</h3>
-<p><span class="math inline">\(\gamma\)</span>, p-length binary vector denote the zero or nonzero coefficients.</p>
-</div>
-</div>
-<div id="a-fully-bayesian-lasso-model" class="section level2">
-<h2><span class="header-section-number">6.4</span> A fully Bayesian Lasso model</h2>
-<div id="prior-specification" class="section level3">
-<h3><span class="header-section-number">6.4.1</span> 2.1. Prior specification</h3>
-<p><img src="chp7/table1.png" width="346" /></p>
-<p>Independent Laplace prior are assumed for <span class="math inline">\(\beta\)</span>, with correspond active set <span class="math inline">\(\boldsymbol \gamma\)</span> with <span class="math inline">\(|\boldsymbol\gamma|=k\)</span>
-with follows the distribution
+<div id="notation-1" class="section level2">
+<h2><span class="header-section-number">21.3</span> Notation:</h2>
+<p>Suppose that <span class="math inline">\(f\left(\mathbf{y} | \boldsymbol{\theta}_{k}, M_{k}\right)\)</span> is the density function of the data <span class="math inline">\(\mathbf{y}=\left(y_{1}, \dots, y_{n}\right)\)</span> under model <span class="math inline">\(M_{k}(k=1,2, \ldots, K)\)</span> given the model-specific parameter vector <span class="math inline">\(\theta_k\)</span>. Let the prior density of <span class="math inline">\(\theta_k\)</span> (assumed to be proper) be given by <span class="math inline">\(\pi\left(\boldsymbol{\theta}_{k} | M_{k}\right)\)</span>, and let <span class="math inline">\(\left\{\boldsymbol{\theta}_{k}^{(g)}\right\} \equiv\left\{\boldsymbol{\theta}_{k}^{(1)}, \ldots, \boldsymbol{\theta}_{k}^{(\hat{G})}\right\}\)</span> be <span class="math inline">\(G\)</span> draws from the posterior density <span class="math inline">\(\pi\left(\boldsymbol{\theta}_{k} | \mathbf{y}, M_{k}\right)\)</span> obtained using a MCMC method, say the Gibbs sampler.</p>
+<p>Newton and Raftery(1994) showed that the marginal likelihood (equivalently, the marginal density of <span class="math inline">\(y\)</span>) under model <span class="math inline">\(M_k\)</span>, that is,
 <span class="math display">\[
-\pi\left(\beta_{j} | \tau, \gamma\right)=\frac{1}{2 \tau} \exp \left(-\frac{\left|\beta_{j}\right|}{\tau}\right)
+m\left(\mathbf{y} | M_{k}\right)=\int f\left(\mathbf{y} | \boldsymbol{\theta}_{k}, M_{k}\right) \pi\left(\boldsymbol{\theta}_{k} | M_{k}\right) d \boldsymbol{\theta}_{k}
 \]</span>
-Since how much should be shrinkage is unkown, a non-informative prior is given to hyper-parameter <span class="math inline">\(\tau\)</span>. By same reason,also give a non-informative prior to variance of noise <span class="math inline">\(\sigma^2\)</span></p>
-<p>Due to the Lindley’s paradox, one needs to be very careful to assign improper priors for <span class="math inline">\(\tau\)</span> or <span class="math inline">\(\sigma^2\)</span></p>
-<p>Furthermore, prior probabilities are also assigned to eachpossible sub-model, that is, a sub-model containing k predictors follows a right-truncated Poisson distribution at p.</p>
-<p><span class="math display">\[
-p(k | \lambda)=\frac{e^{-\lambda} \lambda^{k}}{C k !}
-\]</span></p>
-<p>Therefore, the posterior distribution of the parameter vector</p>
-<p><span class="math display">\[
-\begin{array}{l}{p\left(\boldsymbol{\beta}, \tau, \sigma^{2}, \gamma, \lambda | \mathbf{y}, X\right) \propto \frac{e^{-\lambda} \lambda^{k-1}}{\left( \begin{array}{c}{p} \\ {k}\end{array}\right) k !} \tau^{-(k+1)} \sigma^{-(n+1)}} \\ {\exp \left(-\frac{\|\boldsymbol{\beta}\|_{1}}{\tau}-\frac{\|\mathbf{y}-X \boldsymbol{\beta}\|_{2}^{2}}{2 \sigma^{2}}\right)}\end{array}
-\]</span>
-Derive detail can be found in Appendix.
-To reduce the computational cost, the parameters <span class="math inline">\(\tau,\sigma^2\)</span> and <span class="math inline">\(\lambda\)</span> can be analytically integrated out.
-Normalization constants of the respective Gamma and inverse Gamma p.d.f’s, we can show that</p>
-<p><span class="math display">\[
-\pi(\boldsymbol{\beta}, \gamma | \mathbf{y}, X) \propto \Gamma(k) B(k, p-k+1)\|\boldsymbol{\beta}\|_{1}^{-k}\|\mathbf{y}-X \boldsymbol{\beta}\|_{2}^{-(n-1)}
-\]</span>
-This equation has two parts, <span class="math inline">\(||\boldsymbol\beta||_1^{-k}\)</span> is the prior information and <span class="math inline">\(\|\mathbf{y}-X \boldsymbol{\beta}\|_{2}^{-(n-1)}\)</span> is the likelihood. By integrating out the nuisance parameters analytically, a more stable estimator is possible, in addition to the advantage of requiring fewer computations.</p>
-</div>
-</div>
-<div id="bayesian-computation" class="section level2">
-<h2><span class="header-section-number">6.5</span> Bayesian computation</h2>
-<p>Algorithm</p>
-<p>The proposed RJ-MCMC based Bayesian Lasso</p>
-<p><img src="chp7/Algorithm1.png" width="348" /></p>
-<blockquote>
-<p>没解说直接看怎么感觉有点像MH，需要一点解说</p>
-</blockquote>
-<p>Propose a hybridized MCMC sampler to simultaneously perform model averaging and parameter estimation and falls into the RJ-MCMC umbrella.</p>
-<div id="design-of-model-transition." class="section level3">
-<h3><span class="header-section-number">6.5.1</span> Design of model transition.</h3>
-<p>Disribution of <span class="math inline">\(\beta\)</span> depends on the model dimensionality. Here, we propose three types of model moves as following:</p>
-<p><span class="math display">\[
-\text { 1. } \gamma \rightarrow \gamma ; \quad \text { 2. } \gamma \rightarrow \gamma^{\prime} ; \quad 3 . \gamma^{\prime} \rightarrow \gamma
-\]</span></p>
-<blockquote>
-<p>看不懂，得看看hybridized MCMC是啥
-<span class="citation">(Brooks, Giudici, and Roberts <a href="#ref-Brooks:2003ko">2003</a>)</span> may be need to check about this MCMC methods.</p>
-</blockquote>
-</div>
-<div id="a-usual-metropolis-hastings-update-for-unchanged-model-dimension" class="section level3">
-<h3><span class="header-section-number">6.5.2</span> A usual Metropolis-Hastings update for unchanged model dimension</h3>
-<p>Proposal used: Gaussian random walk (RW) is used, with acceptance probability with
+can be estimated as
 <span class="math display">\[
-\min \left\{\left(\frac{\left\|\boldsymbol{\beta}^{\prime}\right\|_{1}}{\|\boldsymbol{\beta}\|_{1}}\right)^{-k} \times\left(\frac{\left\|\mathbf{y}-X \boldsymbol{\beta}^{\prime}\right\|_{2}}{\|\mathbf{y}-X \boldsymbol{\beta}\|_{2}}\right)^{-(n-1)}, 1\right\}
+\hat{m}_{\mathrm{NR}}=\left\{\frac{1}{G} \sum_{g=1}^{G}\left(\frac{1}{f\left(\mathbf{y} | \boldsymbol{\theta}_{k}^{(g)}, M_{k}\right)}\right)\right\}^{-1}
 \]</span></p>
-</div>
-<div id="a-birth-and-death-strategy-for-changed-model-dimension" class="section level3">
-<h3><span class="header-section-number">6.5.3</span> A birth-and-death strategy for changed model dimension</h3>
-<p>For the model jumping moves, there are two commonly used proposals:</p>
-<ul>
-<li>birth-and-death</li>
-<li>split-and-merge</li>
-</ul>
-<p>birth-and-death is a simple form of model transformation: in the birth step, a new predictor is added to the current model, by generating parameters of a new predictor from a prior distribution. In the death step, a predictor is removed from current model, and the reversibility constraint must be satisfied according to the detailed balance equation.</p>
+<p>Although this is a simulation-consistent estimate of <span class="math inline">\(m\left(\mathbf{y} | M_{k}\right)\)</span>, it is not stable, because the inverse likelihood does not have finite variance.</p>
+<p>However, consider the quantity proposed by Gelfand and Dey(1993):
+<span class="math display">\[
+\hat{m}_{\mathrm{GD}}=\left\{\frac{1}{G} \sum_{g=1}^{G}\left(\frac{p\left(\boldsymbol{\theta}_{k}^{(g)}\right)}{f\left(\mathbf{y} | \boldsymbol{\theta}_{k}^{(g)}, M_{k}\right) \pi\left(\boldsymbol{\theta}_{k}^{(g)} | M_{k}\right)}\right)\right\}^{-1}
+\]</span>
+where <span class="math inline">\(p(\boldsymbol{\theta})\)</span> is a density with tails thinner than the product of the prior and the likelihood.
+It can be shown that
+<span class="math display">\[
+\hat{m}_{\mathrm{GD}} \rightarrow m\left(\mathbf{y} | M_{k}\right)
+\]</span>
+as G becomes large without the instability of <span class="math inline">\(\hat{m}_{\mathrm{NR}}\)</span>.</p>
+<p>The difficulty for this method is that the tunning function <span class="math inline">\(p(\theta)\)</span> is hard to decide.</p>
+<p>In fact, we have found that the somewhat obvious choices of <span class="math inline">\(p(\cdot)\)</span>, a normal density or t density with mean and covariance equal to the posterior mean and covariance— do not necessarily satisfy the thinness requirement.</p>
+<p>Another attempts to modify the harmonic mean estimator, though requiring samples from both the prior and posterior distributions, have been discussed by Newton and Raftery(1994).</p>
+<p>The purpose of this article is to demonstrate that a simple approach to computing the marginal likelihood and the Bayes factor is available that is free of the problems just described.</p>
+<p>To compute the marginal density by this approach, it is necessary that all integrating constants of the full conditional distributions in the Gibbs sampler be known.</p>
 <blockquote>
-<p>然后似乎是要满足什么条件，又看不懂了。<span class="citation">(Green <a href="#ref-Green:1995ut">1995</a>)</span> 如果有需要的话感觉得查查原文</p>
+<p>Seems my model does not meet the requirement, so maybe turn to previous method.</p>
 </blockquote>
-<blockquote>
-<p>还有一点不懂，这个birth-and-dead 过程类似于前向和后项选择过程，是怎么和Bayes lasso扯上关系的，感觉有点像LARS的solution path方法</p>
-</blockquote>
-</div>
-</div>
-<div id="simulation" class="section level2">
-<h2><span class="header-section-number">6.6</span> Simulation</h2>
-<p>run for 100,000</p>
+<p>So turn to Approximate Bayesian Inference with the Weighted Likelihood Bootstrap.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-Chen:uv">
-<p>Chen, Xiaohui, Z. Jane Wang, and Martin J. McKeown. 2011. “A Bayesian Lasso via reversible-jump MCMC.” <em>Signal Processing</em>.</p>
-</div>
-<div id="ref-Mitchell:1988kd">
-<p>Mitchell, T J, and JJ Beauchamp. 1988. “Bayesian variable selection in linear regression.” <em>Journal of the American Statistical Association</em>, 1023–32.</p>
-</div>
-<div id="ref-Brooks:2003ko">
-<p>Brooks, S P, P Giudici, and G O Roberts. 2003. “Efficient construction of reversible jump Markov chain Monte Carlo proposal distributions.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 65 (1): 3–55.</p>
-</div>
-<div id="ref-Green:1995ut">
-<p>Green, Peter J. 1995. “Reversible jump Markov chain Monte Carlo computation and Bayesian model determination.” <em>Biometrika</em> 82 (4): 711–32.</p>
 </div>
 </div>
             </section>
@@ -527,8 +423,8 @@ This equation has two parts, <span class="math inline">\(||\boldsymbol\beta||_1^
           </div>
         </div>
       </div>
-<a href="sparse-inverse-covariance-estimation-with-the-graphical-lasso.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-bayesian-lasso.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

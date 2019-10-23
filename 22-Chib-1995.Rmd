@@ -1,0 +1,74 @@
+# Marginal Likelihood From the Gibbs Output
+
+## Abstract
+Computing the marginal denstiy of the sample data(marginal likelihood) given parameter draws from the posterior distribution.
+
+This could be challenge, an estimate of the posterior density is shown to be available if all complete conditional densities used in the Gibbs sampler have closed form expressions. The posterior density is estimated at a high density point.
+
+## Introduction
+
+The marginal likelihood, which is the normalizing constant of the posterior density and an input ot the computation of Bayes factors, has proved extremely challenging. Marginal likelihood is obtained by integrating the likelihood function with respect to the prior density, whereas the MCMC method produces draws from the posterior.
+
+One way to deal with this problem is to compute Bayes factors without attempting to calculate the marginal likelihood by introducing a model indicator into the lisst of unknown parameters.
+
+> How to do this? by Carlin and Polson(1991), Carlin and Chib(1995), and many others.
+
+To use these methods, it is neccessary to specify all of the competing models at the outset, which may not be always possible, and to carefully specify certain tuning constants to ensure that the simulation algorithm mixeed suitably in model space.
+
+## Notation:
+
+Suppose that $f\left(\mathbf{y} | \boldsymbol{\theta}_{k}, M_{k}\right)$ is the density function of the data $\mathbf{y}=\left(y_{1}, \dots, y_{n}\right)$ under model $M_{k}(k=1,2, \ldots, K)$ given the model-specific parameter vector $\theta_k$. Let the prior density of $\theta_k$ (assumed to be proper) be given by $\pi\left(\boldsymbol{\theta}_{k} | M_{k}\right)$, and let $\left\{\boldsymbol{\theta}_{k}^{(g)}\right\} \equiv\left\{\boldsymbol{\theta}_{k}^{(1)}, \ldots, \boldsymbol{\theta}_{k}^{(\hat{G})}\right\}$ be $G$ draws from the posterior density $\pi\left(\boldsymbol{\theta}_{k} | \mathbf{y}, M_{k}\right)$ obtained using a MCMC method, say the Gibbs sampler.
+
+Newton and Raftery(1994) showed that the marginal likelihood (equivalently, the marginal density of $y$) under model $M_k$, that is, 
+$$
+m\left(\mathbf{y} | M_{k}\right)=\int f\left(\mathbf{y} | \boldsymbol{\theta}_{k}, M_{k}\right) \pi\left(\boldsymbol{\theta}_{k} | M_{k}\right) d \boldsymbol{\theta}_{k}
+$$
+can be estimated as
+$$
+\hat{m}_{\mathrm{NR}}=\left\{\frac{1}{G} \sum_{g=1}^{G}\left(\frac{1}{f\left(\mathbf{y} | \boldsymbol{\theta}_{k}^{(g)}, M_{k}\right)}\right)\right\}^{-1}
+$$
+
+Although this is a simulation-consistent estimate of $m\left(\mathbf{y} | M_{k}\right)$, it is not stable, because the inverse likelihood does not have finite variance. 
+
+However, consider the quantity proposed by Gelfand and Dey(1993):
+$$
+\hat{m}_{\mathrm{GD}}=\left\{\frac{1}{G} \sum_{g=1}^{G}\left(\frac{p\left(\boldsymbol{\theta}_{k}^{(g)}\right)}{f\left(\mathbf{y} | \boldsymbol{\theta}_{k}^{(g)}, M_{k}\right) \pi\left(\boldsymbol{\theta}_{k}^{(g)} | M_{k}\right)}\right)\right\}^{-1}
+$$
+where $p(\boldsymbol{\theta})$ is a density with tails thinner than the product of the prior and the likelihood.
+It can be shown that
+$$
+\hat{m}_{\mathrm{GD}} \rightarrow m\left(\mathbf{y} | M_{k}\right)
+$$
+as G becomes large without the instability of $\hat{m}_{\mathrm{NR}}$.
+
+The difficulty for this method is that the tunning function $p(\theta)$ is hard to decide.
+
+In fact, we have found that the somewhat obvious choices of $p(\cdot)$, a normal density or t density with mean and covariance equal to the posterior mean and covariance--- do not necessarily satisfy the thinness requirement. 
+
+
+Another attempts to modify the harmonic mean estimator, though requiring samples from both the prior and posterior distributions, have been discussed by Newton and Raftery(1994).
+
+The purpose of this article is to demonstrate that a simple approach to computing the marginal likelihood and the Bayes factor is available that is free of the problems just described.
+
+To compute the marginal density by this approach, it is necessary that all integrating constants of the full conditional distributions in the Gibbs sampler be known.
+
+> Seems my model does not meet the requirement, so maybe turn to previous method.
+
+So turn to Approximate Bayesian Inference with the Weighted Likelihood Bootstrap.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

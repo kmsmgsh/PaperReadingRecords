@@ -1,5 +1,23 @@
 # Copula for discrete LDA
 
+> 需要一个copula的图景以及sklar's theorem作为一个补充
+
+$$
+C: [0,1]^p\rightarrow [0.1]
+$$
+
+> Sklar‘s theorem: for any random variable with c.d.f and marginal c.d.f, there exists a copula s.t. $F(x_1,...,x_p)=C(F_1(x_1),...)$
+If F is continuous, C is unique
+
+> density of Copula,需要补充，虽然不知道有什么卵用
+
+  
+> Normal scoring $v$ 好像是Pearson correlation
+啊明白了
+但是为什么考虑Pearson correlation而不是spearman's correlation. Maybe for order statistic, and other things.
+
+
+
 
 
 Lack of suitable mutivariate joint distributions for discrete variables that incorporate with the correlation.

@@ -1,0 +1,206 @@
+#  Approximate Bayesian Inference with the Weighted Likelihood Bootstrap
+
+[@Newton:1994wm]
+
+## Abstract
+
+Use weighted likelihood bootstrap (WLB) as a way to simulate approximately from a posterior distribution.
+
+The SIR-adjusted WLB can be a competitive alternative to other integration methds in certain models.
+
+We note that, given a sample simulated from the posterior distribution, the required marginal likelihood may be simulation consistently estimated by the harmonic mean of the associated likelihood values; a modification of the estimator that avoids instability is also noted.
+
+These methods provide simple ways of calculating approximate Bayes factors and posterior model probabilities for a very wide class of models.
+
+
+## Introduction
+
+This paper investigates the extent to which a new bootstrap procedure -- the weighted likelihood bootstrap (WLB) - can be used by applied Bayesian statisticians to approximate posterior distributions. This is direct extension of the Bayesian bootstrap.
+
+The WLB used in isolation is not simulation consisent: it does not produce exact answers as the amount of computing resources increases without bound.
+
+The paper is organized as:
+- Section 2 description of the method for independent data and application to a non-linear regression problem.
+- 3 Exact properties of the WLB.
+- 4 Asymptotic properties
+- 5 Implement of the WLB
+- 6 Extension to dependent data models and to partial likelihood.
+- 7 We study a method for approximating marginal likelihoods by using samples from a posterior distribution.
+
+
+> From this index, what we need is section 7. So the reading plan is 2,5 and 7, maybe 3.
+
+## The Method
+
+Consider modelling data $x_{1}, x_{2}, \ldots, x_{n}$ as independent, each $x_i$ having probability density function $f_i(x_i;\theta)$, the likelihood function for the parameter $\theta$,
+$$
+L(\theta)=\prod_{i=1}^{n} f_{i}\left(x_{i} ; \theta\right)
+$$
+Started with a prior $\pi(\theta)$.
+Posterior density proportional to $L(\theta)\pi(\theta)$.
+
+In the WLB method, a sample is produced by maximizing a weighted likelihood function
+$$
+\tilde{L}(\theta):=\prod_{i=1}^{n} f_{i}\left(x_{i} ; \theta\right)^{w_{n, t}}
+$$
+where the weight vector $w_{n}=\left(w_{n, 1}, \dots, w_{n, n}\right)$ has some probability distribution determined by the statistician. The function $\tilde L$ is not a likelihood in the usual sense; it is merely a device for generating a sample on the parameter space.
+
+Denote $\tilde \theta$ as any parameter value satisfying $\tilde{L}(\tilde{\theta}) \geqslant \tilde{L}(\theta)$ for all $\theta$ in the parameter space.
+
+The likelihood $L$ are fixed after the data are observed, the weighed likelihood $\tilde{L}$ and its maximizer $\tilde \theta$ have randomness induced by the distribution of the weights.
+
+The thesis of this paper, showed that for certain weight distributions, the conditional distribution of $\tilde \theta$ given the data can provide a good approximation to a posterior distribution of $\theta$.
+
+Although this conditional distribution is usually difficult to find exactly, it is straightforward to simulate when maximization of $\tilde{L}$ is feasible.
+
+Motivated by inference for multinomial data, a natural weight distribution is the uniform Dirichlet distribution. 
+
+> The weight distribution in $\tilde{L}$ 
+
+Such weights are simulated by generating $n$ independent exponentials $Y_i$ and forming $w_{n, i}=Y_{i} / \bar{Y}$, where $\bar{Y}$ is the sample mean of the $Y_i$. When combining the WLB with importance sampling, it is computationally convenient to form weights $w_{n, i} \propto Y_{i}^{\alpha}$ for some power $\alpha\neq 1$. If $\alpha >1$, the weight distribution is overdispersed relative to the Dirichlet distribution. Many weight distributions could be postulated.
+
+__Example__:
+
+A non-linear regression model, relates biochemical oxygen demand $x$ of prepared water samples to incubation time $t$ by the equation:
+$$
+x_{i}=\beta_{1}\left\{1-\exp \left(-\beta_{2} t_{i}\right)\right\}+\epsilon_{i} \quad i=1,2, \ldots, n
+$$
+Thee error $\epsilon_i$ are assumed to be independent normal errors with constant variance $\sigma^2$, assigned an improper prior $\pi\left(\sigma^{2}\right) \propto \sigma^{-2}$. The generic parameter $\theta$ incorporates both the regression parameter vector $\beta$ and the scale parameter $\sigma$. A transformation invariant, design-dependent prior for $\beta=\left(\beta_{1}, \beta_{2}\right)$ is $\pi(\beta) \propto\left|V^{\mathrm{T}} V\right|^{1 / 2}$ where $V$ is the $n\times 2$ matrix having $(i,j)$th element $\partial E_{\beta}\left(x_{i}\right) / \partial \beta_{j}$.
+
+We can quite directly obtain maximum likelihood estimates for this model by using routines for non-linear optimization.
+Bayesian inference is not simple here because marginal posteriors pose difficult integration problems.
+
+The WLB takes advantage of the available estimation technology to carry out the integration. Section 5 described maximizing $\tilde L$ for any particular set of weights is done by simply including a weight vector in the estimation routine.
+
+The WLB samples do not come from the joint posterior exactly, because, for one thing, no prior information was used in the simulation. However, a simple adjustment based on importance sampling can correct this.
+
+The basic idea is that $g$, the joint density of $\tilde \beta$, is a good approximation to the marginal posterior density of $\beta$ and hence is a good choice for an importance sampling density.
+
+To finish the analysis, each $\tilde \beta^j$ in the raw WLB sample must be assigned an importance weight
+$$
+u_{j} \propto r\left(\tilde{\beta}^{j}\right)=\pi\left(\tilde{\beta}^{j}\right) L_{m}\left(\tilde{\beta}_{j}\right) / \hat{g}\left(\tilde{\beta}_{j}\right)
+$$
+
+
+
+## 5 Implementation and Examples
+### Iteratively Reweighted Least Squares
+
+Consider a weighted likelihood function $\tilde L$ which is maximized by solving the (vector) weighted likelihood equation
+$$
+\frac{\partial \tilde{l}}{\partial \theta}(\theta)=0
+$$
+for $\tilde \theta\in R^k$. There is a close connection between a solution $\tilde \theta$ of equation and the IRLS solution $\hat\theta$ of the likelihood equation
+$$
+\frac{\partial l}{\partial \theta}(\theta)=0
+$$
+where $l$ is the logarithm of the likelihood function.
+
+$\tilde l$ is viewed as a function of an n-vector of predictors $\eta=\left(\eta_{1}, \eta_{2}, \dots, \eta_{n}\right)^{\mathrm{T}}$. These predictors, in turn, are viewed as functions of the parameter $\theta$; thus $\eta=\eta(\theta)$. Letting u be the n-vector $(\partial l / \partial \eta)$ and D the $n\times k$ matrix $(\partial \eta / \partial \theta)$, the weighted likelihood equation becomes simply 
+$$
+D^{\mathrm{T}} W u=0
+$$
+where $W$ is an $n\times n$ diagonal matrix with weights $w_{n,i}$ on its diagonal. The model densities are assumed to have the form $f_{i}\left(x_{i} ; \theta\right)=\psi_{i}\left(\eta_{i}, x_{i}\right)$ where, for each $i$,$\psi_i$ is fixed, known, function determined by the model.
+
+
+> Other example ommit here.
+
+## Using Samples From Posterior To Evaluate The Marginal Likelihood
+
+Bayes factor :
+$$
+B_{01}=\frac{p\left(x | M_{0}\right)}{p\left(x | M_{1}\right)}
+$$
+in this equation:
+$$
+p\left(x | M_{j}\right)=\int p\left(x | \theta_{j}, M_{j}\right) p\left(\theta_{j} | M_{j}\right) \mathrm{d} \theta_{j}
+$$
+$\theta_j$ is the parameter of model $M_j$ and $p(\theta_j|M_j)$ is the prior density of $\theta_j$ under model $M_j,(j=0,1)$. We call $p(x|M_j)$ the marginal likelihood of the data under $M_j$.
+
+The Bayesian inference, prediction and decision-making all involve their posterior probabilities:
+$$
+p\left(M_{j} | x\right)=p\left(x | M_{j}\right) p\left(M_{j}\right) / \sum_{k=0}^{J} p\left(x | M_{k}\right) p\left(M_{k}\right)
+$$
+where $p(M_j)$ is the prior probability of the model $M_j$. Again, the marginal likelihoods $p(x|M_j)$ are the crucial components.
+
+If we dropping the notation dependence on $M_j$, then the marginal likelihood becomes
+$$
+p(x)=\int p(x | \theta) p(\theta) \mathrm{d} \theta
+$$
+The Monte Carlo method for evaluating integrals of the form $I=\int g(\theta) p(\theta) \mathrm{d} \theta$ is to generate a sample $\left\{\theta^{(i)}: i=1, \dots, m\right\}$ from a density $p^*(\theta)$. Under quite general conditions, a simulation consistent estimate of $I$ is 
+$$
+\hat{I}=\sum_{i=1}^{m} w_{i} g\left(\theta^{(i)}\right) / \sum_{i=1}^{m} w_{i}
+$$
+where $w_{i}=p\left(\theta^{(i)}\right) / p^{*}\left(\theta^{(i)}\right)$; the function $p^*(\theta)$ is known as the _importance sampling function_.
+
+> This is different form from standard important sampling, from [this book](https://statweb.stanford.edu/~owen/mc/), [Chapter 9 importance sampling](https://statweb.stanford.edu/~owen/mc/Ch-var-is.pdf), this form is the Self-normalized importance sampling, which can use unnormalized version of p and q.
+
+
+The WLB gives us a sample approximately drawn from the posterior density
+$$
+p ^*(\theta)=p(\theta | x)=p(x | \theta) p(\theta) / p(x)
+$$
+
+In general, most functions $g(\theta)$ could be a poor importance sampling function, but here we have $g(\theta)=p(x|\theta)$, and the importance sampling function $p^{*}(\theta)=p(\theta | x)$ is well suited for this case. Then a estimate for $p(x)$,
+$$
+\hat{p}_{1}(x)=\left\{\frac{1}{m} \sum_{i=1}^{m} p\left(x | \theta^{(i)}\right)^{-1}\right\}^{-1}
+$$
+the harmonic mean of the likelihood values.
+
+This is true whether the posterior samples come from an SIR-adjusted WLB or any other sampling scheme, like the Markov chain Monte Carlo method.
+
+It is readily verified that $\hat p_1(x)$ converges almost surely to the correct value $p(x)$ as $m\rightarrow \infty$. However, $\hat p_1(x)$ does not, in general, satisfy a Gaussian central limit theorem. 
+
+This manifests itself by the occasional occurence of a value of $\theta^{(i)}$ with a small likelihood and hence a large effect on the final result; it happens because $p(x | \theta)^{-1}$ is often not square integrable with respect to the posterior distribution.
+
+An alternative is 
+
+$$
+\hat{p}_{2}(x)=\frac{1}{m} \sum_{i=1}^{m} p\left(x | \theta^{(i)}\right)
+$$
+where $\left\{\theta^{(i)}: i=1, \ldots, m\right\}$ is a sample from the prior distribution rather than the posterior.
+
+A major difficulty with $\hat{p}_{2}(x)$ is that most of the $\theta^{(i)}$ will have small likelihood values if the posterior is concentrated relative to the prior, so that the simulation process will be quite inefficient.
+
+Thus the estimate will be dominated by a few large values of the likelihood, and so the variance of $\hat{p}_{2}(x)$ may be large and its convergence to a Gaussian distribution slow. These difficulties are precisely the opposite of the difficulties with $\hat p_1(x)$.
+
+These considerations suggest that we use as importance sampling function a _mixture_ of the prior and posterior densities, with 
+$$
+p^{*}(\theta)=\delta p(\theta)+(1-\delta) p(\theta | x)
+$$
+where $\delta$ is small. This yields a new estimate $\hat{p}_{3}(x)$, defined by the equation
+$$
+\hat{p}_{3}(x)=\frac{\sum_{i=1}^{m} p\left(x | \theta^{(i)}\right) /\left\{\delta \hat{p}_{3}(x)+(1-\delta) p\left(x | \theta^{(i)}\right)\right\}}{\sum_{i=1}^{m}\left\{\hat{p}_{3}(x)+(1-\delta) p\left(x | \theta^{(i)}\right)\right\}^{-1}}
+$$
+
+The estimator $\hat p_3(x)$ is appealing because it retains the efficiency of $\hat p_1(x)$, due to being based mostly on high likelihood values of $\theta$, but avoids its unpleasant instability.
+It is readily verified that $\hat p_3(x)$ does not satisfy a Gaussian central limit theorem, unlike $\hat p_1(x)$. However, $\hat p_3(x)$ has the irksome aspect that we must simulate from the prior as well as the posterior.
+
+Simulation from the prior as well as the posterior may be avoided, without sacrificing the appealing aspects of $\hat p_3(x)$, by instead simulating all $m$ values from the posterior distribution and imagining that a further $\delta_{m} /(1-\delta)$ values of $\theta$ are drawn from the prior, all with likelihood $p\left(x | \theta^{(i)}\right)$ equal to their expected value $p(x)$. This yields an approximation to $\hat p_3(x)$, namely
+$$
+\hat{p}_{4}(x)=\frac{\delta m /(1-\delta)+\sum_{i=1}^{m} p\left(x | \theta^{(i)}\right) /\left\{\delta \hat{p}_{4}(x)+(1-\delta) p\left(x | \theta^{(i)}\right)\right\}}{\delta m /(1-\delta) \hat{p}_{4}(x)+\sum_{i=1}^{m}\left\{\delta \hat{p}_{4}(x)+(1-\delta) p\left(x | \theta^{(i)}\right)\right\}^{-1}}
+$$
+The estimator $\hat p_4(x)$ may be evaluated by using a simple and obvious iterative scheme; in our limited experience to date, this converges fast, often in a single step. $\hat p_4(x)$ performed well for $\delta$ as small as 0.01 and did not display any of the instability of $\hat p_1(x)$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

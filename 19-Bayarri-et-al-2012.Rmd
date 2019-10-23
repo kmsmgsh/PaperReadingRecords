@@ -12,7 +12,7 @@
 There has been no agreement as to which are most appealing or most successful.
 
 ### Notation.
-y be a daata vector of size n.
+y be a data vector of size n.
 $$
 M_{0} : f_{0}(\mathbf{y} | \boldsymbol{\alpha}), \quad M_{i} : f_{i}\left(\mathbf{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}_{i}\right), \quad i=1,2, \ldots, N-1
 $$
