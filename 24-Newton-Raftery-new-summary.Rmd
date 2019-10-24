@@ -1,0 +1,100 @@
+# Approximate Bayesian Inference with the Weighted Likelihood Bootstrap
+
+按照[读论文要求](https://kmsmgsh.github.io/Notes-in-statistics-and-computing/general-notes.html#section-3.1) ,列一个简短的总结，预计中英混杂，以中文为主。
+
+---
+
+论文的题目，作者，年份：
+
+题目：Approximate Bayesian Inference with the Weighted Likelihood Bootstrap
+
+作者：By MICHAEL A. NEWTON，N E. RAFTERY
+
+期刊： J. R. Statist. Soc. B 
+
+年份：1994
+
+引用信息：@Newton:1994wm
+
+---
+
+（这块都来自于abstract）
+研究的问题：
+
+使用weighted likelihood bootstrap (WLB) 作为从posterior distribution抽样的一个办法。
+
+方法的优点：
+
+- Often easy to implement: 只需要能得到极大似然估计的算法即可，比如IRWLS
+
+- WLB is first order correct under quite general conditions. Inaccuracies can be removed by using the WLB as a source of samples in the sampling-importance resampling (SIR) algorithm, which also allows incorporation of particular prior information.
+
+> 这段有点不太懂，第一个是一阶正确是什么意思，第二个是这个SIR algorithm解决的是什么问题？
+
+- Asymptotic expansions elucidate the second-order properties of the WLB, which is a generalization of Rubin's Bayesian bootstrap.
+
+> 这个二阶性质是什么？是广义的Rubin的贝叶斯自助法<--但是这玩意是什么？虽然感觉目前不重要先留着
+
+这篇文章也考虑了另外一个问题:
+如何计算近似Bayes factor从而可以进行模型比较。
+
+结论：给定后验样本，marginal likelihood可以一致的用对应样本的likelihood的调和平均(harmonic mean)进行估计,但是有一些问题，也提出了改进方法。这些方法提供了一个简单的方式对近似的Bayes factor和模型后验概率进行计算。
+
+---
+
+来自于Introduction
+
+
+Directly extension of the Bayesian bootstrap from nonparametric models to parametric and semiparametric models.
+
+使用条件：Maximum likelihood estimation is feasible.
+范例: 比如regression model，广义线性模型
+
+性质：不像Markov chain的模拟算法，如果孤立的使用WLB，这个算法并不是simulation consistent: 也就是说，这不产生exact answers as the amount of computing resources increases without bound. 但是，当更多数据可用时approximation的效率会提升。
+
+WLB产生参数的随机样本来自于其Bayesian posterior.当和其他方法一起使用时，比如sampling-importance-resampling, WLB的输出可用修改去产生感兴趣的后验，这种时候修改的WLB是simulation consistent的，
+
+
+---
+
+另一个主题：算Margiinal likelihood:这是真正关心的主题。
+
+没啥好总结的，细节在前一篇里。
+
+需要注意的问题，instability。 $\hat p_1(x)$ does not, in general, satisfy a Gaussian central limit theorem. 产生的原因是occasional occurrence of a value of $\theta^{(i)}$ with a small likelihood and hence a large effect on the final result; it happens because $p(x|\theta)^{-1}$ is often not square integrable with respect to the posterior distribution.
+
+Square integrable:
+$$
+f: \mathbb{R} \mapsto \mathbb{C} \text { square integrable } \Longleftrightarrow \int_{-\infty}^{\infty}|f(x)|^{2} \mathrm{d} x<\infty
+$$
+
+---
+
+Discussion
+
+A bootstrap-like procedure for simulating approximately from a posterior distribution.
+
+First order correct $\rightarrow$ consistently estimates the mean and covariance structure of the posterior distribution. 
+
+Higher order correctness is generally not available for these simple weights 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
