@@ -25,7 +25,7 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2019-10-23">
+<meta name="date" content="2019-10-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -346,13 +346,31 @@
 <p>性质：不像Markov chain的模拟算法，如果孤立的使用WLB，这个算法并不是simulation consistent: 也就是说，这不产生exact answers as the amount of computing resources increases without bound. 但是，当更多数据可用时approximation的效率会提升。</p>
 <p>WLB产生参数的随机样本来自于其Bayesian posterior.当和其他方法一起使用时，比如sampling-importance-resampling, WLB的输出可用修改去产生感兴趣的后验，这种时候修改的WLB是simulation consistent的，</p>
 <hr />
+<p>正文中需要注意的就是第一个简单的例子：
+使用IRWLS进行对MLE的求解，使用现成的算法只不过权重矩阵从
+<span class="math display">\[
+W_{i}=\frac{1}{\operatorname{var}\left(Y_{i}\right)}\left(\frac{d \mu_{i}}{d \eta_{i}}\right)^{2}=\frac{1}{\operatorname{var}\left(Y_{i}\right)\left\{g^{\prime}\left(\mu_{i}\right)\right\}^{2}}
+\]</span>
+的形式变成了从 Dirichlet 分布抽出的样本。</p>
+<hr />
 <p>另一个主题：算Margiinal likelihood:这是真正关心的主题。</p>
 <p>没啥好总结的，细节在前一篇里。</p>
+<p>作为引导讲稿的话过程如下：</p>
+<p>首先是一般的important sampling
+然后是Unnormalized importance sampling.
+用Unnormalized importance sampling可以得出一般的要用的那个公式。</p>
+<p>然后推一下p1</p>
+<p>p1一般</p>
 <p>需要注意的问题，instability。 <span class="math inline">\(\hat p_1(x)\)</span> does not, in general, satisfy a Gaussian central limit theorem. 产生的原因是occasional occurrence of a value of <span class="math inline">\(\theta^{(i)}\)</span> with a small likelihood and hence a large effect on the final result; it happens because <span class="math inline">\(p(x|\theta)^{-1}\)</span> is often not square integrable with respect to the posterior distribution.</p>
 <p>Square integrable:
 <span class="math display">\[
 f: \mathbb{R} \mapsto \mathbb{C} \text { square integrable } \Longleftrightarrow \int_{-\infty}^{\infty}|f(x)|^{2} \mathrm{d} x&lt;\infty
 \]</span></p>
+<p>这是第一个问题，第二个问题在于推导调和平均的修改版。
+这个问题是链接p1和后面方法的桥梁。</p>
+<p>p2可以直接得出
+p3得好好推一下
+p4的概念有点奇怪，但是可以讲一讲，概念讲通了公式很简单</p>
 <hr />
 <p>Discussion</p>
 <p>A bootstrap-like procedure for simulating approximately from a posterior distribution.</p>

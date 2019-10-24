@@ -127,6 +127,28 @@ If we dropping the notation dependence on $M_j$, then the marginal likelihood be
 $$
 p(x)=\int p(x | \theta) p(\theta) \mathrm{d} \theta
 $$
+
+__Importance Sampling__
+
+Basic importance sampling
+$$
+\mu=\mathbb{E}(f(\boldsymbol{X}))=\int_{\mathcal{D}} f(\boldsymbol{x}) p(\boldsymbol{x}) \mathrm{d} \boldsymbol{x}
+$$
+
+with another proposal $q$:
+$$
+\mu=\int_{\mathcal{D}} f(\boldsymbol{x}) p(\boldsymbol{x}) \mathrm{d} \boldsymbol{x}=\int_{\mathcal{D}} \frac{f(\boldsymbol{x}) p(\boldsymbol{x})}{q(\boldsymbol{x})} q(\boldsymbol{x}) \mathrm{d} \boldsymbol{x}=\mathbb{E}_{q}\left(\frac{f^{\prime}(\boldsymbol{X}) p(\boldsymbol{X})}{q(\boldsymbol{X})}\right)
+$$
+
+Then the importance sampling estimate of $\mu=\mathbb{E}_{p}(f(\boldsymbol{X}))$ is 
+$$
+\hat{\mu}_{q}=\frac{1}{n} \sum_{i=1}^{n} \frac{f\left(\boldsymbol{X}_{i}\right) p\left(\boldsymbol{X}_{i}\right)}{q\left(\boldsymbol{X}_{i}\right)}, \quad \boldsymbol{X}_{i} \sim q
+$$
+
+
+
+
+
 The Monte Carlo method for evaluating integrals of the form $I=\int g(\theta) p(\theta) \mathrm{d} \theta$ is to generate a sample $\left\{\theta^{(i)}: i=1, \dots, m\right\}$ from a density $p^*(\theta)$. Under quite general conditions, a simulation consistent estimate of $I$ is 
 $$
 \hat{I}=\sum_{i=1}^{m} w_{i} g\left(\theta^{(i)}\right) / \sum_{i=1}^{m} w_{i}
@@ -152,6 +174,12 @@ This is true whether the posterior samples come from an SIR-adjusted WLB or any 
 It is readily verified that $\hat p_1(x)$ converges almost surely to the correct value $p(x)$ as $m\rightarrow \infty$. However, $\hat p_1(x)$ does not, in general, satisfy a Gaussian central limit theorem. 
 
 This manifests itself by the occasional occurence of a value of $\theta^{(i)}$ with a small likelihood and hence a large effect on the final result; it happens because $p(x | \theta)^{-1}$ is often not square integrable with respect to the posterior distribution.
+
+Square integrable:
+$$
+f: \mathbb{R} \mapsto \mathbb{C} \text { square integrable } \Longleftrightarrow \int_{-\infty}^{\infty}|f(x)|^{2} \mathrm{d} x<\infty
+$$
+
 
 An alternative is 
 

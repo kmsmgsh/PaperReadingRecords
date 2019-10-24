@@ -54,6 +54,23 @@ Directly extension of the Bayesian bootstrap from nonparametric models to parame
 
 WLB产生参数的随机样本来自于其Bayesian posterior.当和其他方法一起使用时，比如sampling-importance-resampling, WLB的输出可用修改去产生感兴趣的后验，这种时候修改的WLB是simulation consistent的，
 
+---
+
+正文中需要注意的就是第一个简单的例子：
+使用IRWLS进行对MLE的求解，使用现成的算法只不过权重矩阵从
+$$
+W_{i}=\frac{1}{\operatorname{var}\left(Y_{i}\right)}\left(\frac{d \mu_{i}}{d \eta_{i}}\right)^{2}=\frac{1}{\operatorname{var}\left(Y_{i}\right)\left\{g^{\prime}\left(\mu_{i}\right)\right\}^{2}}
+$$
+的形式变成了从 Dirichlet 分布抽出的样本。
+
+
+
+
+
+
+
+
+
 
 ---
 
@@ -61,12 +78,33 @@ WLB产生参数的随机样本来自于其Bayesian posterior.当和其他方法�
 
 没啥好总结的，细节在前一篇里。
 
+作为引导讲稿的话过程如下：
+
+首先是一般的important sampling 
+然后是Unnormalized importance sampling.
+用Unnormalized importance sampling可以得出一般的要用的那个公式。
+
+然后推一下p1
+
+p1一般
+
+
+
 需要注意的问题，instability。 $\hat p_1(x)$ does not, in general, satisfy a Gaussian central limit theorem. 产生的原因是occasional occurrence of a value of $\theta^{(i)}$ with a small likelihood and hence a large effect on the final result; it happens because $p(x|\theta)^{-1}$ is often not square integrable with respect to the posterior distribution.
 
 Square integrable:
 $$
 f: \mathbb{R} \mapsto \mathbb{C} \text { square integrable } \Longleftrightarrow \int_{-\infty}^{\infty}|f(x)|^{2} \mathrm{d} x<\infty
 $$
+
+这是第一个问题，第二个问题在于推导调和平均的修改版。
+这个问题是链接p1和后面方法的桥梁。
+
+p2可以直接得出
+p3得好好推一下
+p4的概念有点奇怪，但是可以讲一讲，概念讲通了公式很简单
+
+
 
 ---
 
