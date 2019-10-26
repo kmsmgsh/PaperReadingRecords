@@ -1,0 +1,217 @@
+# Density estimation in R
+
+Henry Deng and Hadley Wickham
+
+冲着Hadley Wickham的名字也要看这篇文章。
+
+[论文本体](https://vita.had.co.nz/papers/density-estimation.pdf)
+
+## Abstract 
+
+Density estimation很重要,R有超过20个的包实现。一般很难使。This paper presents a brief outline of the theory underlying each package, as well as an overview of the code and comparison of speed and accuracy.
+
+主要关心单变量的情况。但是也设计了一些其他特殊情况。
+
+总的来说，ASH和KernSmooth最好，很快，精确，并且维护得很好。
+
+## Motivation
+
+太多包做density estimation。这些包用了不同的理论方法和计算性能。用户和开发者需要density estimation工具有不同的需求，所以不同的情况下有不同的合适的density estimation方法。这篇文章的目的是总结现有方法，这样能更容易的选取合适的包。
+
+第二节简单的回顾了主流方法背后的理论基础，并且提供了相关文献。
+第三节描述了实现这些方法的R包，高亮了如何使用这些density estimation函数，并列出了这些方法不同的特性（维度，区间，步长选择，等等...）
+第四节比较了各个包的表现，包括计算速度（通过计算10~10e^7个观测点的density estimation）。Density estimation的准确度也很重要。第五节比较了三个不同分布（不同的难度等级）：均匀分布，正态分布，claw分布。第六节研究了计算时间和准确度的关系。第七节总结了我们的发现以及我们的推荐。
+
+## Theoretical approaches
+
+Density estimation建立了对于潜在的概率分布函数基于观测数据样本的估计。Density estimation可以是参数的形式，比如数据来源于已知的分布族。或者非参的形式，这样对未知分布的估计会更加灵活。我们开始简短的概述对应的理论，主要关注非参方法，因为非参方法更加普遍。常见方法包括：条形图 第2.1节，核方法 第2.2节，罚方法，第2.3节。我们希望能在不过多关注很细的细节的前提下尽量传递前沿方法的感觉。更为细节的介绍，我们推荐 Scott(1992a)和Silverman(1986).
+
+### Histogram
+是最古老并且最不复杂的方法。主要好处是极端简单，并且计算很快。A histogram是分段常数（所以并不光滑），而且对于箱条起始点的选择非常敏感。
+
+一个简单的加强版柱状图方法是average shifted histogram(ASH):这个方法更加光滑，而且避免了对于起点选择的敏感性，同时还保证了计算效率。这个方法的假设(Scott,1992b)是取m个柱状图,$\hat{f}_{1}, \hat{f}_{2}, \ldots, \hat{f}_{m}$, 每个柱的宽度是h,并且起始点是$t_{o}=0, \frac{h}{m}, \frac{2 h}{m}, \ldots, \frac{(m-1) h}{m}$. 正如其名字所介绍的，最na¨ıve 的ASH就是
+$$
+\widehat{f}_{a s h}(x)=\frac{1}{m} \sum_{i=1}^{m} \hat{f}_{i}(x)
+$$
+
+有$k=1,...,m\cdot n$ 个柱遍布全部柱状图，每个跨越全部条状图，每个柱的中心是$(k+0.5) \frac{h}{m}$,占据的区间是$\left[k \frac{h}{m},(k+1) \frac{h}{m}\right]$. ASH可以改造成更加一般的方法。估计每一点密度都使用所有柱,靠近数据点的柱权重更高。更一般形式的ASH是
+$$
+\widehat{f}_{a s h}(x)=\frac{1}{m} \sum_{k=1}^{m \cdot n} w\left(l_{k}-x\right) \hat{c}_{k}(x)
+$$
+其中，w是权重函数，$l_k$是第k个柱的中心，$\hat c_k$是这个柱中包含的点的数量。
+因为单变量ASH是分段常数，可以通过计算$m\cdot n$柱，并且计算rolling sum over m个临近的柱。这样能让ASH的计算速度非常快。
+
+## Kernel density estimation
+
+Kernel density estimation方法克服了histogram方法的不连续问题。通过在每个点中心用kernel function然后总结得到一个密度的估计。最基本的kernel estimator 可以写成：
+$$
+\widehat{f}_{k d e}(x)=\frac{1}{n} \sum_{i=1}^{n} K\left(\frac{x-x_{i}}{h}\right)
+$$
+其中$K$是kernel，$h$是带宽(Scott,1992b).这个kernel是对称的，一般来说是正的并且积分到1。一般的kernel函数是uniform, triangle, Epanechnikov, quartic (biweight), tricube (triweight), Gaussian(normal), and cosine.
+
+带宽，h，是一个光滑参数，大的带宽可以得到一个非常光滑的估计，小的值则能得到非常扭曲的估计。这个值的对结果的影响甚至超过了kernel的选择，所以选择一个好的带宽是得到好的估计的关键因素。
+
+一般来说带宽通过极小化$L^2$风险得到，也就是均值的平方积分误差：
+$$
+\operatorname{MISE}(\widehat{f})=\mathrm{E}\left[\int(\widehat{f}(x)-f(x))^{2} d x\right]
+$$
+这个优化问题一般并不容易解决,因为$f(x)$不知道。由此引申出了很多其他的理论方法。一般来讲被广泛应用的方法是plug-in 选择法和cross validation 
+选择法。
+对于kde方法主要的挑战是数据变化的密度，比如说对于很密集的数据，可以用小的带宽，而数据稀疏的部分则需要大的带宽。对于基本kde方法的扩展可以通过让带宽可变从而克服这个问题。
+
+### 罚似然函数方法
+
+另外一个对密度函数估计的方法是混合m个“基”函数(密度函数)，调整拟合的好坏和模型的复杂程度。这样做的好处是能让密度函数在数据支持的地方变得很起伏摆动。一般来说，罚方法(Kauermann and Schellhase,2009)通过m个密度函数逼近数据x的密度函数
+$$
+\widehat{f}_{p e n}(x)=\sum_{i=1}^{m} c_{i} \phi_{i}(x)
+$$
+其中,$\phi_k$ 是密度函数，$c_i$是被选择的权重使得$\hat f_{\text{pen}}$ 积分为1.一般来说基函数是等权重的，只在location参数,$\mu_i$上有区别，所以我们能简化定义为一个和kernel方法类似的式子：
+$$
+\widehat{f}_{p e n}(x)=\frac{1}{m} \sum_{i=1}^{m} K\left(\frac{x-\mu_{i}}{h}\right)
+$$
+
+和KDE方法相比较，基函数（密度函数）不在要求约束在以数据点为中心。
+
+$\mu_i$一般叫做节点，罚密度估计的关键是找到节点最合适的数量和位置。一般来说会使用等距离的大量点散布在数据的范围内，然后极小化罚似然函数去移除对总体拟合质量贡献不大的节点。
+
+$\lambda$的重要性是控制密度函数估计的光滑程度。一个很方便的方法是通过AIC准则对罚参数进行选取，也就是极小化：
+$$
+\operatorname{AIC}(\lambda)=-l(\widehat{\beta})+d f(\lambda)
+$$
+其中，$d f(\lambda)=\operatorname{tr}\left(J_{p}^{-1}(\widehat{\beta}, \lambda) J_{p}(\widehat{\beta}, \lambda=0)\right)$.然而，来自于 Kauermann & Schellhase的罚样条光滑方法通过Bayesian方法使用混合模型，
+
+## 密度估计的包
+
+现在我们从介绍R包背后的理论转到介绍R包本身。表1总结了15个我们检查过的密度估计包。给出了基础信息包括，他们做了什么，理论基础，和使用这些包的最基本R代码。这一节剩下的部分介绍了每个包的更多细节。对于每个包，我们总结了输入，输出，和其特征。
+
+### Histogram柱状图
+
+#### graphics
+
+`graphics::hist` 允许用户生成数据x的柱状图(Venables and Ripley,2002)。`break`参数确定了柱的数量，或者柱的边缘（对于不规则宽窄的柱），或者一个自动估计柱的数量的函数。默认设置中，这个函数会产生一个图，但是这个特性可以通过`plot=F`进行取消。这个函数返回一个列表，其内容是柱的边界，中点，计数，和密度(通过柱的宽度进行标准化)。
+
+#### ash
+
+`ash` 包(Scott,2009)估计了ASHs使用两个函数：`bin1` 和 `ash1`. `bin1`需要数据向量x，估计的区间，从`a`到`b`, 并且需要的柱的数量`nbin`, 并且计数了在每个柱中点的数量。`ash1`使用`bin1`的输出，然后计算一般ASH，然后权重通过`kopt`定义。
+这样可以产生一个等空间预测的网格，在每个柱的中心。
+`ash`也提供了2-d average shifted histograms 通过`bin2`和`ash2`函数。
+
+### Kernel Density estimation
+
+CRAN包 __GenKern__, __kerdiest__, __KernSmooth__, __ks__, __np__, __plugdensity__ 和 __sm__ 都使用了kernel density 方法，还有`stats::density`. 这些方法主要区别是选择带宽的方法。
+
+![](https://cdn.mathpix.com/snip/images/vBYIv2pG_dkrkTRLkFdjkhQSisDeal7aY9hWvTbWRUQ.original.fullsize.png)
+
+#### GenKern
+
+函数 `KernSec` 来自于 __GenKen__ (Lucy and Aykroyd,2010) 产生了单变量密度估计使用高斯kernel对输入$x$.其支持多个带宽，也就是：
+$$
+\widehat{f}_{G K}(x) \propto \sum_{i=1}^{n} K\left(\frac{x-x_{i}}{h_{i}}\right)
+$$
+由参数 __xbandwidth__ 定义。默认的带宽是一个数，用插入准则(Sheather and Jones,1991) 所定义。输出是一个网格，大小是 __xgridsize__ 在 __range.x__ 上的估计。
+函数 __KernSur__ 的工作方式类似，不过是2维的。
+
+
+
+#### kerdiest
+
+
+
+
+#### KernSmooth
+
+
+
+
+#### ks
+
+ks包可以计算最高6维的密度估计。 __ks__ 提供了一系列带宽的选择方法：
+exact MISE, asymptotic MISE 估计 `Hamise.mixt`和 `Hmise.mixt`,有偏交叉验证 `Hbcv`,最小二乘交叉验证 `Hlscv`, 插入估计 `Hpi`, 还有光滑交叉验证 `Hscv`. 全部带宽选择方法也有一个不同的估计，只估计对角元(假设维度是不相关的。) 
+> 这句没懂，All bandwidth estimators also have a variant that estimates only the diagonal (i.e. it assumes the dimensions are uncorrelated).
+
+__kde__ 估计密度 1-6维的x，使用带宽 H (或者h 如果是对角的) ，估计使用条状的数据，其中条的宽度是 __bgridsize__ 如果参数 __binned__ 是 `TRUE`, 也可以通过 $w$ 自定义权重。 输出是预测密度，在由gridsize，从xmin到xmax定义的网格，或者点的位置 __eval.points__ .
+
+__ks__ 也提供了pdf __dkde__ ,cdf __pkde__ , 逆cdf __qkde__ ,和随机数生成器 __prkde__ 函数通过预测的密度生成随机数。
+
+
+
+#### np
+
+#### plugdensity
+
+#### sm
+
+__sm__ 包(Bowman and Azzalini,2010,1997) 可以计算kernel density estimation 从1维到3维。函数 `sm.density` 用输入x，带宽 h，和频率权重 `h.weights`. 如果没有指定带宽，`h.select`使用正态最优光滑估计。输出是预测密度，和标准误差，在 `eval.points`指定的位置。默认的图像输出可以通过 `display="none"` 进行取消。
+
+__sm__ 也提供了非参数 ANCOVA, 自回归分析，回归（包括logistic，Poisson和自相关），和范围上的密度估计。
+
+#### stats
+
+### Penalized approaches
+以下包提供了密度估计基于罚方法并且趋向于有更少的tuning parameter。潜在的方法会比kernel density估计更加复杂.我们建议在使用这些方法之前先熟悉这些方法背后的文献。
+
+#### gss
+
+gss (Gu,2011)使用罚似然方法进行非参数密度估计。
+ssden有一个公式接口，用全局环境的变量的向量或者data frame作为输入数据。函数返回一个ssden对象，任意点的预测值可以通过 `dssden` 得到。 默认的节点数量和位置使用交叉验证进行选取，但是也可以通过`nbasis`和`id.basis`参数提供。
+`gss`也提供了cdf `pssden` 和逆cdf `qssden` 函数由其生成的密度。对于1维的密度估计，也可以产生条件密度估计，光滑样条ANOVA，hazard模型，log-linear模型。
+
+
+
+
+#### locfit
+
+#### pendensity
+
+#### logspline
+
+### Taut strings approach
+
+#### ftnonpar
+
+### Other packages
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Density estimation computation speed
+
+## Accuracy of density estimates
+
+## Speed vs. accuracy
+
+## Conclusion
+
+我们的发现建议最好的包确实表现了速度和精确度的权衡但是也很快，误差小，并且日常更新。我们建议从ASH或KernSmooth开始。这两个的表现分都很高，包的更新信息也显示这是两个最古老的密度估计包，并且有日常更新。
+
+必须指出我们的推荐是基于一系列的我们能做的测试，基于用户的需要选择包可能会更合适。比如说我们的密度估计准确度的测试基于uniform,normal, 和claw分布。据我们观测 __ftnonpar__ 在uniform的情况下表现的比其他包好，但是正态和claw分布则不如。简单来说，具体的理论方法可能在结果上在不同的潜在分布或者数据集上有更好的表现。
+我们希望我们的对R的密度估计包的回顾能帮助他人更精确的把问题和答案匹配起来。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

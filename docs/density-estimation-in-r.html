@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>reading review | A paper reading record</title>
+  <title>Paper 24 Density estimation in R | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="reading review | A paper reading record" />
+  <meta property="og:title" content="Paper 24 Density estimation in R | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="reading review | A paper reading record" />
+  <meta name="twitter:title" content="Paper 24 Density estimation in R | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="introduction.html">
+<link rel="prev" href="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap-1.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,69 +50,6 @@
 
 
 
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -355,7 +292,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.3" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#theoretical-approaches"><i class="fa fa-check"></i><b>24.3</b> Theoretical approaches</a><ul>
 <li class="chapter" data-level="24.3.1" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#histogram"><i class="fa fa-check"></i><b>24.3.1</b> Histogram</a></li>
 </ul></li>
-<li class="chapter" data-level="24.4" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#kernel-density-estimation"><i class="fa fa-check"></i><b>24.4</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="24.4" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#kernel-density-estimation"><i class="fa fa-check"></i><b>24.4</b> Kernel density estimation</a><ul>
+<li class="chapter" data-level="24.4.1" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#section-24.4.1"><i class="fa fa-check"></i><b>24.4.1</b> 罚似然函数方法</a></li>
+</ul></li>
+<li class="chapter" data-level="24.5" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#section-24.5"><i class="fa fa-check"></i><b>24.5</b> 密度估计的包</a><ul>
+<li class="chapter" data-level="24.5.1" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#histogram"><i class="fa fa-check"></i><b>24.5.1</b> Histogram柱状图</a></li>
+<li class="chapter" data-level="24.5.2" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#kernel-density-estimation-1"><i class="fa fa-check"></i><b>24.5.2</b> Kernel Density estimation</a></li>
+<li class="chapter" data-level="24.5.3" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#penalized-approaches"><i class="fa fa-check"></i><b>24.5.3</b> Penalized approaches</a></li>
+<li class="chapter" data-level="24.5.4" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#taut-strings-approach"><i class="fa fa-check"></i><b>24.5.4</b> Taut strings approach</a></li>
+<li class="chapter" data-level="24.5.5" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#other-packages"><i class="fa fa-check"></i><b>24.5.5</b> Other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="24.6" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#density-estimation-computation-speed"><i class="fa fa-check"></i><b>24.6</b> Density estimation computation speed</a></li>
+<li class="chapter" data-level="24.7" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#accuracy-of-density-estimates"><i class="fa fa-check"></i><b>24.7</b> Accuracy of density estimates</a></li>
+<li class="chapter" data-level="24.8" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#speed-vs.accuracy"><i class="fa fa-check"></i><b>24.8</b> Speed vs. accuracy</a></li>
+<li class="chapter" data-level="24.9" data-path="density-estimation-in-r.html"><a href="density-estimation-in-r.html#conclusion-1"><i class="fa fa-check"></i><b>24.9</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -378,166 +328,178 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="reading-review" class="section level1 unnumbered">
-<h1>reading review</h1>
-<div id="reviews-1-in-april2019" class="section level2">
-<h2><span class="header-section-number">0.1</span> reviews 1 in April,2019</h2>
-<p>Time period and Work</p>
-<p>Elements of statistical learning</p>
-<p>Index:</p>
-<ul>
-<li>Chap2 Supervised learning</li>
-<li>Chap3 Linear methods for Regression</li>
-<li>Chap4 Linear Methods for Classification</li>
-<li>Chap5 Basic Expansions and Regularization
-<ul>
-<li>Nonparametric Regression and Generalized Linear Methods
-<ul>
-<li>Chap1. Introduction</li>
-<li>Chap2. Interpolating and smoothing splines</li>
-</ul></li>
-</ul></li>
-<li></li>
-<li>Chap7 Model assessment and Selection</li>
-<li>Chap8 Model Inference and Averaging</li>
-<li>Chap9 Additive Models, Trees, and Related Methods
-<ul>
-<li>Generalized Additive Model: Chap2 Smoothing</li>
-</ul></li>
-</ul>
-<hr />
-<p>Mixed models,theory and applications with R</p>
-<p>Eugene Demidenko</p>
-<p>to page 98,
-Chap1. Introduction: Why Mixed Models
-Chap2. MLE for the LME model</p>
-<hr />
-<p>Classification and Regression Trees</p>
-<p>LeiBreiman</p>
-<p>To Chap2.</p>
-<hr />
-<p>An Introduction to Graphical Models, (lecture notes)</p>
-<p>To Chap4</p>
-<p>Michael I. Jordan</p>
-<hr />
-<p><a href="http://www.gaussianprocess.org/gpml/chapters/RW.pdf">Gaussian Process for machine learning</a></p>
-<hr />
-<hr />
-<p>Modelling Dependence with copula, and application to risk management
-(Lecture notes)</p>
-<hr />
-<ul>
-<li>Least-Angle regression,<span class="citation">(Efron et al. <a href="#ref-Efron:2018tz">2004</a>)</span></li>
-<li><p>Elastic Net <span class="citation">(Zou and Hastie <a href="#ref-Anonymous:LDmrq-ls">2005</a>)</span></p></li>
-<li>Random effect selection<span class="citation">(Pan and Huang <a href="#ref-Pan:2013bp">2013</a>)</span></li>
-<li>Jmcm <span class="citation">(Pan and Pan <a href="#ref-Pan:2017il">2017</a>)</span></li>
-<li>mcd: <span class="citation">(Pourahmadi <a href="#ref-Pourahmadi:2000fs">2000</a>)</span> , <span class="citation">(Pourahmadi <a href="#ref-Anonymous:F6r664rM">1999</a>)</span> , <span class="citation">(Pan and MacKenzie <a href="#ref-Anonymous:2sUafWTP">2003</a>)</span> and <span class="citation">(J. Pan and MacKenzie <a href="#ref-Pan:2016hg">2006</a>)</span></li>
-<li><p>acd&amp; Bayesian random effect selection : <span class="citation">(Chen, Biometrics, and 2003, <a href="#ref-Chen:vh">n.d.</a>)</span></p></li>
-<li><p>Covariance matrix estimation <span class="citation">(Bickel and Levina <a href="#ref-Bickel:2008ez">2008</a>)</span>,<span class="citation">(Pinheiro and Bates <a href="#ref-Pinheiro:1996ib">1996</a>)</span>,</p></li>
-</ul>
-<p><a href="http://www.math.niu.edu/~pourahm/GenLinModMSU.pdf">Covariance modelling talks by Pourhamadi</a></p>
-<p>Regulized covariance estimating, banding <span class="citation">(Rothman, Levina, and Zhu <a href="#ref-Rothman:2010cy">2010</a>)</span>,<span class="citation">(Lee and Lin <a href="#ref-Lee:2018vj">2018</a>)</span>,<span class="citation">(Cheng, Zhang, and Zhang <a href="#ref-Cheng:2017jh">2017</a>)</span>,<span class="citation">(An, Guo, and Liu <a href="#ref-An:2014jc">2014</a>)</span></p>
-<p>Bayes random effect selection <span class="citation">(Cai, Biometrics, and 2006, <a href="#ref-Cai:tp">n.d.</a>)</span></p>
-<p>lasso uniqueness <span class="citation">(Tibshirani <a href="#ref-Tibshirani:2014uc">2014</a>)</span></p>
-<p>Discrete correlated data analysis via copula <span class="citation">(Tang, Zhang, and Leng <a href="#ref-Tang:2019gw">2019</a>)</span> and <span class="citation">(Song et al., <a href="#ref-Song:wr">n.d.</a>)</span></p>
-<p>Gaussian Process<span class="citation">(Dunlop et al. <a href="#ref-Dunlop:2017uz">2017</a>)</span></p>
-<hr />
-<p>Recent reading
-roptim, by Yi Pan</p>
-<p>acd:<span class="citation">(Maadooliat et al., <a href="#ref-Maadooliat:tw">n.d.</a>)</span></p>
-<p>Joint modelling dealing with non-ignorance missing data <span class="citation">(Bhuyan, <a href="#ref-Bhuyan:uc">n.d.</a>)</span></p>
-<p>Penalised method: <span class="citation">(Fan and Li <a href="#ref-Fan:2001ug">2001</a>)</span></p>
-<p>mcd for <span class="math inline">\(\Sigma\)</span> <span class="citation">(Zhang and Leng <a href="#ref-Zhang:2012dg">2012</a>)</span>, and it’s gee <span class="citation">(Liu, Mathematics, and 2013, <a href="#ref-Liu:tv">n.d.</a>)</span></p>
-<p>mcd gee <span class="citation">(J. Pan and Ye <a href="#ref-Anonymous:eWhsJY64">2006</a>)</span></p>
-<p>HPC: <span class="citation">(Zhang, Leng, and Tang <a href="#ref-Zhang:2015is">2015</a>)</span>,<span class="citation">(Rapisarda, Brigo, and Mercurio <a href="#ref-Rapisarda:2007eh">2007</a>)</span></p>
+<div id="density-estimation-in-r" class="section level1">
+<h1><span class="header-section-number">Paper 24</span> Density estimation in R</h1>
+<p>Henry Deng and Hadley Wickham</p>
+<p>冲着Hadley Wickham的名字也要看这篇文章。</p>
+<p><a href="https://vita.had.co.nz/papers/density-estimation.pdf">论文本体</a></p>
+<div id="abstract-15" class="section level2">
+<h2><span class="header-section-number">24.1</span> Abstract</h2>
+<p>Density estimation很重要,R有超过20个的包实现。一般很难使。This paper presents a brief outline of the theory underlying each package, as well as an overview of the code and comparison of speed and accuracy.</p>
+<p>主要关心单变量的情况。但是也设计了一些其他特殊情况。</p>
+<p>总的来说，ASH和KernSmooth最好，很快，精确，并且维护得很好。</p>
+</div>
+<div id="motivation" class="section level2">
+<h2><span class="header-section-number">24.2</span> Motivation</h2>
+<p>太多包做density estimation。这些包用了不同的理论方法和计算性能。用户和开发者需要density estimation工具有不同的需求，所以不同的情况下有不同的合适的density estimation方法。这篇文章的目的是总结现有方法，这样能更容易的选取合适的包。</p>
+<p>第二节简单的回顾了主流方法背后的理论基础，并且提供了相关文献。
+第三节描述了实现这些方法的R包，高亮了如何使用这些density estimation函数，并列出了这些方法不同的特性（维度，区间，步长选择，等等…）
+第四节比较了各个包的表现，包括计算速度（通过计算10~10e^7个观测点的density estimation）。Density estimation的准确度也很重要。第五节比较了三个不同分布（不同的难度等级）：均匀分布，正态分布，claw分布。第六节研究了计算时间和准确度的关系。第七节总结了我们的发现以及我们的推荐。</p>
+</div>
+<div id="theoretical-approaches" class="section level2">
+<h2><span class="header-section-number">24.3</span> Theoretical approaches</h2>
+<p>Density estimation建立了对于潜在的概率分布函数基于观测数据样本的估计。Density estimation可以是参数的形式，比如数据来源于已知的分布族。或者非参的形式，这样对未知分布的估计会更加灵活。我们开始简短的概述对应的理论，主要关注非参方法，因为非参方法更加普遍。常见方法包括：条形图 第2.1节，核方法 第2.2节，罚方法，第2.3节。我们希望能在不过多关注很细的细节的前提下尽量传递前沿方法的感觉。更为细节的介绍，我们推荐 Scott(1992a)和Silverman(1986).</p>
+<div id="histogram" class="section level3">
+<h3><span class="header-section-number">24.3.1</span> Histogram</h3>
+<p>是最古老并且最不复杂的方法。主要好处是极端简单，并且计算很快。A histogram是分段常数（所以并不光滑），而且对于箱条起始点的选择非常敏感。</p>
+<p>一个简单的加强版柱状图方法是average shifted histogram(ASH):这个方法更加光滑，而且避免了对于起点选择的敏感性，同时还保证了计算效率。这个方法的假设(Scott,1992b)是取m个柱状图,<span class="math inline">\(\hat{f}_{1}, \hat{f}_{2}, \ldots, \hat{f}_{m}\)</span>, 每个柱的宽度是h,并且起始点是<span class="math inline">\(t_{o}=0, \frac{h}{m}, \frac{2 h}{m}, \ldots, \frac{(m-1) h}{m}\)</span>. 正如其名字所介绍的，最na¨ıve 的ASH就是
+<span class="math display">\[
+\widehat{f}_{a s h}(x)=\frac{1}{m} \sum_{i=1}^{m} \hat{f}_{i}(x)
+\]</span></p>
+<p>有<span class="math inline">\(k=1,...,m\cdot n\)</span> 个柱遍布全部柱状图，每个跨越全部条状图，每个柱的中心是<span class="math inline">\((k+0.5) \frac{h}{m}\)</span>,占据的区间是<span class="math inline">\(\left[k \frac{h}{m},(k+1) \frac{h}{m}\right]\)</span>. ASH可以改造成更加一般的方法。估计每一点密度都使用所有柱,靠近数据点的柱权重更高。更一般形式的ASH是
+<span class="math display">\[
+\widehat{f}_{a s h}(x)=\frac{1}{m} \sum_{k=1}^{m \cdot n} w\left(l_{k}-x\right) \hat{c}_{k}(x)
+\]</span>
+其中，w是权重函数，<span class="math inline">\(l_k\)</span>是第k个柱的中心，<span class="math inline">\(\hat c_k\)</span>是这个柱中包含的点的数量。
+因为单变量ASH是分段常数，可以通过计算<span class="math inline">\(m\cdot n\)</span>柱，并且计算rolling sum over m个临近的柱。这样能让ASH的计算速度非常快。</p>
+</div>
+</div>
+<div id="kernel-density-estimation" class="section level2">
+<h2><span class="header-section-number">24.4</span> Kernel density estimation</h2>
+<p>Kernel density estimation方法克服了histogram方法的不连续问题。通过在每个点中心用kernel function然后总结得到一个密度的估计。最基本的kernel estimator 可以写成：
+<span class="math display">\[
+\widehat{f}_{k d e}(x)=\frac{1}{n} \sum_{i=1}^{n} K\left(\frac{x-x_{i}}{h}\right)
+\]</span>
+其中<span class="math inline">\(K\)</span>是kernel，<span class="math inline">\(h\)</span>是带宽(Scott,1992b).这个kernel是对称的，一般来说是正的并且积分到1。一般的kernel函数是uniform, triangle, Epanechnikov, quartic (biweight), tricube (triweight), Gaussian(normal), and cosine.</p>
+<p>带宽，h，是一个光滑参数，大的带宽可以得到一个非常光滑的估计，小的值则能得到非常扭曲的估计。这个值的对结果的影响甚至超过了kernel的选择，所以选择一个好的带宽是得到好的估计的关键因素。</p>
+<p>一般来说带宽通过极小化<span class="math inline">\(L^2\)</span>风险得到，也就是均值的平方积分误差：
+<span class="math display">\[
+\operatorname{MISE}(\widehat{f})=\mathrm{E}\left[\int(\widehat{f}(x)-f(x))^{2} d x\right]
+\]</span>
+这个优化问题一般并不容易解决,因为<span class="math inline">\(f(x)\)</span>不知道。由此引申出了很多其他的理论方法。一般来讲被广泛应用的方法是plug-in 选择法和cross validation
+选择法。
+对于kde方法主要的挑战是数据变化的密度，比如说对于很密集的数据，可以用小的带宽，而数据稀疏的部分则需要大的带宽。对于基本kde方法的扩展可以通过让带宽可变从而克服这个问题。</p>
+<div id="section-24.4.1" class="section level3">
+<h3><span class="header-section-number">24.4.1</span> 罚似然函数方法</h3>
+<p>另外一个对密度函数估计的方法是混合m个“基”函数(密度函数)，调整拟合的好坏和模型的复杂程度。这样做的好处是能让密度函数在数据支持的地方变得很起伏摆动。一般来说，罚方法(Kauermann and Schellhase,2009)通过m个密度函数逼近数据x的密度函数
+<span class="math display">\[
+\widehat{f}_{p e n}(x)=\sum_{i=1}^{m} c_{i} \phi_{i}(x)
+\]</span>
+其中,<span class="math inline">\(\phi_k\)</span> 是密度函数，<span class="math inline">\(c_i\)</span>是被选择的权重使得<span class="math inline">\(\hat f_{\text{pen}}\)</span> 积分为1.一般来说基函数是等权重的，只在location参数,<span class="math inline">\(\mu_i\)</span>上有区别，所以我们能简化定义为一个和kernel方法类似的式子：
+<span class="math display">\[
+\widehat{f}_{p e n}(x)=\frac{1}{m} \sum_{i=1}^{m} K\left(\frac{x-\mu_{i}}{h}\right)
+\]</span></p>
+<p>和KDE方法相比较，基函数（密度函数）不在要求约束在以数据点为中心。</p>
+<p><span class="math inline">\(\mu_i\)</span>一般叫做节点，罚密度估计的关键是找到节点最合适的数量和位置。一般来说会使用等距离的大量点散布在数据的范围内，然后极小化罚似然函数去移除对总体拟合质量贡献不大的节点。</p>
+<p><span class="math inline">\(\lambda\)</span>的重要性是控制密度函数估计的光滑程度。一个很方便的方法是通过AIC准则对罚参数进行选取，也就是极小化：
+<span class="math display">\[
+\operatorname{AIC}(\lambda)=-l(\widehat{\beta})+d f(\lambda)
+\]</span>
+其中，<span class="math inline">\(d f(\lambda)=\operatorname{tr}\left(J_{p}^{-1}(\widehat{\beta}, \lambda) J_{p}(\widehat{\beta}, \lambda=0)\right)\)</span>.然而，来自于 Kauermann &amp; Schellhase的罚样条光滑方法通过Bayesian方法使用混合模型，</p>
+</div>
+</div>
+<div id="section-24.5" class="section level2">
+<h2><span class="header-section-number">24.5</span> 密度估计的包</h2>
+<p>现在我们从介绍R包背后的理论转到介绍R包本身。表1总结了15个我们检查过的密度估计包。给出了基础信息包括，他们做了什么，理论基础，和使用这些包的最基本R代码。这一节剩下的部分介绍了每个包的更多细节。对于每个包，我们总结了输入，输出，和其特征。</p>
+<div id="histogram" class="section level3">
+<h3><span class="header-section-number">24.5.1</span> Histogram柱状图</h3>
+<div id="graphics" class="section level4">
+<h4><span class="header-section-number">24.5.1.1</span> graphics</h4>
+<p><code>graphics::hist</code> 允许用户生成数据x的柱状图(Venables and Ripley,2002)。<code>break</code>参数确定了柱的数量，或者柱的边缘（对于不规则宽窄的柱），或者一个自动估计柱的数量的函数。默认设置中，这个函数会产生一个图，但是这个特性可以通过<code>plot=F</code>进行取消。这个函数返回一个列表，其内容是柱的边界，中点，计数，和密度(通过柱的宽度进行标准化)。</p>
+</div>
+<div id="ash" class="section level4">
+<h4><span class="header-section-number">24.5.1.2</span> ash</h4>
+<p><code>ash</code> 包(Scott,2009)估计了ASHs使用两个函数：<code>bin1</code> 和 <code>ash1</code>. <code>bin1</code>需要数据向量x，估计的区间，从<code>a</code>到<code>b</code>, 并且需要的柱的数量<code>nbin</code>, 并且计数了在每个柱中点的数量。<code>ash1</code>使用<code>bin1</code>的输出，然后计算一般ASH，然后权重通过<code>kopt</code>定义。
+这样可以产生一个等空间预测的网格，在每个柱的中心。
+<code>ash</code>也提供了2-d average shifted histograms 通过<code>bin2</code>和<code>ash2</code>函数。</p>
+</div>
+</div>
+<div id="kernel-density-estimation-1" class="section level3">
+<h3><span class="header-section-number">24.5.2</span> Kernel Density estimation</h3>
+<p>CRAN包 <strong>GenKern</strong>, <strong>kerdiest</strong>, <strong>KernSmooth</strong>, <strong>ks</strong>, <strong>np</strong>, <strong>plugdensity</strong> 和 <strong>sm</strong> 都使用了kernel density 方法，还有<code>stats::density</code>. 这些方法主要区别是选择带宽的方法。</p>
+<p><img src="https://cdn.mathpix.com/snip/images/vBYIv2pG_dkrkTRLkFdjkhQSisDeal7aY9hWvTbWRUQ.original.fullsize.png" /></p>
+<div id="genkern" class="section level4">
+<h4><span class="header-section-number">24.5.2.1</span> GenKern</h4>
+<p>函数 <code>KernSec</code> 来自于 <strong>GenKen</strong> (Lucy and Aykroyd,2010) 产生了单变量密度估计使用高斯kernel对输入<span class="math inline">\(x\)</span>.其支持多个带宽，也就是：
+<span class="math display">\[
+\widehat{f}_{G K}(x) \propto \sum_{i=1}^{n} K\left(\frac{x-x_{i}}{h_{i}}\right)
+\]</span>
+由参数 <strong>xbandwidth</strong> 定义。默认的带宽是一个数，用插入准则(Sheather and Jones,1991) 所定义。输出是一个网格，大小是 <strong>xgridsize</strong> 在 <strong>range.x</strong> 上的估计。
+函数 <strong>KernSur</strong> 的工作方式类似，不过是2维的。</p>
+</div>
+<div id="kerdiest" class="section level4">
+<h4><span class="header-section-number">24.5.2.2</span> kerdiest</h4>
+</div>
+<div id="kernsmooth" class="section level4">
+<h4><span class="header-section-number">24.5.2.3</span> KernSmooth</h4>
+</div>
+<div id="ks" class="section level4">
+<h4><span class="header-section-number">24.5.2.4</span> ks</h4>
+<p>ks包可以计算最高6维的密度估计。 <strong>ks</strong> 提供了一系列带宽的选择方法：
+exact MISE, asymptotic MISE 估计 <code>Hamise.mixt</code>和 <code>Hmise.mixt</code>,有偏交叉验证 <code>Hbcv</code>,最小二乘交叉验证 <code>Hlscv</code>, 插入估计 <code>Hpi</code>, 还有光滑交叉验证 <code>Hscv</code>. 全部带宽选择方法也有一个不同的估计，只估计对角元(假设维度是不相关的。)
+&gt; 这句没懂，All bandwidth estimators also have a variant that estimates only the diagonal (i.e. it assumes the dimensions are uncorrelated).</p>
+<p><strong>kde</strong> 估计密度 1-6维的x，使用带宽 H (或者h 如果是对角的) ，估计使用条状的数据，其中条的宽度是 <strong>bgridsize</strong> 如果参数 <strong>binned</strong> 是 <code>TRUE</code>, 也可以通过 <span class="math inline">\(w\)</span> 自定义权重。 输出是预测密度，在由gridsize，从xmin到xmax定义的网格，或者点的位置 <strong>eval.points</strong> .</p>
+<p><strong>ks</strong> 也提供了pdf <strong>dkde</strong> ,cdf <strong>pkde</strong> , 逆cdf <strong>qkde</strong> ,和随机数生成器 <strong>prkde</strong> 函数通过预测的密度生成随机数。</p>
+</div>
+<div id="np" class="section level4">
+<h4><span class="header-section-number">24.5.2.5</span> np</h4>
+</div>
+<div id="plugdensity" class="section level4">
+<h4><span class="header-section-number">24.5.2.6</span> plugdensity</h4>
+</div>
+<div id="sm" class="section level4">
+<h4><span class="header-section-number">24.5.2.7</span> sm</h4>
+<p><strong>sm</strong> 包(Bowman and Azzalini,2010,1997) 可以计算kernel density estimation 从1维到3维。函数 <code>sm.density</code> 用输入x，带宽 h，和频率权重 <code>h.weights</code>. 如果没有指定带宽，<code>h.select</code>使用正态最优光滑估计。输出是预测密度，和标准误差，在 <code>eval.points</code>指定的位置。默认的图像输出可以通过 <code>display=&quot;none&quot;</code> 进行取消。</p>
+<p><strong>sm</strong> 也提供了非参数 ANCOVA, 自回归分析，回归（包括logistic，Poisson和自相关），和范围上的密度估计。</p>
+</div>
+<div id="stats" class="section level4">
+<h4><span class="header-section-number">24.5.2.8</span> stats</h4>
+</div>
+</div>
+<div id="penalized-approaches" class="section level3">
+<h3><span class="header-section-number">24.5.3</span> Penalized approaches</h3>
+<p>以下包提供了密度估计基于罚方法并且趋向于有更少的tuning parameter。潜在的方法会比kernel density估计更加复杂.我们建议在使用这些方法之前先熟悉这些方法背后的文献。</p>
+<div id="gss" class="section level4">
+<h4><span class="header-section-number">24.5.3.1</span> gss</h4>
+<p>gss (Gu,2011)使用罚似然方法进行非参数密度估计。
+ssden有一个公式接口，用全局环境的变量的向量或者data frame作为输入数据。函数返回一个ssden对象，任意点的预测值可以通过 <code>dssden</code> 得到。 默认的节点数量和位置使用交叉验证进行选取，但是也可以通过<code>nbasis</code>和<code>id.basis</code>参数提供。
+<code>gss</code>也提供了cdf <code>pssden</code> 和逆cdf <code>qssden</code> 函数由其生成的密度。对于1维的密度估计，也可以产生条件密度估计，光滑样条ANOVA，hazard模型，log-linear模型。</p>
+</div>
+<div id="locfit" class="section level4">
+<h4><span class="header-section-number">24.5.3.2</span> locfit</h4>
+</div>
+<div id="pendensity" class="section level4">
+<h4><span class="header-section-number">24.5.3.3</span> pendensity</h4>
+</div>
+<div id="logspline" class="section level4">
+<h4><span class="header-section-number">24.5.3.4</span> logspline</h4>
+</div>
+</div>
+<div id="taut-strings-approach" class="section level3">
+<h3><span class="header-section-number">24.5.4</span> Taut strings approach</h3>
+<div id="ftnonpar" class="section level4">
+<h4><span class="header-section-number">24.5.4.1</span> ftnonpar</h4>
+</div>
+</div>
+<div id="other-packages" class="section level3">
+<h3><span class="header-section-number">24.5.5</span> Other packages</h3>
+</div>
+</div>
+<div id="density-estimation-computation-speed" class="section level2">
+<h2><span class="header-section-number">24.6</span> Density estimation computation speed</h2>
+</div>
+<div id="accuracy-of-density-estimates" class="section level2">
+<h2><span class="header-section-number">24.7</span> Accuracy of density estimates</h2>
+</div>
+<div id="speed-vs.accuracy" class="section level2">
+<h2><span class="header-section-number">24.8</span> Speed vs. accuracy</h2>
+</div>
+<div id="conclusion-1" class="section level2">
+<h2><span class="header-section-number">24.9</span> Conclusion</h2>
+<p>我们的发现建议最好的包确实表现了速度和精确度的权衡但是也很快，误差小，并且日常更新。我们建议从ASH或KernSmooth开始。这两个的表现分都很高，包的更新信息也显示这是两个最古老的密度估计包，并且有日常更新。</p>
+<p>必须指出我们的推荐是基于一系列的我们能做的测试，基于用户的需要选择包可能会更合适。比如说我们的密度估计准确度的测试基于uniform,normal, 和claw分布。据我们观测 <strong>ftnonpar</strong> 在uniform的情况下表现的比其他包好，但是正态和claw分布则不如。简单来说，具体的理论方法可能在结果上在不同的潜在分布或者数据集上有更好的表现。
+我们希望我们的对R的密度估计包的回顾能帮助他人更精确的把问题和答案匹配起来。</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-Efron:2018tz">
-<p>Efron, Bradley, Trevor Hastie, Iain Johnstone, and Robert Tibshirani. 2004. “Least Angle Regression.” <em>The Annals of Statistics</em>, 1–41.</p>
-</div>
-<div id="ref-Anonymous:LDmrq-ls">
-<p>Zou, Hui, and Trevor Hastie. 2005. “Regularization and variable selection via the elastic net.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em>, February, 1–20.</p>
-</div>
-<div id="ref-Pan:2013bp">
-<p>Pan, Jianxin, and Chao Huang. 2013. “Random effects selection in generalized linear mixed models via shrinkage penalty function.” <em>Statistics and Computing</em> 24 (5): 725–38.</p>
-</div>
-<div id="ref-Pan:2017il">
-<p>Pan, Jianxin, and Yi Pan. 2017. “jmcm: An RPackage for Joint Mean-Covariance Modeling of Longitudinal Data.” <em>Journal of Statistical Software</em> 82 (9): 1–29.</p>
-</div>
-<div id="ref-Pourahmadi:2000fs">
-<p>Pourahmadi, Mohsen. 2000. “Maximum likelihood estimation of generalised linear models for multivariate normal covariance matrix.” <em>Biometrika</em> 87 (2): 425–35.</p>
-</div>
-<div id="ref-Anonymous:F6r664rM">
-<p>Pourahmadi, Mohsen. 1999. “Joint mean-covariance models with applications to longitudinal data: Unconstrained parameterisation.” <em>Biometrika</em>, September, 1–14.</p>
-</div>
-<div id="ref-Anonymous:2sUafWTP">
-<p>Pan, Jianxin, and Gilbert MacKenzie. 2003. “On modelling mean-covariance structures in longitudinal studies,” February, 1–6.</p>
-</div>
-<div id="ref-Pan:2016hg">
-<p>Pan, Jianxin, and Gilbert MacKenzie. 2006. “Regression models for covariance structures in longitudinal studies.” <em>Statistical Modelling: An International Journal</em> 6 (1): 43–57.</p>
-</div>
-<div id="ref-Chen:vh">
-<p>Chen, Z, DB Dunson Biometrics, and 2003. n.d. “Random effects selection in linear mixed models.” <em>Wiley Online Library</em>.</p>
-</div>
-<div id="ref-Bickel:2008ez">
-<p>Bickel, Peter J, and Elizaveta Levina. 2008. “Regularized estimation of large covariance matrices.” <em>The Annals of Statistics</em> 36 (1): 199–227.</p>
-</div>
-<div id="ref-Pinheiro:1996ib">
-<p>Pinheiro, Jos C, and Douglas M Bates. 1996. “Unconstrained parametrizations for variance-covariance matrices.” <em>Statistics and Computing</em> 6 (3): 289–96.</p>
-</div>
-<div id="ref-Rothman:2010cy">
-<p>Rothman, Adam J, Elizaveta Levina, and Ji Zhu. 2010. “A new approach to Cholesky-based covariance regularization in high dimensions.” <em>Biometrika</em> 97 (3): 539–50.</p>
-</div>
-<div id="ref-Lee:2018vj">
-<p>Lee, Kyoungjae, and Lizhen Lin. 2018. “Bayesian Test and Selection for Bandwidth of High-dimensional Banded Precision Matrices.” <em>arXiv.org</em>, April. <a href="http://arxiv.org/abs/1804.08650v1" class="uri">http://arxiv.org/abs/1804.08650v1</a>.</p>
-</div>
-<div id="ref-Cheng:2017jh">
-<p>Cheng, Guanghui, Zhengjun Zhang, and Baoxue Zhang. 2017. “Test for bandedness of high-dimensional precision matrices,” November, 1–20.</p>
-</div>
-<div id="ref-An:2014jc">
-<p>An, Baiguo, Jianhua Guo, and Yufeng Liu. 2014. “Hypothesis testing for band size detection of high-dimensional banded precision matrices.” <em>Biometrika</em> 101 (2): 477–83.</p>
-</div>
-<div id="ref-Cai:tp">
-<p>Cai, B, DB Dunson Biometrics, and 2006. n.d. “Bayesian covariance selection in generalized linear mixed models.” <em>Wiley Online Library</em>.</p>
-</div>
-<div id="ref-Tibshirani:2014uc">
-<p>Tibshirani, Ryan J. 2014. “The Lasso Problem and Uniqueness,” April, 1–27.</p>
-</div>
-<div id="ref-Tang:2019gw">
-<p>Tang, Cheng Yong, Weiping Zhang, and Chenlei Leng. 2019. “Discrete Longitudinal Data Modeling with a Mean-Correlation Regression Approach.” <em>Statistica Sinica</em>.</p>
-</div>
-<div id="ref-Song:wr">
-<p>Song, PXK, M Li, Y Yuan Biometrics, and 2009. n.d. “Joint regression analysis of correlated data using Gaussian copulas.” <em>Wiley Online Library</em>.</p>
-</div>
-<div id="ref-Dunlop:2017uz">
-<p>Dunlop, Matthew M, Mark A Girolami, Andrew M Stuart, and Aretha L Teckentrup. 2017. “How Deep Are Deep Gaussian Processes?” <em>arXiv.org</em>, November. <a href="http://arxiv.org/abs/1711.11280v2" class="uri">http://arxiv.org/abs/1711.11280v2</a>.</p>
-</div>
-<div id="ref-Maadooliat:tw">
-<p>Maadooliat, M, M Pourahmadi, JZ Huang Statistics Computing, and and 2013. n.d. “Robust estimation of the correlation matrix of longitudinal data.” <em>Springer</em>.</p>
-</div>
-<div id="ref-Bhuyan:uc">
-<p>Bhuyan, Prajamitra. n.d. “Estimation of random-effects model for longitudinal data with nonignorable missingness using Gibbs sampling.” <em>Computational Statistics</em>.</p>
-</div>
-<div id="ref-Fan:2001ug">
-<p>Fan, Jianqin, and Runze Li. 2001. “Variable selection via nonconcave penalized likelihood and its oracle properties.” <em>Journal of the American Statistical Association</em>, December.</p>
-</div>
-<div id="ref-Zhang:2012dg">
-<p>Zhang, W, and C Leng. 2012. “A moving average Cholesky factor model in covariance modelling for longitudinal data.” <em>Biometrika</em> 99 (1): 141–50.</p>
-</div>
-<div id="ref-Liu:tv">
-<p>Liu, X Y, WP Zhang Science China Mathematics, and 2013. n.d. “A moving average Cholesky factor model in joint mean-covariance modeling for longitudinal data.” <em>Springer</em>.</p>
-</div>
-<div id="ref-Anonymous:eWhsJY64">
-<p>Pan, Jianxin, and Huajun Ye. 2006. “Modelling of covariance structures in generalised estimating equations for longitudinal data.” <em>Biometrika</em> 93 (4): 927–41.</p>
-</div>
-<div id="ref-Zhang:2015is">
-<p>Zhang, Weiping, Chenlei Leng, and Cheng Yong Tang. 2015. “A joint modelling approach for longitudinal studies.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 77 (1): 219–38.</p>
-</div>
-<div id="ref-Rapisarda:2007eh">
-<p>Rapisarda, Francesco, Damiano Brigo, and Fabio Mercurio. 2007. “Parameterizing correlations: a geometric interpretation.” <em>IMA Journal of Management Mathematics</em> 18 (1): 55–73.</p>
 </div>
 </div>
             </section>
@@ -545,8 +507,8 @@ roptim, by Yi Pan</p>
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
