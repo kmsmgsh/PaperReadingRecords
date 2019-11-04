@@ -56,6 +56,36 @@ To compute the marginal density by this approach, it is necessary that all integ
 
 So turn to Approximate Bayesian Inference with the Weighted Likelihood Bootstrap.
 
+> Come back because the another approach use the results presents here
+
+This requirement is usually satisfied in models fit with conjugate priors and covers almost all applications of the Gibbs sampler that have appeared in the literature.
+
+__Structure__
+
+- Section 2 presents the approach
+- Section 3 illustrates the derivation of the numerical standard error of the estimate.
+- Section 4 presents applications of the approach: variable selection in probit regression, model comparisons in finite mixture models.
+- Final section contains brief concluding remarks.
+
+## Approach
+
+$f(y|\theta)$ is the sampling density (likelihood function), $\pi(\theta)$ is the prior density.
+For model complexity, let $z$ denote latent data and suppose that for a given set of vector blocks $\boldsymbol{\theta}=\left(\boldsymbol{\theta}_{1}, \boldsymbol{\theta}_{2}, \ldots, \boldsymbol{\theta}_{B}\right)$, the Gibbs sampling algorithm is applied to the set of $(B+1)$ complete conditional densities,
+$$
+\left\{\pi\left(\boldsymbol{\theta}_{r} | \mathbf{y}, \boldsymbol{\theta}_{s}(s \neq r), \mathbf{z}\right)\right\}_{r=1}^{B}, \quad p(\mathbf{z} | \mathbf{y}, \boldsymbol{\theta})
+$$
+
+> 看完了但是没空写
+
+[一些值得注意的细节](https://stats.stackexchange.com/questions/129109/marginal-likelihood-from-the-gibbs-output)
+
+
+
+
+
+
+
+
 
 
 
