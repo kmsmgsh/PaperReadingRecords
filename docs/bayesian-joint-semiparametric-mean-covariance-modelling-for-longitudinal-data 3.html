@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 10 Bayesian Joint Semiparametric Mean-Covariance Modelling for Longitudinal Data | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 10 Bayesian Joint Semiparametric Mean-Covariance Modelling for Longitudinal Data | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 10 Bayesian Joint Semiparametric Mean-Covariance Modelling for Longitudinal Data | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="bayesian-analysis-of-joint-mean-and-covariance-models-for-longitudinal-data.html">
+<link rel="next" href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
-<ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
-</ul>
+<div id="bayesian-joint-semiparametric-mean-covariance-modelling-for-longitudinal-data" class="section level1">
+<h1><span class="header-section-number">Paper 10</span> Bayesian Joint Semiparametric Mean-Covariance Modelling for Longitudinal Data</h1>
+<p><span class="citation">Liu, Zhang, and Chen (<a href="#ref-Liu:2018wn">2018</a>)</span></p>
+<div id="abstract-6" class="section level2">
+<h2><span class="header-section-number">10.1</span> Abstract</h2>
+<p>In this paper, a Bayesian approach is proposed for modelling the mean and covariance simultaneously by using semiparametric models and the modified Cholesky decomposition. Using a generalized prior to avoid the knots selection while using B-spline to approximate the nonlinear part. And using Metropolis-Hastings algorithm for computations.</p>
 </div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
+<div id="introduction-8" class="section level2">
+<h2><span class="header-section-number">10.2</span> Introduction</h2>
+<p>Based on Leng,Zhang,Pan那篇, 基本方法还是来源于 <span class="citation">Cepeda and Gamerman (<a href="#ref-Cepeda:2000vz">2000</a>)</span> . 然后semi-parametric的部分是用了B-spline。Knots的选取使用一个generalized prior代替了。</p>
+</div>
+<div id="models-and-bayesian-estimation-methods" class="section level2">
+<h2><span class="header-section-number">10.3</span> Models and Bayesian Estimation Methods</h2>
+<div id="models" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> Models</h3>
+<p>Suppose <span class="math inline">\(y_{i j} | x_{i j}, t_{i j} \sim N\left(\mu_{i j}, \Sigma_{i}\right)\)</span>, with
+MCD <span class="math inline">\(\Phi_{i} \Sigma_{i} \Phi_{i}^{\prime}=D_{i}\)</span>.
+Have autoregressive coefficients <span class="math inline">\(\phi_{ijk}\)</span> is negative entry of <span class="math inline">\(\Phi_i\)</span></p>
 <p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
-\]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
-<span class="math display">\[
-\theta_j=I_j\beta_j
-\]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
-<span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+y_{i j}=\mu_{i j}+\sum_{k=1}^{j-1} \phi_{i j k}\left(y_{i k}-\mu_{i k}\right)+\epsilon_{i j}
 \]</span></p>
+<p>And the slightly different 3 model</p>
+<p><span class="math display">\[
+\mu_{i j}=x_{i j}^{\prime} \beta+f_{0}\left(t_{i j}\right), \quad \phi_{i j k}=w_{i j k}^{\prime} \gamma, \quad \log \left(\sigma_{i j}^{2}\right)=z_{i j}^{\prime} \lambda+f_{1}\left(t_{i j}\right)
+\]</span></p>
+<p><span class="math inline">\(\beta\)</span>,<span class="math inline">\(\gamma\)</span>,<span class="math inline">\(\lambda\)</span>是线性部分，然后<span class="math inline">\(f_0(\cdot)\)</span> 和<span class="math inline">\(f_1(\cdot)\)</span> 是smooth function。</p>
 </div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
+<div id="smoothing-splines-and-priors" class="section level3">
+<h3><span class="header-section-number">10.3.2</span> Smoothing Splines and Priors</h3>
+<p><span class="math inline">\(f_0\)</span> and <span class="math inline">\(f_1\)</span> 用regression splines来决定。假设<span class="math inline">\(f_0\)</span>和<span class="math inline">\(f_1\)</span>有同样的smoothness的形式，令<span class="math inline">\(0=s_{0}&lt;s_{1}&lt;\cdots&lt;s_{k_{n}}&lt;s_{k_{n}+1}=1\)</span> be a partition of the interval <span class="math inline">\([0,1]\)</span>. <span class="math inline">\(s_i\)</span> be the interval knots, then we have <span class="math inline">\(L=k_n+l\)</span> normalized B-spline basis function of order <span class="math inline">\(l\)</span> that form a basis for the linear spline space, the nonlinear function f can be linearized as
+<span class="math display">\[
+f(t)=\sum_{l=1}^{L} \theta_{l} b_{l}(t)
+\]</span>
+Where <span class="math inline">\(B(t)=\left(b_{1}(t), \ldots, b_{L}(t)\right)\)</span> are the B-spline basis functions and <span class="math inline">\(\psi=\left(\theta_{1}, \cdots, \theta_{L}\right)^{\prime}\)</span> are the associated coefficients.</p>
+<p>Follow the Bayesian p-spline method by Lang and Brezger, place a first-order random walk prior distribution on the coefficients, so that</p>
+<p><span class="math display">\[
+p\left(\theta_{1}\right) \propto 1, \quad \theta_{l}=\theta_{l-1}+e_{l}, \quad l=2, \ldots, L ; \quad e_{2}, \ldots, e_{L} | \tau \stackrel{i i d}{\sim} N\left(0, \tau^{2}\right)
+\]</span></p>
+<p>Here the random walk variance <span class="math inline">\(\tau^2\)</span> can be interpreted as a smoothing parameter. Thus, the resulting conditional prior density for <span class="math inline">\(\psi\)</span> satisfies
+<span class="math display">\[
+p(\psi | \tau) \propto \exp \left(-\frac{1}{2 \tau^{2}} \psi^{\prime} \Omega \psi\right)
+\]</span>
+with a banded penalty matrix</p>
+<blockquote>
+<p>这个random walk prior感觉很有意思诶，不知道为啥要那么弄，但是感觉很强的样子，ar(1)或者ma(1)的结构，然后最后条件分布是一个正态</p>
+</blockquote>
+<p><span class="math display">\[
+\Omega=\left( \begin{array}{cccccc}{1} &amp; {-1} &amp; {0} &amp; {\cdots} &amp; {0} &amp; {0} \\ {-1} &amp; {2} &amp; {-1} &amp; {\cdots} &amp; {0} &amp; {0} \\ {0} &amp; {-1} &amp; {2} &amp; {\cdots} &amp; {0} &amp; {0} \\ {\vdots} &amp; {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} &amp; {\vdots} \\ {0} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {2} &amp; {-1} \\ {0} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {-1} &amp; {1}\end{array}\right)
+\]</span></p>
+<p>This prior structure is a Bayesian interpretation of the work of Eilers and Marx(1996) which constructed a different penalty from the ranodm walk prior and adopted a penalized maximum likelihood approach.</p>
+<p>More in Lang and Brezger(2004).</p>
+<p>对于两个非参数的部分<span class="math inline">\(f_{k}(t) \quad(k=0,1)\)</span> 可以写成线性形式<span class="math inline">\(f_{k}\left(t_{i j}\right)=B_{k}\left(t_{i j}\right) \psi_{k}\)</span> at time <span class="math inline">\(t_{ij}\)</span>. 设<span class="math inline">\(n_i\times L\)</span>矩阵
+<span class="math inline">\(B_{k i}=\left(B_{k}^{\prime}\left(t_{i 1}\right), \ldots, B_{k}^{\prime}\left(t_{i n_{i}}\right)\right)^{\prime}\)</span> and <span class="math inline">\(f_{k}\left(t_{i}\right)=\left(f_{k}\left(t_{i} 1\right), \ldots, f_{k}\left(t_{i n_{i}}\right)\right)^{\prime}\)</span>, then <span class="math inline">\(f_{k}\left(t_{i}\right)=B_{k i} \psi_{k}\)</span> for k=0,1.
+The prior density of <span class="math inline">\(\psi_k\)</span> is</p>
+<p><span class="math display">\[
+p\left(\psi_{k} | \tau_{k}\right) \propto \exp \left(-\frac{1}{2 \tau_{k}^{2}} \psi_{k}^{\prime} \Omega \psi_{k}\right), \quad k=0,1
+\]</span>
+.</p>
+<p>For fully Bayesian inference, the unknown variance parameters <span class="math inline">\(\tau_k\)</span> can be consideredas random and assigned an inverse gamma hyper-prior, namely <span class="math inline">\(\tau^2_k\sim\Gamma^{-1}(a_k,b_k)\)</span> with some known constants <span class="math inline">\(a_k\)</span> and <span class="math inline">\(b_k\)</span>. Also, a vague prior can be imposed on <span class="math inline">\(\tau_k\)</span>. Smaller <span class="math inline">\(\tau_k\)</span> means larger penalty on parameters and meanwhile we assigned large knumber of knos. So a smaller <span class="math inline">\(\tau_k\)</span> is preferred to get the efficient estimation of nonlinear function.</p>
+<p>Conjugate prior for <span class="math inline">\(\beta\)</span>,<span class="math inline">\(\gamma\)</span>,<span class="math inline">\(\lambda\)</span> with easily implement MCMC, that is,
+<span class="math display">\[
+\beta \sim N_{p}\left(\beta_{0}, \Delta_{0}\right), \quad \gamma \sim N_{q}\left(\gamma_{0}, \Gamma_{0}\right), \quad \lambda \sim N_{d}\left(\lambda_{0}, \Lambda_{0}\right)
+\]</span></p>
+<p>.</p>
 </div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+</div>
+<div id="mcmc-sampling" class="section level2">
+<h2><span class="header-section-number">10.4</span> MCMC Sampling</h2>
+<p><span class="math display">\[
+\pi\left(\beta | Y, X, f_{0}, \Sigma\right)=N_{p}\left(\Delta_{1}^{-1}\left(\Delta_{0}^{-1} \beta_{0}+\sum_{i=1}^{m} X_{i}^{\prime} \Sigma_{i}^{-1}\left(Y_{i}-f_{0}\left(t_{i}\right)\right)\right), \Delta_{1}^{-1}\right)
+\]</span>
+with <span class="math inline">\(\Delta_{1}=\Delta_{0}^{-1}+\sum_{i=1}^{m} X_{i}^{\prime} \Sigma_{i}^{-1} X_{i}\)</span>.</p>
+<p>The posterior full conditional distribution for B-spline coefficient <span class="math inline">\(\psi_0\)</span> is
+<span class="math display">\[
+\pi\left(\psi_{0} | \beta, \gamma, \lambda, f_{1}\right)=N_{L}\left(P_{0}^{-1} \sum_{i=1}^{m} B_{0 i}^{\prime} \Sigma_{i}^{-1}\left(Y_{i}-X_{i} \beta\right), P_{0}^{-1}\right)
+\]</span>
+where
+<span class="math inline">\(P_{0}=\sum_{i=1}^{m} B_{0 i}^{\prime} \Sigma_{i}^{-1} B_{0 i}+\Omega / \tau_{0}^{2}\)</span>.</p>
+<p>Let <span class="math inline">\(W_{i}=\left(0,\left(y_{i 1}-\mu_{i 1}\right) w_{i 21}, \ldots, \sum_{k=1}^{n_{i}-1}\left(y_{i k}-\mu_{i k}\right) w_{i j k}\right)^{\prime}\)</span>, then we have
+<span class="math display">\[
+Y_{i}-\mu_{i}=W_{i} \gamma+\epsilon_{i}, \quad i=1, \ldots, m
+\]</span>
+&gt; 也就是和zp的操作一致。</p>
+<p><span class="math display">\[
+\pi\left(\gamma | Y, X, \beta, \lambda, f_{0}, f_{1}\right)=N_{q}\left(\Gamma_{1}^{-1}\left(\Gamma_{0}^{-1} \gamma_{0}+\sum_{i=1}^{m} W_{i}^{\prime} D_{i}^{-1}\left(Y_{i}-\mu_{i}\right)\right), \Gamma_{1}^{-1}\right)
+\]</span>
+where <span class="math inline">\(\Gamma_{1}=\Gamma_{0}^{-1}+\sum_{i=1}^{m} W_{i}^{\prime} D_{i}^{-1} W_{i}\)</span>.</p>
+<p>However, unlike the full conditional distributions of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span>, the full conditional distributions of <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\psi_1\)</span> are given by</p>
+<p><span class="math display">\[
+\begin{aligned} \pi\left(\lambda | \beta, \gamma, f_{0}, f_{1}\right) \propto \prod_{i=1}^{m}\left|D_{i}\right|^{-1 / 2} \exp \left\{-\frac{1}{2} \sum_{i=1}^{m}\left(y_{i}-\mu_{i}-W_{i} \gamma\right)^{\prime} D_{i}^{-1}\left(y_{i}-\mu_{i}-W_{i} \gamma\right)\right.\\-\frac{1}{2}\left(\lambda-\lambda_{0}\right)^{\prime} \Lambda_{0}^{-1}\left(\lambda-\lambda_{0}\right) \} \end{aligned}
+\]</span>
+and
+<span class="math display">\[
+\begin{aligned} \pi\left(\psi_{1} | \beta, \gamma, \lambda, f_{0}\right) \propto \prod_{i=1}^{m}\left|D_{i}\right|^{-1 / 2} \exp \left\{-\frac{1}{2} \sum_{i=1}^{m}\left(y_{i}-\mu_{i}-W_{i} \gamma\right)^{\prime} D_{i}^{-1}\left(y_{i}-\mu_{i}-W_{i} \gamma\right)\right.\\ -\frac{1}{2 \tau_{1}^{2}} \psi_{1}^{\prime} \Omega \psi_{1} \} \end{aligned}
+\]</span></p>
+<p>According to the standard Bayesian theory, we have</p>
 
+<div class="theorem">
+<span id="thm:unnamed-chunk-10" class="theorem"><strong>Theorem 10.1  </strong></span>Let the Bayesian estimation of <span class="math inline">\(\left(\beta, \psi_{0}, \gamma, \lambda, \psi_{1}\right)\)</span> be the mean of posterior distributions. Then the resultant estimators are known as the minimum mean square error estimators.
 </div>
-</div>
+
+<p>These final two full conditional posterior ditributions are analytically intractable, then we use Metropolis-Hastings instead. Empirical evidence suggests that the more it interrelates with the objective distribution the faster it converges. This paper use the methodologyproposed by [Gamerman,D. 1997 Sampling from the posterior distribution in generalized linear mixed models.] Using fisher scoring algorithm to construct suitable proposals as those of Cepeda and Gamerman. This algorithm requires working variables to approximate transformation of the observations aroune the current parameter estimates. At the step of <span class="math inline">\(\lambda\)</span> iteration, <span class="math inline">\(\beta,\gamma\)</span> and <span class="math inline">\(f_k\)</span> are fixed at their current values <span class="math inline">\(\beta^{(c)}, \lambda^{(c)} \text { and } f_{k}^{(c)}\)</span>, given the working observation model is
+<span class="math display">\[
+h_{i j}=\left(y_{i j}-x_{i j}^{\prime} \beta^{(c)}-f_{0}^{(c)}-w_{i}^{(c)} \gamma^{(c)}\right)^{2} \sim \sigma_{i j}^{2} \chi_{1}^{2}, \quad i=1, \ldots, m ; j=1, \ldots, n_{i}
+\]</span>
+where <span class="math inline">\(w_i^{(c)}\)</span> is the ith row of <span class="math inline">\(W_i^{(c)}\)</span>. Therefore, the observation <span class="math inline">\(h_{ij}\)</span> has respective mean <span class="math inline">\(E h_{i j}=\sigma_{i j}^{2}\)</span> and variance <span class="math inline">\(\operatorname{Var}\left(h_{i j}\right)=2 \sigma_{i j}^{4}\)</span>, and is related to the regression parameter <span class="math inline">\(\lambda\)</span> through <span class="math inline">\(\log \left(E h_{i j}\right)=z_{i j}^{\prime} \lambda+f_{1}\left(t_{i j}\right)\)</span>. By Taylor expansion,</p>
+<p><span class="math display">\[
+\begin{aligned} \log \left(h_{i j}\right) &amp; \approx \log \left(E h_{i j}\right)+\left(h_{i j}-E h_{i j}\right)\left(\log \left(E h_{i i j}\right)\right)^{\prime} \\ &amp;=\log \left(\sigma_{i j}^{2}\right)+\frac{h_{i j}}{\sigma_{i j}^{2}}-1 \sim N\left(z_{i j}^{\prime} \lambda+f_{1}\left(t_{i j}\right), 2\right) \end{aligned}
+\]</span>
+Similar, we can get the vector of appropriate working observation <span class="math inline">\(\tilde Y=\left(\tilde{y}_{11}, \ldots, \tilde{y}_{m n_{i}}\right)\)</span> with
+<span class="math display">\[
+\begin{array}{c}{\tilde{y}_{i j}=z_{i j}^{\prime} \lambda^{(c)}+f_{1}^{(c)}\left(t_{i j}\right)+\frac{\left(y_{i j}-x_{i j}^{\prime} \beta^{(c)}-f_{0}^{(c)}-w_{i}^{(c)} \gamma^{(c)}\right)^{2}}{\exp \left(z_{i j}^{\prime} \lambda^{(c)}+f_{1}^{(c)}\left(t_{i j}\right)\right)}-1} \\ {i=1, \ldots, m ; j=1, \ldots, n_{i} ;}\end{array}
+\]</span></p>
+<p>Therefore, the normal transition kernel for <span class="math inline">\(\lambda\)</span> based on Fisher scoring methods is obtained as
+<span class="math display">\[
+q_{\lambda}\left(\lambda^{(c)}, \lambda^{(n)}\right)=N\left(g_{b}, G_{b}\right)
+\]</span>
+where <span class="math inline">\(\lambda^{(n)}\)</span> is the next possible value, and
+<span class="math display">\[
+g_{b}=G_{b}\left[\Lambda_{0}^{-1} \lambda_{0}+2^{-1} \sum_{i=1}^{m} Z_{i}^{\prime}\left(\tilde{Y}_{i}-f_{1}^{(c)}\left(t_{i}\right)\right)\right], \quad G_{b}=\left(\Lambda_{0}^{-1}+2^{-1} \sum_{i=1}^{m} Z_{i}^{\prime} Z_{i}\right)^{-1}
+\]</span></p>
+<p>Similarly, the normal transition kernel for <span class="math inline">\(\psi_1\)</span> can be obtained as
+<span class="math display">\[
+q_{\psi_{1}}\left(\psi_{1}^{(c)}, \psi_{1}^{(n)}\right)=N\left(v_{b}, V_{b}\right)
+\]</span></p>
+<p>where <span class="math inline">\(\psi_1^{(n)}\)</span> is the next possible value, and
+<span class="math display">\[
+v_{b}=2^{-1} V_{b} \sum_{i=1}^{m} B_{1 i}^{\prime}\left(\tilde{Y}_{i}-Z_{i} \lambda^{(c)}\right), \quad V_{b}=\left(\tau_{1}^{-2} \Omega+2^{-1} \sum_{i=1}^{m} B_{1 i}^{\prime} B_{1 i}\right)^{-1}
+\]</span></p>
+<p>Note that instead of sampling all the parameters in <span class="math inline">\(\theta=\left(\beta, \gamma, \lambda, \psi_{0}, \psi_{1}\right)\)</span> at the same time, we should use the conditional independent structure of the model to divided the into blocks and draw samples step by step. Specifically, it is advisable to sample <span class="math inline">\(\beta,\gamma,\psi_0\)</span> from their full posterior conditional distributions directly, and draw sample of <span class="math inline">\(\lambda,\phi_1\)</span> using the Metropolis-Hastings method. The algorithm could be described as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Start with <span class="math inline">\(\beta^{(0)}, \gamma^{(0)}, \lambda^{(0)}, \psi_{0}^{(0)}, \psi_{1}^{(0)}\)</span></li>
+<li>Generate new <span class="math inline">\(\beta^{(j)}\)</span></li>
+<li>Based on <span class="math inline">\(\beta^{(j)}\)</span> generate the new value <span class="math inline">\(\psi_0^{(j)}\)</span> and update.</li>
+<li>Basedon <span class="math inline">\(\beta^{(j)}\)</span>, <span class="math inline">\(\psi_0^{(j)}\)</span>,generate the new value <span class="math inline">\(\gamma^{(j)}\)</span> and update</li>
+<li>Based on step2-4, propose a new value <span class="math inline">\(\lambda^*\)</span> generated from transition kernel. Calculate the acceptance probability of the movement <span class="math inline">\(\alpha_{j}\left(\lambda^{(j-1)}, \lambda^{*}\right)\)</span>. If the movement is accepted, then <span class="math inline">\(\lambda^{(j)}=\lambda^{*}\)</span>, otherwise <span class="math inline">\(\lambda^{(j)}=\lambda^{(j-1)}\)</span>.</li>
+<li>Based step 2-5, propose a new value <span class="math inline">\(\psi_1^*\)</span>, and follow the MH algorithm,update <span class="math inline">\(\psi_1^{(j)}\)</span></li>
+<li>Next iteration j+1.</li>
+</ol>
+<p>The acceptance probability mentioned in step 5 could be expressed as
+<span class="math display">\[
+\alpha_{j}\left(\lambda^{(j-1)}, \lambda^{*}\right)=\frac{\pi\left(\lambda^{*} | \lambda_{-}^{(j-1)}\right) q_{\lambda}\left(\lambda^{*}, \lambda^{(j-1)}\right)}{\pi\left(\lambda^{(j-1)} | \lambda_{-}^{(j-1)}\right) q_{\lambda}\left(\lambda^{(j-1)}, \lambda^{*}\right)}
+\]</span></p>
+<p><img src="chp11/Figure2.png" width="564" /></p>
+<blockquote>
+<p>从figure2来看，看来这种基于fishing score method的方法收敛情况意外的好？
+而且这让人感觉再推一步就到 Hamiltonian Monte Carlo 的感觉了，毕竟都用了一二阶导数的信息来着。。。需要再把这个proposal的形式推一下</p>
+</blockquote>
+<blockquote>
+<p>总结一下，需要注意的有几点。1，Bayes下的B-spline，也就是P-spline那篇值得推一下。以及其中包括的B spline 参数的先验那个 first order random walk prior和最后得到的那个类似于Normal的形式。2，对于MH算法，那个基于Proposed by Gamerman 的基于Fisher scoring algorithm的构造proposal的方法。-3，文中写出注意的那个算法好像没啥新鲜的，就是一个一个抽，因为Gibbs。而因为之前几个参数有解析分布，可以直接抽，所以号称“block”抽，其实是一样的，还是顺着抽的思路，新<span class="math inline">\(\beta\)</span>，基于<span class="math inline">\(\beta\)</span>抽<span class="math inline">\(\psi_0\)</span>,基于<span class="math inline">\(\beta,\psi_0\)</span>抽<span class="math inline">\(\gamma\)</span>….. 2+,那个proposal的效果意外的好。1+,选knots那块咋搞定的还没懂。</p>
+</blockquote>
+
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
+<div id="ref-Liu:2018wn">
+<p>Liu, Meimei, Weiping Zhang, and Yu Chen. 2018. “Bayesian Joint Semiparametric MeanCovariance Modeling for Longitudinal Data.” <em>Communications in Mathematics and Statistics</em>, July.</p>
 </div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
+<div id="ref-Cepeda:2000vz">
+<p>Cepeda, Edilberto, and Dani Gamerman. 2000. “Bayesian modeling of variance heterogeneity in normal regression models.” <em>Brazilian Journal of Probability and Statistics</em> 14 (2): 207–21.</p>
 </div>
 </div>
             </section>
@@ -515,8 +563,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesian-analysis-of-joint-mean-and-covariance-models-for-longitudinal-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bayesian-modeling-of-joint-regressions-for-the-mean-and-covariance-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

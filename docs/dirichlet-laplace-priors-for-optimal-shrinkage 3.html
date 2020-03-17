@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 14 Dirichlet-Laplace Priors for Optimal Shrinkage | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 14 Dirichlet-Laplace Priors for Optimal Shrinkage | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 14 Dirichlet-Laplace Priors for Optimal Shrinkage | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="homogeneity-tests-of-covariance-matrices-with-high-dimensional-longitudinal-data.html">
+<link rel="next" href="parsimonious-covariance-matrix-estimation-for-longitudinal-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,177 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
+<div id="dirichlet-laplace-priors-for-optimal-shrinkage" class="section level1">
+<h1><span class="header-section-number">Paper 14</span> Dirichlet-Laplace Priors for Optimal Shrinkage</h1>
+<p><span class="citation">(Bhattacharya et al. <a href="#ref-Bhattacharya:2015cq">2015</a>)</span></p>
+<div id="abstract-9" class="section level2">
+<h2><span class="header-section-number">14.1</span> Abstract</h2>
+<p>Bayesian paradigm, sparsity is routinely induced through two-component mixture priors having a probability mass at zero, but such priors encounter daunting computational problems in high dimensions. This has motivated continuous shrinkage priors.</p>
+<p>This article proposed a new class of Dirichlet-Laplace priors relative to alternatives is assessed in simulated and real data example.</p>
+</div>
+<div id="introduction-11" class="section level2">
+<h2><span class="header-section-number">14.2</span> Introduction</h2>
+<p>However, in many applications, it is crucial to obtain a realistic characterization of uncertainty in estimates of parameters, function of parameters, and predictions.
+Frequentist approaches using constructing asymptotic confidence regions or using the bootstrap to characterize uncertainty. But these may be broken down in high-dimensional settings.</p>
+<p>Example: In regression, one cannot naively appeal to asymptotic normality and resampling from the data when p is equal or larger than n. Resampling of data may not provide an adequate characterization of uncertainty.</p>
+<p>Most penalized estimators correspond to the mode of a Bayesian posterior distribution. Lasso is equivelant to a MAP estimation under a Gaussian linear regression model with double exponential (Laplace) prior.</p>
+<p>A natural question is whether we can use the entire posterior distribution to provide a probabilistic measure of uncertainty.</p>
+<p>Bayesian perspective also have distinct advantages in terms of tuning parameter choice. In this case, the key tuning parameters can be marginalized over the posterior distribution instead of relying on cross-validation.</p>
+<p>“However, instead of showing that a penalized estimator obtains the minimax rate under sparsity assumption, we would like to show that the entire posterior distribution concentrates at the optimal rate, that is, the posterior probability assigned to a shrinking neighborhood of the true parameter value converges to one, with the neighborhood size proportional to the requentist minimax rate.”</p>
+<p>An amazing variety of shrinkage priors has been proposed in the Bayesian literature.</p>
 <ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
+<li><p>Ghosal(1999),Bontemps(2011): Provided conditions on the prior for asymptotic normality of linear regression coefficients allowing the number of predictors p to increase with sample size n. Ghosal approach requiring a very slow rate of growth. Bontemps assuming <span class="math inline">\(p\leq n\)</span>.</p></li>
+<li><p>Armagan, Dunson, and Lee(2013) considered shrinkage priors in providing simple sufficient conditions for posterior consistency in linear regression where the number of variables grows slower than the sample size, though no rate of contraction was provided.</p></li>
 </ul>
+<p>Studying “posterior contraction” in high-dimensions, …
+Studying these properties of shrinkage pirors is challenging due to the lack of exact zeros, with the prior draws being sparse in only an approximate sense.</p>
+<p>Prior selection remains an art.</p>
+<p>The overarching goal is to obtain theory allowing design of novel priors, which are appealing from a Bayesian perspective while having frequentist optimality properties.</p>
 </div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
-<p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
-\]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
+<div id="a-new-class-of-shrinkage-priors" class="section level2">
+<h2><span class="header-section-number">14.3</span> A NEW CLASS OF SHRINKAGE PRIORS:</h2>
+<div id="bayesian-sparsity-priors-in-normal-means-problem" class="section level3">
+<h3><span class="header-section-number">14.3.1</span> Bayesian Sparsity Priors in Normal Means Problem</h3>
+<p>For concreteness (?), this paper focus on the normal means problem. (not the generalized model like GLM).</p>
+<p>Based on a single observation corrupted with iid standard normal noise:
 <span class="math display">\[
-\theta_j=I_j\beta_j
-\]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
-<span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+y_{i}=\theta_{i}+\epsilon_{i}, \quad \epsilon_{i} \sim \mathrm{N}(0,1), \quad 1 \leq i \leq n
 \]</span></p>
+<p>Let <span class="math inline">\(\ell_0[q;n]\)</span> denote the subset of <span class="math inline">\(\mathbb R^n\)</span> given by
+<span class="math display">\[
+l_{0}[q ; n]=\left\{\theta \in \mathbb{R}^{n} : \#\left(1 \leq j \leq n : \theta_{j} \neq 0\right) \leq q\right\}
+\]</span>
+<span class="math inline">\(l_0[q;n]\)</span> 是<span class="math inline">\(\mathbb R^n\)</span> 的子集，这个#是啥，子集中非零元的个数吗。</p>
+<p>A vector <span class="math inline">\(x\in \mathbb R^r\)</span>, let <span class="math inline">\(||x||_2\)</span> is Euclidean norm. If <span class="math inline">\(\theta_0\)</span> is <span class="math inline">\(q_n\)</span>-sparse, that is, <span class="math inline">\(\theta_0\in l_0[q_n;n]\)</span>, with <span class="math inline">\(q_n=o(n)\)</span>, the <em>squared minimax rate in estimating <span class="math inline">\(\theta_0\)</span> in <span class="math inline">\(\ell_2\)</span> norm is <span class="math inline">\(2 q_{n} \log \left(n / q_{n}\right)(1+o(1))\)</span></em>. (Donoho et al. 1992);</p>
+<blockquote>
+<p>Squared minimax rate是啥？</p>
+</blockquote>
+<p>(given sequences <span class="math inline">\(a_n\)</span>,<span class="math inline">\(b_n\)</span>, we denote <span class="math inline">\(a_n=O(b_n)\)</span> or <span class="math inline">\(a_{n} \lesssim b_{n}\)</span> if there exists a global constant <span class="math inline">\(C\)</span> such that <span class="math inline">\(a_{n} \leq C b_{n}\)</span> and <span class="math inline">\(a_n=o(b_n)\)</span> if <span class="math inline">\(a_n/b_n\rightarrow0\)</span>) as <span class="math inline">\(n\rightarrow 0\)</span></p>
+<p><span class="math display">\[
+\inf _{\hat{\theta}} \sup _{\theta_{0} \in l_{0}\left[q_{n} ; n\right]} E_{\theta_{0}}\left\|\hat{\theta}-\theta_{0}\right\|_{2}^{2} \asymp q_{n} \log \left(n / q_{n}\right)
+\]</span>
+In the above display, <span class="math inline">\(E_{\theta_0}\)</span> denotes an expectation with respect to an <span class="math inline">\(N_n(\theta_0,I_n)\)</span> density.</p>
+<blockquote>
+<p>这玩意的意义没看懂。</p>
+</blockquote>
+<p>For a subset <span class="math inline">\(S \subset\{1, \ldots, n\}\)</span>, let <span class="math inline">\(|S|\)</span> denote the cardinality of <span class="math inline">\(S\)</span> and define <span class="math inline">\(\theta_{S}=\left(\theta_{j} : j \in S\right)\)</span> for a vector <span class="math inline">\(\theta\in \mathbb R^n\)</span>. Denote <span class="math inline">\(supp(\theta)\)</span> to be the <em>support</em> of <span class="math inline">\(\theta\)</span>, the subset of <span class="math inline">\(\{1, \ldots, n\}\)</span> corresponding to the nonzero entries of <span class="math inline">\(\theta\)</span>. For a vector <span class="math inline">\(\theta \in \mathbb R^n\)</span>, a nature way to incorporate sparsity is to use <strong>point mass mixture priors</strong>:
+<span class="math display">\[
+\theta_{j} \sim(1-\pi) \delta_{0}+\pi g_{\theta}, \quad j=1, \ldots, n
+\]</span>
+where <span class="math inline">\(\pi=\operatorname{Pr}\left(\theta_{j} \neq 0\right)\)</span>, <span class="math inline">\(\mathbb{E}\{|\operatorname{supp}(\theta)| | \pi\}=n \pi\)</span> is the prior guess on model size (sparsity level), and <span class="math inline">\(g_\theta\)</span> is an absolutely continuous density on <span class="math inline">\(\mathbb R\)</span>.</p>
+<p>These priors are highly appealing in allowing separate control of the level of sparsity and the size of the signal coefficients. If the sparsity parameter <span class="math inline">\(\pi\)</span> is estimated via empirical Bayes the posterior median of <span class="math inline">\(\theta\)</span> is estimated via empirical Bayes, the posterior median of <span class="math inline">\(\theta\)</span> is a minimax-optimal estimator, which can adapt to arbitrary sparsity levels as long as <span class="math inline">\(q_n=o(n)\)</span>.</p>
+<blockquote>
+<p>反正就是说这个先验很好的意思？ 能满足一些性质，而且同样的，<span class="math inline">\(\lambda\)</span>可以用empirical bayes选</p>
+</blockquote>
+<p>In fully bayesian framework, it is common to place a beta prior on <span class="math inline">\(\pi\)</span>, leading to a beta-Bernoulli prior on the model size, which conveys an automatic multiplicity adjustment.</p>
+<blockquote>
+<p>multiplicity adjustment这又是啥</p>
+</blockquote>
+<p>In recent article, Castillo and van der Vaart (2012) established that prior with an appropriate beta prior on <span class="math inline">\(\pi\)</span> and suitable tail conditions on <span class="math inline">\(g_\theta\)</span> leads to a minimax optimal rate of <span class="math inline">\(posteiror contraction\)</span>.</p>
+<blockquote>
+<p>posterior contraction 是啥?</p>
+</blockquote>
+<p>That is, the posterior concentrates most of its mass on a ball around <span class="math inline">\(\theta_0\)</span> of squared radius of the order of <span class="math inline">\(q_n log (n/q_n)\)</span>:</p>
+<p><span class="math display">\[
+E_{\theta_{0}} \mathbb{P}\left(\left\|\theta-\theta_{0}\right\|_{2}&lt;M s_{n} | y\right) \rightarrow 1, \text { as } n \rightarrow \infty
+\]</span>
+.</p>
+<p>Narisetty et al.(2014) obtained consistency in model selection using point mass mixture priors with appropriate data-driven hyperparameters.</p>
 </div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
 </div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+<div id="global-local-shrinkage-rules" class="section level2">
+<h2><span class="header-section-number">14.4</span> Global-Local shrinkage Rules</h2>
+<p>Although point mass mixture priors are intuitively appealing and possess attractive theoretical properties, posterior sampling requires a stochastic search over an enormous space, leading to slow mixing and convergence. Thus, continuous shrinkage priors and promoted by several authors. [<strong>literatues</strong>]</p>
+<p>Polson and Scott (2010) noted that essentially all such shrinkage priors can be represented as global-local (GL) mixtures of Gaussians,
+<span class="math display">\[
+\theta_{j} \sim \mathrm{N}\left(0, \psi_{j} \tau\right), \quad \psi_{j} \sim f, \quad \tau \sim g
+\]</span></p>
+<blockquote>
+<p>Bayes lasso确实就是这种的一个特殊形式</p>
+</blockquote>
+<p><span class="math inline">\(\tau\)</span> controls global shrinkage toward the origin while the local scales <span class="math inline">\(\{\psi_j\}\)</span> allow deviations in the degree of shrinkage. This can be an approximate point mass priors through a continuous density concentrated near zero with heavy tails.</p>
+<p>GL priors are more convenient in computation compare to point mass priors. Because the Normal priors allows for conjugate updating for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\psi\)</span> in a block. The frequentist regularization procedures correspond to posterior modes under GL priors with appropriate choice of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>.</p>
+<p>However, many aspects of shrinkagepriors are poorly understood, with the lack of exact zeros compounding the difficulty in studying basic properties, such as prior expectation, tail bounds for the number of large signals, and prior concentration around sparse vectors.</p>
+<p>Hence, subjective Bayesian face difficulties in incorporating prior information regarding sparsity, and frequentists tend to be skeptical due to the lack of theoretical justification.</p>
+<p>This is warranted, reasonable seeming priors can have poor performance in high dimensional settings.</p>
+<blockquote>
+<p>这段话没看懂：</p>
+</blockquote>
+<p>For example, choosing <span class="math inline">\(\pi=\frac{1}{2}\)</span> in point mass mixture priors leads to an exponentially small prior probability of <span class="math inline">\(2^{-n}\)</span> assigned to the null model, so that it becomes literally impossible to override that prior informativeness with the information in the data to pick the null model.</p>
+<blockquote>
+<p>也就是说，如果取<span class="math inline">\(\pi=\frac{1}{2}\)</span>,那么就有<span class="math inline">\(\theta_j\sim \frac{1}{2}\delta_0+\frac{1}{2}g_\theta\)</span>,但是这个为啥是会leads to an exponential small prior probability of <span class="math inline">\(2^{-n}\)</span>？ 感觉对这个point mass mixture prior理解不够深入。两个最简单的问题，<span class="math inline">\(\delta_0\)</span> 和<span class="math inline">\(g_\theta\)</span>应该如何选取</p>
+</blockquote>
+<p>However, with a beta prior on <span class="math inline">\(\pi\)</span>, this problem can be avoided. In the same vein, if one places iid <span class="math inline">\(N(0,1)\)</span> priors on the entries of <span class="math inline">\(\theta\)</span>, then the induced prior on <span class="math inline">\(\|\theta\|\)</span> is highly concentrated around <span class="math inline">\(\sqrt n\)</span> leading to mmisleadin ginferences on <span class="math inline">\(\theta\)</span> almost everywhere. Although these are simple examples, similar multiplicity problems can transpire more subtly in cases where complicated models/prios are involved and hence it is fundmentally important to understand properties of the prior and the posterior in the setting of the normal mean model.</p>
+<p>There has been a recent awareness of these issues, motivating a basic assessment of the marginal properties of shrinkage priors for a single <span class="math inline">\(\theta_j\)</span>. Recent priors such as the horseshoe and generalized double Pareto are carefully formulated to obtain marginals having a high concentration around zero with heavy tails. This is well justified,but as we will se below, such marginal behavior alone is not sufficient; it is necessary to study the joint distribution of <span class="math inline">\(\theta\)</span> on <span class="math inline">\(\mathbb R^n\)</span>. With such motivation, we propose a class of Dirichlet-kernel priors in the next subsection.</p>
+</div>
+<div id="dirichlet-kernel-priors" class="section level2">
+<h2><span class="header-section-number">14.5</span> Dirichlet-Kernel Priors</h2>
+<p>Let <span class="math inline">\(\phi_0\)</span> denote the standard normal density on <span class="math inline">\(\mathbb R\)</span>. Also, let <span class="math inline">\(DE(\tau)\)</span> denote a zero mean double-exponential or Laplace distribution or Laplace distribution with density <span class="math inline">\(f(y)=(2 \tau)^{-1} e^{-|y| / \tau}\)</span> for <span class="math inline">\(y\in \mathbb R\)</span>. Integrating out the local scales <span class="math inline">\(\psi_i\)</span>’s, the global and local prior can be equivalently represented as a global scale mixture of a kernel <span class="math inline">\(\mathcal{K}(\cdot)\)</span>,
+<span class="math display">\[
+\theta_{j} \stackrel{\mathrm{iid}}{\sim} \mathcal{K}(\cdot, \tau), \quad \tau \sim g
+\]</span>
+where <span class="math inline">\(\mathcal{K}(x)=\int \psi^{-1 / 2} \phi_{0}(x / \sqrt{\psi}) g(\psi) d \psi\)</span> is a symmetrix unimodal density on <span class="math inline">\(\mathbb R\)</span> and <span class="math inline">\(\mathcal{K}(x, \tau) :=\tau^{-1 / 2} \mathcal{K}(x / \sqrt{\tau})\)</span>. For example, <span class="math inline">\(\psi_j\sim Exp(1/2)\)</span> corresponds to a double-exponential kernel <span class="math inline">\(\mathcal{K} \equiv \mathrm{DE}(1)\)</span>, while <span class="math inline">\(\psi_{j} \sim \mathrm{IG}(1 / 2,1 / 2)\)</span> results in a standard Cauchy kernel <span class="math inline">\(\mathcal{K} \equiv \mathrm{Ca}(0,1)\)</span>.</p>
+<blockquote>
+<p>上面这几个等价得检查研究一下</p>
+</blockquote>
+<p>These choices lead to a kernel that is bounded in a neighborhood of zero.</p>
+<p>However, if one instead uses a half Cauchy prior <span class="math inline">\(\psi_j^{\frac{1}{2}}\sim Ca_{+}(0,1)\)</span>, then the resulting horseshoe kernel (Carvalho,Polson, and Scott 2009,2010) is unbounded with a singularity at zero. This phenomenon coupled with tail robustness properties leads to excellent empirical performance of the horseshoe.
+However, the joint distribution of <span class="math inline">\(\theta\)</span> under a horseshoe prior is understudied and further theoretical investigation is required to understand its operating characteristics. One can imagine that it concentrates more along sparse regions of the parameter space compared to common shrinkage priors isnce the singularity at zero potentially allows most of the entries to be concentrated around zero with the heavy tails ensuring concentration around the relatively small number of signals.</p>
+<p>The above class of priors rely on obtaining a suitable kernel <span class="math inline">\(\mathcal K\)</span> through appropriate normal scale mixtures. In this article, alleviate the requirements on the kernel, while having attractive theoretical properties. In particular, our proposedclass of Dirichlet-kernel (Dk) priors replaces the single global scale <span class="math inline">\(\tau\)</span> by a vector scales <span class="math inline">\((\phi_1\tau,...\phi_n\tau)\)</span>, where <span class="math inline">\(\phi=(\phi_1,...,\phi_n)\)</span> is constrained to lie in the <span class="math inline">\((n-1)\)</span>-dimensional simplex <span class="math inline">\(\mathcal S^{n-1}=\{x=(x_1,...,x_n)^T:x_j\geq 0,\sum_{j=1}^n x_j=1\}\)</span> and is assigned a <span class="math inline">\(Dir(a,...,a)\)</span> prior:
+<span class="math display">\[
+\theta_{j} | \phi_{j}, \tau \sim \mathcal{K}\left(\cdot, \phi_{j} \tau\right), \quad \phi \sim \operatorname{Dir}(a, \ldots, a)
+\]</span></p>
+<p><span class="math inline">\(\mathcal K\)</span> is any symmetric (about zero) unimodal density with exponential or heavier tails; for computational purposes, we restrict attention to the class of kernels that can be represented as scale mixture of normals. While previous shrinkage priors obtain marginal behavior similar to the point mass mixture priors, our construction aims at resembling the joint distribution of <span class="math inline">\(\theta\)</span> under a two-component mixture prior.</p>
+<blockquote>
+<p>没太懂这个kernel是啥，然后kernel的重要性在哪里。 然后那个积分感觉怪怪的，需要更细致的讲解。 然后这个用Dirichlet分布放在tau上。有点奇怪，需要更深的解释。</p>
+</blockquote>
+<p>Focus on the Laplace kernel from now on for concreteness, noting that all the results stated below can be generalized to other choices. The corresponding hierachical prior given <span class="math inline">\(\tau\)</span>.,</p>
+<p><span class="math display">\[
+\theta_{j} | \phi, \tau \sim \operatorname{DE}\left(\phi_{j} \tau\right), \quad \phi \sim \operatorname{Dir}(a, \ldots, a)
+\]</span>
+is referred to as a Dirichlet-Laplace prior, denoted <span class="math inline">\(\theta|\tau\sim DL_a(\tau)\)</span>.</p>
+<p>To understand the role of <span class="math inline">\(\phi\)</span>, we undertake a study of the marginal properties of <span class="math inline">\(\theta_j\)</span> conditional on <span class="math inline">\(\tau\)</span>, integrating out <span class="math inline">\(\phi_j\)</span>. The results are summarized in Proposition 2.1.</p>
+<p>Proposition 2.1. If <span class="math inline">\(\theta | \tau \sim \operatorname{DL}_{a}(\tau)\)</span>, then the marginal distribution of <span class="math inline">\(\theta_j\)</span> given <span class="math inline">\(\tau\)</span> is unbounded with a singularity at zero for any <span class="math inline">\(a&lt;1\)</span>. Further, in the special case <span class="math inline">\(a=1/n\)</span>, the marginal distribution is a wrapped Gamma distribution <span class="math inline">\(WG(\tau^{-1},1/n)\)</span>, where <span class="math inline">\(WG(\lambda,\alpha)\)</span> has a density <span class="math inline">\(f(x ; \lambda, \alpha) \propto|x|^{\alpha-1} e^{-\lambda|x|}\)</span> on <span class="math inline">\(\mathbb R\)</span>.</p>
+<p>Thus,marginalizing over <span class="math inline">\(\phi\)</span>, we obtain an unbounded kernel <span class="math inline">\(\mathcal K\)</span>, so that the marginal density of <span class="math inline">\(\theta_j|\tau\)</span> has singularity at 0 while retaining exponential tails.</p>
+<p>The parameter <span class="math inline">\(\tau\)</span> plays a critical role in determining the tails of the marginal distribution of <span class="math inline">\(\theta_j\)</span>’s. We consider a fully Bayesian framework where <span class="math inline">\(\tau\)</span> is assigned a prior <span class="math inline">\(g\)</span> on the positive real line and learnt from the data through the posterior. Specifically, we assume a <span class="math inline">\(gamma(\lambda,1/2)\)</span> prior on <span class="math inline">\(\tau\)</span> with <span class="math inline">\(\lambda=na\)</span>. We continue to refer to the induced prior on <span class="math inline">\(\theta\)</span> implied by the hierarchical structure,
+<span class="math display">\[
+\begin{array}{l}{\theta_{j} | \phi, \tau \sim \operatorname{DE}\left(\phi_{j} \tau\right), \quad \phi \sim \operatorname{Dir}(a, \ldots, a), \quad \tau \sim}  {\operatorname{gamma}(n a, 1 / 2)}\end{array}
+\]</span>
+as a Dirichlet-Laplace prior, denoted <span class="math inline">\(\theta\sim DL_a\)</span>.</p>
+<p>There is a frequentist literature on including a local penalty specific to each coefficient. The adaptive lasso relies on empirically estimated weights that are plugged in. Leng instead sampled the penalty parameters from a posterior, with a sparse point estimate obtained for each draw. These approaches do not produce a full posterior distribution but focus on sparse point estimates.</p>
+</div>
+<div id="posterior-computation" class="section level2">
+<h2><span class="header-section-number">14.6</span> Posterior Computation</h2>
+<p>The proposed class ofo DL prior leads to straightforward posterior computation via an efficient data augmented Gibbs sampler. The <span class="math inline">\(DL_a\)</span> prior can be equivalently represented as</p>
+<p><span class="math display">\[
+\begin{array}{l}{\theta_{j} \sim \mathrm{N}\left(0, \psi_{j} \phi_{j}^{2} \tau^{2}\right), \psi_{j} \sim \operatorname{Exp}(1 / 2), \phi \sim \operatorname{Dir}(a, \ldots, a)}  {,\tau \sim \operatorname{gamma}(n a, 1 / 2)}\end{array}
+\]</span></p>
+<p>We detail the steps in the normal means setting noting that the algorithm is trivially modified to accomodate normal linear regression, robust regression with heavy tailed residuals, probit models, logistic regression, factor models, and other hierarchical Gaussian cases. To reduce auto-correlation, we rely on marginalization and blocking as much as possible. Our sampler cycles through <span class="math inline">\(\text { (i) } \theta | \psi, \phi, \tau, y,(\text { ii) } \psi | \phi, \tau, \theta, \text { (iii) } \tau | \phi, \theta, \text { and (iv) } \phi|\theta\)</span>. We use the fact that the joint posterior of <span class="math inline">\((\psi, \phi, \tau)\)</span> is conditionally independent of <span class="math inline">\(y\)</span> given <span class="math inline">\(\theta\)</span>. Steps (ii)-(iv) together give us a draw from the conditional distribution of <span class="math inline">\((\psi, \phi, \tau) | \theta\)</span> since
+<span class="math display">\[
+[\psi, \phi, \tau | \theta]=[\psi | \phi, \tau, \theta][\tau | \phi, \theta][\phi | \theta]
+\]</span>
+Steps (i)-(iii) are standard and hence not derived. Step (iv) is nontrivial and we develop an efficient sampling algorithm for jointly sampling <span class="math inline">\(\phi\)</span>. Usual one at a time updates of a Dirichlet vector lead to tremendously slow mixing and convergence, and hence the joint updaate in Theorem 2.1 is an important feature of our proposed prior. Consider the following parameterization for the three-parameter generalized inverse Gaussian (giG) distribution:
+<span class="math inline">\(Y \sim \operatorname{giG}(\lambda, \rho, \chi)\)</span> if <span class="math inline">\(f(y) \propto y^{\lambda-1} e^{-0.5(\rho y+\chi / y)}\)</span> for <span class="math inline">\(y&gt;0\)</span>.</p>
+<p>Theorem 2.1. The joint posterior of <span class="math inline">\(\phi|\theta\)</span> has the same distribution as <span class="math inline">\(\left(T_{1} / T, \ldots, T_{n} / T\right)\)</span>, where <span class="math inline">\(T_j\)</span> are independently distributed according to a <span class="math inline">\(giG(a01,1,2|\theta_j|)\)</span> distribution, and <span class="math inline">\(T=\sum_{j=1}^{n} T_{j}\)</span>.</p>
+<p>Summaries of each step are provided below:</p>
+<ol style="list-style-type: decimal">
+<li><p>To sample <span class="math inline">\(\theta | \psi, \phi, \tau, y\)</span>, draw <span class="math inline">\(\theta_j\)</span> independently from an <span class="math inline">\(N(\mu_j,\sigma_j^2)\)</span> distribution with
+<span class="math display">\[\sigma_{j}^{2}=\left\{1+1 /\left(\psi_{j} \phi_{j}^{2} \tau^{2}\right)\right\}^{-1}, \quad \mu_{j}=\left\{1+1 /\left(\psi_{j} \phi_{j}^{2} \tau^{2}\right)\right\}^{-1} y\]</span>.</p></li>
+<li><p>The conditional posterior of <span class="math inline">\(\psi | \phi, \tau, \theta\)</span> can be sampled efficiently in a block by independently sampling <span class="math inline">\(\tilde{\psi}_{j} | \phi, \theta\)</span> from an inverse-Gaussian distribution <span class="math inline">\(\mathrm{i} \mathrm{G}\left(\mu_{j}, \lambda\right)\)</span> with <span class="math inline">\(\mu_{j}=\phi_{j} \tau /\left|\theta_{j}\right|, \lambda=1\)</span> and setting <span class="math inline">\(\psi_{j}=1 / \tilde{\psi}_{j}\)</span>.</p></li>
+<li><p>Sample the conditional posterior of <span class="math inline">\(\tau|\phi,\theta\)</span> from a <span class="math inline">\(\operatorname{giG}\left(\lambda-n, 1,2 \sum_{j=1}^{n}\left|\theta_{j}\right| / \phi_{j}\right)\)</span> distribution.</p></li>
+<li><p>To sample <span class="math inline">\(\phi|\theta\)</span>, draw <span class="math inline">\(T_{1}, \ldots, T_{n}\)</span> independently with <span class="math inline">\(T_{j} \sim \operatorname{giG}\left(a-1,1,2\left|\theta_{j}\right|\right)\)</span> and set <span class="math inline">\(\phi_j=T_j/T\)</span> with <span class="math inline">\(T=\sum_{j=1}^n T_j\)</span>.</p></li>
+</ol>
+</div>
+<div id="concentration-properties-of-dirichlet-laplace-priors" class="section level2">
+<h2><span class="header-section-number">14.7</span> Concentration properties of dirichlet-laplace priors</h2>
+<p>In this section, we study a number of properties of the joint density of the Dirichlet-Laplace prior <span class="math inline">\(DL_a\)</span> on <span class="math inline">\(\mathbb R^n\)</span> and investigate the implied rate of posterior contraction in the normal means setting.</p>
 
-</div>
-</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
-</div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
+<div id="ref-Bhattacharya:2015cq">
+<p>Bhattacharya, Anirban, Debdeep Pati, Natesh S Pillai, and David B Dunson. 2015. “Dirichlet-Laplace priors for optimal shrinkage.” <em>Journal of the American Statistical Association</em> 110 (512): 1479–90.</p>
 </div>
 </div>
             </section>
@@ -515,8 +573,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homogeneity-tests-of-covariance-matrices-with-high-dimensional-longitudinal-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

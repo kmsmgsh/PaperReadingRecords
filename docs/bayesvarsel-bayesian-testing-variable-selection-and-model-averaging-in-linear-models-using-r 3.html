@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 17 BayesVarSel: Bayesian Testing, Variable Selection and model averaging in Linear Models using R | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 17 BayesVarSel: Bayesian Testing, Variable Selection and model averaging in Linear Models using R | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 17 BayesVarSel: Bayesian Testing, Variable Selection and model averaging in Linear Models using R | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="modeling-local-dependence-in-latent-vector-autoregressive-models.html">
+<link rel="next" href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,139 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
-<ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
-</ul>
-</div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
+<div id="bayesvarsel-bayesian-testing-variable-selection-and-model-averaging-in-linear-models-using-r" class="section level1">
+<h1><span class="header-section-number">Paper 17</span> BayesVarSel: Bayesian Testing, Variable Selection and model averaging in Linear Models using R</h1>
+<p>摘要
+介绍了使用BayesVarSel包进行主观Bayes的假设检验问题以及变量选择问题，并且提供了model average和prediction的工具。
+默认使用 <em>criteria-based-prior</em> by Bayarri et al (2012).</p>
+<p>introduction</p>
+<p>1.1 检验
+贝叶斯假设检验，例子是 检验两个总体的均值是否相等，给出了相应的代码和例子。
+第二个例子是回归参数的检验以及实例代码。
+比如说
+检验
+<span class="math display">\[
+H_{0} : \beta_{d p i}=\beta_{d d p i}=\beta_{p o p 15}=\beta_{p o p 75}=0
+\]</span>
+以及类似模型对应的variable selection.</p>
+<p><img src="https://cdn.mathpix.com/snip/images/7fE_5P-mhk3XyPLzQk4I7kmmTNgx7NcqIp4sLHmp9Qw.original.fullsize.png" /></p>
+<p>1.2 Variable selection
+可以把Variable selection问题看成是一个multiple-test问题，比如有p个variables,那么模型选择就变成<span class="math inline">\(2^p\)</span> 个hypothesis test的问题
+用这个思路BayesVarSel包里有对应的函数Btest</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Basic Formulae
+考虑高斯线性模型
+<span class="math display">\[
+M_{F} : \boldsymbol{y}=\boldsymbol{X}_{0} \boldsymbol{\alpha}+\boldsymbol{X} \boldsymbol{\beta}+\varepsilon, \boldsymbol{\varepsilon} \sim N_{n}\left(\mathbf{0}, \sigma^{2} \boldsymbol{I}_{n}\right)
+\]</span>
+要做covariates 是否对回归有显著变化的test，那么就考虑和null-model就行对比
+<span class="math display">\[
+M_{0} : \boldsymbol{y}=\boldsymbol{X}_{0} \boldsymbol{\alpha}+\varepsilon, \boldsymbol{\varepsilon} \sim N_{n}\left(\mathbf{0}, \sigma^{2} \boldsymbol{I}_{n}\right)
+\]</span>
+也就是有Bayes Factor如下：
+<span class="math display">\[
+B_{F 0}=\frac{m_{F}(\boldsymbol{y})}{m_{0}(\boldsymbol{y})}
+\]</span>
+<span class="math inline">\(m_F\)</span>和<span class="math inline">\(m_0\)</span>是integrated likelihood 或者 predictive marginal:也就是把其他参数积掉的模型：
+<span class="math display">\[
+m_{0}(\boldsymbol{y})=\int M_{0}(\boldsymbol{y} | \boldsymbol{\alpha}, \sigma) \pi_{0}(\boldsymbol{\alpha}, \sigma) d \boldsymbol{\alpha} d \sigma
+\]</span>
+以及
+<span class="math display">\[
+m_{F}(\boldsymbol{y})=\int M_{F}(\boldsymbol{y} | \boldsymbol{\alpha}, \boldsymbol{\beta}, \sigma) \pi_{F}(\boldsymbol{\alpha}, \boldsymbol{\beta}, \sigma) d \boldsymbol{\beta} d \boldsymbol{\alpha} d \sigma
+\]</span></li>
+</ol>
+<p><span class="math inline">\(\pi_0\)</span> is the prior distribution for the parameters.
+默认的参数prior是robust prior by Bayarri et al.(2012)</p>
 <p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
+\operatorname{Pr}\left(H_{F} | \boldsymbol{y}\right)=\frac{B_{F 0} \operatorname{Pr}\left(H_{F}\right)}{\left(\operatorname{Pr}\left(H_{0}\right)+B_{F 0} \operatorname{Pr}\left(H_{F}\right)\right)}, \operatorname{Pr}\left(H_{0} | \boldsymbol{y}\right)=1-\operatorname{Pr}\left(H_{F} | \boldsymbol{y}\right)
 \]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
+bayes factor乘以<span class="math inline">\(H_F\)</span> 的先验概率，这就是null model的先验概率加上<span class="math inline">\(H_F\)</span>的先验概率，权值是Bayes factor。因为Bayes factor是<span class="math inline">\(H_F\)</span>的后验概率除以<span class="math inline">\(H_0\)</span>的后验概率。</p>
+<p>但是当变量数量很多的时候,有些模型evidence会虚假的高(因为很多假设都是同时考虑的（有什么关系？）)。基于Scott and Berger(2006)多元假设必须控制每个<span class="math inline">\(H_\gamma\)</span>的先验，这篇文章里作者建议使用
 <span class="math display">\[
-\theta_j=I_j\beta_j
+\operatorname{Pr}\left(H_{\gamma}\right)=\left((p+1)\left(\begin{array}{c}{p} \\ {p_{\gamma}}\end{array}\right)\right)^{-1}
 \]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
+作为先验。</p>
+<p>不管是常数先验还是上文这个ScottBerger prior，都是一种更复杂的先验的特殊情况:
 <span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+\operatorname{Pr}\left(M_{\gamma} | \theta\right)=\theta^{p_{\gamma}}(1-\theta)^{p-p_{\gamma}}
+\]</span>
+<span class="math inline">\(\theta\in (0,1)\)</span> 是一个变量被包含在模型中的概率.
+对应的常数先验是<span class="math inline">\(\theta=1/2\)</span>,ScottBerger先验则是<span class="math inline">\(\theta\sim Unif(0,1)\)</span>. Ley and Steel (2009)则用另外一种形式
+<span class="math display">\[
+\theta \sim \operatorname{Beta}(\theta | 1, b)
+\]</span>
+一般来讲，用户会对有关于多少个变量的先验信息，记为<span class="math inline">\(w^{\star}\)</span>.
+这个信息可以体现在b里面：<span class="math inline">\(b=\left(p-w^{\star}\right) / w^{\star}\)</span>.
+这样先验的性质就是covariates的数量的期望就是<span class="math inline">\(w^{\star}\)</span>.
+把上式带到上上式中就可以（积掉<span class="math inline">\(\theta\)</span>）就有
+<span class="math display">\[
+\operatorname{Pr}\left(M_{\gamma} | b\right) \propto \Gamma\left(p_{\gamma}+1\right) \Gamma\left(p-p_{\gamma}+b\right)
 \]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Hypothesis testing with BayesVarSel</li>
+</ol>
+<p>使用这个包里面Btest进行实现test。主要说模型比较如何用，如何定义nested model。</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Variable selection with BayesVarSel</li>
+</ol>
+<p>如果要算全部<span class="math inline">\(2^p\)</span>个模型，当p很大的时候就很不现实，需要特殊的函数处理这个multiple testing problem.</p>
+<ul>
+<li>Bvs : 当<span class="math inline">\(p\leq 25\)</span>时，使用这个，会穷举所有hypotheses</li>
+<li>PBvs : Parallel Version of Bvs</li>
+<li>GibbsBvs: Simulations from the posterior distribution over the model space using a Gibbs sampling scheme. (use when p&gt;25)</li>
+</ul>
+<p>然后使用USCrime 和 SDM两个数据。</p>
+<p>4.1 Common arguments</p>
+<p>fixed.cov: 固定的covariate，也就是说Null-model（对比的基准）包含哪些model，一般来说使用<code>c(&quot;Intercept&quot;)</code>。如果要只包含error的话使用<code>fixed.cov=NULL</code>.</p>
+<p>4.2 Specific arguments</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Summary</li>
+</ol>
+<p>Summarize the result analysis tools.</p>
+<p>可以直接打印Bvs对象，得到的信息是Highest Posterior Probability model给出的intercept的点估计以及包含的variable。</p>
+<p>如果不是用Bvs 或者PBvs，而是用GibbsBvs，那么结果就是渐进的而不是exact的。 Approximation基于Garcia-Donato and Martinez-Beneito(2013)的方法。
+返回值是一个HPM。</p>
+<p>Barbieri and Berger (2004) 证明了，under general conditions, 如果单一模型要用于预测，MPM是最优的。</p>
+<ul>
+<li><p>图像总结和jointness.</p>
+<ul>
+<li><span class="math inline">\(\operatorname{Pr}\left(x_{i}, x_{j} | \boldsymbol{y}\right)\)</span> 对应 <code>option=&quot;joint&quot;</code>.
+A matrix plot with the joint inclusion probabilities.</li>
+<li><span class="math inline">\(\operatorname{Pr}\left(x_{i} | x_{j}, \boldsymbol{y}\right)\)</span> 对应 <code>option=&quot;conditional</code></li>
+<li><span class="math inline">\(\operatorname{Pr}\left(x_{i} | \operatorname{Not} x_{j}, \boldsymbol{y}\right)\)</span> 对于 <code>option=conditional</code></li>
+<li>number of variables的条形图<code>option=dimension</code></li>
+</ul></li>
+</ul>
+<div id="movel-averaged-estimations-and-predictions" class="section level2">
+<h2><span class="header-section-number">17.1</span> 6 Movel averaged estimations and predictions</h2>
+<p>考虑感兴趣的统计量<span class="math inline">\(\Lambda\)</span>,在模型<span class="math inline">\(M_\gamma\)</span>下这个量有后验分布<span class="math inline">\(\pi^{N}\left(\Lambda | \boldsymbol{y}, M_{\gamma}\right)\)</span>,with non-informative prior <span class="math inline">\(\pi_\gamma^{N}\)</span>. 则考虑所有考虑到的模型取平均，则可以得到均值：
+<span class="math display">\[
+f(\Lambda | \boldsymbol{y})=\sum_{\gamma} \pi^{N}\left(\Lambda | \boldsymbol{y}, M_{\gamma}\right) \operatorname{Pr}\left(M_{\gamma} | \boldsymbol{y}\right)
+\]</span>
+对于<span class="math inline">\(\pi^{N}\left(\Lambda | \boldsymbol{y}, M_{\gamma}\right)\)</span>,使用reference piror by Berger and Bernardo (1992), Berger et al.(2009).当模型都已知的时候，这个先验有着非常好的理论性质。</p>
+<p>主要关心的<span class="math inline">\(\Lambda\)</span>有两类，第一类是回归系数<span class="math inline">\(\beta_i\)</span> 第二个是预测值<span class="math inline">\(y^\star\)</span>当已知预测的covariate<span class="math inline">\(x^\star\)</span>时。</p>
+<div id="estimation" class="section level3">
+<h3><span class="header-section-number">17.1.1</span> 6.1 Estimation</h3>
+<p>Inclusion probaiblities <span class="math inline">\(Pr(x_i|\boldsymbol y)\)</span></p>
+<p><span class="math display">\[
+f(\boldsymbol{\alpha}, \boldsymbol{\beta} | \boldsymbol{y})=\sum_{\gamma} S t_{p_{\gamma}+p_{0}}\left(\left(\boldsymbol{\alpha}, \boldsymbol{\beta}_{\gamma}\right) |\left(\hat{\boldsymbol{\alpha}}, \hat{\boldsymbol{\beta}}_{\gamma}\right),\left(\boldsymbol{Z}_{\gamma}^{t} \boldsymbol{Z}_{\gamma}\right)^{-1} \frac{S S E_{\gamma}}{n-p_{\gamma}-p_{0}}, n-p_{\gamma}-p_{0}\right) \operatorname{Pr}\left(M_{\gamma} | \boldsymbol{y}\right)
+\]</span>
+没懂的是为什么会推出来multivariate student distribution会在这里出现来着，是通过normal error推出来的吗。
+除此以外应该没什么，就是通过Bvs，PBvs得到，然后如果p太大用Gibbs算。</p>
 </div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
-</div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+<div id="prediction" class="section level3">
+<h3><span class="header-section-number">17.1.2</span> 6.2 Prediction</h3>
+<p>和之前的分布差不多，预测的分布如下：
+<span class="math display">\[
+f\left(y^{\star} | \boldsymbol{y}, \boldsymbol{x}^{\star}\right)=\sum_{\gamma} S t\left(y^{\star} | \boldsymbol{x}_{\gamma}^{\star}\left(\hat{\boldsymbol{\alpha}}, \hat{\boldsymbol{\beta}}_{\gamma}\right), \frac{S S E_{\gamma}}{h_{\gamma}}, n-p_{\gamma}-p_{0}\right) \operatorname{Pr}\left(M_{\gamma} | \boldsymbol{y}\right)
+\]</span>
+where
+<span class="math display">\[
+h_{\gamma}=1-\boldsymbol{x}_{\gamma}^{\star}\left(\left(\boldsymbol{x}_{\gamma}^{\star}\right)^{t} \boldsymbol{x}_{\gamma}^{\star}+\boldsymbol{Z}_{\gamma}^{t} \boldsymbol{Z}_{\gamma}\right)^{-1}\left(\boldsymbol{x}_{\gamma}^{\star}\right)^{t}
+\]</span></p>
 
 </div>
-</div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
-</div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
 </div>
 </div>
             </section>
@@ -515,8 +535,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modeling-local-dependence-in-latent-vector-autoregressive-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="criteria-for-bayesian-model-choice-with-application-to-variable-selection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

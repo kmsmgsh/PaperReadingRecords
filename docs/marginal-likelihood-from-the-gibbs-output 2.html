@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 21 Marginal Likelihood From the Gibbs Output | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 21 Marginal Likelihood From the Gibbs Output | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 21 Marginal Likelihood From the Gibbs Output | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html">
+<link rel="next" href="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
+<div id="marginal-likelihood-from-the-gibbs-output" class="section level1">
+<h1><span class="header-section-number">Paper 21</span> Marginal Likelihood From the Gibbs Output</h1>
+<div id="abstract-13" class="section level2">
+<h2><span class="header-section-number">21.1</span> Abstract</h2>
+<p>Computing the marginal denstiy of the sample data(marginal likelihood) given parameter draws from the posterior distribution.</p>
+<p>This could be challenge, an estimate of the posterior density is shown to be available if all complete conditional densities used in the Gibbs sampler have closed form expressions. The posterior density is estimated at a high density point.</p>
+</div>
+<div id="introduction-16" class="section level2">
+<h2><span class="header-section-number">21.2</span> Introduction</h2>
+<p>The marginal likelihood, which is the normalizing constant of the posterior density and an input ot the computation of Bayes factors, has proved extremely challenging. Marginal likelihood is obtained by integrating the likelihood function with respect to the prior density, whereas the MCMC method produces draws from the posterior.</p>
+<p>One way to deal with this problem is to compute Bayes factors without attempting to calculate the marginal likelihood by introducing a model indicator into the lisst of unknown parameters.</p>
+<blockquote>
+<p>How to do this? by Carlin and Polson(1991), Carlin and Chib(1995), and many others.</p>
+</blockquote>
+<p>To use these methods, it is neccessary to specify all of the competing models at the outset, which may not be always possible, and to carefully specify certain tuning constants to ensure that the simulation algorithm mixeed suitably in model space.</p>
+</div>
+<div id="notation-1" class="section level2">
+<h2><span class="header-section-number">21.3</span> Notation:</h2>
+<p>Suppose that <span class="math inline">\(f\left(\mathbf{y} | \boldsymbol{\theta}_{k}, M_{k}\right)\)</span> is the density function of the data <span class="math inline">\(\mathbf{y}=\left(y_{1}, \dots, y_{n}\right)\)</span> under model <span class="math inline">\(M_{k}(k=1,2, \ldots, K)\)</span> given the model-specific parameter vector <span class="math inline">\(\theta_k\)</span>. Let the prior density of <span class="math inline">\(\theta_k\)</span> (assumed to be proper) be given by <span class="math inline">\(\pi\left(\boldsymbol{\theta}_{k} | M_{k}\right)\)</span>, and let <span class="math inline">\(\left\{\boldsymbol{\theta}_{k}^{(g)}\right\} \equiv\left\{\boldsymbol{\theta}_{k}^{(1)}, \ldots, \boldsymbol{\theta}_{k}^{(\hat{G})}\right\}\)</span> be <span class="math inline">\(G\)</span> draws from the posterior density <span class="math inline">\(\pi\left(\boldsymbol{\theta}_{k} | \mathbf{y}, M_{k}\right)\)</span> obtained using a MCMC method, say the Gibbs sampler.</p>
+<p>Newton and Raftery(1994) showed that the marginal likelihood (equivalently, the marginal density of <span class="math inline">\(y\)</span>) under model <span class="math inline">\(M_k\)</span>, that is,
+<span class="math display">\[
+m\left(\mathbf{y} | M_{k}\right)=\int f\left(\mathbf{y} | \boldsymbol{\theta}_{k}, M_{k}\right) \pi\left(\boldsymbol{\theta}_{k} | M_{k}\right) d \boldsymbol{\theta}_{k}
+\]</span>
+can be estimated as
+<span class="math display">\[
+\hat{m}_{\mathrm{NR}}=\left\{\frac{1}{G} \sum_{g=1}^{G}\left(\frac{1}{f\left(\mathbf{y} | \boldsymbol{\theta}_{k}^{(g)}, M_{k}\right)}\right)\right\}^{-1}
+\]</span></p>
+<p>Although this is a simulation-consistent estimate of <span class="math inline">\(m\left(\mathbf{y} | M_{k}\right)\)</span>, it is not stable, because the inverse likelihood does not have finite variance.</p>
+<p>However, consider the quantity proposed by Gelfand and Dey(1993):
+<span class="math display">\[
+\hat{m}_{\mathrm{GD}}=\left\{\frac{1}{G} \sum_{g=1}^{G}\left(\frac{p\left(\boldsymbol{\theta}_{k}^{(g)}\right)}{f\left(\mathbf{y} | \boldsymbol{\theta}_{k}^{(g)}, M_{k}\right) \pi\left(\boldsymbol{\theta}_{k}^{(g)} | M_{k}\right)}\right)\right\}^{-1}
+\]</span>
+where <span class="math inline">\(p(\boldsymbol{\theta})\)</span> is a density with tails thinner than the product of the prior and the likelihood.
+It can be shown that
+<span class="math display">\[
+\hat{m}_{\mathrm{GD}} \rightarrow m\left(\mathbf{y} | M_{k}\right)
+\]</span>
+as G becomes large without the instability of <span class="math inline">\(\hat{m}_{\mathrm{NR}}\)</span>.</p>
+<p>The difficulty for this method is that the tunning function <span class="math inline">\(p(\theta)\)</span> is hard to decide.</p>
+<p>In fact, we have found that the somewhat obvious choices of <span class="math inline">\(p(\cdot)\)</span>, a normal density or t density with mean and covariance equal to the posterior mean and covariance— do not necessarily satisfy the thinness requirement.</p>
+<p>Another attempts to modify the harmonic mean estimator, though requiring samples from both the prior and posterior distributions, have been discussed by Newton and Raftery(1994).</p>
+<p>The purpose of this article is to demonstrate that a simple approach to computing the marginal likelihood and the Bayes factor is available that is free of the problems just described.</p>
+<p>To compute the marginal density by this approach, it is necessary that all integrating constants of the full conditional distributions in the Gibbs sampler be known.</p>
+<blockquote>
+<p>Seems my model does not meet the requirement, so maybe turn to previous method.</p>
+</blockquote>
+<p>So turn to Approximate Bayesian Inference with the Weighted Likelihood Bootstrap.</p>
+<blockquote>
+<p>Come back because the another approach use the results presents here</p>
+</blockquote>
+<p>This requirement is usually satisfied in models fit with conjugate priors and covers almost all applications of the Gibbs sampler that have appeared in the literature.</p>
+<p><strong>Structure</strong></p>
 <ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
+<li>Section 2 presents the approach</li>
+<li>Section 3 illustrates the derivation of the numerical standard error of the estimate.</li>
+<li>Section 4 presents applications of the approach: variable selection in probit regression, model comparisons in finite mixture models.</li>
+<li>Final section contains brief concluding remarks.</li>
 </ul>
 </div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
-<p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
-\]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
+<div id="approach" class="section level2">
+<h2><span class="header-section-number">21.4</span> Approach</h2>
+<p><span class="math inline">\(f(y|\theta)\)</span> is the sampling density (likelihood function), <span class="math inline">\(\pi(\theta)\)</span> is the prior density.
+For model complexity, let <span class="math inline">\(z\)</span> denote latent data and suppose that for a given set of vector blocks <span class="math inline">\(\boldsymbol{\theta}=\left(\boldsymbol{\theta}_{1}, \boldsymbol{\theta}_{2}, \ldots, \boldsymbol{\theta}_{B}\right)\)</span>, the Gibbs sampling algorithm is applied to the set of <span class="math inline">\((B+1)\)</span> complete conditional densities,
 <span class="math display">\[
-\theta_j=I_j\beta_j
-\]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
-<span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+\left\{\pi\left(\boldsymbol{\theta}_{r} | \mathbf{y}, \boldsymbol{\theta}_{s}(s \neq r), \mathbf{z}\right)\right\}_{r=1}^{B}, \quad p(\mathbf{z} | \mathbf{y}, \boldsymbol{\theta})
 \]</span></p>
-</div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
-</div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+<blockquote>
+<p>看完了但是没空写</p>
+</blockquote>
+<p><a href="https://stats.stackexchange.com/questions/129109/marginal-likelihood-from-the-gibbs-output">一些值得注意的细节</a></p>
 
-</div>
-</div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
-</div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
 </div>
 </div>
             </section>
@@ -515,8 +473,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-review-of-bayesian-variable-selection-methods-what-how-and-which.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

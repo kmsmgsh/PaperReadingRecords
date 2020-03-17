@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 5 Sparse inverse covariance estimation with the graphical lasso | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 5 Sparse inverse covariance estimation with the graphical lasso | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 5 Sparse inverse covariance estimation with the graphical lasso | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html">
+<link rel="next" href="a-bayesian-lasso-via-reversible-jump-mcmc.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
-<ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
-</ul>
+<div id="sparse-inverse-covariance-estimation-with-the-graphical-lasso" class="section level1">
+<h1><span class="header-section-number">Paper 5</span> Sparse inverse covariance estimation with the graphical lasso</h1>
+<p>by <span class="citation">(Friedman, Hastie, and Biostatistics <a href="#ref-Friedman:2008tb">2008</a>)</span></p>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">5.1</span> Summary</h2>
+<p>Estimating sparse graph by lasso penalty to precision matrix.
+Using coordinate descent procedure for the lasso-&gt; <em>graphical lasso</em>, which is remarkably fast.</p>
 </div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
+<div id="introduction-4" class="section level2">
+<h2><span class="header-section-number">5.2</span> Introduction</h2>
+<p>Estimation of sparse undirected graphical models through <span class="math inline">\(L_1\)</span> regularization. Basic model: observations follows <span class="math inline">\(MVN(\mu,\Sigma)\)</span>. An important result in graphical model is that if the <span class="math inline">\(ij\)</span> th component of <span class="math inline">\(\Sigma^{-1}\)</span> is 0, <span class="math inline">\(\sigma_{ij}=0\)</span>, then the variable <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are conditionally independent condition on other variables. This is the reason to impose penalty to precision matrix <span class="math inline">\(\Sigma^{-1}\)</span> to increase its sparsity.</p>
+<p><span class="citation">(Meinshausen and Bühlmann <a href="#ref-Meinshausen:2006fu">2006</a>)</span> take a simple approach: estimate sparse graphical model by fitting lasso to each variable. The correspond <span class="math inline">\(\hat\Sigma_{ij}^{-1}\)</span> is nonzero if variable estiamted coefficient of variable <span class="math inline">\(i\)</span> on <span class="math inline">\(j\)</span> or <span class="math inline">\(j\)</span> on <span class="math inline">\(i\)</span> is nonzero.(They use AND rather than OR). Then they showed method is asymptotically consistenctly estimates of <span class="math inline">\(\Sigma^{-1}\)</span> for nonzero elements.</p>
+<p>Others propose exact maximization of the <span class="math inline">\(L_1\)</span> penalized loglikelihood,
+some adapt interior-point optimization methods, and simpler approach to <span class="citation">(Meinshausen and Bühlmann <a href="#ref-Meinshausen:2006fu">2006</a>)</span>.</p>
+<p>This paper use blockwise coordinate descent approach in (Banerjee,et.al. 2007) at launch point, and propose a new algorithm for the exat problem. It also bridge the original idea and the exact problem.</p>
+</div>
+<div id="the-proposed-model" class="section level2">
+<h2><span class="header-section-number">5.3</span> The Proposed Model</h2>
+<p>Assume we have N <span class="math inline">\(MVN(\mu,\Sigma)\)</span> observations with dimension p. Let <span class="math inline">\(\Theta=\Sigma^{-1}\)</span>, and S be the empirical covariance matrix, the problem is maximize the penalized log-likelihood
+<span class="math display">\[
+\log \operatorname{det} \Theta-\operatorname{tr}(S \Theta)-\rho\|\Theta\|_{1}
+\]</span>
+over the nonnegative definite matrices <span class="math inline">\(\Theta\)</span>, <span class="citation">(Yuan and Lin <a href="#ref-Yuan:2007kk">2007</a>)</span> solves this problemusing the interior-point method for the “maxdet” problem. Banerjee and others (2007) use another framework for the optimization which impetus for this paper work.</p>
+<p>They showed that the problem of penalized log-likelihood is convex and estimation of <span class="math inline">\(\Sigma\)</span> as
+W. which is</p>
 <p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
+W=\left( \begin{array}{cc}{W_{11}} &amp; {w_{12}} \\ {w_{12}^{T}} &amp; {w_{22}}\end{array}\right), \quad S=\left( \begin{array}{cc}{S_{11}} &amp; {s_{12}} \\ {s_{12}^{T}} &amp; {s_{22}}\end{array}\right)
 \]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
+solving the problem by optimizing over each row and corresponding column of W in a block coordinate descent fashion. The solution for <span class="math inline">\(w_{12}\)</span> satisfies
 <span class="math display">\[
-\theta_j=I_j\beta_j
+w_{12}=\operatorname{argmin}_{y}\left\{y^{T} W_{11}^{-1} y :\left\|y-s_{12}\right\|_{\infty} \leqslant \rho\right\}
 \]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
+this is box-constrained quadratic program(QP) solve using interior-point procedure.</p>
+<blockquote>
+<p>If this procedure is initialized with a positive definite matrix, they show that the iterates from this procedure remains positive definite and invertible, even if p&gt;N</p>
+</blockquote>
+<p>Using convex duality, solve <span class="math inline">\(w_{12}\)</span> is equivalent to solving the dual problem</p>
+<p><span class="math display" id="eq:2-4">\[
+\begin{equation} 
+\min _{\beta}\left\{\frac{1}{2}\left\|W_{11}^{1 / 2} \beta-b\right\|^{2}+\rho\|\beta\|_{1}\right\}
+\tag{5.1}
+\end{equation} 
+\]</span>
+where <span class="math inline">\(b=W_{11}^{-1 / 2} s_{12}\)</span>.
+Expanding <span class="math inline">\(W \Theta=I\)</span> as</p>
+<p><span class="math display">\[
+\left( \begin{array}{cc}{W_{11}} &amp; {w_{12}} \\ {w_{12}^{T}} &amp; {w_{22}}\end{array}\right) \left( \begin{array}{ll}{\Theta_{11}} &amp; {\theta_{12}} \\ {\theta_{12}^{T}} &amp; {\theta_{22}}\end{array}\right)=\left( \begin{array}{cc}{I} &amp; {0} \\ {0^{T}} &amp; {1}\end{array}\right)
+\]</span>
+Now the subgradient equation for maximization the log-likelihood is
 <span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
-\]</span></p>
-</div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
-</div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+W-S-\rho \cdot \Gamma=0
+\]</span>
+by <em>convex optimization</em> Boyd 2004.</p>
+<p>The computation omit…</p>
+<p>…
+Note that solution of <span class="math inline">\(\beta\)</span> to the lasso problem <a href="sparse-inverse-covariance-estimation-with-the-graphical-lasso.html#eq:2-4">(5.1)</a> ,gives (up to a negative constant), the corresponding part of <span class="math inline">\(\Theta:\theta_{12}=-\theta_{22} \beta\)</span>.</p>
+<p>The main point of this paper:</p>
+<p><a href="sparse-inverse-covariance-estimation-with-the-graphical-lasso.html#eq:2-4">(5.1)</a> Lookslike a lasso LS problem, and the solutions <span class="math inline">\(\hat\beta\)</span> are easily seen to lasso estimates for the pth variable.</p>
+<p>..</p>
+<p>..</p>
+<p>And this paragraph is extreme important</p>
+<blockquote>
+<p>Now to the main point of this paper. Problem (2.4) looks like a lasso (L1-regularized) least-squares problem. In fact if <span class="math inline">\(W_{11}\)</span> = <span class="math inline">\(S_{11}\)</span>, then the solutions βˆ are easily seen to equal the lasso estimates for the pth variable on the others and hence related to the Meinshausen and Bu ̈hlmann (2006) proposal. As pointed out by Banerjee and others (2007),<span class="math inline">\(W_{11} \neq S_{11}\)</span> in general, and hence, the Meinshausen and Bu ̈hlmann (2006) approach does not yield the maximum likelihood estimator. They point out that their blockwise interior point procedure is equivalent to recursively solving and updating the lasso problem (2.4), but do not pursue this approach. We do, to great advantage, because fast coordinate descent algorithms (Friedman and others, 2007) make solution of the lasso problem very attractive.</p>
+</blockquote>
+<p>…
+然后时间不够看不懂了。</p>
+<p>这篇的要点：</p>
+<ul>
+<li>Meinshausen and Bu ̈hlmann (2006) 的思路（在introduction中），</li>
+<li>对于penalized loglikelihood的几个解决方案，interior-point optimization methods。</li>
+<li>Block-wise coordinate descent approach</li>
+<li>duality convex的那个式子</li>
+<li>Boyd 2004 p641 提供的subgradient equation for MLE.</li>
+</ul>
+<p>没看懂的</p>
+<ul>
+<li>Graphical lasso是通过哪一点作为初始然后优化了结论？</li>
+<li>优化过程的推导</li>
+<li>几个等价性的问题。</li>
+</ul>
+<p>没看的</p>
+<p>时间比较，实证分析，公式推演（基本上其实这篇文章就没看？</p>
+<p>但是只花了2个多小时来着。</p>
 
-</div>
-</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
+<div id="ref-Friedman:2008tb">
+<p>Friedman, J, T Hastie, and R Tibshirani Biostatistics. 2008. “Sparse inverse covariance estimation with the graphical lasso.” <em>Biostatistics</em>.</p>
 </div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
+<div id="ref-Meinshausen:2006fu">
+<p>Meinshausen, Nicolai, and Peter Bühlmann. 2006. “High-dimensional graphs and variable selection with the lasso.” <em>The Annals of Statistics</em> 34 (3): 1436–62.</p>
+</div>
+<div id="ref-Yuan:2007kk">
+<p>Yuan, Ming, and Y Lin. 2007. “Model selection and estimation in the Gaussian graphical model.” <em>Biometrika</em> 94 (1): 19–35.</p>
 </div>
 </div>
             </section>
@@ -515,8 +498,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimation-of-random-effects-model-for-longitudinal-data-with-nonignorable-missingness-using-gibbs-sampling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-bayesian-lasso-via-reversible-jump-mcmc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

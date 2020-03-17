@@ -1,0 +1,104 @@
+# Integrated Nested Laplace Approximations(INLA)
+
+## Abstract
+Short description and basic introduction for INLA approach.
+Combination of analytical approximations and efficient numerical integration schemes to achieve highly accurate eterministic approximations to posterior quantities of interest.
+
+INLA is faster than MCMC, does not suffer from slow convergence and poor mixing. 
+
+Approximate Bayesian inference.
+
+Latent Gaussian Models: 
+3 components: 
+- A likelihood model
+- A latent Gaussian field
+- A vector of hyperparameters.
+
+The data $\mathcal y$ are assumed to be conditionally independent given the latent Gaussian field x so that the univariate likelihood model describes the marginal distribution of the observation.
+
+In generalized linear model framework, the mean, of the observation $y_i$ is linked to a Gaussian linear predictor $\eta_i$ through a known link function:
+$$
+\eta_{i}=\mu+\sum_{j} \beta_{j} z_{i j}+\sum_{k} w_{k} f^{k}\left(u_{i k}\right)
+$$
+
+$\mu$ is an overall intercept, z are known covariate with linear effect $\beta$, $w$ a vector of known weights. The terms $f^k$ are used to model random effects of the covariate $\mathcal u$. INLA framework we assign $\mu$,$\beta$ and $f^k,k=1,...,K$ a Gaussian prior. The latent Gaussian field is then $x=\left\{\boldsymbol{\eta}, \mu, \boldsymbol{\beta}, \boldsymbol{f}^{1}, \boldsymbol{f}^{2}, \ldots\right\}$. Note that we include the linear predictor in the latent field. Having each data point $y_i$ dependent on the latent Gaussian field only through one single element of $x$.
+
+A small random noise term where the precision parameter is fixed to a high value is always automatically added to the model.
+
+The hyperparameter $\theta$ can appear in the likelihood model.Typically as dispersion parameters, spatial correlation parameters or autoregression coefficients in the $f^k$ terms. Formally the model can be written as:
+$$
+\begin{aligned} \boldsymbol{y} | \boldsymbol{x}, \boldsymbol{\theta} & \sim \prod_{\boldsymbol{\pi}\left(y_{i} | \eta_{i}, \boldsymbol{\theta}\right)} \\ \boldsymbol{x} | \boldsymbol{\theta} & \sim \mathcal{N}\left(\mathbf{0}, \boldsymbol{Q}^{-1}(\boldsymbol{\theta})\right) \\ \boldsymbol{\theta} & \sim \pi(\boldsymbol{\theta}) \end{aligned}
+$$
+where $Q(\theta)$ is the precision matrix of the latent Gaussian field.
+
+A limitation of the INLA approach is the size of the hyperparameter vector $\theta$. While $y$ and $x$ can be large, $\theta$ should be small, say $<15$.
+Due to the numerical integration that has to be carried over the $\theta$ space.
+
+The dependence structure of the data is mainly captured by the precision matrix $Q(\theta)$ through a clever choice of the terms $f^k$ in first formula. In order for INLA to perform efficiently, we require the precision matrix $Q(\theta)$ to be sparse.
+
+Prior for $f^k$ terms belong to the class of so called Gaussian Markov Random field (GMRF). GMRFs can be used to model smooth effects of a covariate, random effects, measurement errors, temporal dependencies, and so on(see Rue and Held). When it comes to spatial dependence, there exist GMRF models for areal data, such as the CAR or BYM model proposed by Besag et al. Continuous spatial dependence can be specified using the so-called SPDE approach which creates an approximated GMRF representation of the Matern covariance field based on stochastic partial differentiation equations. GMRFs are Gaussian models endowed with Markov properties. 
+
+These, in turn, are linked to the non-zero structure of the precision matrix in the sense that, if two elements of the field are conditionally independent given all the others, then the corresponding entry of the precision matrix is equal to zero, see Rue and Held. In practice, choosing GMRF priors for $f^k$, induces sparsity in the precision matrix $Q(\theta)$.
+
+The resulting posterior density of $x$ and $\theta$ given $y$ is:
+$$
+\pi(\boldsymbol{x}, \boldsymbol{\theta} | \boldsymbol{y}) \propto \exp \left(-\frac{1}{2} \boldsymbol{x}^{T} \boldsymbol{Q}(\boldsymbol{\theta}) \boldsymbol{x}+\sum_{i} \log \left(\pi\left(y_{i} | \eta_{i}, \boldsymbol{\theta}\right)\right)+\log \pi(\boldsymbol{\theta})\right)
+$$
+This is a high dimensional density that is difficult to interpret. The main interest lies in the marginal posterior of the latent field $\pi(x_i|y)$ or of the hyperparameters $\pi(\theta_j|y)$. INLA provides an approximation to such marginal posterior densities, which can then be used to compute approximated summary statistics of the interest such as posterior means, variances or quantiles.
+
+
+To sum up, INLA can be applies to LGMs which fulfill the following assumptions:
+
+- Each data point depends on only one of the elements in the latent Gaussian field x, the linear predictor, so that the likelihood can be written as:
+$$
+\boldsymbol{y}|\boldsymbol{x}, \boldsymbol{\theta} \sim \prod_{i} \pi\left(y_{i} | \eta_{i}, \boldsymbol{\theta}\right).
+$$
+- The size of the hyperparameter vector $\theta$ is small (say <15)
+
+- The latent field $x$, can be large but it is endowed with some conditional independence (Markov) properties so that the precision matrix $Q(\theta)$ is sparse.
+
+- The linear predictor depends linearly on the unknown smooth function of covariates.
+
+- The inferential interest lies in the univariate posterior marginals $\pi(x_i|y)$ and $\pi(\theta_j|y)$ rather than in the joint posterior $\pi(x,\theta|y)$.
+
+## The INLA computing scheme
+
+The INLA framework provides deterministic approximations to the univariate posterior marginals for the hyperparameters $\pi(\theta_j|y)$ and the latent field $\pi(x_i|y)$. Thus, interest lies in:
+
+$$
+\begin{aligned} \pi\left(\theta_{j} | \boldsymbol{y}\right) &=\iint \pi(\boldsymbol{x}, \boldsymbol{\theta} | \boldsymbol{x}) d \boldsymbol{x} d \boldsymbol{\theta}_{-j}=\int \pi(\boldsymbol{\theta} | \boldsymbol{y}) d \boldsymbol{\theta}_{j} \\ \pi\left(x_{i} | \boldsymbol{y}\right) &=\iint \pi(\boldsymbol{x}, \boldsymbol{\theta} | \boldsymbol{x}) d \boldsymbol{x}_{-i} d \boldsymbol{\theta}=\int \pi\left(x_{i} | \boldsymbol{\theta}, \boldsymbol{y}\right) \pi(\boldsymbol{\theta} | \boldsymbol{y}) d \boldsymbol{\theta} \end{aligned}
+$$
+
+> 这里的$d\theta_j$和$dx_{-i}$有点奇怪，应该是对应着最后一个univariate posterior marginals.
+
+The core of the INLA methodology lies therefore in building clever approximations to the posterior for the hyperparameters $\pi(\theta|y)$ and the full=conditional density $\pi(x_i|\theta,y)$ that allow to avoid the cumbersome integration.
+
+An approximation to $\pi(\theta|y)$ is built starting from the identity:
+$$
+\pi(\boldsymbol{\theta} | \boldsymbol{y})=\frac{\pi(\boldsymbol{x}, \boldsymbol{\theta} | \boldsymbol{y})}{\pi(\boldsymbol{x} | \boldsymbol{\theta}, \boldsymbol{y})} \propto \frac{\pi(\boldsymbol{y} | \boldsymbol{x}, \boldsymbol{\theta}) \pi(\boldsymbol{x} | \boldsymbol{\theta}) \pi(\boldsymbol{\theta})}{\pi(\boldsymbol{x} | \boldsymbol{\theta}, \boldsymbol{y})}
+$$
+
+Notice that, while the numerator in previous formula is easy to compute, the denominator is, ingeneral, not available in closed form and hard to compute.
+
+INLA approximates this at a specific value $\theta^k$ of the hyperparameters vector as:
+$$
+\widetilde{\pi}\left(\boldsymbol{\theta}^{k} | \boldsymbol{y}\right) \propto \frac{\pi\left(\boldsymbol{y} | \boldsymbol{x}, \boldsymbol{\theta}^{k}\right) \pi\left(\boldsymbol{x} | \boldsymbol{\theta}^{k}\right) \pi\left(\boldsymbol{\theta}^{k}\right)}{\widetilde{\pi}_{G}\left(\boldsymbol{x} | \boldsymbol{\theta}^{k}, \boldsymbol{y}\right)}
+$$
+where $\widetilde{\pi}_{G}\left(\boldsymbol{x} | \boldsymbol{\theta}^{k}, \boldsymbol{y}\right)$ is a Gaussian approximation to the full conditional $\boldsymbol{x} | \boldsymbol{\theta}^{k}, \boldsymbol{y}$ build by matching the mode and the curvature at the mode.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

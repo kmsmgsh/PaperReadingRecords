@@ -1,0 +1,340 @@
+# Parsimonious Covariance Matrix Estimation for Longitudinal Data
+
+Can be used in longitudinal data with autoregressive/antedependence model.
+
+Structure:
+
+- 2: Bayesian hierachical model
+- 3: Bayesian inference, MCMC Sampling method
+- 4: Simulation Study
+- 5: Real data analysis
+- 6: Summarize
+
+Notation:
+
+$$
+e_i \sim N(0,\Sigma)
+$$
+MCD:
+$$
+\Sigma^{-1}=B D B^{\prime}
+$$
+
+This work is related to Gaussian covariance selection model, also called Gausian graphical models.
+
+
+Alternative factorization of the covariance matrix is spectral decomposition :
+$$
+\Sigma=O^{\prime} \Lambda O
+$$
+O can be further decomposed into product of Givens rotation matrices, then the covariance becomes eigenvalues and Givens angles. Yang and Berger (1994) placed reference prior and carry out Bayesian inference on $\Sigma$. This method are used to be compare the estimation efficiency.
+
+## Notation: 
+
+$$
+\Sigma^{-1}=\left\{\sigma^{i, j}\right\}
+$$
+$B=\left\{b_{i, j}\right\}$, $D=\operatorname{diag}\left(d_{1}, \ldots, d_{m}\right)$. To allow parsimony in representation,set indicator 
+$$
+\begin{aligned}
+&b_{i, j}=0 \quad \text { iff } \quad \gamma_{i, j}=0\\
+&b_{i, j} \neq 0 \quad \text { iff } \quad \gamma_{i, j}=1
+\end{aligned}
+$$
+model parameter
+$\gamma=\left\{\gamma_{i, j} | j=1, \ldots, m-1 ; i>j\right\}$.
+
+## Likelihood
+
+The likelihood of the parameters $(B, D, \gamma)$ is the density of $e=\left(e_{1}^{\prime}, \ldots, e_{n}^{\prime}\right)^{\prime}$ given $(B, D, \gamma)$, that is,
+$$
+\begin{array}{l}
+p(e | B, D, \gamma) \\
+\quad=(2 \pi)^{-n m / 2}|D|^{n / 2} \exp \left\{-\frac{1}{2} \sum_{i=1}^{n} e_{i}^{\prime} B D B^{\prime} e_{i}\right\} \\
+\quad=(2 \pi)^{-n m / 2} \prod_{i=1}^{m}\left(d_{i}\right)^{n / 2} \exp \left\{-\frac{1}{2} \sum_{k=1}^{m} d_{k} b_{k}^{\prime} A b_{k}\right\}
+\end{array}
+$$
+where $b_{k}=\left(b_{1, k}, \dots, b_{m, k}\right)^{\prime}$ is the kth column of $B$ and $A=\sum_{i=1}^{n} e_{i} e_{i}^{\prime}$. A is PD almost surely if $m\leq n$.
+
+Denote the free parameters in $\beta_k=\{b_{i,k}|i>k, \gamma_{i, k}=1\}$ the quadratic form in likelihood,
+
+> The likelihood from step 2 to 3 is obtained by the matrix multiple by column expansion, which is use column vector to present the matrix multiplication.
+
+can be written in terms of a quadratic function of $\beta_k$, so that
+$$
+b_{k}^{\prime} A b_{k}=\left\{\begin{array}{ll}
+a_{k, k}+2 \beta_{k}^{\prime} a_{k}+\beta_{k}^{\prime} A_{k} \beta_{k} & \text { for } k=1, \ldots, m-1 \\
+a_{m, m} & \text { for } k=m
+\end{array}\right.
+$$
+with
+$$
+a_{k}=\left\{a_{i, k} | i>k, \gamma_{i, k}=1\right\}
+$$
+and 
+$$
+A_{k}=\left\{a_{i, j} | i>k, j>k, \gamma_{i, j}=1\right\}
+$$
+The unconstrained elements in kth column: the dimension of $\beta_k$ is $q_k$, then the total number of unconstrained elements in B in model $\gamma$ is $q_{\gamma}=\sum_{k=1}^{m-1} q_{k}$.
+Then the likelihood can be expressed as
+
+\begin{align*}
+p\left(e | B_{\gamma}, D, \gamma\right)=(2 \pi)^{-n m / 2} \prod_{k=1}^{m}\left(d_{k}\right)^{n / 2}\\
+
+\times \exp \left(-\frac{d_{k}}{2}\left\{S_{k}(\gamma)+\left(\beta_{k}-m_{k}\right)^{\prime} A_{k}\left(\beta_{k}-m_{k}\right)\right\}\right)
+\end{align*}
+where $m_{k}=-A_{k}^{-1} a_{k}$ and $S_{k}(\gamma)=a_{k, k}-a_{k}^{\prime} A_{k}^{-1} a_{k}$
+
+
+
+## Prior Specification
+
+Use conditional prior $p(B | \gamma, D)$ similar to prior used to variable subset uncertainty in linear regression.
+
+When given $\gamma$, some entries of $B$ are fixed to be zero, then the remain unconstrained elements denoted as $B_\gamma$. The fractional conditional prior for $B_\gamma$ is by setting
+
+$$
+p\left(B_{\gamma} | \gamma, D\right) \propto p(e | B, D, \gamma)^{1 / n}
+$$
+Then
+$$
+\begin{array}{c}
+p\left(\beta_{1}, \ldots, \beta_{m} | D, \gamma\right)=\prod_{k=1}^{m-1} p\left(\beta_{k} | D, \gamma\right) \quad \text { with } \\
+\beta_{k} | D, \gamma \sim N\left(m_{k}, \Omega_{k}\right)
+\end{array}
+$$
+where $m_k$ is as defined earlier and $\Omega_{k}=\frac{n}{d_{k}} A_{k}^{-1}$.
+$\gamma_{i,j}$, with $j=1,...,m-1$ and $i>j$, prior independent with $p\left(\gamma_{i, j}=1 | \omega\right)=\omega$. Then the parsimonious measure of model is $m(m-1) \omega / 2$.
+
+The parameter $\omega$ is integrated out of the analsis, with
+$$
+\begin{aligned}
+p(\gamma) &=\int p(\gamma | \omega) p(\omega) d \omega \\
+&=\int_{0}^{1} \omega^{q_{\gamma}}(1-\omega)^{\left(r-q_{\gamma}\right)} d \omega=\operatorname{beta}\left(q_{\gamma}+1, r-q_{\gamma}+1\right)
+\end{aligned}
+$$
+with $r=m(m-1)/2$.
+
+prior for D is as usual Gamma distribution
+$$
+\begin{array}{c}
+p\left(d_{1}, \ldots, d_{m} | \xi, \kappa\right)=\prod_{k=1}^{m} p\left(d_{k} | \xi, \kappa\right), \quad \text { where } \\
+p\left(d_{k} | \xi, \kappa\right)=\frac{d_{k}^{\xi / \kappa-1} \exp \left(-d_{k} / \kappa\right)}{\Gamma(\xi / \kappa) \kappa^{\xi / \kappa}}
+\end{array}
+$$
+
+the $\xi$ and $\kappa$ is hyper-parameter, which is insensitive, so set $\xi=100$ and $\kappa=1000$.
+
+Also shrinkage prior of $d_i$ are considered, 
+$log(d_i)$ are independent and $N(\mu_d,\tau_d)$ and the prior for $\mu_d$ and $\tau_d$ is $p\left(\mu_{d}, \tau_{d}\right) \propto 1 / \tau_{d}$.
+
+log-normal prior requires MH step for generation of $d_i$.
+
+These two priors perform similar.
+
+## Inference And Simulation Method.
+
+Model-wise average:
+Posterior Mean estimatiors:
+$$
+E(B | e)=\sum_{\gamma} E(B | \gamma, e) p(\gamma | e)
+$$
+by
+$$
+\widehat{B}=J^{-1} \sum_{j=1}^{J} E\left(B | \gamma^{[j]}, D^{[j]}, e\right)
+$$
+Similarly for D is
+$$
+\widehat{D}=J^{-1} \sum_{j=1}^{J} E\left(D | \gamma^{[j]}, B^{[j]}, e\right)
+$$
+Then the estimate of $\Sigma$ is
+$$
+\widehat{\Sigma^{-1}}=J^{-1} \sum_{j=1}^{J} B^{[j]} D^{[j]}\left(B^{\prime}\right)^{[j]}
+$$
+The estimate of number of non-zero elements is
+$$
+\hat{\omega}=\frac{1}{J} \sum_{j=1}^{J} q_{\gamma^{U 1}} / r
+$$
+
+The probability of $p\left(\gamma_{i, k}=1 | e\right)$ can be obtained by
+$$
+\hat{p}\left(\gamma_{i, k}=1 | e\right)=\frac{1}{J} \sum_{j=1}^{J} \gamma_{i, k}^{[j]}
+$$
+that is, whether i-k entry are 1 in different models.
+
+> Not very related, estimators for other loss function:
+
+Based on Yang and Berger(1994)
+
+$$
+L_{1}(\widehat{\Sigma}, \Sigma)=\operatorname{tr}\left(\widehat{\Sigma} \Sigma^{-1}\right)-\log \left|\widehat{\Sigma} \Sigma^{-1}\right|-m
+$$
+and
+$$
+L_{2}(\widehat{\Sigma}, \Sigma)=\operatorname{tr}\left(\widehat{\Sigma} \Sigma^{-1}-I\right)^{2}
+$$
+
+
+### Markov Chain Monte Carlo Sampling
+
+1. Generate from $B | \gamma, D, e$
+2. Generate from $D | B, \gamma, e$
+3. Generate from $\gamma_{i, j} | \gamma_{| i, j}, D, e, \quad$ for $j=1, \ldots, m-1$
+$i>j$
+
+
+For B, the parameters $\beta_k$ is independent MVN
+For D, the posterior distribution is independent Gamma distribution.
+
+Prior is not primarily for B and D to generate likelihood. Prior also can be correct using MH algorithm.
+
+> 也就是说，主要部分都是一个Gaussian加一个Gamma，所以能直接抽，最多后面加一个MH对于prior做修正。 具体算法细节得从另外的部分开始，但是可以参考对于indicator的转移核的抽法。或者直接说就是，用likelihood部分的MVN和Gamma做proposal，这样新的和旧的就差一个prior这样。大概是？没推，但是直观上是这样。
+
+3， generate $\gamma_{i,j}$
+
+$$
+\underbrace{p\left(\gamma_{i, j} | \gamma_{| i, j}, D, e\right)}_{\pi^{*}\left(\gamma_{i, j}\right)} \propto \underbrace{p(e | \gamma, D)}_{l\left(\gamma_{i, j}\right)} \underbrace{p\left(\gamma_{i, j} | \gamma_{\backslash i, j}\right)}_{\pi\left(\gamma_{i, j}\right)}
+$$
+
+
+> This transition kernel idea is important and useful for my project.
+
+The transition kernel to generate $\gamma_{i,j}$ is
+$$
+Q\left(\gamma_{i, j}^{c}=1 \rightarrow \gamma_{i, j}^{g}=0\right)=\pi\left(\gamma_{i, j}=0\right) \frac{l\left(\gamma_{i, j}=0\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+$$
+and
+$$
+Q\left(\gamma_{i, j}^{c}=0 \rightarrow \gamma_{i, j}^{g}=1\right)=\pi\left(\gamma_{i, j}=1\right) \frac{l\left(\gamma_{i, j}=1\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+$$
+$\gamma^{c}_{i,j}$ is current value of $\gamma_{i,j}$ and $\gamma^{g}_{i,j}$ is the generated $\gamma_{i,j}$ is
+$$Q\left(\gamma_{i, j}^{c}=1 \rightarrow \gamma_{i, j}^{g}=0\right)=\pi\left(\gamma_{i, j}=0\right) \frac{l\left(\gamma_{i, j}=0\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}$$
+and
+$$Q\left(\gamma_{i, j}^{c}=0 \rightarrow \gamma_{i, j}^{g}=1\right)=\pi\left(\gamma_{i, j}=1\right) \frac{l\left(\gamma_{i, j}=1\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}$$
+
+Kohn et al(2001) showed that this transition kenerl satisfied detailed balance criteria.
+
+Then the algorithm can be obtained by
+
+1. Generate $u$ from a uniform distribution on $(0,1)$
+2. a. If $\gamma_{i, j}^{c}=1$ and $u>\pi\left(\gamma_{i, j}=0\right),$ then set $\gamma_{i, j}^{g}=1$
+b. If $\gamma_{i, j}^{c^{\prime}}=1$ and $u<\pi\left(\gamma_{i, j}=0\right),$ then generate $\gamma_{i, j}^{g}$
+from the density
+$$
+\operatorname{Pr}\left(\gamma_{i, j}=0\right)=\frac{l\left(\gamma_{i, j}=0\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+$$
+c. If $\gamma_{i, j}^{c}=0$ and $u>\pi\left(\gamma_{i, j}=1\right),$ then set $\gamma_{i, j}^{g}=0$
+d. If $\gamma_{i, j}^{c}=0$ and $u<\pi\left(\gamma_{i, j}=1\right),$ then generate $\gamma_{i, j}^{g}$ from the density
+$$
+\operatorname{Pr}\left(\gamma_{i, j}=1\right)=\frac{l\left(\gamma_{i, j}=1\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+$$
+
+in case (a)(c), only need evaluate prior $\pi(\gamma_{i,j}=1)$ rather than full posterior.
+
+In examples, most of the lower-triangular elements are identified as non-zero. (a) most frequently.
+
+## Simulation Study
+
+Cholesky Decomposition: SK estimator 
+
+compared with
+
+Yang and Berger: YB84 estimator
+
+Example 1: Homoscedastic System: $B=I, D=I$,so in this case $\Sigma=I$.
+
+Example 2: Heteroscedastic System. $B=I$ and $D=diag(\frac{1}{m}, \frac{1}{m-1}, \dots, 1)$, so $\Sigma=\operatorname{diag}(m, m-1, \dots, 1)$.
+
+Example 3, AR: $\theta=0.8$, $b_{i+1,i}=-\theta$ for $i=1,...,m-1;b_{i,j}=0$ for $j=1,...,m-2$ and $i>j+1$; $d_m=100/(1-\theta^2)$ and $d_i=100$ for $i=2,...,m$.
+
+
+Example 4: MA: MA(1), in this case, the lower triangular factor of $B$ is full, $b_{i,j}\neq 0$ for all $i>j$. band of $B$ are of $O(-\theta^i)$.
+
+
+cases: $(m,n)$, (5,40),(15,40),(30,100)
+
+$\Sigma$ and $\Sigma^{-1}$ were estimated for the simulated data, using the Bayes estimator for squared error loss (posterior means) and $L_1$ and $L_2$ loss function.
+
+MLE is
+
+$\widehat{\Sigma}=\frac{1}{n} \sum_{i=1}^{n} e_{i} e_{i}^{\prime}$
+and $\quad \widehat{\Sigma^{-1}}=(\widehat{\Sigma})^{-1}$
+
+
+The result of Bayesian posterior mean estimators and MLE were assessed by calculating the squared error loss function
+
+$$
+D(\widehat{\Sigma}, \Sigma)=\frac{1}{m^{2}}\left(\sum_{i} \sum_{j}\left(\hat{\sigma}_{i j}-\sigma_{i j}\right)^{2}\right)^{1 / 2}
+$$
+
+$L_1$ and $L_2$ was assessed relative to these loss functions.
+
+> 所以表格内容是在三种评价标准，matrix distance measure，$L_1$ and $L_2$ 下，YB94， SK 和 MLE的表现。
+
+> 用parsomonia的情况下，SK的效率稍微高一点，但是如果是full的YB94效率会更高一点。
+
+MH rate of YB94 is around 5%.
+
+## Application
+
+###Non-zero mean case:
+
+Modified as:
+$$
+y=X \alpha+e
+$$
+Then $e \sim N\left(0, I_{n} \otimes \Sigma\right)$, y is $mn\times 1$ observation vector, $\alpha$ is vector of regression coefficients. prior of $\alpha$ is proportion to constant.
+
+Then conditional posterior density of $\alpha$ is
+$$
+\begin{aligned}
+p\left(\boldsymbol{\alpha} | y, B_{\gamma}, D, \gamma\right) & \propto p\left(y | \alpha, B_{\gamma}, D, \gamma\right) p\left(B_{\gamma} | \gamma, \alpha, D\right) \\
+& \propto p\left(y | \alpha, B_{\gamma}, D, \gamma\right)^{1+1 / n}
+\end{aligned}
+$$
+
+Conditional posterior density of normal with mean $\left(X^{\prime}\left(I \otimes \Sigma^{-1}\right) X\right)^{-1} X^{\prime}\left(I \otimes \Sigma^{-1}\right) y$ and covariance matrix $n(1+n)^{-1}\left(X^{\prime}\left(I \otimes \Sigma^{-1}\right) X\right)^{-1}$. mixture estimate of $\alpha$ is
+$$
+\begin{aligned}
+\hat{\alpha} &=\frac{1}{J} \sum_{k=1}^{J} E\left(\alpha | y, \Sigma^{[k]}\right) \\
+&=\frac{1}{J} \sum_{k=1}^{J}\left(X^{\prime}\left(I \otimes\left(\Sigma^{-1}\right)^{[k]}\right) X\right)^{-1} X^{\prime}\left(I \otimes\left(\Sigma^{-1}\right)^{[k]}\right) y
+\end{aligned}
+$$
+
+
+
+
+### Longitudinal case
+$$
+\begin{aligned}
+\log \left(y_{t, i}\right)=\left(a_{k}+b_{k} T_{t}+c_{k} T_{t}^{2}\right)+e_{t, i} & \\
+\text { for } i=1, \ldots, n, t &=1, \ldots, m
+\end{aligned}
+$$
+
+error structure is independent across cows, but not across time.
+
+$e_{i}=\left(e_{1, i}, \dots, e_{m, i}\right)'$ are independent distributed $N(0,\Sigma)$.
+
+### Intraday Elextricity Demand.
+
+--- tbc
+
+## Conclusion
+
+
+
+This method may also be useful for some cross-sectional covariance matrices. Can be applied to high-dimensional covariance matrices. YB94 is impractical to apply because high rejection rate Metropolis-Hastings step becomes computationally prohibitive as the size of the matrix increases.
+
+
+
+
+
+
+
+
+
+
+
+
+

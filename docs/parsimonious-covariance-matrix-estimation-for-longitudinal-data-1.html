@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 26 Parsimonious Covariance Matrix Estimation for Longitudinal Data | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 26 Parsimonious Covariance Matrix Estimation for Longitudinal Data | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 26 Parsimonious Covariance Matrix Estimation for Longitudinal Data | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="integrated-nested-laplace-approximationsinla.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,69 +50,6 @@
 
 
 
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -375,7 +312,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
 <li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
+<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a><ul>
+<li class="chapter" data-level="26.1" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#notation-2"><i class="fa fa-check"></i><b>26.1</b> Notation:</a></li>
+<li class="chapter" data-level="26.2" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#likelihood-1"><i class="fa fa-check"></i><b>26.2</b> Likelihood</a></li>
+<li class="chapter" data-level="26.3" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#prior-specification-1"><i class="fa fa-check"></i><b>26.3</b> Prior Specification</a></li>
+<li class="chapter" data-level="26.4" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#inference-and-simulation-method."><i class="fa fa-check"></i><b>26.4</b> Inference And Simulation Method.</a><ul>
+<li class="chapter" data-level="26.4.1" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#markov-chain-monte-carlo-sampling-1"><i class="fa fa-check"></i><b>26.4.1</b> Markov Chain Monte Carlo Sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="26.5" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#simulation-study"><i class="fa fa-check"></i><b>26.5</b> Simulation Study</a></li>
+<li class="chapter" data-level="26.6" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#application"><i class="fa fa-check"></i><b>26.6</b> Application</a><ul>
+<li class="chapter" data-level="26.6.1" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#longitudinal-case"><i class="fa fa-check"></i><b>26.6.1</b> Longitudinal case</a></li>
+<li class="chapter" data-level="26.6.2" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#intraday-elextricity-demand."><i class="fa fa-check"></i><b>26.6.2</b> Intraday Elextricity Demand.</a></li>
+</ul></li>
+<li class="chapter" data-level="26.7" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html#conclusion-2"><i class="fa fa-check"></i><b>26.7</b> Conclusion</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +347,287 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
+<div id="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1" class="section level1">
+<h1><span class="header-section-number">Paper 26</span> Parsimonious Covariance Matrix Estimation for Longitudinal Data</h1>
+<p>Can be used in longitudinal data with autoregressive/antedependence model.</p>
+<p>Structure:</p>
 <ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
+<li>2: Bayesian hierachical model</li>
+<li>3: Bayesian inference, MCMC Sampling method</li>
+<li>4: Simulation Study</li>
+<li>5: Real data analysis</li>
+<li>6: Summarize</li>
 </ul>
-</div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
+<p>Notation:</p>
 <p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
+e_i \sim N(0,\Sigma)
 \]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
+MCD:
 <span class="math display">\[
-\theta_j=I_j\beta_j
-\]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
-<span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+\Sigma^{-1}=B D B^{\prime}
 \]</span></p>
+<p>This work is related to Gaussian covariance selection model, also called Gausian graphical models.</p>
+<p>Alternative factorization of the covariance matrix is spectral decomposition :
+<span class="math display">\[
+\Sigma=O^{\prime} \Lambda O
+\]</span>
+O can be further decomposed into product of Givens rotation matrices, then the covariance becomes eigenvalues and Givens angles. Yang and Berger (1994) placed reference prior and carry out Bayesian inference on <span class="math inline">\(\Sigma\)</span>. This method are used to be compare the estimation efficiency.</p>
+<div id="notation-2" class="section level2">
+<h2><span class="header-section-number">26.1</span> Notation:</h2>
+<p><span class="math display">\[
+\Sigma^{-1}=\left\{\sigma^{i, j}\right\}
+\]</span>
+<span class="math inline">\(B=\left\{b_{i, j}\right\}\)</span>, <span class="math inline">\(D=\operatorname{diag}\left(d_{1}, \ldots, d_{m}\right)\)</span>. To allow parsimony in representation,set indicator
+<span class="math display">\[
+\begin{aligned}
+&amp;b_{i, j}=0 \quad \text { iff } \quad \gamma_{i, j}=0\\
+&amp;b_{i, j} \neq 0 \quad \text { iff } \quad \gamma_{i, j}=1
+\end{aligned}
+\]</span>
+model parameter
+<span class="math inline">\(\gamma=\left\{\gamma_{i, j} | j=1, \ldots, m-1 ; i&gt;j\right\}\)</span>.</p>
 </div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
-</div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+<div id="likelihood-1" class="section level2">
+<h2><span class="header-section-number">26.2</span> Likelihood</h2>
+<p>The likelihood of the parameters <span class="math inline">\((B, D, \gamma)\)</span> is the density of <span class="math inline">\(e=\left(e_{1}^{\prime}, \ldots, e_{n}^{\prime}\right)^{\prime}\)</span> given <span class="math inline">\((B, D, \gamma)\)</span>, that is,
+<span class="math display">\[
+\begin{array}{l}
+p(e | B, D, \gamma) \\
+\quad=(2 \pi)^{-n m / 2}|D|^{n / 2} \exp \left\{-\frac{1}{2} \sum_{i=1}^{n} e_{i}^{\prime} B D B^{\prime} e_{i}\right\} \\
+\quad=(2 \pi)^{-n m / 2} \prod_{i=1}^{m}\left(d_{i}\right)^{n / 2} \exp \left\{-\frac{1}{2} \sum_{k=1}^{m} d_{k} b_{k}^{\prime} A b_{k}\right\}
+\end{array}
+\]</span>
+where <span class="math inline">\(b_{k}=\left(b_{1, k}, \dots, b_{m, k}\right)^{\prime}\)</span> is the kth column of <span class="math inline">\(B\)</span> and <span class="math inline">\(A=\sum_{i=1}^{n} e_{i} e_{i}^{\prime}\)</span>. A is PD almost surely if <span class="math inline">\(m\leq n\)</span>.</p>
+<p>Denote the free parameters in <span class="math inline">\(\beta_k=\{b_{i,k}|i&gt;k, \gamma_{i, k}=1\}\)</span> the quadratic form in likelihood,</p>
+<blockquote>
+<p>The likelihood from step 2 to 3 is obtained by the matrix multiple by column expansion, which is use column vector to present the matrix multiplication.</p>
+</blockquote>
+<p>can be written in terms of a quadratic function of <span class="math inline">\(\beta_k\)</span>, so that
+<span class="math display">\[
+b_{k}^{\prime} A b_{k}=\left\{\begin{array}{ll}
+a_{k, k}+2 \beta_{k}^{\prime} a_{k}+\beta_{k}^{\prime} A_{k} \beta_{k} &amp; \text { for } k=1, \ldots, m-1 \\
+a_{m, m} &amp; \text { for } k=m
+\end{array}\right.
+\]</span>
+with
+<span class="math display">\[
+a_{k}=\left\{a_{i, k} | i&gt;k, \gamma_{i, k}=1\right\}
+\]</span>
+and
+<span class="math display">\[
+A_{k}=\left\{a_{i, j} | i&gt;k, j&gt;k, \gamma_{i, j}=1\right\}
+\]</span>
+The unconstrained elements in kth column: the dimension of <span class="math inline">\(\beta_k\)</span> is <span class="math inline">\(q_k\)</span>, then the total number of unconstrained elements in B in model <span class="math inline">\(\gamma\)</span> is <span class="math inline">\(q_{\gamma}=\sum_{k=1}^{m-1} q_{k}\)</span>.
+Then the likelihood can be expressed as</p>
+<p><span class="math display">\[\begin{align*}
+p\left(e | B_{\gamma}, D, \gamma\right)=(2 \pi)^{-n m / 2} \prod_{k=1}^{m}\left(d_{k}\right)^{n / 2}\\
 
+\times \exp \left(-\frac{d_{k}}{2}\left\{S_{k}(\gamma)+\left(\beta_{k}-m_{k}\right)^{\prime} A_{k}\left(\beta_{k}-m_{k}\right)\right\}\right)
+\end{align*}\]</span>
+where <span class="math inline">\(m_{k}=-A_{k}^{-1} a_{k}\)</span> and <span class="math inline">\(S_{k}(\gamma)=a_{k, k}-a_{k}^{\prime} A_{k}^{-1} a_{k}\)</span></p>
+</div>
+<div id="prior-specification-1" class="section level2">
+<h2><span class="header-section-number">26.3</span> Prior Specification</h2>
+<p>Use conditional prior <span class="math inline">\(p(B | \gamma, D)\)</span> similar to prior used to variable subset uncertainty in linear regression.</p>
+<p>When given <span class="math inline">\(\gamma\)</span>, some entries of <span class="math inline">\(B\)</span> are fixed to be zero, then the remain unconstrained elements denoted as <span class="math inline">\(B_\gamma\)</span>. The fractional conditional prior for <span class="math inline">\(B_\gamma\)</span> is by setting</p>
+<p><span class="math display">\[
+p\left(B_{\gamma} | \gamma, D\right) \propto p(e | B, D, \gamma)^{1 / n}
+\]</span>
+Then
+<span class="math display">\[
+\begin{array}{c}
+p\left(\beta_{1}, \ldots, \beta_{m} | D, \gamma\right)=\prod_{k=1}^{m-1} p\left(\beta_{k} | D, \gamma\right) \quad \text { with } \\
+\beta_{k} | D, \gamma \sim N\left(m_{k}, \Omega_{k}\right)
+\end{array}
+\]</span>
+where <span class="math inline">\(m_k\)</span> is as defined earlier and <span class="math inline">\(\Omega_{k}=\frac{n}{d_{k}} A_{k}^{-1}\)</span>.
+<span class="math inline">\(\gamma_{i,j}\)</span>, with <span class="math inline">\(j=1,...,m-1\)</span> and <span class="math inline">\(i&gt;j\)</span>, prior independent with <span class="math inline">\(p\left(\gamma_{i, j}=1 | \omega\right)=\omega\)</span>. Then the parsimonious measure of model is <span class="math inline">\(m(m-1) \omega / 2\)</span>.</p>
+<p>The parameter <span class="math inline">\(\omega\)</span> is integrated out of the analsis, with
+<span class="math display">\[
+\begin{aligned}
+p(\gamma) &amp;=\int p(\gamma | \omega) p(\omega) d \omega \\
+&amp;=\int_{0}^{1} \omega^{q_{\gamma}}(1-\omega)^{\left(r-q_{\gamma}\right)} d \omega=\operatorname{beta}\left(q_{\gamma}+1, r-q_{\gamma}+1\right)
+\end{aligned}
+\]</span>
+with <span class="math inline">\(r=m(m-1)/2\)</span>.</p>
+<p>prior for D is as usual Gamma distribution
+<span class="math display">\[
+\begin{array}{c}
+p\left(d_{1}, \ldots, d_{m} | \xi, \kappa\right)=\prod_{k=1}^{m} p\left(d_{k} | \xi, \kappa\right), \quad \text { where } \\
+p\left(d_{k} | \xi, \kappa\right)=\frac{d_{k}^{\xi / \kappa-1} \exp \left(-d_{k} / \kappa\right)}{\Gamma(\xi / \kappa) \kappa^{\xi / \kappa}}
+\end{array}
+\]</span></p>
+<p>the <span class="math inline">\(\xi\)</span> and <span class="math inline">\(\kappa\)</span> is hyper-parameter, which is insensitive, so set <span class="math inline">\(\xi=100\)</span> and <span class="math inline">\(\kappa=1000\)</span>.</p>
+<p>Also shrinkage prior of <span class="math inline">\(d_i\)</span> are considered,
+<span class="math inline">\(log(d_i)\)</span> are independent and <span class="math inline">\(N(\mu_d,\tau_d)\)</span> and the prior for <span class="math inline">\(\mu_d\)</span> and <span class="math inline">\(\tau_d\)</span> is <span class="math inline">\(p\left(\mu_{d}, \tau_{d}\right) \propto 1 / \tau_{d}\)</span>.</p>
+<p>log-normal prior requires MH step for generation of <span class="math inline">\(d_i\)</span>.</p>
+<p>These two priors perform similar.</p>
+</div>
+<div id="inference-and-simulation-method." class="section level2">
+<h2><span class="header-section-number">26.4</span> Inference And Simulation Method.</h2>
+<p>Model-wise average:
+Posterior Mean estimatiors:
+<span class="math display">\[
+E(B | e)=\sum_{\gamma} E(B | \gamma, e) p(\gamma | e)
+\]</span>
+by
+<span class="math display">\[
+\widehat{B}=J^{-1} \sum_{j=1}^{J} E\left(B | \gamma^{[j]}, D^{[j]}, e\right)
+\]</span>
+Similarly for D is
+<span class="math display">\[
+\widehat{D}=J^{-1} \sum_{j=1}^{J} E\left(D | \gamma^{[j]}, B^{[j]}, e\right)
+\]</span>
+Then the estimate of <span class="math inline">\(\Sigma\)</span> is
+<span class="math display">\[
+\widehat{\Sigma^{-1}}=J^{-1} \sum_{j=1}^{J} B^{[j]} D^{[j]}\left(B^{\prime}\right)^{[j]}
+\]</span>
+The estimate of number of non-zero elements is
+<span class="math display">\[
+\hat{\omega}=\frac{1}{J} \sum_{j=1}^{J} q_{\gamma^{U 1}} / r
+\]</span></p>
+<p>The probability of <span class="math inline">\(p\left(\gamma_{i, k}=1 | e\right)\)</span> can be obtained by
+<span class="math display">\[
+\hat{p}\left(\gamma_{i, k}=1 | e\right)=\frac{1}{J} \sum_{j=1}^{J} \gamma_{i, k}^{[j]}
+\]</span>
+that is, whether i-k entry are 1 in different models.</p>
+<blockquote>
+<p>Not very related, estimators for other loss function:</p>
+</blockquote>
+<p>Based on Yang and Berger(1994)</p>
+<p><span class="math display">\[
+L_{1}(\widehat{\Sigma}, \Sigma)=\operatorname{tr}\left(\widehat{\Sigma} \Sigma^{-1}\right)-\log \left|\widehat{\Sigma} \Sigma^{-1}\right|-m
+\]</span>
+and
+<span class="math display">\[
+L_{2}(\widehat{\Sigma}, \Sigma)=\operatorname{tr}\left(\widehat{\Sigma} \Sigma^{-1}-I\right)^{2}
+\]</span></p>
+<div id="markov-chain-monte-carlo-sampling-1" class="section level3">
+<h3><span class="header-section-number">26.4.1</span> Markov Chain Monte Carlo Sampling</h3>
+<ol style="list-style-type: decimal">
+<li>Generate from <span class="math inline">\(B | \gamma, D, e\)</span></li>
+<li>Generate from <span class="math inline">\(D | B, \gamma, e\)</span></li>
+<li>Generate from <span class="math inline">\(\gamma_{i, j} | \gamma_{| i, j}, D, e, \quad\)</span> for <span class="math inline">\(j=1, \ldots, m-1\)</span>
+<span class="math inline">\(i&gt;j\)</span></li>
+</ol>
+<p>For B, the parameters <span class="math inline">\(\beta_k\)</span> is independent MVN
+For D, the posterior distribution is independent Gamma distribution.</p>
+<p>Prior is not primarily for B and D to generate likelihood. Prior also can be correct using MH algorithm.</p>
+<blockquote>
+<p>也就是说，主要部分都是一个Gaussian加一个Gamma，所以能直接抽，最多后面加一个MH对于prior做修正。 具体算法细节得从另外的部分开始，但是可以参考对于indicator的转移核的抽法。或者直接说就是，用likelihood部分的MVN和Gamma做proposal，这样新的和旧的就差一个prior这样。大概是？没推，但是直观上是这样。</p>
+</blockquote>
+<p>3， generate <span class="math inline">\(\gamma_{i,j}\)</span></p>
+<p><span class="math display">\[
+\underbrace{p\left(\gamma_{i, j} | \gamma_{| i, j}, D, e\right)}_{\pi^{*}\left(\gamma_{i, j}\right)} \propto \underbrace{p(e | \gamma, D)}_{l\left(\gamma_{i, j}\right)} \underbrace{p\left(\gamma_{i, j} | \gamma_{\backslash i, j}\right)}_{\pi\left(\gamma_{i, j}\right)}
+\]</span></p>
+<blockquote>
+<p>This transition kernel idea is important and useful for my project.</p>
+</blockquote>
+<p>The transition kernel to generate <span class="math inline">\(\gamma_{i,j}\)</span> is
+<span class="math display">\[
+Q\left(\gamma_{i, j}^{c}=1 \rightarrow \gamma_{i, j}^{g}=0\right)=\pi\left(\gamma_{i, j}=0\right) \frac{l\left(\gamma_{i, j}=0\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+\]</span>
+and
+<span class="math display">\[
+Q\left(\gamma_{i, j}^{c}=0 \rightarrow \gamma_{i, j}^{g}=1\right)=\pi\left(\gamma_{i, j}=1\right) \frac{l\left(\gamma_{i, j}=1\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+\]</span>
+<span class="math inline">\(\gamma^{c}_{i,j}\)</span> is current value of <span class="math inline">\(\gamma_{i,j}\)</span> and <span class="math inline">\(\gamma^{g}_{i,j}\)</span> is the generated <span class="math inline">\(\gamma_{i,j}\)</span> is
+<span class="math display">\[Q\left(\gamma_{i, j}^{c}=1 \rightarrow \gamma_{i, j}^{g}=0\right)=\pi\left(\gamma_{i, j}=0\right) \frac{l\left(\gamma_{i, j}=0\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}\]</span>
+and
+<span class="math display">\[Q\left(\gamma_{i, j}^{c}=0 \rightarrow \gamma_{i, j}^{g}=1\right)=\pi\left(\gamma_{i, j}=1\right) \frac{l\left(\gamma_{i, j}=1\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}\]</span></p>
+<p>Kohn et al(2001) showed that this transition kenerl satisfied detailed balance criteria.</p>
+<p>Then the algorithm can be obtained by</p>
+<ol style="list-style-type: decimal">
+<li>Generate <span class="math inline">\(u\)</span> from a uniform distribution on <span class="math inline">\((0,1)\)</span></li>
+<li><ol style="list-style-type: lower-alpha">
+<li>If <span class="math inline">\(\gamma_{i, j}^{c}=1\)</span> and <span class="math inline">\(u&gt;\pi\left(\gamma_{i, j}=0\right),\)</span> then set <span class="math inline">\(\gamma_{i, j}^{g}=1\)</span></li>
+</ol></li>
+</ol>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>If <span class="math inline">\(\gamma_{i, j}^{c^{\prime}}=1\)</span> and <span class="math inline">\(u&lt;\pi\left(\gamma_{i, j}=0\right),\)</span> then generate <span class="math inline">\(\gamma_{i, j}^{g}\)</span>
+from the density
+<span class="math display">\[
+\operatorname{Pr}\left(\gamma_{i, j}=0\right)=\frac{l\left(\gamma_{i, j}=0\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+\]</span></li>
+<li>If <span class="math inline">\(\gamma_{i, j}^{c}=0\)</span> and <span class="math inline">\(u&gt;\pi\left(\gamma_{i, j}=1\right),\)</span> then set <span class="math inline">\(\gamma_{i, j}^{g}=0\)</span></li>
+<li>If <span class="math inline">\(\gamma_{i, j}^{c}=0\)</span> and <span class="math inline">\(u&lt;\pi\left(\gamma_{i, j}=1\right),\)</span> then generate <span class="math inline">\(\gamma_{i, j}^{g}\)</span> from the density
+<span class="math display">\[
+\operatorname{Pr}\left(\gamma_{i, j}=1\right)=\frac{l\left(\gamma_{i, j}=1\right)}{l\left(\gamma_{i, j}=1\right)+l\left(\gamma_{i, j}=0\right)}
+\]</span></li>
+</ol>
+<p>in case (a)(c), only need evaluate prior <span class="math inline">\(\pi(\gamma_{i,j}=1)\)</span> rather than full posterior.</p>
+<p>In examples, most of the lower-triangular elements are identified as non-zero. (a) most frequently.</p>
 </div>
 </div>
+<div id="simulation-study" class="section level2">
+<h2><span class="header-section-number">26.5</span> Simulation Study</h2>
+<p>Cholesky Decomposition: SK estimator</p>
+<p>compared with</p>
+<p>Yang and Berger: YB84 estimator</p>
+<p>Example 1: Homoscedastic System: <span class="math inline">\(B=I, D=I\)</span>,so in this case <span class="math inline">\(\Sigma=I\)</span>.</p>
+<p>Example 2: Heteroscedastic System. <span class="math inline">\(B=I\)</span> and <span class="math inline">\(D=diag(\frac{1}{m}, \frac{1}{m-1}, \dots, 1)\)</span>, so <span class="math inline">\(\Sigma=\operatorname{diag}(m, m-1, \dots, 1)\)</span>.</p>
+<p>Example 3, AR: <span class="math inline">\(\theta=0.8\)</span>, <span class="math inline">\(b_{i+1,i}=-\theta\)</span> for <span class="math inline">\(i=1,...,m-1;b_{i,j}=0\)</span> for <span class="math inline">\(j=1,...,m-2\)</span> and <span class="math inline">\(i&gt;j+1\)</span>; <span class="math inline">\(d_m=100/(1-\theta^2)\)</span> and <span class="math inline">\(d_i=100\)</span> for <span class="math inline">\(i=2,...,m\)</span>.</p>
+<p>Example 4: MA: MA(1), in this case, the lower triangular factor of <span class="math inline">\(B\)</span> is full, <span class="math inline">\(b_{i,j}\neq 0\)</span> for all <span class="math inline">\(i&gt;j\)</span>. band of <span class="math inline">\(B\)</span> are of <span class="math inline">\(O(-\theta^i)\)</span>.</p>
+<p>cases: <span class="math inline">\((m,n)\)</span>, (5,40),(15,40),(30,100)</p>
+<p><span class="math inline">\(\Sigma\)</span> and <span class="math inline">\(\Sigma^{-1}\)</span> were estimated for the simulated data, using the Bayes estimator for squared error loss (posterior means) and <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> loss function.</p>
+<p>MLE is</p>
+<p><span class="math inline">\(\widehat{\Sigma}=\frac{1}{n} \sum_{i=1}^{n} e_{i} e_{i}^{\prime}\)</span>
+and <span class="math inline">\(\quad \widehat{\Sigma^{-1}}=(\widehat{\Sigma})^{-1}\)</span></p>
+<p>The result of Bayesian posterior mean estimators and MLE were assessed by calculating the squared error loss function</p>
+<p><span class="math display">\[
+D(\widehat{\Sigma}, \Sigma)=\frac{1}{m^{2}}\left(\sum_{i} \sum_{j}\left(\hat{\sigma}_{i j}-\sigma_{i j}\right)^{2}\right)^{1 / 2}
+\]</span></p>
+<p><span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> was assessed relative to these loss functions.</p>
+<blockquote>
+<p>所以表格内容是在三种评价标准，matrix distance measure，<span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> 下，YB94， SK 和 MLE的表现。</p>
+</blockquote>
+<blockquote>
+<p>用parsomonia的情况下，SK的效率稍微高一点，但是如果是full的YB94效率会更高一点。</p>
+</blockquote>
+<p>MH rate of YB94 is around 5%.</p>
+</div>
+<div id="application" class="section level2">
+<h2><span class="header-section-number">26.6</span> Application</h2>
+<p>###Non-zero mean case:</p>
+<p>Modified as:
+<span class="math display">\[
+y=X \alpha+e
+\]</span>
+Then <span class="math inline">\(e \sim N\left(0, I_{n} \otimes \Sigma\right)\)</span>, y is <span class="math inline">\(mn\times 1\)</span> observation vector, <span class="math inline">\(\alpha\)</span> is vector of regression coefficients. prior of <span class="math inline">\(\alpha\)</span> is proportion to constant.</p>
+<p>Then conditional posterior density of <span class="math inline">\(\alpha\)</span> is
+<span class="math display">\[
+\begin{aligned}
+p\left(\boldsymbol{\alpha} | y, B_{\gamma}, D, \gamma\right) &amp; \propto p\left(y | \alpha, B_{\gamma}, D, \gamma\right) p\left(B_{\gamma} | \gamma, \alpha, D\right) \\
+&amp; \propto p\left(y | \alpha, B_{\gamma}, D, \gamma\right)^{1+1 / n}
+\end{aligned}
+\]</span></p>
+<p>Conditional posterior density of normal with mean <span class="math inline">\(\left(X^{\prime}\left(I \otimes \Sigma^{-1}\right) X\right)^{-1} X^{\prime}\left(I \otimes \Sigma^{-1}\right) y\)</span> and covariance matrix <span class="math inline">\(n(1+n)^{-1}\left(X^{\prime}\left(I \otimes \Sigma^{-1}\right) X\right)^{-1}\)</span>. mixture estimate of <span class="math inline">\(\alpha\)</span> is
+<span class="math display">\[
+\begin{aligned}
+\hat{\alpha} &amp;=\frac{1}{J} \sum_{k=1}^{J} E\left(\alpha | y, \Sigma^{[k]}\right) \\
+&amp;=\frac{1}{J} \sum_{k=1}^{J}\left(X^{\prime}\left(I \otimes\left(\Sigma^{-1}\right)^{[k]}\right) X\right)^{-1} X^{\prime}\left(I \otimes\left(\Sigma^{-1}\right)^{[k]}\right) y
+\end{aligned}
+\]</span></p>
+<div id="longitudinal-case" class="section level3">
+<h3><span class="header-section-number">26.6.1</span> Longitudinal case</h3>
+<p><span class="math display">\[
+\begin{aligned}
+\log \left(y_{t, i}\right)=\left(a_{k}+b_{k} T_{t}+c_{k} T_{t}^{2}\right)+e_{t, i} &amp; \\
+\text { for } i=1, \ldots, n, t &amp;=1, \ldots, m
+\end{aligned}
+\]</span></p>
+<p>error structure is independent across cows, but not across time.</p>
+<p><span class="math inline">\(e_{i}=\left(e_{1, i}, \dots, e_{m, i}\right)&#39;\)</span> are independent distributed <span class="math inline">\(N(0,\Sigma)\)</span>.</p>
+</div>
+<div id="intraday-elextricity-demand." class="section level3">
+<h3><span class="header-section-number">26.6.2</span> Intraday Elextricity Demand.</h3>
+<p>— tbc</p>
 </div>
 </div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
-</div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
+<div id="conclusion-2" class="section level2">
+<h2><span class="header-section-number">26.7</span> Conclusion</h2>
+<p>This method may also be useful for some cross-sectional covariance matrices. Can be applied to high-dimensional covariance matrices. YB94 is impractical to apply because high rejection rate Metropolis-Hastings step becomes computationally prohibitive as the size of the matrix increases.</p>
+
 </div>
 </div>
             </section>
@@ -515,8 +635,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="integrated-nested-laplace-approximationsinla.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

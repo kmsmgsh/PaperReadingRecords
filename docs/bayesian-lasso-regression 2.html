@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 8 Bayesian lasso regression | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 8 Bayesian lasso regression | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 8 Bayesian lasso regression | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="the-bayesian-lasso.html">
+<link rel="next" href="bayesian-analysis-of-joint-mean-and-covariance-models-for-longitudinal-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,227 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
+<div id="bayesian-lasso-regression" class="section level1">
+<h1><span class="header-section-number">Paper 8</span> Bayesian lasso regression</h1>
+<p><span class="citation">(Hans <a href="#ref-Hans:2009hc">2009</a>)</span></p>
+<div id="summary-1" class="section level2">
+<h2><span class="header-section-number">8.1</span> Summary</h2>
+<p>又是independent Laplace(double-exponential) prior on regression coefficient.
+&gt; This paper introduces new aspects of the braoder Bayesian treatment of lasso regression. It is shown that the standard lasso prediction method does not neccessarily agree with model-based, Bayesian predictions.</p>
+<p>然后再加上new Gibbs sampler.</p>
+</div>
+<div id="introduction-6" class="section level2">
+<h2><span class="header-section-number">8.2</span> Introduction</h2>
 <ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
+<li><p>Lasso introduction
+<span class="math display">\[
+\hat{\beta}_{\mathrm{L}}=\operatorname{argmin}_{\beta}(y-X \beta)^{\mathrm{T}}(y-X \beta)+\lambda\|\beta\|_{1}
+\]</span></p></li>
+<li><p>Laplace prior</p></li>
 </ul>
-</div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
 <p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
-\]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
-<span class="math display">\[
-\theta_j=I_j\beta_j
-\]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
-<span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+p(\beta | \tau)=(\tau / 2)^{p} \exp \left(-\tau\|\beta\|_{1}\right)
 \]</span></p>
+<p>The posterior mode of <span class="math inline">\(\beta\)</span> is the lasso estimate with penalty <span class="math inline">\(\lambda=2\tau\sigma^2\)</span>.</p>
+<blockquote>
+<p>A new, direct characterization of the posterior distribution <span class="math inline">\(p(\beta|y,\sigma^2,\tau)\)</span> is introduced, along with a discussion about estimation and prediction under the lasso from a model-based perspective. The Bayesian connection to the lasso is examined, with particular attention paid to the problem of predicting future observation via the posterior prediction distribution. The direct characterization of the posterior is shown to facilitate sampling from the postrior distribution via two new Gibbs samplers that do not require the use of latent variables.</p>
+</blockquote>
 </div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
+<div id="the-lasso-posterior-distribution" class="section level2">
+<h2><span class="header-section-number">8.3</span> The Lasso posterior distribution</h2>
+<div id="direct-characterization" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Direct characterization</h3>
+<p>Model:
+<span class="math display">\[
+\begin{aligned} p\left(y | \beta, \sigma^{2}, \tau\right) &amp;=\mathrm{N}\left(y | X \beta, \sigma^{2} I_{n}\right) \\ p\left(\beta | \tau, \sigma^{2}\right) &amp;=\left(\frac{\tau}{2 \sigma}\right)^{p} \exp \left(\tau \sigma^{-1}\|\beta\|_{1}\right) \end{aligned}
+\]</span></p>
+<p>This prior retains the property that, for fixed <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\sigma^2\)</span>, the mode of <span class="math inline">\(p\left(\beta | y, \sigma^{2}, \tau\right)\)</span> is the lasso estimate with penalty parameter <span class="math inline">\(\lambda=2 \tau \sigma\)</span>.</p>
+<p>A direct characterization of the posterior distribution <span class="math inline">\(p\left(\beta | y, \sigma^{2}, \tau\right)\)</span> does not require the inclusion of latent variables is constructed as follows.</p>
+<p>Let <span class="math inline">\(\mathcal{Z}=\{-1,1\}^{p}\)</span> represent the set of all <span class="math inline">\(2^p\)</span> possible p-vectors whose elements are <span class="math inline">\(\pm 1\)</span>. For any vector <span class="math inline">\(z \in \mathcal{Z}\)</span>, let <span class="math inline">\(\mathcal{O}_{z} \subset R^{p}\)</span> represent the corresponding orthant: if <span class="math inline">\(\beta \in \mathcal{O}_{z}\)</span>, then <span class="math inline">\(\beta_{j} \geqslant 0\)</span> if <span class="math inline">\(z_{j}=1\)</span> and <span class="math inline">\(\beta_{j}&lt;0\)</span> if <span class="math inline">\(z_{j}=-1\)</span>.</p>
+<blockquote>
+<p>所以说<span class="math inline">\(z_j\)</span>是<span class="math inline">\(\beta\)</span>正负的indicator？这么做有什么意义？orthant是什么意思？象限？这里指什么？j-维空间的元素-》对应<span class="math inline">\(\beta_j\)</span>和<span class="math inline">\(z_j\)</span>吗？</p>
+</blockquote>
+<p>Write the density function for the orthant-truncated normal distribution and its associated orthant integrals as
+<span class="math display">\[
+\mathrm{N}^{[z]}(\beta | m, S) \equiv \frac{\mathrm{N}(\beta | m, S)}{\mathrm{P}(z, m, S)} 1\left(\beta \in \mathcal{O}_{z}\right), \quad \mathrm{P}(z, m, S)=\int_{\mathcal{O}_{z}} \mathrm{N}(t | m, S) d t
+\]</span></p>
+<p>Applying Bayes’ theorem to the lasso regression model, the posterior distribution is orthant-wise Gaussian,
+<span class="math display">\[
+p\left(\beta | y, \sigma^{2}, \tau\right)=\sum_{z \in \mathcal{Z}} \omega_{z} \mathrm{N}^{[z]}\left(\beta | \mu_{z}, \Sigma\right)
+\]</span>
+i.e. a collection of <span class="math inline">\(2^p\)</span> different normal distributions that are each restricted to a different orthant.</p>
+<blockquote>
+<p>所以这个象限确实是象限的意思看来。。。因为每个维度（数轴）由正负分成两个象限，然后这几个象限两两组合，所以<span class="math inline">\(2^p\)</span> 个不同的象限</p>
+</blockquote>
+<p>The covariance structure in each of the <span class="math inline">\(2^p\)</span> orthants is the same, <span class="math inline">\(\Sigma=\sigma^{2}\left(X^{\mathrm{T}} X\right)^{-1}\)</span>, whereas the location parameters depend on the orthants: <span class="math inline">\(\mu_{z}=\hat{\beta}_{\mathrm{OLS}}-\tau \sigma^{-1} \Sigma z\)</span>, where <span class="math inline">\(\hat{\beta}_{\mathrm{O} \mathrm{L} \mathrm{S}}=\left(X^{\mathrm{T}} X\right)^{-1} X^{\mathrm{T}} y\)</span>. The normalized weight for each orthant is</p>
+<p><span class="math display">\[
+\omega_{z}=\left\{\frac{\mathrm{P}\left(z, \mu_{z}, \Sigma\right)}{\mathrm{N}\left(0 | \mu_{z}, \Sigma\right)}\right\} /\left\{\sum_{z \in \mathcal{Z}} \frac{\mathrm{P}\left(z, \mu_{z}, \Sigma\right)}{\mathrm{N}\left(0 | \mu_{z}, \Sigma\right)}\right\}
+\]</span>
+Classic lasso prior has the similar posterior, the only change is that the location parameters become <span class="math inline">\(\mu_{z}=\hat{\beta}_{\mathrm{ous}}-\tau \Sigma z\)</span>.</p>
+<blockquote>
+<p>感觉这个想法很牛逼但是没搞懂为啥要这么做。。。。基于orthant的分布, orthant-truncated normal distribution</p>
+</blockquote>
+<p>如果可以计算multivariate normal orthant integrals, 后验分布可以被积出来或者sample出来当p很小的时候，那么久可以直接得到后验的inference，然后估计<span class="math inline">\(\sigma^2,\tau\)</span>的后验均值。对于很大的p，后验估计可以通过MCMC搞定。</p>
+<p><span class="math inline">\(\sigma^{-2} \sim \operatorname{Ga}(a, b)\)</span>,<span class="math inline">\(\tau \sim \operatorname{Ga}(r, s)\)</span>.</p>
 </div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+<div id="posterior-based-estimation-and-prediction" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> Posterior-based estimation and prediction</h3>
+<p>Strictly speaking, when <span class="math inline">\(\beta \in R^{p}\)</span>, this interpretation is not correct: under this loss function, the expected posterior loss is equal to one for all <span class="math inline">\(b \in R^{p}\)</span> and so any point <span class="math inline">\(b \in R^{p}\)</span> is a suitable <span class="math inline">\(\hat b\)</span>. The posterior mode can, though, be interpreted as the limit of a sequence of Bayes rules. The posterior mode can, though, be interpreted as the limit of a sequence of Bayes rules. Consider the sequence of loss functions <span class="math inline">\(l_{\varepsilon}(b, \beta)=1-1\left\{\beta \in B_{\varepsilon(b)}\right\}\)</span>, where the indicator function equals one if an <span class="math inline">\(\epsilon-\)</span>ball centred at <span class="math inline">\(b\)</span> contains <span class="math inline">\(\beta\)</span> and is zero otherwise. In the limit as <span class="math inline">\(\epsilon \rightarrow 0\)</span>, the sequence of Bayes-optimal estimators <span class="math inline">\(\hat{b}_{\varepsilon}\)</span> converges to the posterior mode.</p>
+<blockquote>
+<p>这一段没懂，怎么就和0-1损失函数等价了，而且对于<span class="math inline">\(\beta\in R^p\)</span> 为啥不成立，而且这个sequence的loss function是什么意思？要去看Bernardo&amp;Smith,2000,pp. 257-258吗。。</p>
+</blockquote>
+<p>给定<span class="math inline">\(\beta\)</span>的点估计<span class="math inline">\(\hat\beta\)</span>,接下来要考虑的问题就是预测问题<span class="math inline">\(\tilde y\)</span> with given new value <span class="math inline">\(\tilde X\)</span>,是<span class="math inline">\(\tilde X\hat \beta\)</span>.而对于贝尔意思问题，就是考虑y的边际分布<span class="math inline">\(p\left(\tilde{y} | y, \sigma^{2}, \tau\right)=\int p\left(\tilde{y} | y, \beta, \sigma^{2}, \tau\right) p\left(\beta | y, \sigma^{2}, \tau\right) d \beta\)</span>. 对于回归问题，posterior predictive mean is <span class="math inline">\(E\left(\tilde{y} | y, \sigma^{2}, \tau\right)=\tilde{X} E\left(\beta | y, \sigma^{2}, \tau\right)\)</span>. 所以posterior mean同时可以促进点估计和预测。（Bayes 后验这套对参数的点估计和预测都有用？）
+而对于0-1损失函数这套不成立，后验估计分布的最高点不一定是<span class="math inline">\(\tilde{X} \hat{\beta}_{\mathrm{L}}\)</span>. 最基础的lasso预测，如果预测是在一列0-1损失函数上得出的，需要使用数值优化方法极大化<span class="math inline">\(p\left(\tilde{y} | y, \sigma^{2}, \tau\right)\)</span>.</p>
+</div>
+<div id="the-univariate-case." class="section level3">
+<h3><span class="header-section-number">8.3.3</span> The univariate case.</h3>
+<p>Pericchi &amp; Smith (1992)引进了<span class="math inline">\(\beta\)</span>的一种后验估计方法，单变量，intercept only， normal mean. For fixed <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau\)</span>, the univariate posterior is
+<span class="math display">\[
+p\left(\beta | y, \sigma^{2}, \tau\right)=w \mathrm{N}^{-}\left(\beta | \mu_{-}, v^{2}\right)+(1-w) \mathrm{N}^{+}\left(\beta | \mu_{+}, v^{2}\right)
+\]</span>
+where <span class="math inline">\(N^{-}\)</span> and <span class="math inline">\(N^+\)</span> correspond to <span class="math inline">\(N^{[z]}\)</span> for <span class="math inline">\(z=-1\)</span> and <span class="math inline">\(z=1\)</span>,respectively. The common scale term is <span class="math inline">\(v^{2}=\sigma^{2}\left(x^{\mathrm{T}} x\right)^{-1}\)</span>, and the two location parameters are <span class="math inline">\(\mu_{+}=\hat{\beta}_{\mathrm{ols}}-\tau \sigma^{-1} v^{2}\)</span> and <span class="math inline">\(\mu_{-}=\hat{\beta}_{\mathrm{ols}}+\tau \sigma^{-1} v^{2}\)</span>. The weight is</p>
+<p><span class="math display">\[
+w=\frac{\Phi\left(\frac{-\mu_{-}}{v}\right) / \mathrm{N}\left(0 | \mu_{-}, v^{2}\right)}{\Phi\left(\frac{-\mu_{-}}{v}\right) / \mathrm{N}\left(0 | \mu_{-}, v^{2}\right)+\Phi\left(\frac{\mu_{+}}{v}\right) / \mathrm{N}\left(0 | \mu_{+}, v^{2}\right)}
+\]</span>
+where <span class="math inline">\(\Phi(\cdot)\)</span> is the standard normal cumulative distribution function.
+<span class="math display">\[
+E\left(\beta | y, \sigma^{2}, \tau\right)=\hat{\beta}_{\mathrm{OLS}}+\tau \sigma^{-1} v^{2}\{w-(1-w) \}
+\]</span>
+denote as <span class="math inline">\(\hat\beta_B\)</span>.Because <span class="math inline">\(-1 \leqslant w-(1-w) \leqslant 1\)</span>, the effect of the prior on the posterior mean relative to the least-squares estimate is bounded, <span class="math inline">\(\left|\hat{\beta}_{\mathrm{B}}-\hat{\beta}_{\mathrm{O} \mathrm{LS}}\right| \leqslant \tau \sigma\left(x^{\mathrm{T}} x\right)^{-1}\)</span>, and the bound is controlled by the amount of penalization.</p>
+<p><span class="math display">\[
+p\left(\tilde{y} | y, \sigma^{2}, \tau\right)=w\left\{\frac{\Phi\left(\frac{-\tilde{\mu}_{-}}{\tilde{v}}\right)}{\Phi\left(\frac{-\mu_{-}}{v}\right)} \mathrm{N}\left(\tilde{y} | \tilde{x} \mu_{-}, \tilde{\sigma}^{2}\right)\right\}+(1-w)\left\{\frac{\Phi\left(\frac{\tilde{\mu}_{+}}{\tilde{v}}\right)}{\Phi\left(\frac{\mu_{+}}{v}\right)} \mathrm{N}\left(\tilde{y} | \tilde{x} \mu_{+}, \tilde{\sigma}^{2}\right)\right\}
+\]</span>
+where <span class="math inline">\(\tilde{v}^{2}=v^{2} /\left\{1+\tilde{x}^{2} /\left(x^{\mathrm{T}} x\right)\right\}, \tilde{\sigma}^{2}=\sigma^{2}\left\{1+\tilde{x}^{2} /\left(x^{\mathrm{T}} x\right)\right\}\)</span>.
+and
+<span class="math display">\[
+\tilde{\mu}_{+}=\left(\frac{\tilde{x} \tilde{y}+x^{\mathrm{T}} y-\sigma \tau}{\tilde{x}^{2}+x^{\mathrm{T}} x}\right), \quad \tilde{\mu}_{-}=\left(\frac{\tilde{x} \tilde{y}+x^{\mathrm{T}} y+\sigma \tau}{\tilde{x}^{2}+x^{\mathrm{T}} x}\right)
+\]</span></p>
+<p><img src="chp9/Figure1.png" width="532" /></p>
+</div>
+</div>
+<div id="posterior-inference-via-gibbs-sampling" class="section level2">
+<h2><span class="header-section-number">8.4</span> Posterior Inference via Gibbs sampling</h2>
+<div id="the-standard-gibbs-sampler." class="section level3">
+<h3><span class="header-section-number">8.4.1</span> The standard Gibbs sampler.</h3>
+<p>Update each parameter one at a time, conditionally on all other parameters. The full conditional distributions with details as</p>
+<p><span class="math display">\[
+\begin{aligned} p\left(\beta_{j} | \beta_{-j}, \sigma^{2}, \tau, y\right) &amp;=\phi_{j} \mathrm{N}^{+}\left(\beta_{j} | \mu_{j .}^{+}, \omega_{j j}^{-1}\right)+\left(1-\phi_{j}\right) \mathrm{N}^{-}\left(\beta_{j} | \mu_{j .}^{-}, \omega_{j j}^{-1}\right) \\ p\left(\sigma^{2} | \beta, \tau, y\right) &amp; \propto\left(\sigma^{2}\right)^{-\left(a^{*}+1\right)} \exp \left(-b^{*} / \sigma^{2}-\tau\|\beta\|_{1} / \sigma\right) \\ p\left(\tau | \beta, \sigma^{2}, y\right) &amp;=\mathrm{Ga}\left(\tau | p+r, \sigma^{-1}\|\beta\|_{1}+s\right) \end{aligned}
+\]</span>
+with parameter:
+<span class="math inline">\(a^{*}=(n+p) / 2+a\)</span>,<span class="math inline">\(b^{*}=(y-X \beta)^{\mathrm{T}}(y-X \beta) / 2+b\)</span>,
+<span class="math display">\[
+\mu_{j .}^{+}=\hat{\beta}_{\mathrm{OLS}, j}+\left\{\sum_{i \neq j}\left(\hat{\beta}_{\mathrm{OLS}, i}-\beta_{i}\right)\left(\omega_{i j} / \omega_{j j}\right)\right\}+\left(-\tau \sigma^{-1} \omega_{j j}^{-1}\right)
+\]</span>
+<span class="math inline">\(w_{ij}\)</span> is the ijth element of <span class="math inline">\(\Omega=\Sigma^{-1}\)</span>.The weights are
+<span class="math display">\[
+\phi_{j}=\left\{\frac{\Phi\left(\mu_{j}^{+} \cdot \sqrt{\omega}_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}\right\} /\left\{\frac{\Phi\left(\mu_{j}^{+} \vee \omega_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}+\frac{\Phi\left(-\mu_{j}^{-} \vee \omega_{j j}\right)}{\mathrm{N}\left(0 | \mu_{j}^{-}, \omega_{j j}^{-1}\right)}\right\}
+\]</span></p>
+<p>A description of a simple and efficient reject sampling method for obtaining exact samples from <span class="math inline">\(\sigma^2\)</span> is provided in the Appendix.</p>
+<p>When predictor variables are highly correlated, autocorrelation in the chain can be high. The usual solution of block-updating is not feasible because <span class="math inline">\(p\left(\beta | \sigma^{2}, \tau, y\right)\)</span> is difficult to sample when <span class="math inline">\(p\)</span> is even moderately large.</p>
+<blockquote>
+<p>注意到full conditional distribution里面，<span class="math inline">\(\beta_j\)</span> conditional on <span class="math inline">\(\beta_{-j}\)</span>.</p>
+</blockquote>
+<p>in 3.2, where a new Gibbs sampler is proposed that uses a reparameterization of the model to reduce autocorrelation. Even in the case of high autocorrelation, accurate estimates of the posterior mean of the regression coefficients can often be obtained under the standard Gibbs sampler via Rao-Blackwellization; at each iteration, the conditional expectation of <span class="math inline">\(\beta_j\)</span> is simply</p>
+<p><span class="math display">\[
+E\left(\beta_{j} | \beta_{-j}, \sigma^{2}, \tau, y\right)=\phi_{j}\left\{\mu_{j .}^{+}+\frac{\mathrm{N}\left(0 | \mu_{j}^{+}, \omega_{j j}^{-1}\right)}{\Phi\left(\mu_{j}^{+} \cdot \sqrt{\omega_{j j}}\right)}\right\}+\left(1-\phi_{j}\right)\left\{\mu_{j .}^{-}-\frac{\mathrm{N}\left(0 | \mu_{j}^{-}, \omega_{j j}^{-1}\right)}{\Phi\left(-\mu_{j}^{-} \cdot \sqrt{\omega_{j j}}\right)}\right\}
+\]</span>
+.</p>
+<p>If the classic lasso prior is used in place, then the Gibbs for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau\)</span> are replaced by
+<span class="math display">\[
+\begin{aligned} p\left(\sigma^{2} | \beta, \tau, y\right) &amp;=\operatorname{IG}\left(\sigma^{2} | a+n / 2, b^{*}\right) \\ p\left(\tau | \beta, \sigma^{2}, y\right) &amp;=\mathrm{Ga}\left(\tau | p+r,\|\beta\|_{1}+s\right) \end{aligned}
+\]</span></p>
+<blockquote>
+<p>这块不懂，得手推一下才能懂</p>
+</blockquote>
+</div>
+<div id="the-orthogonalized-gibbs-sampler" class="section level3">
+<h3><span class="header-section-number">8.4.2</span> The orthogonalized Gibbs sampler</h3>
+<p>A Gibbs sampler that is less sensitive to collinearity in the design matrix can be constructed as follows: Using the idea of ortogonally.</p>
+<p>Let <span class="math inline">\(\Sigma=\sigma^{2}\left(X^{\mathrm{T}} X\right)^{-1}\)</span> according to <span class="math inline">\(\sigma^{2} H^{\mathrm{T}}\left(X^{\mathrm{T}} X\right)^{-1} H=\sigma^{2} \Lambda=\sigma^{2} \operatorname{diag}\left(\lambda_{j}\right)\)</span>, where H is a <span class="math inline">\(p\times p\)</span> matrix such that <span class="math inline">\(H^{\mathrm{T}} H=H H^{\mathrm{T}}=I_{p}\)</span>. Transforming the regression coefficients as <span class="math inline">\(\eta=H^{\mathrm{T}} \beta\)</span>,</p>
+<p><span class="math display">\[
+p\left(\eta | y, \sigma^{2}, \tau\right) \propto \sum_{z \in \mathcal{Z}} \frac{\mathrm{N}\left(\eta | H^{\mathrm{T}} \mu_{z}, \sigma^{2} \Lambda\right)}{\mathrm{N}\left(0 | \mu_{z}, \Sigma\right)} 1\left(H \eta \in \mathcal{O}_{z}\right)
+\]</span></p>
+<p>Each element of the sum contains a term <span class="math inline">\(\mathrm{N}\left(\eta | H^{\mathrm{T}} \mu_{z}, \sigma^{2} \Lambda\right) 1\left(H \eta \in \mathcal{O}_{z}\right)\)</span>, a normal distribution with diagonal covariance matrix and support restricted by linear constraints.</p>
+<blockquote>
+<p>这段没懂，大概的意思是用一个H矩阵转换一下？</p>
+</blockquote>
+<p>While this distribution of <span class="math inline">\(\eta\)</span> is difficult to sample, then the full conditionals are piecewise normal on the intervals <span class="math inline">\(h_{0, j}^{*}&lt;\cdots&lt;h_{p+1, j}^{*} :\)</span></p>
+<p><span class="math display">\[
+p\left(\eta_{j} | \eta_{-j}, \sigma^{2}, \tau, y\right)=\sum_{l=0}^{p} \rho_{l j}\left\{C_{l j}^{-1} \mathrm{N}\left(\eta_{j} | \xi_{l j}, \sigma^{2} \lambda_{j}\right) 1\left(h_{l, j}^{*} \leqslant \eta_{j}&lt;h_{l+1, j}^{*}\right)\right\}
+\]</span></p>
+<blockquote>
+<p>为什么成立。。。这个piecewise normal on the intervals.</p>
+</blockquote>
+</div>
+<div id="comparing-samplers" class="section level3">
+<h3><span class="header-section-number">8.4.3</span> Comparing samplers</h3>
+<p>Each of the three Gibbs samplers for this model has advantages and disadvantages.</p>
+<blockquote>
+<p>哪里来的三个！？ 一个传统Laplace prior，一个2008那个的prior，还有一个正交的？是这三个吗？</p>
+</blockquote>
+<p>The data-augmentation approach is simple to implement and performs a block update for the regression coefficients <span class="math inline">\(\beta\)</span>, but involves a vector of latent variables which may result in slower mixing of the chain.</p>
+<blockquote>
+<p>哦原来是这个，文中一开始提出的那个带正负号indicator的latent variable <span class="math inline">\(z\)</span> 的那个Gibbs sampler</p>
+</blockquote>
+<p>The standard Gibbs sampler describe above is also simple to implement, but its mixing properties are particularly sensitive to correlation among the predictor variables.</p>
+<blockquote>
+<p>就是在讲orthogonalized之前那个，就是最普通的Gibbs sampler？</p>
+</blockquote>
+<p>The orthogonalized sampler is designed to reduce autocorrelation in such cases, but this reduction comes with an increase in both algorithmic complexity and computing time for a fixed number of iterations.</p>
+<blockquote>
+<p>所以正交方法很复杂然后带来了额外的计算和额外的迭代？</p>
+</blockquote>
+<p>然后就是Efron的diabetes data, illustrate the trade-offs between the data-augmentation and orthogonalized samplers.data-augumentation的是最简单的模型，orthogonalized则是代表了最复杂的模型。两个抽样器都分别跑了100 000次。然后分析<span class="math inline">\(\tau\)</span> 和 <span class="math inline">\(\beta_5\)</span>.</p>
+<blockquote>
+<p>既然Gibbs都要100 000次，那么Random walk跑1 000 000次一点都不多吧orz</p>
+</blockquote>
+<p>因为<span class="math inline">\(\beta_5\)</span>对应着一个和其他predictor 高度相关的predictor。
+lag-1 自回归系数：0.31对于第一个模型，0.08对于orthogonalized方法。
+对于<span class="math inline">\(\tau\)</span> 则是0.74和0.13.所以虽然data-augumented Gibbs是一块一块更新<span class="math inline">\(\beta\)</span>的，但是orthogonalized sampler还是有更低的自相关性。</p>
+<p>但是orthogonalized sampler对于scale更敏感，加了40个白噪声predictor时，orthogonalized sampler要多跑20倍的时间。解决这个问题的一个策略是对于large-p，把<span class="math inline">\(\beta\)</span>分成两部分，一个是两两不怎么相关的predictor，一个是有复杂相关关系的结构，第一个则每次更新一个，第二个几何则应用orthogonalizing transformation。</p>
+</div>
+</div>
+<div id="examples" class="section level2">
+<h2><span class="header-section-number">8.5</span> Examples</h2>
+<div id="example1prediction-along-the-solution-path" class="section level3">
+<h3><span class="header-section-number">8.5.1</span> Example1:Prediction along the solution path</h3>
+<p>The solution path is indexed by <span class="math inline">\(s=\left\|\hat{\beta}_{\mathrm{L}}(\lambda)\right\|_{1} /\left\|\hat{\beta}_{\mathrm{OLS}}\right\|_{1} \in[0,1]\)</span> corresponding to the fraction of the <span class="math inline">\(L_1\)</span> norm of the least-squares estimate represnete by the lasso estimate at <span class="math inline">\(\lambda\)</span>.</p>
+<blockquote>
+<p>所以从这段来看The solution path就是那个关于latent variable<span class="math inline">\(\lambda\)</span>的图上的solution</p>
+</blockquote>
+<p>Large values of <span class="math inline">\(\lambda\)</span> represent high shrinkage and hence correspond to small values of <span class="math inline">\(s\)</span></p>
+<p>Along the path at <span class="math inline">\(l=1,...,50\)</span>, evenly space values in <span class="math inline">\([0,1]\)</span>, the corresponding penalty parameters <span class="math inline">\(\lambda_l\)</span> were determined. The lasso estimate at each value of <span class="math inline">\(\lambda_l\)</span> corresponds to the mode of the posterior distribution under piror with <span class="math inline">\(\tau=\lambda_{l} /\left(2 \sigma^{2}\right)\)</span>. Where <span class="math inline">\(\sigma^2\)</span> was fixed at an estimate based on a least-squares fit of the full model.</p>
+</div>
+<div id="example2-prediction-when-modelling-lambda" class="section level3">
+<h3><span class="header-section-number">8.5.2</span> Example2: Prediction when modelling <span class="math inline">\(\lambda\)</span></h3>
+<p>Several methods for choosing <span class="math inline">\(\lambda\)</span>:</p>
+<ul>
+<li>K-fold and generalized cross-validation</li>
+<li><span class="math inline">\(C_p\)</span>-type selection</li>
+<li>Empirical Bayes approach.</li>
+</ul>
+<p>Using 10-fold crossvalidation on the training data. Prediction error was calculated using the test data.</p>
+<p>We repeated this procedure T=10000 times.</p>
+<blockquote>
+<p>所以每次Bayes抽100000次，然后重复这个过程在10-fold cv，所以是10^6,然后再反复repeat 10000次，所以要重复10^10次抽样？</p>
+</blockquote>
+</div>
+</div>
+<div id="discussion" class="section level2">
+<h2><span class="header-section-number">8.6</span> Discussion</h2>
+<ul>
+<li>Better than standard lasso.</li>
+<li>Similar result</li>
+<li>Reduction in average prediction error of 16%,36%,19%</li>
+</ul>
+<p><a href="https://www.asc.ohio-state.edu/hans.11/software/">Software</a></p>
 
-</div>
-</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
-</div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
+<div id="ref-Hans:2009hc">
+<p>Hans, Chris. 2009. “Bayesian lasso regression.” <em>Biometrika</em> 96 (4): 835–45.</p>
 </div>
 </div>
             </section>
@@ -515,8 +623,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-bayesian-lasso.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bayesian-analysis-of-joint-mean-and-covariance-models-for-longitudinal-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

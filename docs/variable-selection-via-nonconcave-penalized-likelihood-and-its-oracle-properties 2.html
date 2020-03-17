@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 1 Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 1 Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 1 Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="introduction.html">
+<link rel="next" href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,198 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
+<div id="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties" class="section level1">
+<h1><span class="header-section-number">Paper 1</span> Variable Selection via Nonconcave Penalized Likelihood and its Oracle Properties</h1>
+<p><span class="citation">Fan and Li (<a href="#ref-Fan:2001ug">2001</a>)</span></p>
+<div id="abstract" class="section level2">
+<h2><span class="header-section-number">1.1</span> Abstract:</h2>
+<p>Variable selection，stepwise selection方法的计算昂贵，并且在选择过程中没有考虑到随机误差。这篇文章则考虑使用罚似然函数penalized likelihood 方法去解决这几个问题。选择变量和估计参数同时进行。同时构造估计参数的置信区间。该方法独特的地方在于罚函数是symetric, nonconcave on <span class="math inline">\((0,\infty)\)</span>. 本文还提出了一种关于penalized likelihood function的优化算法。这种算法可以广泛的用于各类模型。比如非参模型小波和样条。同时也提出了收敛速率相关的理论。还介绍了这个方法的oracle property。</p>
+</div>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">1.2</span> Introduction</h2>
+<p>变量选择很重要blablabla。传统方法（step-wise）方法有很多问题。罚最小二乘可以同时保持子集选择方法和岭回归的有点。罚函数需要有在原点奇异性使得有稀疏的解(The penalty functions have to be singular at the origin to produce sparse solutions.)，还得满足一定的条件使得模型连续，为了保持模型选择的稳定性。(to satisfy certain conditions to produce continuous models, for staility of model selection)、而且得有界up to a constant使得对于一些大参数的估计是几乎无偏的。
+罚函数的前辈ridge regression和 lasso不完全满足这几项条件。
+罚最小二乘可以自然的推广到似然函数基础的模型上。
+对带有罚的高维目标函数做优化是一个非常难的问题。本文提出了一个新的并且广泛的算法能产生unified variable selection procedure.
+估计的标准差用一个sandwitch formula得到。</p>
+<p>罚函数相对于传统的step-wise方法来说，可以建立样本性质，比如收敛速度，oracle procedure。也就是说，如果真实的参数为0，则估计值为0的概率趋向于1.</p>
+<p>penalized likelihood 方法可以推广到高维的非参模型，通过使用wavelet和splines逼近回归函数。传统的sub-set selection方法在非参中是选择合适的样条的subbases。这些data-driven的变量选择方法的大样本性质很难理解。但是用penalized likelihood方法就很好建立大样本性质理论。</p>
 <ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
+<li>Section 2 Relation between penalized least squares &amp; subset selection when matrices are orthonormal</li>
+<li>Section 3 Extend penalized likelihood approach to various parametric regression, lm, rlm. glm. Asymoptotic property. 3.3: Based on local quadratic approximations, find the estimator for penalized likelihood.</li>
+</ul>
+<blockquote>
+<p>The main reason I read this, the local quadratic approximation</p>
+</blockquote>
+<ul>
+<li>Section 4 Numerical comparision and simulation studies</li>
+<li>Section 5 More discussion</li>
+<li>Appendix: Technical proofs.</li>
 </ul>
 </div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
-<p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
-\]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
+<div id="penalized-least-squares-and-variable-selection" class="section level2">
+<h2><span class="header-section-number">1.3</span> Penalized Least Squares And Variable Selection</h2>
+<p>Linear Regression Model:
 <span class="math display">\[
-\theta_j=I_j\beta_j
+\mathbf{y}=\mathbf{X} \boldsymbol{\beta}+\boldsymbol{\varepsilon}
 \]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
+LSE
 <span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+\|\mathbf{y}-\mathbf{X} \boldsymbol{\beta}\|^{2}
+\]</span>
+equivelent to
+<span class="math display">\[
+\|\hat{\boldsymbol{\beta}}-\boldsymbol{\beta}\|^{2}
+\]</span>
+penalized least square:
+<span class="math display">\[
+\begin{array}{r}{\frac{1}{2}\|\mathbf{y}-\mathbf{X} \boldsymbol{\beta}\|^{2}+\lambda \sum_{j=1}^{d} p_{j}\left(\left|\boldsymbol{\beta}_{j}\right|\right)=\frac{1}{2}\|\mathbf{y}-\hat{\mathbf{y}}\|^{2}+\frac{1}{2} \sum_{j=1}^{d}\left(z_{j}-\beta_{j}\right)^{2}} \\ {+\lambda \sum_{j=1}^{d} p_{j}\left(\left|\beta_{j}\right|\right)}\end{array}
+\]</span>
+with <span class="math inline">\(\mathbf{z}=\mathbf{X}^{T} \mathbf{y}\)</span> and <span class="math inline">\(\hat{\mathbf{y}}=\mathbf{X} \mathbf{X}^{T} \mathbf{y}\)</span>.</p>
+<p><span class="math inline">\(p_j\)</span> 不一定对所有j都一致。（可以加个权甚至把对重要j的减为0）</p>
+<p>但是以下我们假设一致。</p>
+<p>minimizing the previous PLS problem is equivelant to
+<span class="math display">\[
+\frac{1}{2}(z-\theta)^{2}+p_{\lambda}(|\theta|)
 \]</span></p>
+<p>By taking hard thresholding penalty(!!! 这个在lasso里面提过)
+<span class="math display">\[
+p_{\lambda}(|\theta|)=\lambda^{2}-(|\theta|-\lambda)^{2} I(|\theta|&lt;\lambda)
+\]</span></p>
+<p>hard thresholding rule:
+<span class="math display">\[
+\hat{\theta}=z I(|z|&gt;\lambda)
+\]</span>
+在这种情况下，正巧和best subset selection and stepwise deletion and addition for orthonormal designs的一致。Hard thresholding penalty function is a smoother penalty function than the entropy penalty <span class="math inline">\(p_{\lambda}(|\theta|)=\left(\lambda^{2} / 2\right) I(|\theta| \neq 0)\)</span>.</p>
+<p>一个好的penalty function应该有如下性质</p>
+<ul>
+<li>Unbiasedness,无偏或者近似无偏</li>
+<li>Sparsity,自动把参数很小的变量设为0进而降低模型复杂度</li>
+<li>Continuity 估计对于数据z连续，避免模型预测时的不稳定(?)</li>
+</ul>
+<p>对于hard thresholding penalty，如下图可见，当<span class="math inline">\(|\theta|&lt;\lambda\)</span>时，罚函数是从0到<span class="math inline">\(\lambda^2\)</span>，也就是在这个范围内，“鼓励”<span class="math inline">\(\theta\)</span>取0，但是当<span class="math inline">\(|\theta|\geq \lambda\)</span>时，penalty是一样的，所以不会对likelihood的估计造成影响。</p>
+<pre class="sourceCode r"><code class="sourceCode r">lambda=<span class="dv">2</span>
+theta=<span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)
+p_hard=lambda<span class="op">^</span><span class="dv">2</span><span class="op">-</span>(<span class="kw">abs</span>(theta)<span class="op">-</span>lambda)<span class="op">^</span><span class="dv">2</span><span class="op">*</span><span class="kw">as.numeric</span>(<span class="kw">abs</span>(theta)<span class="op">&lt;</span>lambda)
+<span class="kw">plot</span>(theta,p_hard,<span class="dt">type=</span><span class="st">&#39;l&#39;</span>,<span class="dt">ylab=</span><span class="st">&quot;hard threshold penalty&quot;</span>)</code></pre>
+<p><img src="paper_reanding_record_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>PLS关于<span class="math inline">\(\theta\)</span>的一阶导是<span class="math inline">\(\operatorname{sgn}(\theta)\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}-z\)</span> ,其中, <span class="math inline">\(p&#39;(\theta)=I(|\theta|&lt;\lambda) sign(\theta)\cdot2(|\theta|-\lambda)\)</span>当<span class="math inline">\(\theta\)</span>很大的时候,<span class="math inline">\(p&#39;(\theta)\)</span>=0.当<span class="math inline">\(|z|\)</span> 足够大的时候，估计值就是<span class="math inline">\(\hat\theta=z\)</span> 所以说approximately unbiased estimator. 此时，“<span class="math inline">\(p&#39;(|\theta|)=0\)</span> for large <span class="math inline">\(|\theta|\)</span>” 就是无偏性的一个充分条件。就类似于Bayes selection中的一个improper prior.(？？？为啥，improper prior的定义不是不是分布的prior吗，和导数为0有什么关系？)</p>
+<p>结果得到的估计量是一个阈值条件(thresholding rule)的充分条件是 <em>the minimum of the function <span class="math inline">\(|\theta|+p&#39;_{\lambda}(|\theta|)\)</span> is positive</em>. When <span class="math inline">\(|z|&lt;\min _{\theta \neq 0}\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}\)</span>, then the derivative of PLS is positive for all positive <span class="math inline">\(\theta\)</span>’s and negative for negative <span class="math inline">\(\theta\)</span>’s.<br />
+因为PLS的一阶是<span class="math inline">\(\operatorname{sgn}(\theta)\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}-z\)</span>.
+但是在这种情况下，PLS的估计是<span class="math inline">\(\hat\theta=0\)</span>.因为在定义域上<span class="math inline">\((-\infty,0)\)</span>上PLS函数单减，在<span class="math inline">\((0,\infty)\)</span>上单增，最小化PLS函数的点就是0.
+另外一种情况，当<span class="math inline">\(|z|&gt;\min _{\theta \neq 0}|\theta|+p_{\lambda}^{\prime}(|\theta|)\)</span>，则Z函数和<span class="math inline">\(|\theta|+p&#39;_{\lambda}(|\theta|)\)</span>有交叉，也就是存在令导数为0的点。
+<img src="chp2/Figure1.png" width="659" />
+所以这几根粗的线是不同penalty function的长相，第一张图的意思就是当<span class="math inline">\(\theta=0\)</span>时，罚函数不罚，当theta超过一定值也不罚。lasso则一直罚，SCAD则更smooth，但是超过一定值也不罚了。</p>
+<p>This implies that a sufficient and necessary condition for continuity is that <em>the minimum of the function <span class="math inline">\(|\theta|+p_\lambda&#39;(|\theta|)\)</span> is attained at 0.</em></p>
+<pre class="sourceCode r"><code class="sourceCode r">lambda=<span class="dv">2</span>
+theta=<span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)
+p_der=<span class="op">-</span><span class="kw">as.numeric</span>(<span class="kw">abs</span>(theta)<span class="op">&lt;</span>lambda)<span class="op">*</span><span class="dv">2</span><span class="op">*</span>(<span class="kw">abs</span>(theta)<span class="op">-</span>lambda)
+<span class="kw">plot</span>(theta,p_der,<span class="dt">type=</span><span class="st">&#39;l&#39;</span>,<span class="dt">ylab =</span> <span class="st">&quot;hard threshold 1-order derivative&quot;</span>)</code></pre>
+<p><img src="paper_reanding_record_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#lines(theta,rep(1,8001),type=&#39;l&#39;)</span></code></pre>
+<p>观察PLS关于<span class="math inline">\(\theta\)</span>的一阶导，当<span class="math inline">\(|z|&lt;\min _{\theta \neq 0}\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}\)</span> 时，一阶导的符号与<span class="math inline">\(\theta\)</span>一致，+ if <span class="math inline">\(\theta&gt;0\)</span>,- if <span class="math inline">\(\theta&lt;0\)</span>.这样<span class="math inline">\(\hat\theta=0\)</span>。 而当<span class="math inline">\(|z|&gt;\min _{\theta \neq 0}|\theta|+p_{\lambda}^{\prime}(|\theta|)\)</span> 时，（可能？）存在两个跨越点。</p>
+<p><img src="chp2/Figure3.png" width="297" /></p>
+<p>其中，大的那个点是PLS的estimator。这样，为了保证<span class="math inline">\(\hat\theta\)</span>关于<span class="math inline">\(z=\min _{\theta \neq 0}\left\{|\theta|+p_{\lambda}^{\prime}(|\theta|)\right\}\)</span> 左右连续，所以<span class="math inline">\(|\theta|+p_{\lambda}^{\prime}(|\theta|)\)</span> 应该在0点取得</p>
+<p>可以断言，满足稀疏性和连续性条件的penalty 函数必须在origin点singular。</p>
+<ul>
+<li><span class="math inline">\(L_2\)</span> penalty <span class="math inline">\(p_{\lambda}(|\theta|)=\lambda|\theta|^2\)</span>-&gt; ridge regression</li>
+<li><span class="math inline">\(L_1\)</span> penalty <span class="math inline">\(p_{\lambda}(|\theta|)=\lambda|\theta|\)</span> yields a soft thresholding rule and lasso
+<span class="math display">\[
+\hat{\theta}_{j}=\operatorname{sgn}\left(z_{j}\right)\left(\left|z_{j}\right|-\lambda\right)_{+}
+\]</span></li>
+<li><span class="math inline">\(L_q\)</span> penalty <span class="math inline">\(p_{\lambda}(|\theta|)=\lambda|\theta|^{q}\)</span> -&gt; bridge regression.</li>
+</ul>
+<p>然而 The solution is continuous only when <span class="math inline">\(q\geq 1\)</span>. 但是，when <span class="math inline">\(q&gt;1\)</span>, the minimum of <span class="math inline">\(|\theta|+p&#39;_{\lambda}(|\theta|)\)</span> is zero and hence it does not produce sparse solution. So the only solution is the <span class="math inline">\(L_1\)</span> penalty family. 但是使用常数<span class="math inline">\(\lambda\)</span>时，改变<span class="math inline">\(\lambda\)</span>会有代价。</p>
+<div id="smoothly-clipped-absolute-deviation-penalty" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Smoothly Clipped Absolute Deviation Penalty</h3>
+<p>因为一般的<span class="math inline">\(L_q\)</span> 和硬阈值方法不能同时满足无偏，稀疏和连续性。定义一个连续可微的penalty:
+<span class="math display">\[
+p_{\lambda}^{\prime}(\theta)=\lambda\left\{I(\theta \leq \lambda)+\frac{(a \lambda-\theta)_{+}}{(a-1) \lambda} I(\theta&gt;\lambda)\right\}
+\]</span>
+for some <span class="math inline">\(a&gt;2\)</span> and <span class="math inline">\(\theta&gt;0\)</span>. This is called SCAD penalty.
+这是二次样条，其端点是<span class="math inline">\(\lambda\)</span>和<span class="math inline">\(a\lambda\)</span>.结果如下
+<span class="math display">\[
+\hat{\theta}=\left\{\begin{array}{ll}{\operatorname{sgn}(z)(|z|-\lambda)_{+},} &amp; {\text { when }|z| \leq 2 \lambda} \\ {\{(a-1) z-\operatorname{sgn}(z) a \lambda\} /(a-2),} &amp; {\text { when } 2 \lambda&lt;|z| \leq a \lambda} \\ {z,} &amp; {\text { when }|z|&gt;a \lambda}\end{array}\right.
+\]</span></p>
+<p>估计的阈值由<span class="math inline">\(\lambda\)</span>和<span class="math inline">\(a\)</span>决定。
+在Bayes risk analysis中，prior for <span class="math inline">\(\theta\)</span> is <span class="math inline">\(N(0,a\lambda)\)</span>. Compute Bayes risk via numerical integration.</p>
 </div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
+<div id="performance-of-thresholding-rules" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Performance of Thresholding Rules</h3>
+<p>怎么突然转去讲risk anaysis了。。。
+Compare between <span class="math inline">\(L_2\)</span> risk function, hard and soft thresholding rules with SCAD.</p>
 </div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+</div>
+<div id="variable-selection-via-penalized-likelihood" class="section level2">
+<h2><span class="header-section-number">1.4</span> Variable selection via penalized likelihood</h2>
+<p>Assume design matrix <span class="math inline">\(X=(x_{ij})\)</span> is standardized.(mean 0 and variance 1).</p>
+<div id="penalized-least-squares-and-likelihood" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Penalized Least Squares and Likelihood</h3>
+<p>Penalized least squares:
+<span class="math display">\[
+\frac{1}{2}(\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^{T}(\mathbf{y}-\mathbf{X} \boldsymbol{\beta})+n \sum_{j=1}^{d} p_{\lambda}\left(\left|\beta_{j}\right|\right)
+\]</span></p>
+<p>We can consider alternative loss function Huber’s <span class="math inline">\(\psi\)</span> function, which is more numerical stablize than least squares,that is, we minimizing</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} \psi\left(\left|y_{i}-\mathbf{x}_{i} \boldsymbol{\beta}\right|\right)+n \sum_{j=1}^{d} p_{\lambda}\left(\left|\beta_{j}\right|\right)
+\]</span>
+For generalized linear model, penalized likelihood is
+<span class="math display">\[
+\sum_{i=1}^{n} \ell_{i}\left(g\left(\mathbf{x}_{i}^{T} \boldsymbol{\beta}\right), y_{i}\right)-n \sum_{j=1}^{d} p_{\lambda}\left(\left|\beta_{j}\right|\right)
+\]</span>
+equivelent to minimize its multiple with -1.</p>
+</div>
+<div id="sampling-properties-and-oracle-properties." class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Sampling properties and oracle properties.</h3>
+<p>先跳过，以后再看。</p>
+</div>
+<div id="a-new-unified-algorithm" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> A new Unified Algorithm</h3>
+<p>A new unified algorithm for monimizing the problem:1. penalized linear square.
+2.penalized Huber <span class="math inline">\(\psi\)</span> function 3.Generalised linear model.</p>
+<p>Denote first term of these problem as a loss function of <span class="math inline">\(\boldsymbol \beta\)</span>, as <span class="math inline">\(\ell(\beta)\)</span>. Then the problem can be rewrite as the form:</p>
+<p><span class="math display">\[
+\ell(\boldsymbol{\beta})+n \sum_{j=1}^{d} p_{\lambda}\left(\left|\beta_{j}\right|\right)
+\]</span>
+为了解这个优化问题，可能会涉及二阶导以及Hessian阵一类的问题。但是<span class="math inline">\(L_1\)</span>,硬阈值，SCAD都没有连续的二阶导，但是这些罚函数可以被locally approximated by a quadratic function.假设从初值<span class="math inline">\(\boldsymbol \beta_0\)</span> 开始迭代，如果对于某个<span class="math inline">\(\beta_{j0}\)</span> 非常靠近0，则设置<span class="math inline">\(\hat\beta_j=0\)</span>。否则用二次函数局部逼近：
+<span class="math display">\[
+\left[p_{\lambda}\left(\left|\beta_{j}\right|\right)\right]^{\prime}=p_{\lambda}^{\prime}\left(\left|\beta_{j}\right|\right) \operatorname{sgn}\left(\beta_{j}\right) \approx\left\{p_{\lambda}^{\prime}\left(\left|\beta_{j 0}\right|\right) /\left|\beta_{j 0}\right|\right\} \beta_{j}
+\]</span>
+when <span class="math inline">\(\beta\neq0\)</span>,则有
+<span class="math display">\[
+\begin{array}{r}{p_{\lambda}\left(\left|\beta_{j}\right|\right) \approx p_{\lambda}\left(\left|\beta_{j 0}\right|\right)+\frac{1}{2}\left\{p_{\lambda}^{\prime}\left(\left|\beta_{j 0}\right|\right) /\left|\beta_{j 0}\right|\right\}\left(\beta_{j}^{2}-\beta_{j 0}^{2}\right)} \\ {\text { for } \beta_{j} \approx \beta_{j 0}}\end{array}
+\]</span>
+二次逼近的缺点是一旦coefficient被压缩到0，将一直停留在0点。
+penalized maximum likelihood的问题可以等价的编程二次型最小值的问题，并且能用Newton-Raphson算法进行求解。
+<span class="math display">\[
+\begin{array}{r}{\ell\left(\boldsymbol{\beta}_{0}\right)+\nabla \ell\left(\boldsymbol{\beta}_{0}\right)^{T}\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)+\frac{1}{2}\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)^{T} \nabla^{2} \ell\left(\boldsymbol{\beta}_{0}\right)\left(\boldsymbol{\beta}-\boldsymbol{\beta}_{0}\right)} \\ {+\frac{1}{2} n \boldsymbol{\beta}^{T} \Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right) \boldsymbol{\beta}}\end{array}
+\]</span></p>
+<p>于是就得到更新过程如下：
+<span class="math display">\[
+\boldsymbol{\beta}_{1}=\boldsymbol{\beta}_{0}-\left\{\nabla^{2} \ell\left(\boldsymbol{\beta}_{0}\right)+n \Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right)\right\}^{-1}\left\{\nabla \ell\left(\boldsymbol{\beta}_{0}\right)+n \mathbf{U}_{\lambda}\left(\boldsymbol{\beta}_{0}\right)\right\}
+\]</span>
+with
+<span class="math display">\[
+\begin{array}{l}{\nabla \ell\left(\boldsymbol{\beta}_{0}\right)=\frac{\partial \ell\left(\boldsymbol{\beta}_{0}\right)}{\partial \boldsymbol{\beta}}, \quad \nabla^{2} \ell\left(\boldsymbol{\beta}_{0}\right)=\frac{\partial^{2} \ell\left(\boldsymbol{\beta}_{0}\right)}{\partial \boldsymbol{\beta} \partial \boldsymbol{\beta}^{T}}} \\ {\Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right)=\operatorname{diag}\left\{p_{\lambda}^{\prime}\left(\left|\boldsymbol{\beta}_{10}\right|\right) /\left|\beta_{10}\right|, \ldots, p_{\lambda}^{\prime}\left(\left|\beta_{d 0}\right|\right) /\left|\beta_{d 0}\right|\right\}}\\
+\mathbf{U}_{\lambda}\left(\boldsymbol{\beta}_{0}\right)=\Sigma_{\lambda}\left(\boldsymbol{\beta}_{0}\right) \boldsymbol{\beta}_{0}
+\end{array}
+\]</span></p>
+<p>当算法收敛的时候，estimator <span class="math inline">\(\hat\beta\)</span>满足如下条件
+<span class="math display">\[
+\frac{\partial \ell\left(\hat{\boldsymbol{\beta}}_{0}\right)}{\partial \beta_{j}}+n p_{\lambda}^{\prime}\left(\left|\hat{\beta}_{j 0}\right|\right) \operatorname{sgn}\left(\hat{\beta}_{j 0}\right)=0
+\]</span></p>
+<p>如下的sandwich formula 可以作为对<span class="math inline">\(\hat\beta_1\)</span>的估计:
+<span class="math display">\[
+\begin{aligned} \widehat{\operatorname{cov}}\left(\hat{\boldsymbol{\beta}}_{1}\right)=\left\{\nabla^{2} \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)+n \Sigma_{\lambda}\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\}^{-1} \widehat {\operatorname{cov}}\left\{\nabla \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\} \\ \times\left\{\nabla^{2} \ell\left(\hat{\boldsymbol{\beta}}_{1}\right)+n \Sigma_{\lambda}\left(\hat{\boldsymbol{\beta}}_{1}\right)\right\}^{-1} \end{aligned}
+\]</span></p>
 
-</div>
 </div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
-</div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
+<div id="ref-Fan:2001ug">
+<p>Fan, Jianqin, and Runze Li. 2001. “Variable selection via nonconcave penalized likelihood and its oracle properties.” <em>Journal of the American Statistical Association</em>, December.</p>
 </div>
 </div>
             </section>
@@ -515,8 +594,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

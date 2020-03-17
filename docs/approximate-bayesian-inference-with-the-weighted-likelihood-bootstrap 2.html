@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 22 Approximate Bayesian Inference with the Weighted Likelihood Bootstrap | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 22 Approximate Bayesian Inference with the Weighted Likelihood Bootstrap | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 22 Approximate Bayesian Inference with the Weighted Likelihood Bootstrap | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="next" href="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap-1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,178 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
-<ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
-</ul>
+<div id="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap" class="section level1">
+<h1><span class="header-section-number">Paper 22</span> Approximate Bayesian Inference with the Weighted Likelihood Bootstrap</h1>
+<p><span class="citation">(Newton and Raftery <a href="#ref-Newton:1994wm">1994</a>)</span></p>
+<div id="abstract-14" class="section level2">
+<h2><span class="header-section-number">22.1</span> Abstract</h2>
+<p>Use weighted likelihood bootstrap (WLB) as a way to simulate approximately from a posterior distribution.</p>
+<p>The SIR-adjusted WLB can be a competitive alternative to other integration methds in certain models.</p>
+<p>We note that, given a sample simulated from the posterior distribution, the required marginal likelihood may be simulation consistently estimated by the harmonic mean of the associated likelihood values; a modification of the estimator that avoids instability is also noted.</p>
+<p>These methods provide simple ways of calculating approximate Bayes factors and posterior model probabilities for a very wide class of models.</p>
 </div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
-<p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
-\]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
+<div id="introduction-17" class="section level2">
+<h2><span class="header-section-number">22.2</span> Introduction</h2>
+<p>This paper investigates the extent to which a new bootstrap procedure – the weighted likelihood bootstrap (WLB) - can be used by applied Bayesian statisticians to approximate posterior distributions. This is direct extension of the Bayesian bootstrap.</p>
+<p>The WLB used in isolation is not simulation consisent: it does not produce exact answers as the amount of computing resources increases without bound.</p>
+<p>The paper is organized as:
+- Section 2 description of the method for independent data and application to a non-linear regression problem.
+- 3 Exact properties of the WLB.
+- 4 Asymptotic properties
+- 5 Implement of the WLB
+- 6 Extension to dependent data models and to partial likelihood.
+- 7 We study a method for approximating marginal likelihoods by using samples from a posterior distribution.</p>
+<blockquote>
+<p>From this index, what we need is section 7. So the reading plan is 2,5 and 7, maybe 3.</p>
+</blockquote>
+</div>
+<div id="the-method" class="section level2">
+<h2><span class="header-section-number">22.3</span> The Method</h2>
+<p>Consider modelling data <span class="math inline">\(x_{1}, x_{2}, \ldots, x_{n}\)</span> as independent, each <span class="math inline">\(x_i\)</span> having probability density function <span class="math inline">\(f_i(x_i;\theta)\)</span>, the likelihood function for the parameter <span class="math inline">\(\theta\)</span>,
 <span class="math display">\[
-\theta_j=I_j\beta_j
+L(\theta)=\prod_{i=1}^{n} f_{i}\left(x_{i} ; \theta\right)
 \]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
+Started with a prior <span class="math inline">\(\pi(\theta)\)</span>.
+Posterior density proportional to <span class="math inline">\(L(\theta)\pi(\theta)\)</span>.</p>
+<p>In the WLB method, a sample is produced by maximizing a weighted likelihood function
 <span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+\tilde{L}(\theta):=\prod_{i=1}^{n} f_{i}\left(x_{i} ; \theta\right)^{w_{n, t}}
+\]</span>
+where the weight vector <span class="math inline">\(w_{n}=\left(w_{n, 1}, \dots, w_{n, n}\right)\)</span> has some probability distribution determined by the statistician. The function <span class="math inline">\(\tilde L\)</span> is not a likelihood in the usual sense; it is merely a device for generating a sample on the parameter space.</p>
+<p>Denote <span class="math inline">\(\tilde \theta\)</span> as any parameter value satisfying <span class="math inline">\(\tilde{L}(\tilde{\theta}) \geqslant \tilde{L}(\theta)\)</span> for all <span class="math inline">\(\theta\)</span> in the parameter space.</p>
+<p>The likelihood <span class="math inline">\(L\)</span> are fixed after the data are observed, the weighed likelihood <span class="math inline">\(\tilde{L}\)</span> and its maximizer <span class="math inline">\(\tilde \theta\)</span> have randomness induced by the distribution of the weights.</p>
+<p>The thesis of this paper, showed that for certain weight distributions, the conditional distribution of <span class="math inline">\(\tilde \theta\)</span> given the data can provide a good approximation to a posterior distribution of <span class="math inline">\(\theta\)</span>.</p>
+<p>Although this conditional distribution is usually difficult to find exactly, it is straightforward to simulate when maximization of <span class="math inline">\(\tilde{L}\)</span> is feasible.</p>
+<p>Motivated by inference for multinomial data, a natural weight distribution is the uniform Dirichlet distribution.</p>
+<blockquote>
+<p>The weight distribution in <span class="math inline">\(\tilde{L}\)</span></p>
+</blockquote>
+<p>Such weights are simulated by generating <span class="math inline">\(n\)</span> independent exponentials <span class="math inline">\(Y_i\)</span> and forming <span class="math inline">\(w_{n, i}=Y_{i} / \bar{Y}\)</span>, where <span class="math inline">\(\bar{Y}\)</span> is the sample mean of the <span class="math inline">\(Y_i\)</span>. When combining the WLB with importance sampling, it is computationally convenient to form weights <span class="math inline">\(w_{n, i} \propto Y_{i}^{\alpha}\)</span> for some power <span class="math inline">\(\alpha\neq 1\)</span>. If <span class="math inline">\(\alpha &gt;1\)</span>, the weight distribution is overdispersed relative to the Dirichlet distribution. Many weight distributions could be postulated.</p>
+<p><strong>Example</strong>:</p>
+<p>A non-linear regression model, relates biochemical oxygen demand <span class="math inline">\(x\)</span> of prepared water samples to incubation time <span class="math inline">\(t\)</span> by the equation:
+<span class="math display">\[
+x_{i}=\beta_{1}\left\{1-\exp \left(-\beta_{2} t_{i}\right)\right\}+\epsilon_{i} \quad i=1,2, \ldots, n
+\]</span>
+Thee error <span class="math inline">\(\epsilon_i\)</span> are assumed to be independent normal errors with constant variance <span class="math inline">\(\sigma^2\)</span>, assigned an improper prior <span class="math inline">\(\pi\left(\sigma^{2}\right) \propto \sigma^{-2}\)</span>. The generic parameter <span class="math inline">\(\theta\)</span> incorporates both the regression parameter vector <span class="math inline">\(\beta\)</span> and the scale parameter <span class="math inline">\(\sigma\)</span>. A transformation invariant, design-dependent prior for <span class="math inline">\(\beta=\left(\beta_{1}, \beta_{2}\right)\)</span> is <span class="math inline">\(\pi(\beta) \propto\left|V^{\mathrm{T}} V\right|^{1 / 2}\)</span> where <span class="math inline">\(V\)</span> is the <span class="math inline">\(n\times 2\)</span> matrix having <span class="math inline">\((i,j)\)</span>th element <span class="math inline">\(\partial E_{\beta}\left(x_{i}\right) / \partial \beta_{j}\)</span>.</p>
+<p>We can quite directly obtain maximum likelihood estimates for this model by using routines for non-linear optimization.
+Bayesian inference is not simple here because marginal posteriors pose difficult integration problems.</p>
+<p>The WLB takes advantage of the available estimation technology to carry out the integration. Section 5 described maximizing <span class="math inline">\(\tilde L\)</span> for any particular set of weights is done by simply including a weight vector in the estimation routine.</p>
+<p>The WLB samples do not come from the joint posterior exactly, because, for one thing, no prior information was used in the simulation. However, a simple adjustment based on importance sampling can correct this.</p>
+<p>The basic idea is that <span class="math inline">\(g\)</span>, the joint density of <span class="math inline">\(\tilde \beta\)</span>, is a good approximation to the marginal posterior density of <span class="math inline">\(\beta\)</span> and hence is a good choice for an importance sampling density.</p>
+<p>To finish the analysis, each <span class="math inline">\(\tilde \beta^j\)</span> in the raw WLB sample must be assigned an importance weight
+<span class="math display">\[
+u_{j} \propto r\left(\tilde{\beta}^{j}\right)=\pi\left(\tilde{\beta}^{j}\right) L_{m}\left(\tilde{\beta}_{j}\right) / \hat{g}\left(\tilde{\beta}_{j}\right)
 \]</span></p>
 </div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
+<div id="implementation-and-examples" class="section level2">
+<h2><span class="header-section-number">22.4</span> 5 Implementation and Examples</h2>
+<div id="iteratively-reweighted-least-squares" class="section level3">
+<h3><span class="header-section-number">22.4.1</span> Iteratively Reweighted Least Squares</h3>
+<p>Consider a weighted likelihood function <span class="math inline">\(\tilde L\)</span> which is maximized by solving the (vector) weighted likelihood equation
+<span class="math display">\[
+\frac{\partial \tilde{l}}{\partial \theta}(\theta)=0
+\]</span>
+for <span class="math inline">\(\tilde \theta\in R^k\)</span>. There is a close connection between a solution <span class="math inline">\(\tilde \theta\)</span> of equation and the IRLS solution <span class="math inline">\(\hat\theta\)</span> of the likelihood equation
+<span class="math display">\[
+\frac{\partial l}{\partial \theta}(\theta)=0
+\]</span>
+where <span class="math inline">\(l\)</span> is the logarithm of the likelihood function.</p>
+<p><span class="math inline">\(\tilde l\)</span> is viewed as a function of an n-vector of predictors <span class="math inline">\(\eta=\left(\eta_{1}, \eta_{2}, \dots, \eta_{n}\right)^{\mathrm{T}}\)</span>. These predictors, in turn, are viewed as functions of the parameter <span class="math inline">\(\theta\)</span>; thus <span class="math inline">\(\eta=\eta(\theta)\)</span>. Letting u be the n-vector <span class="math inline">\((\partial l / \partial \eta)\)</span> and D the <span class="math inline">\(n\times k\)</span> matrix <span class="math inline">\((\partial \eta / \partial \theta)\)</span>, the weighted likelihood equation becomes simply
+<span class="math display">\[
+D^{\mathrm{T}} W u=0
+\]</span>
+where <span class="math inline">\(W\)</span> is an <span class="math inline">\(n\times n\)</span> diagonal matrix with weights <span class="math inline">\(w_{n,i}\)</span> on its diagonal. The model densities are assumed to have the form <span class="math inline">\(f_{i}\left(x_{i} ; \theta\right)=\psi_{i}\left(\eta_{i}, x_{i}\right)\)</span> where, for each <span class="math inline">\(i\)</span>,<span class="math inline">\(\psi_i\)</span> is fixed, known, function determined by the model.</p>
+<blockquote>
+<p>Other example ommit here.</p>
+</blockquote>
 </div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+</div>
+<div id="using-samples-from-posterior-to-evaluate-the-marginal-likelihood" class="section level2">
+<h2><span class="header-section-number">22.5</span> Using Samples From Posterior To Evaluate The Marginal Likelihood</h2>
+<p>Bayes factor :
+<span class="math display">\[
+B_{01}=\frac{p\left(x | M_{0}\right)}{p\left(x | M_{1}\right)}
+\]</span>
+in this equation:
+<span class="math display">\[
+p\left(x | M_{j}\right)=\int p\left(x | \theta_{j}, M_{j}\right) p\left(\theta_{j} | M_{j}\right) \mathrm{d} \theta_{j}
+\]</span>
+<span class="math inline">\(\theta_j\)</span> is the parameter of model <span class="math inline">\(M_j\)</span> and <span class="math inline">\(p(\theta_j|M_j)\)</span> is the prior density of <span class="math inline">\(\theta_j\)</span> under model <span class="math inline">\(M_j,(j=0,1)\)</span>. We call <span class="math inline">\(p(x|M_j)\)</span> the marginal likelihood of the data under <span class="math inline">\(M_j\)</span>.</p>
+<p>The Bayesian inference, prediction and decision-making all involve their posterior probabilities:
+<span class="math display">\[
+p\left(M_{j} | x\right)=p\left(x | M_{j}\right) p\left(M_{j}\right) / \sum_{k=0}^{J} p\left(x | M_{k}\right) p\left(M_{k}\right)
+\]</span>
+where <span class="math inline">\(p(M_j)\)</span> is the prior probability of the model <span class="math inline">\(M_j\)</span>. Again, the marginal likelihoods <span class="math inline">\(p(x|M_j)\)</span> are the crucial components.</p>
+<p>If we dropping the notation dependence on <span class="math inline">\(M_j\)</span>, then the marginal likelihood becomes
+<span class="math display">\[
+p(x)=\int p(x | \theta) p(\theta) \mathrm{d} \theta
+\]</span></p>
+<p><strong>Importance Sampling</strong></p>
+<p>Basic importance sampling
+<span class="math display">\[
+\mu=\mathbb{E}(f(\boldsymbol{X}))=\int_{\mathcal{D}} f(\boldsymbol{x}) p(\boldsymbol{x}) \mathrm{d} \boldsymbol{x}
+\]</span></p>
+<p>with another proposal <span class="math inline">\(q\)</span>:
+<span class="math display">\[
+\mu=\int_{\mathcal{D}} f(\boldsymbol{x}) p(\boldsymbol{x}) \mathrm{d} \boldsymbol{x}=\int_{\mathcal{D}} \frac{f(\boldsymbol{x}) p(\boldsymbol{x})}{q(\boldsymbol{x})} q(\boldsymbol{x}) \mathrm{d} \boldsymbol{x}=\mathbb{E}_{q}\left(\frac{f^{\prime}(\boldsymbol{X}) p(\boldsymbol{X})}{q(\boldsymbol{X})}\right)
+\]</span></p>
+<p>Then the importance sampling estimate of <span class="math inline">\(\mu=\mathbb{E}_{p}(f(\boldsymbol{X}))\)</span> is
+<span class="math display">\[
+\hat{\mu}_{q}=\frac{1}{n} \sum_{i=1}^{n} \frac{f\left(\boldsymbol{X}_{i}\right) p\left(\boldsymbol{X}_{i}\right)}{q\left(\boldsymbol{X}_{i}\right)}, \quad \boldsymbol{X}_{i} \sim q
+\]</span></p>
+<p>The Monte Carlo method for evaluating integrals of the form <span class="math inline">\(I=\int g(\theta) p(\theta) \mathrm{d} \theta\)</span> is to generate a sample <span class="math inline">\(\left\{\theta^{(i)}: i=1, \dots, m\right\}\)</span> from a density <span class="math inline">\(p^*(\theta)\)</span>. Under quite general conditions, a simulation consistent estimate of <span class="math inline">\(I\)</span> is
+<span class="math display">\[
+\hat{I}=\sum_{i=1}^{m} w_{i} g\left(\theta^{(i)}\right) / \sum_{i=1}^{m} w_{i}
+\]</span>
+where <span class="math inline">\(w_{i}=p\left(\theta^{(i)}\right) / p^{*}\left(\theta^{(i)}\right)\)</span>; the function <span class="math inline">\(p^*(\theta)\)</span> is known as the <em>importance sampling function</em>.</p>
+<blockquote>
+<p>This is different form from standard important sampling, from <a href="https://statweb.stanford.edu/~owen/mc/">this book</a>, <a href="https://statweb.stanford.edu/~owen/mc/Ch-var-is.pdf">Chapter 9 importance sampling</a>, this form is the Self-normalized importance sampling, which can use unnormalized version of p and q.</p>
+</blockquote>
+<p>The WLB gives us a sample approximately drawn from the posterior density
+<span class="math display">\[
+p ^*(\theta)=p(\theta | x)=p(x | \theta) p(\theta) / p(x)
+\]</span></p>
+<p>In general, most functions <span class="math inline">\(g(\theta)\)</span> could be a poor importance sampling function, but here we have <span class="math inline">\(g(\theta)=p(x|\theta)\)</span>, and the importance sampling function <span class="math inline">\(p^{*}(\theta)=p(\theta | x)\)</span> is well suited for this case. Then a estimate for <span class="math inline">\(p(x)\)</span>,
+<span class="math display">\[
+\hat{p}_{1}(x)=\left\{\frac{1}{m} \sum_{i=1}^{m} p\left(x | \theta^{(i)}\right)^{-1}\right\}^{-1}
+\]</span>
+the harmonic mean of the likelihood values.</p>
+<p>This is true whether the posterior samples come from an SIR-adjusted WLB or any other sampling scheme, like the Markov chain Monte Carlo method.</p>
+<p>It is readily verified that <span class="math inline">\(\hat p_1(x)\)</span> converges almost surely to the correct value <span class="math inline">\(p(x)\)</span> as <span class="math inline">\(m\rightarrow \infty\)</span>. However, <span class="math inline">\(\hat p_1(x)\)</span> does not, in general, satisfy a Gaussian central limit theorem.</p>
+<p>This manifests itself by the occasional occurence of a value of <span class="math inline">\(\theta^{(i)}\)</span> with a small likelihood and hence a large effect on the final result; it happens because <span class="math inline">\(p(x | \theta)^{-1}\)</span> is often not square integrable with respect to the posterior distribution.</p>
+<p>Square integrable:
+<span class="math display">\[
+f: \mathbb{R} \mapsto \mathbb{C} \text { square integrable } \Longleftrightarrow \int_{-\infty}^{\infty}|f(x)|^{2} \mathrm{d} x&lt;\infty
+\]</span></p>
+<p>An alternative is</p>
+<p><span class="math display">\[
+\hat{p}_{2}(x)=\frac{1}{m} \sum_{i=1}^{m} p\left(x | \theta^{(i)}\right)
+\]</span>
+where <span class="math inline">\(\left\{\theta^{(i)}: i=1, \ldots, m\right\}\)</span> is a sample from the prior distribution rather than the posterior.</p>
+<p>A major difficulty with <span class="math inline">\(\hat{p}_{2}(x)\)</span> is that most of the <span class="math inline">\(\theta^{(i)}\)</span> will have small likelihood values if the posterior is concentrated relative to the prior, so that the simulation process will be quite inefficient.</p>
+<p>Thus the estimate will be dominated by a few large values of the likelihood, and so the variance of <span class="math inline">\(\hat{p}_{2}(x)\)</span> may be large and its convergence to a Gaussian distribution slow. These difficulties are precisely the opposite of the difficulties with <span class="math inline">\(\hat p_1(x)\)</span>.</p>
+<p>These considerations suggest that we use as importance sampling function a <em>mixture</em> of the prior and posterior densities, with
+<span class="math display">\[
+p^{*}(\theta)=\delta p(\theta)+(1-\delta) p(\theta | x)
+\]</span>
+where <span class="math inline">\(\delta\)</span> is small. This yields a new estimate <span class="math inline">\(\hat{p}_{3}(x)\)</span>, defined by the equation
+<span class="math display">\[
+\hat{p}_{3}(x)=\frac{\sum_{i=1}^{m} p\left(x | \theta^{(i)}\right) /\left\{\delta \hat{p}_{3}(x)+(1-\delta) p\left(x | \theta^{(i)}\right)\right\}}{\sum_{i=1}^{m}\left\{\hat{p}_{3}(x)+(1-\delta) p\left(x | \theta^{(i)}\right)\right\}^{-1}}
+\]</span></p>
+<p>The estimator <span class="math inline">\(\hat p_3(x)\)</span> is appealing because it retains the efficiency of <span class="math inline">\(\hat p_1(x)\)</span>, due to being based mostly on high likelihood values of <span class="math inline">\(\theta\)</span>, but avoids its unpleasant instability.
+It is readily verified that <span class="math inline">\(\hat p_3(x)\)</span> does not satisfy a Gaussian central limit theorem, unlike <span class="math inline">\(\hat p_1(x)\)</span>. However, <span class="math inline">\(\hat p_3(x)\)</span> has the irksome aspect that we must simulate from the prior as well as the posterior.</p>
+<p>Simulation from the prior as well as the posterior may be avoided, without sacrificing the appealing aspects of <span class="math inline">\(\hat p_3(x)\)</span>, by instead simulating all <span class="math inline">\(m\)</span> values from the posterior distribution and imagining that a further <span class="math inline">\(\delta_{m} /(1-\delta)\)</span> values of <span class="math inline">\(\theta\)</span> are drawn from the prior, all with likelihood <span class="math inline">\(p\left(x | \theta^{(i)}\right)\)</span> equal to their expected value <span class="math inline">\(p(x)\)</span>. This yields an approximation to <span class="math inline">\(\hat p_3(x)\)</span>, namely
+<span class="math display">\[
+\hat{p}_{4}(x)=\frac{\delta m /(1-\delta)+\sum_{i=1}^{m} p\left(x | \theta^{(i)}\right) /\left\{\delta \hat{p}_{4}(x)+(1-\delta) p\left(x | \theta^{(i)}\right)\right\}}{\delta m /(1-\delta) \hat{p}_{4}(x)+\sum_{i=1}^{m}\left\{\delta \hat{p}_{4}(x)+(1-\delta) p\left(x | \theta^{(i)}\right)\right\}^{-1}}
+\]</span>
+The estimator <span class="math inline">\(\hat p_4(x)\)</span> may be evaluated by using a simple and obvious iterative scheme; in our limited experience to date, this converges fast, often in a single step. <span class="math inline">\(\hat p_4(x)\)</span> performed well for <span class="math inline">\(\delta\)</span> as small as 0.01 and did not display any of the instability of <span class="math inline">\(\hat p_1(x)\)</span>.</p>
 
-</div>
-</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
-</div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
+<div id="ref-Newton:1994wm">
+<p>Newton, Michael A, and Adrian E Raftery. 1994. “Approximate Bayesian inference with the weighted likelihood bootstrap.” <em>Journal of the Royal Statistical Society. Series B. Methodological</em> 56 (1): 3–48.</p>
 </div>
 </div>
             </section>
@@ -515,8 +574,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="approximate-bayesian-inference-with-the-weighted-likelihood-bootstrap-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

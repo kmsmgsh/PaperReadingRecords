@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record</title>
+  <title>Paper 2 Random effects selection in generalized linear mixed models via shrinkage penalty function | A paper reading record</title>
   <meta name="description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta property="og:title" content="Paper 2 Random effects selection in generalized linear mixed models via shrinkage penalty function | A paper reading record" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Paper 20 A Review of Bayesian Variable Selection Methods: What, How and Which | A paper reading record" />
+  <meta name="twitter:title" content="Paper 2 Random effects selection in generalized linear mixed models via shrinkage penalty function | A paper reading record" />
   
   <meta name="twitter:description" content="This is a reading record and notes for paper reading, in order to make me concentrate and remind of the paper I have read." />
   
@@ -25,15 +25,15 @@
 <meta name="author" content="Jiaming Shen">
 
 
-<meta name="date" content="2020-03-17">
+<meta name="date" content="2019-12-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html">
-<link rel="next" href="marginal-likelihood-from-the-gibbs-output.html">
+<link rel="prev" href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html">
+<link rel="next" href="copula-for-discrete-lda.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -373,9 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html"><i class="fa fa-check"></i><b>25</b> Integrated Nested Laplace Approximations(INLA)</a><ul>
 <li class="chapter" data-level="25.1" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#abstract-16"><i class="fa fa-check"></i><b>25.1</b> Abstract</a></li>
-<li class="chapter" data-level="25.2" data-path="integrated-nested-laplace-approximationsinla.html"><a href="integrated-nested-laplace-approximationsinla.html#the-inla-computing-scheme"><i class="fa fa-check"></i><b>25.2</b> The INLA computing scheme</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><a href="parsimonious-covariance-matrix-estimation-for-longitudinal-data-1.html"><i class="fa fa-check"></i><b>26</b> Parsimonious Covariance Matrix Estimation for Longitudinal Data</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -397,117 +395,188 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-bayesian-variable-selection-methods-what-how-and-which" class="section level1">
-<h1><span class="header-section-number">Paper 20</span> A Review of Bayesian Variable Selection Methods: What, How and Which</h1>
-<p>R.B. O’Hara and M.J.Sillanpaa
-<span class="citation">(O’Hara and Sillanp a a <a href="#ref-OHara:2009in">2009</a>)</span></p>
-<div id="abstract-12" class="section level2">
-<h2><span class="header-section-number">20.1</span> Abstract</h2>
-<p>This paper concentrated on</p>
+<div id="random-effects-selection-in-generalized-linear-mixed-models-via-shrinkage-penalty-function" class="section level1">
+<h1><span class="header-section-number">Paper 2</span> Random effects selection in generalized linear mixed models via shrinkage penalty function</h1>
+<p>papers by Huang Chao &amp; Jianxin Pan 2014</p>
+<div id="abstract-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Abstract:</h2>
+<p>Framework: Generalized linear mixed models (GLMMs).</p>
+<p>Method: MCD for covariance matrix of random effects.</p>
+<p>Add shrinkage penalty term to the penalized quasi-likelihood (PQL) to select effective random effects.</p>
+<p>Idea: Variance -&gt;0, random effects no longer random.</p>
+<p>PQL: convenient computation.</p>
+<p>Penalty: LASSO and SCAD.</p>
+<p>backfitting algorithms to estimate the fixed effects and variance components in GLMMs, and simultaneously selecting effective random effects.</p>
+</div>
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">2.2</span> Introduction</h2>
+<p>Selecting significant covariate .</p>
 <ul>
-<li>Kuo &amp; Mallick method</li>
-<li>Gibbs Variable Selection(GVS)</li>
-<li>Stochastic Search Variable Selection (SSVS)</li>
-<li>Adaptive shrinkage with Jeffreys’ prior</li>
-<li>Reversible jump MCMC</li>
-<li>Laplacian prior, Bayesian lasso</li>
+<li><p>Early literature methods: Mallow’s <span class="math inline">\(C_p\)</span>, AIC, BIC, backward, forward, stepwise selection methods : computational intensive and statistically unreliable.</p></li>
+<li><p>Via penalty methods: Penalty add in sum squares or substract in log-likelihood methods.</p>
+<ul>
+<li><p>Ridge regression: <span class="math inline">\(L_2\)</span> penalty</p></li>
+<li>Bridge regression: <span class="math inline">\(L_q,q\geq0\)</span> penalty</li>
+<li>LASSO(Least absolute shrinkage and selection operator): <span class="math inline">\(L_1\)</span> penalty</li>
+<li>Adaptive LASSO: improve consistency of LASSO</li>
+<li><p>SCAD(smoothly clipped absolute deviation): Continuity, sparsity, and unbiasedness.</p></li>
+</ul></li>
+<li><p>Generalized linear mixed model</p>
+<ul>
+<li>Continuous/Discrete longitudinal/clustered data</li>
+<li>Compare to GLM, GLMM handle the heterogeneity across subject (clustered)</li>
+<li>Estimation method: PQL
+<ul>
+<li>Key idea: utilize Laplace approximation to approximate the integral likelihood (The integral random effect part)</li>
+<li>Easily fulfill iterative fitting linear mixed model</li>
+</ul></li>
+<li>Variable Selection in GLMMs
+<ul>
+<li>Fixed effects selection via <span class="math inline">\(L_1\)</span> penalty</li>
+<li>Fixed effects selection via boosting techniques</li>
+<li>Framework of general class of mixed-effects models penalized likelihood as SCAD and adaptive LASSO, <span class="math inline">\(IC_Q\)</span> criteria is used to select tunning parameter</li>
+<li>Need care selection efficiency: redundant random effect may cause covariance matrix of random effects to be singular (Random effect not random, than variance comes to 0? ), also computational intraceble for estimation also should be considered.</li>
+<li>Bayes hierachical model by MCMC (Chen&amp;Dunson 2003 actually using the full model posterior selection method )</li>
+<li>Fahrmeir et al. (2010) gave a detailed review of Bayesian approaches for the selection of ran-
+dom effects.</li>
+</ul></li>
+<li>Variable Selection in LMMs
+<ul>
+<li>Both fixed and random effect using EM algorithms</li>
+<li>Random effects selection using moment-based methods and two-stage method.</li>
+<li>Group variable selection to simultaneously select and estimate ran-dom effects, by using a proxy matrix to replace the unknown covariance matrix of random effects.</li>
+</ul></li>
+<li>Conclusion of Introduction:
+<ul>
+<li>Focus on selection of random effects within the framework of GLMMs.</li>
+<li>Shrinkage penalty term on PQL, covariance matrix model by MCD.</li>
+<li>Key idea: variance -&gt; 0 (shrinkage), corresponding variable is no longer random</li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
-<div id="introduction-15" class="section level2">
-<h2><span class="header-section-number">20.2</span> Introduction</h2>
-<p><span class="math inline">\(y_i\)</span> for individual <span class="math inline">\(i(i=1,...,N)\)</span> using <span class="math inline">\(p\)</span> covariates with values <span class="math inline">\(x_{i, j}, j=1, \dots, p\)</span></p>
-<div id="notation" class="section level3">
-<h3><span class="header-section-number">20.2.1</span> Notation:</h3>
-<p><span class="math display">\[
-y_{i}=\alpha+\sum_{j=1}^{p} \theta_{j} x_{i, j}+e_{i}
-\]</span>
-<span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(e_{i} \sim N\left(0, \sigma^{2}\right)\)</span> are the errors.</p>
-<p>Variable selection procedure can be seen as one of deciding which of the regression parameters, the <span class="math inline">\(\theta_j\)</span>s, are equal to zero.</p>
-<p>For example, <span class="math inline">\(\theta_j\)</span> should therefore have a “slab and spike” prior, can be found in <span class="citation">(Ishwaran and Rao <a href="#ref-Ishwaran:2005ir">2005</a>)</span> and Miller(2002). The prior is with a spike(the probability mass) either exactly at or around zero, and a flat slab elsewhere.
-Usually use auxiliary indicator to indicate presence and absence of covariate.
-That is, the parameter have two part, with defining as
+<div id="methodology-and-algorithm" class="section level2">
+<h2><span class="header-section-number">2.3</span> Methodology and Algorithm</h2>
+<p>Basic notation: <span class="math inline">\(y_{ij}\)</span> be j-th of <span class="math inline">\(n_i\)</span> repeat measurements for i-th individual. <span class="math inline">\(\mu_{ij} =E(y_{ij}|b_i)\)</span> .</p>
+<p>GLMMs:
 <span class="math display">\[
-\theta_j=I_j\beta_j
+\begin{array}{l}{g\left(\mu_{i j}\right)=\eta_{i j}=x_{i j}^{T} \beta+z_{i j}^{T} b_{i}} \\ {\operatorname{var}\left(y_{i j} | b_{i}\right)=a(\phi) v\left(\mu_{i j}\right)}\end{array}
 \]</span>
-The variable selection problem here becomes to estimate <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.</p>
-</div>
-<div id="concepts-and-properties" class="section level3">
-<h3><span class="header-section-number">20.2.2</span> Concepts and Properties</h3>
-<div id="sparseness" class="section level4">
-<h4><span class="header-section-number">20.2.2.1</span> Sparseness</h4>
-<p>The variable selection prior can be viewed as providing a loss function, which is hard to say it is appropriate for all circumstances. The flexibility of model in this pespective is needed, which is sparsness of the model. It may be set according to some kind of optimality criterion.</p>
-<p>One measurement of sparsness is <span class="math inline">\(P(I_j=1)\)</span> (e.g. George and McCulloch 1993).</p>
-<p>And this also can be influenced by some subjective idea. Only a small proportion of variables are likely to be included in the model when practice.</p>
-</div>
-<div id="tuning" class="section level4">
-<h4><span class="header-section-number">20.2.2.2</span> Tuning</h4>
-<p>As we consider the sparseness as an extra flexibility modelling parameter, a natural question rised here is how to tuning the model, choose a proper tuning parameter.
-Other components also should be adjusted, such as prior distribution, to ensure good mixing of the MCMC chains.</p>
-<p>Data-based priors should be designed with the purpose of improving mixing or giving good centering and scaling properties. (For example, a fractional prior, Smith and Kohn 2002,Parsimonious covariance matrix estimation for longitudinal data.).</p>
-<p>“It contravenes the Bayesian philosophy as the prior should be a summary of the beliefs of the analyst (before seing the data), not a reflection of the ability of the fitting algorithms to do their job.”</p>
-<p>However in some subjective Bayesian pespective, this might be advantage instead of disadvantage.</p>
-<p>Several methods may have issues in the marginal identifiability (confounding) of variables <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span>.
-It may need monitor the posterior of the product <span class="math inline">\(\theta_j=I_j\times\beta_j\)</span>. If <span class="math inline">\(I_j\)</span> and <span class="math inline">\(\beta_j\)</span> is independent, then, when <span class="math inline">\(\beta_j\)</span> is near 0,the likelihood could be almost identical for <span class="math inline">\(I_j=1\)</span> or <span class="math inline">\(I_j=0\)</span>.</p>
-</div>
-<div id="global-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.3</span> Global adaptation</h4>
-<p>A natural strategy for building model is put Normal prior on <span class="math inline">\(\beta_j|(I_j=1)\)</span>.
-If set prior variance as constant, than the model would be equivelent to a classical fixed effects model. Also this model can be extended as hierarchical model.
-<span class="math inline">\(\beta_j|(I_j=1)\)</span> drawn from <span class="math inline">\(N(0,\tau^2)\)</span>, where <span class="math inline">\(\tau^2\)</span> is an unknown parameter to be estimated.</p>
-</div>
-<div id="local-adaptation" class="section level4">
-<h4><span class="header-section-number">20.2.2.4</span> Local adaptation</h4>
-<p>Instead of fitting one common parameter for all regression coefficients, as we called it global adaptation, one can use different variance parameters for different covariates. That is, <span class="math inline">\(\beta_{j} |\left(I_{j}=1\right)\)</span> is drawn from <span class="math inline">\(N(0,\tau_j^2)\)</span> instead of <span class="math inline">\(\tau^2\)</span>.</p>
-</div>
-<div id="bayesian-model-averaging" class="section level4">
-<h4><span class="header-section-number">20.2.2.5</span> Bayesian Model Averaging</h4>
-<p>The probability that a single variable should enter a model can be averaged over all of the models, like in MCMC framework, the frequency of this covariate appeared in the model, that is, the average of <span class="math inline">\(I_j\)</span>.</p>
-<p>Robust estimation of effect sizes can be done in a Bayesian setting by averaging the effect size over several different models. This can overcome the overestimation problem that if the same data is used for variable selection and individual contributions.</p>
-</div>
-</div>
-<div id="variable-selection-methods" class="section level3">
-<h3><span class="header-section-number">20.2.3</span> Variable Selection Methods</h3>
-<div id="indicator-model-selection" class="section level4">
-<h4><span class="header-section-number">20.2.3.1</span> Indicator model selection</h4>
-<p>Directly set the slab, <span class="math inline">\(\theta_j|(I_j=1)\)</span> equal to <span class="math inline">\(\beta_j\)</span> and the spike, <span class="math inline">\(\theta_j|(I_j=0)\)</span> equal to 0. There are two methods in such approach, differing in the way treat <span class="math inline">\(\beta_j|(I_j=0)\)</span></p>
-<p><em>Kuo &amp; Mallick</em>: Simply set <span class="math inline">\(\theta_j=I_j\beta_j\)</span>, assume indicators and effects are independent in prior. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(I_{j}\right) P\left(\beta_{j}\right)\)</span>.</p>
-<p><em>GVS</em>: An alternative model formulation called Gibbs variable selection by Dellaportas et al.(1997). The idea is sampling <span class="math inline">\(\beta_{j} |\left(I_{j}=0\right)\)</span> from a “pseudo-prior”, that is, a prior distribution which has no effect on the posterior. This approach also set <span class="math inline">\(\theta_{j}=I_{j} \beta_{j}\)</span>, but the indicator and effect are assumed to depen on each other. <span class="math inline">\(P\left(I_{j}, \beta_{j}\right)=P\left(\beta_{j} | I_{j}\right) P\left(I_{j}\right)\)</span>, for example, a mixture prior is assumed for <span class="math inline">\(\beta_j\)</span>:
-<span class="math inline">\(P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N(\tilde{\mu}, S)+I_{j} N\left(0, \tau^{2}\right)\)</span>.</p>
-</div>
-<div id="stochastic-search-variable-selection-ssvs" class="section level4">
-<h4><span class="header-section-number">20.2.3.2</span> Stochastic search variable selection (SSVS)</h4>
-<p>The spike is a narrow distribution concentrated around zero. Then in this case, the <span class="math inline">\(\theta_j=\beta_j\)</span> and the indicators affects the prior distribution of <span class="math inline">\(\beta_j\)</span>. Then, <span class="math inline">\(P(I_j,\beta_j)=P(\beta_j|I_j)P(I_j)\)</span>.
+<span class="math inline">\(\beta\)</span> is <span class="math inline">\(p\times 1\)</span> vector as fixed effects, <span class="math inline">\(x_{ij}\)</span> and <span class="math inline">\(z_{ij}\)</span> are covariates corresponding to fixed effects and random effects. <span class="math inline">\(\phi\)</span> nuisance dispersion parameter.</p>
+<p><span class="math inline">\(b_i\sim N(0,D)\)</span> , so <span class="math inline">\(Y_{ij}=X_i\beta+Z_ib_i\)</span>, <span class="math inline">\(Y_{ij}\sim N(X_i\beta,\Sigma+Z_iDZ_i^T)\)</span> . By (Chen &amp; Dunson 2003) D uas the acd form: <span class="math inline">\(D=\Lambda \Gamma \Gamma^{T} \Lambda\)</span> , <span class="math inline">\(\Lambda=\operatorname{diag}\left(\lambda_{1}, \ldots, \lambda_{q}\right)\)</span> , with the <span class="math inline">\(\lambda_l\)</span> proportion to the standard deviantion of the random effects <span class="math inline">\(b_i\)</span></p>
+<blockquote>
+<p>Need prove of this “proportion to the standard deviantion of the random effects <span class="math inline">\(b_i\)</span> , the best should write down the form of the”constant proportion&quot;, then …. wait a minute, seems we can write it down</p>
+</blockquote>
+<p><span class="math inline">\(\Gamma\)</span> with the form: the lower-triangular matrix with diagonal part as 1’s, denote its entry by <span class="math inline">\(\gamma_{ij}\)</span></p>
+<p><span class="math inline">\(\theta_{1}=\left(\lambda_{1}, \ldots, \lambda_{q}\right)^{T}, \theta_{2}=\left(\gamma_{21} ; \gamma_{31}, \gamma_{32} ; \ldots ; \gamma_{q 1}, \ldots,\gamma_{q(q-1)} \right).\)</span> Then the full covariance matrix is determined by <span class="math inline">\(\theta=(\theta_1^T,\theta_2^T,\phi^T)^T\)</span></p>
+<p>Then the covariance <span class="math inline">\(D\)</span> can be determined by <span class="math inline">\(\theta\)</span> . With such notation, we can obtain the conditonal distribution of data <span class="math inline">\(y_{ij}\)</span> as <span class="math inline">\(N(X_i\beta+Z_ib_i,Z_i\Lambda\Gamma\Gamma^T\Lambda+a(\phi)v(\mu_{ij})\)</span>, than the likelihood can be expressed as
 <span class="math display">\[
-P\left(\beta_{j} | I_{j}\right)=\left(1-I_{j}\right) N\left(0, \tau^{2}\right)+I_{j} N\left(0, g \tau^{2}\right)
+\begin{aligned} L(\beta, \theta) &amp;=\prod_{i=1}^{n} f\left(y_{i} ; \beta, \theta\right) \\ &amp;=\prod_{i=1}^{n} \int_{b_{i}}\left\{\prod_{j=1}^{n_{i}} f\left(y_{i j} | b_{i} ; \beta, \phi\right)\right\} f\left(b_{i} ; \theta_{1}, \theta_{2}\right) d b_{i} \end{aligned}
+\]</span>
+Similar, the log likelihood is
+<span class="math display">\[
+\begin{aligned} \ell(\beta, \theta) &amp;=\sum_{i=1}^{n} \log f\left(y_{i} ; \beta, \theta\right) \\ &amp;=\sum_{i=1}^{n} \log \int_{j=1}^{n_{i}} f\left(y_{i j} | b_{i} ; \beta, \phi\right) \} f\left(b_{i} ; \theta_{1}, \theta_{2}\right) d b_{i} \end{aligned}
 \]</span></p>
-</div>
-<div id="adaptive-shrinkage" class="section level4">
-<h4><span class="header-section-number">20.2.3.3</span> Adaptive Shrinkage</h4>
-<p>Instead of using indicator, specifying a prior directly on <span class="math inline">\(\theta_j\)</span> approximates the “slab and spike” shape.
-The prior should shrinking values of <span class="math inline">\(\beta_j\)</span> towards zero if there is no evidence in the data for non-zero values.</p>
-<p>The degree of sparseness of the model can be adjusted by changing the prior distribution of <span class="math inline">\(\tau_j^2\)</span>.</p>
-<p><em>Jeffreys’ prior</em>. A scale invariant Jeffreys’ prior, <span class="math inline">\(P\left(\tau_{j}^{2}\right) \propto \frac{1}{\tau_{j}^{2}}\)</span>.</p>
-<p><em>Laplacian shrinkage</em>. Using an exponential prior for <span class="math inline">\(\tau_j^2\)</span> with a parameter <span class="math inline">\(\mu\)</span>. More details see the Bayesian lasso literature.</p>
-</div>
-<div id="model-space-approach" class="section level4">
-<h4><span class="header-section-number">20.2.3.4</span> Model space approach</h4>
-<p>The model before are developed through placing priors on the individual covariates <span class="math inline">\(\theta_j\)</span>s. An alternative approach is place priors on <span class="math inline">\(N_v\)</span>, the number of covariates selected in the model and their coefficients <span class="math inline">\(\left(\theta_{1}, \ldots, \theta_{N_{v}}\right)\)</span>.</p>
-<p><em>Reversible jump MCMC</em> This method lets the Markov chain explore space of different dimension. Each step of updating, the model randomly selecting variable <span class="math inline">\(j\)</span>, and then proposing either addition to model or deleting from model. More details can be found in <a href="https://kmsmgsh.github.io/Notes-in-statistics-and-computing/reversible-jump-mcmc.html">here</a></p>
-<p><em>Composite model space</em> (CMS)
-This method is similar to data augumentation method to deal with the complexity of the Reversible jump MCMC. This can be done by fixing <span class="math inline">\(N_{max}\)</span> to some value less than p. Then use indicator variables to let covariate enter or leave the model. The variable procedure becomes randomly selecting component j and then proposing a change of the indicator value <span class="math inline">\(I_j\)</span>.</p>
-<p><img src="https://cdn.mathpix.com/snip/images/Vw6eULQGqj108GmLjX8XD5eX9i5NiFglGN7vvcQ0kAE.original.fullsize.png" /></p>
+<blockquote>
+<p>Need write more about how this form is derived, it’s may not a big deal</p>
+</blockquote>
+<p>The PQL approach for the loglikelihood can be obtained as follows</p>
+<blockquote>
+<p>But I have no idea why this form is work</p>
+</blockquote>
+<p><span class="math display">\[
+\ell(\beta, \theta) \approx \sum_{i=1}^{n} \sum_{j=1}^{n_{i}} \log f\left(y_{i j} | b_{i} ; \beta, \phi\right)-\frac{1}{2} \sum_{i=1}^{n} b_{i}^{T} D^{-1} b_{i}
+\]</span></p>
+<blockquote>
+<p>The original Laplace approximation make the loglikelihood as <span class="math inline">\(\tilde b_i^T D^{-1} \tilde b_i\)</span>, with <span class="math inline">\(\tilde b_i\)</span> is a solution to some function <span class="math inline">\(\kappa(b_i)\)</span> (or its derivatives) =0.</p>
+</blockquote>
+<p>Then the random effects <span class="math inline">\(b_i\)</span> can be treated as some kind of parameter and solve the loglikelihood in iterating two steps.</p>
+<ol style="list-style-type: decimal">
+<li>Given <span class="math inline">\(\theta\)</span> , maximize <span class="math inline">\(\ell(\beta,\theta)\)</span> with <span class="math inline">\(\beta\)</span> and <span class="math inline">\(b_i\)</span>, that is <span class="math inline">\((\hat\beta,\hat b_i)=(\hat\beta(\theta),\hat b_i(\theta))\)</span></li>
+<li><span class="math inline">\(\sum_{i=1}^n X^T_iW_i(Y_i-\eta_i)=0\)</span> and <span class="math inline">\(Z_i^TW_i(Y_i-\eta_i)=D^{-1}b_i\)</span></li>
+</ol>
+<p><span class="math inline">\(X_i=(x_{i1},…,x_{in_i})^T\)</span> ,<span class="math inline">\(Z_i=(z_{i1},…,z_{in_i})^T\)</span> , <span class="math inline">\(Y_i=\eta_i+(y_i-\mu_i)g&#39;(\mu_i)\)</span> is the working response, <span class="math inline">\(W_i=diag(w_{i1},…,w_{in_i})\)</span> with <span class="math inline">\(w_{ij}=\{a(\phi)v(\mu_{ij})g&#39;(\mu_{ij})^2 \}^{-1}\)</span> is the weight matrix. That is ,</p>
+<p>we have
+<span class="math display">\[
+\hat\beta=(\sum_{i=1}^n X^T_iV_i^{-1}X_i)^{-1} (\sum_{i=1}^n X_i^TV_i^{-1}Y_i)\\
+\hat b_i=DZ_i^TV_i^{-1} (Y_i-X_i\hat\beta)
+\]</span>
+where <span class="math inline">\(V_i=W^{-1}_i+Z_iDZ_i^T\)</span></p>
+<p>The log-likelihood function can be further approximated by
+<span class="math display">\[
+\begin{aligned} \ell_{2}(\hat{\beta}, \theta)=&amp;-\frac{1}{2} \sum_{i=1}^{n} \log \left|V_{i}\right| -\frac{1}{2} \sum_{i=1}^{n}\left(Y_{i}-X_{i} \hat{\beta}\right)^{T} V_{i}^{-1}\left(Y_{i}-X_{i} \hat{\beta}\right) \end{aligned}
+\]</span>
+An alternative approximation which corresponds to the restricted maximum likelihood (REML) is given by
+<span class="math display">\[
+\begin{aligned} \ell_{2 R}(\hat{\beta}, \theta)=-&amp; \frac{1}{2} \sum_{i=1}^{n} \log \left|V_{i}\right|-\frac{1}{2} \sum_{i=1}^{n} \log \left|X_{i}^{T} V_{i}^{-1} X_{i}\right| \\ &amp;-\frac{1}{2} \sum_{i=1}^{n}\left(Y_{i}-X_{i} \hat{\beta}\right)^{T} V_{i}^{-1}\left(Y_{i}-X_{i} \hat{\beta}\right) \end{aligned}
+\]</span>
+Maximization of <span class="math inline">\(\ell_2(\hat\beta,\theta)\)</span> or <span class="math inline">\(\ell(\hat\beta,\theta)\)</span> respect to <span class="math inline">\(\theta\)</span> .</p>
+<p>Consider the diagonal entry of <span class="math inline">\(\Lambda\)</span> in <span class="math inline">\(D=\Lambda\Gamma\Gamma^{T}\Lambda\)</span> as <span class="math inline">\(\lambda_\ell\)</span> . It is obvious that if <span class="math inline">\(\lambda_\ell=0\)</span> then <span class="math inline">\(d_{ll}=0\)</span>, so that all the entries of the lth row and the lth column in <span class="math inline">\(D\)</span> .</p>
+<p>Maximize the penalized log-likelihood function
+<span class="math display">\[
+p \ell_{2 R}(\hat{\beta}, \theta)=\ell_{2 R}(\hat{\beta}, \theta)-n p_{\psi}\left(\left|\theta_{1}\right|\right)
+\]</span>
+Or its REML version
+<span class="math display">\[
+p \ell_{2 R}(\hat{\beta}, \theta)=\ell_{2 R}(\hat{\beta}, \theta)-n p_{\psi}\left(\left|\theta_{1}\right|\right)
+\]</span>
+with <span class="math inline">\(p_\psi (|\theta_1|)=\sum_{l=1}^q p_{\psi} (|\lambda_l|)\)</span> are the penalty function for <span class="math inline">\(\lambda_1,…,\lambda_q\)</span> with <span class="math inline">\(\psi\)</span> as the tuning parameter, which can be chosen as LASSO or SCAD.</p>
+<blockquote>
+<p>Penalized log-likelihood function he REML 的形式都很奇怪，需要仔细看看怎么来的。</p>
+<p>推了一遍，在notes的longitudinal那一节</p>
+</blockquote>
+<p>SACD penalty is
+<span class="math display">\[
+p_{\psi}\left(\left|\lambda_{l}\right|\right)=\psi\left\{I\left(\left|\lambda_{l}\right| \leq \psi\right)+\frac{\left(a \psi-\left|\lambda_{l}\right|\right)_{+}}{(a-1) \psi} I\left(\left|\lambda_{l}\right|&gt;\psi\right)\right\}
+\]</span>
+Next is estimate the variance component <span class="math inline">\(\theta=\left(\theta_{1}^{T}, \theta_{2}^{T}, \phi\right)^{T}\)</span> based on the penalized log-likelihood function.</p>
+<p>Assume <span class="math inline">\(\phi\)</span> is known, in order to obtain <span class="math inline">\(\theta_1\)</span>, fix <span class="math inline">\(\theta_2\)</span> first and in this case <span class="math inline">\(p\ell_2(\hat\beta,\theta)\)</span> or <span class="math inline">\(p\ell_{2R}(\hat\beta,\theta)\)</span> is univariate function corresponds to <span class="math inline">\(\theta_1\)</span> . Then Newton-Raphson algorithm can be used to calculate the estimate <span class="math inline">\(\hat\theta_1\)</span> .</p>
+<p>Because the penalty function <span class="math inline">\(p_\psi(\cdot)\)</span> not always have second-order derivatives. Thus, replace it by its quadratic approximation functions.</p>
+<p>首先是三个参数<span class="math inline">\(\theta=(\theta_1^T,\theta_2^T,\phi)\)</span> ,前两个之前解释过了，<span class="math inline">\(\phi\)</span>是Y的条件方差，(近似的可以看成measurement error的方差?)。</p>
+<p>基于<span class="math inline">\(p\ell_2(\hat\beta,\theta)\)</span> 或者restrict版本<span class="math inline">\(p\ell_{2R} (\hat\beta,\theta)\)</span>. 假设<span class="math inline">\(\phi\)</span> 已知，计算<span class="math inline">\(\theta_1\)</span>和<span class="math inline">\(\theta_2\)</span> 的PQL。</p>
+<p>首先计算<span class="math inline">\(\theta_1\)</span> ，则固定<span class="math inline">\(\theta_2\)</span> ，PQL退化成关于<span class="math inline">\(\theta_1\)</span> 的一元函数。此时可以用Newton-Raphson算法计算<span class="math inline">\(\hat\theta_1\)</span> .因为罚函数<span class="math inline">\(p_\psi(\cdot)\)</span> 不一定二阶可导，所以使用quadratic approximation function替代罚函数。</p>
+<blockquote>
+<p>提示：<span class="math inline">\(\theta_1=(\lambda_1,…,\lambda_q)^T,\theta_2=(\gamma_{21};\gamma_{31},\gamma_{32};…;\gamma_{q1},…,\gamma_{q(q-1)})\)</span> ,也就是说<span class="math inline">\(\theta_1\)</span>是 innovation variance的参数，<span class="math inline">\(\theta_2\)</span> 是下三角阵的参数</p>
+<p>提示2：对<span class="math inline">\(\theta\)</span>的penalty以及估计是这篇文章的核心部分</p>
+</blockquote>
+<p>Given <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\theta_2\)</span> , the estimate of <span class="math inline">\(\theta_1\)</span> can be iteratively updated using
+<span class="math display">\[
+\begin{aligned} \theta_{1}^{(k)}=&amp; \theta_{1}^{(k-1)}-\left(\nabla^{2} \ell_{2}\left(\theta_{1}^{(k-1)}\right)+n \Sigma_{\psi}\left(\theta_{1}^{(k-1)}\right)\right)^{-1} \\ &amp; \cdot\left(\nabla \ell_{2}\left(\theta_{1}^{(k-1)}\right)+n U_{\psi}\left(\theta_{1}^{(k-1)}\right)\right) \end{aligned}
+\]</span>
+where <span class="math inline">\(\nabla \ell_{2}\left(\theta_{1}\right)=\frac{\partial \ell_{2}}{\partial \theta_{1}}\)</span> and <span class="math inline">\(\nabla^{2} \ell_{2}\left(\theta_{1}\right)=\frac{\partial^{2} \ell_{2}}{\partial \theta_{1} \theta_{1}^{T}}\)</span> are the first and second order derivative of <span class="math inline">\(\ell_2(\beta,\theta)\)</span> with respect to <span class="math inline">\(\theta_1\)</span> , <span class="math inline">\(U_\psi (\theta_1^{(k-1)})=\Sigma_\psi(\theta_1^{(k-1)})\theta_1^{(k-1)}\)</span> and <span class="math inline">\(\Sigma_{\psi}\left(\theta_{1}^{(k-1)}\right)=\operatorname{diag}\left(\frac{p_{\psi}^{\prime}\left(\left|\lambda_{1}^{(k-1)}\right|\right)}{\left|\lambda_{1}^{(k-1)}\right|}, \ldots, \frac{p_{\psi}^{\prime}\left(\left|\lambda_{q}^{(k-1)}\right|\right)}{\left|\lambda_{q}^{(k-1)}\right|}\right)\)</span> .</p>
+<p>每步迭代的步长和方向由上式第二项决定，这个式子是啥意思怎么来的文章没写，于是感觉得去翻Fan那篇文章。</p>
+<p>After this, we turn to calculate the estimate of <span class="math inline">\(\theta_2\)</span> . Assume we have already got <span class="math inline">\(\hat\theta_1\)</span> via the previous procedure. Need to mention that, if some components of <span class="math inline">\(\theta_1\)</span> , like <span class="math inline">\(\lambda_l=0\)</span>, then the lth component of the random effects <span class="math inline">\(b_i\)</span> is not effective, so that it should be removed from <span class="math inline">\(b_i\)</span> . As a result, corresponding <span class="math inline">\(\gamma_{l1},…,\gamma_{l(l-1)}\)</span> are also removed from <span class="math inline">\(\theta_2\)</span> . The remaining part can be obtained by
+<span class="math display">\[
+\theta_{2}^{(k)}=\theta_{2}^{(k-1)}-\left(\nabla^{2} \ell_{2}\left(\theta_{2}^{(k-1)}\right)\right)^{-1}\left(\nabla \ell_{2}\left(\theta_{2}^{(k-1)}\right)\right)
+\]</span>
+With <span class="math inline">\(\nabla \ell_{2}\left(\theta_{2}\right)=\frac{\partial \ell_{2}}{\partial \theta_{2}} \text { and } \nabla^{2} \ell_{2}\left(\theta_{2}\right)=\frac{\partial^{2} \ell_{2}}{\partial \theta_{2} \theta_{2}^{T}}\)</span> .</p>
+<p>The covariance matrices of <span class="math inline">\(\hat\theta_1\)</span> and <span class="math inline">\(\hat\theta_2\)</span> can be calculated using the sandwich formulae
+<span class="math display">\[
+\begin{aligned} \operatorname{Cov}\left(\hat{\theta}_{1}\right)=&amp;\left(\nabla^{2} \ell_{2}\left(\hat{\theta}_{1}\right)+n \Sigma_{\psi}\left(\hat{\theta}_{1}\right)\right)^{-1} \widehat{\operatorname{Cov}}\left(\nabla \ell_{2}\left(\hat{\theta}_{1}\right)\right) \\ &amp; \cdot\left(\nabla^{2} \ell_{2}\left(\hat{\theta}_{1}\right)+n \Sigma_{\psi}\left(\hat{\theta}_{1}\right)\right)^{-1} \end{aligned}
+\]</span>
+and
+<span class="math display">\[
+\operatorname{Cov}\left(\hat{\theta}_{2}\right)=\left(\nabla^{2} \ell_{2}\left(\hat{\theta}_{2}\right)\right)^{-1} \widehat{\operatorname{Cov}}\left(\nabla \ell_{2}\left(\hat{\theta}_{2}\right)\right)\left(\nabla^{2} \ell_{2}\left(\hat{\theta}_{2}\right)\right)^{-1}
+\]</span>
+If <span class="math inline">\(\phi\)</span> is unknown, it can be estimated iteratively using the residuals.</p>
+<p><span class="math inline">\(\phi^{(k)}=(1 / N) \sum_{i=1}^{n}\left(e_{i}^{(k)}\right)^{T} e_{i}^{(k)}\)</span> where <span class="math inline">\(N=\sum_{i=1}^n n_i\)</span> and <span class="math inline">\(e_{i}^{(k)}=y_{i}-X_{i} \hat{\beta}^{(k)}-Z_{i} \hat{b}_{i}^{(k)}\)</span> are the conditional residuals in the kth iteration.</p>
+<p>while <span class="math inline">\(y_{ij}\)</span> is Normal distribution.</p>
+<p>When <span class="math inline">\(y_{ij}\)</span> under binomial or Poisson distribution, we may simply take <span class="math inline">\(\phi=1\)</span> .</p>
+<div id="algorithms" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Algorithms</h3>
+<ol style="list-style-type: decimal">
+<li>Give initial value for fixed effects <span class="math inline">\(\beta^{(0)}\)</span> and variance components <span class="math inline">\(\theta^{(0)}=\left(\theta_{1}^{(0)}, \theta_{2}^{(0)}, \phi^{(0)}\right)\)</span> , then compute estimate of fixed beta, <span class="math inline">\(\beta^{(1)}\)</span> and prediction of random effects <span class="math inline">\(b_i^{(1)}\)</span>.</li>
+<li>Given <span class="math inline">\(\beta^{(1)},\theta^{(0)}_2,\phi^{(0)}\)</span>, using the <span class="math inline">\(\theta_1^{(k)}\)</span> updating formula upon, to update <span class="math inline">\(\theta_1\)</span> , then use <span class="math inline">\(\beta_{(1)},\theta_1^{(1)},\phi^{(0)}\)</span> to compute <span class="math inline">\(\theta_2^{(1)}\)</span> . Update <span class="math inline">\(\phi^{(1)}\)</span> if neccessary.</li>
+<li>Repeat Steps 1 and 2 above until convergence.</li>
+</ol>
+<p>Tunning parameter <span class="math inline">\(\psi\)</span> in the penalty function is genearlly unknown and need to estimate. This paper used the leave-one-subject-out cross validation, which minimizes
+<span class="math display">\[
+\begin{aligned} \operatorname{SCV}(\psi)=&amp; \sum_{i=1}^{n}\left(Y_{i}^{(-i)}-X_{i} \hat{\beta}^{(-i)}\right)^{T}\left[V_{i}^{(-i)}\right]^{-1} \\ &amp; \times\left(Y_{i}^{(-i)}-X_{i} \hat{\beta}^{(-i)}\right) \end{aligned}
+\]</span>
+with <span class="math inline">\(Y_{i}^{(-i)}=\eta_{i}^{(-i)}+\left(y_{i}-\mu_{i}^{(-i)}\right) g^{\prime}\left(\mu_{i}^{(-i)}\right)\)</span> and <span class="math inline">\(V_{i}^{(-i)}=\left(W_{i}^{(-i)}\right)^{-1}+Z_{i} D^{(-i)} Z_{i}^{T}, D^{(-i)}\)</span> .</p>
+<p>所以是取使得leave-i-out,sum from i=1:n CV 最小的那个<span class="math inline">\(\phi\)</span>.</p>
 
 </div>
-</div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-OHara:2009in">
-<p>O’Hara, R B, and M J Sillanp a a. 2009. “A review of Bayesian variable selection methods: what, how and which.” <em>Bayesian Analysis</em> 4 (1): 85–117.</p>
-</div>
-<div id="ref-Ishwaran:2005ir">
-<p>Ishwaran, Hemant, and J Sunil Rao. 2005. “Spike and slab variable selection: Frequentist and Bayesian strategies.” <em>arXiv.org</em>, no. 2 (May): 730–73. <a href="http://arxiv.org/abs/math/0505633v1" class="uri">http://arxiv.org/abs/math/0505633v1</a>.</p>
 </div>
 </div>
             </section>
@@ -515,8 +584,8 @@ This method is similar to data augumentation method to deal with the complexity 
           </div>
         </div>
       </div>
-<a href="objective-bayesian-methods-for-model-selection-introduction-and-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="marginal-likelihood-from-the-gibbs-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variable-selection-via-nonconcave-penalized-likelihood-and-its-oracle-properties.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="copula-for-discrete-lda.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
